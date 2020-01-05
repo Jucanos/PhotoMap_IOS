@@ -7,21 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
+		970CFCD123C2148F00D9FB12 /* LoginWithKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* LoginWithKakao.swift */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
-		9750586823C1B17800BF54E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586723C1B17800BF54E5 /* ContentView.swift */; };
+		9750586823C1B17800BF54E5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586723C1B17800BF54E5 /* LoginView.swift */; };
 		9750586A23C1B17900BF54E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9750586923C1B17900BF54E5 /* Assets.xcassets */; };
 		9750586D23C1B17900BF54E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9750586C23C1B17900BF54E5 /* Preview Assets.xcassets */; };
 		9750587023C1B17900BF54E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		970CFCC823C208C800D9FB12 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		9750585D23C1B17800BF54E5 /* PhotoMap_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
+		970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		970CFCD023C2148F00D9FB12 /* LoginWithKakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithKakao.swift; sourceTree = "<group>"; };
+		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9750586023C1B17800BF54E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9750586223C1B17800BF54E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9750586523C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoMap_IOS.xcdatamodel; sourceTree = "<group>"; };
-		9750586723C1B17800BF54E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9750586723C1B17800BF54E5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9750586923C1B17900BF54E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9750586C23C1B17900BF54E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9750586F23C1B17900BF54E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -33,24 +51,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		970CFCC423C208C700D9FB12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9750585423C1B17800BF54E5 = {
 			isa = PBXGroup;
 			children = (
 				9750585F23C1B17800BF54E5 /* PhotoMap_IOS */,
 				9750585E23C1B17800BF54E5 /* Products */,
+				970CFCC423C208C700D9FB12 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		9750585E23C1B17800BF54E5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9750585D23C1B17800BF54E5 /* PhotoMap_IOS.app */,
+				9750585D23C1B17800BF54E5 /* PhotoMap.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,14 +86,16 @@
 		9750585F23C1B17800BF54E5 /* PhotoMap_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */,
 				9750586023C1B17800BF54E5 /* AppDelegate.swift */,
 				9750586223C1B17800BF54E5 /* SceneDelegate.swift */,
-				9750586723C1B17800BF54E5 /* ContentView.swift */,
+				9750586723C1B17800BF54E5 /* LoginView.swift */,
 				9750586923C1B17900BF54E5 /* Assets.xcassets */,
 				9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */,
 				9750587123C1B17900BF54E5 /* Info.plist */,
 				9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */,
 				9750586B23C1B17900BF54E5 /* Preview Content */,
+				970CFCD023C2148F00D9FB12 /* LoginWithKakao.swift */,
 			);
 			path = PhotoMap_IOS;
 			sourceTree = "<group>";
@@ -88,6 +118,7 @@
 				9750585923C1B17800BF54E5 /* Sources */,
 				9750585A23C1B17800BF54E5 /* Frameworks */,
 				9750585B23C1B17800BF54E5 /* Resources */,
+				970CFCC823C208C800D9FB12 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -95,7 +126,7 @@
 			);
 			name = PhotoMap_IOS;
 			productName = PhotoMap_IOS;
-			productReference = 9750585D23C1B17800BF54E5 /* PhotoMap_IOS.app */;
+			productReference = 9750585D23C1B17800BF54E5 /* PhotoMap.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -149,9 +180,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970CFCD123C2148F00D9FB12 /* LoginWithKakao.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */,
-				9750586823C1B17800BF54E5 /* ContentView.swift in Sources */,
+				9750586823C1B17800BF54E5 /* LoginView.swift in Sources */,
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,13 +324,23 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoMap_IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = EKU567YQE4;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhotoMap_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Jucanos.PhotoMap-IOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apps.jucano.PhotoMap-IOS";
+				PRODUCT_NAME = PhotoMap;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -312,13 +354,23 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoMap_IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = EKU567YQE4;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhotoMap_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Jucanos.PhotoMap-IOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apps.jucano.PhotoMap-IOS";
+				PRODUCT_NAME = PhotoMap;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
