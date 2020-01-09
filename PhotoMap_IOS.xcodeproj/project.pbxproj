@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
-		970CFCD123C2148F00D9FB12 /* LoginWithKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* LoginWithKakao.swift */; };
+		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
@@ -16,6 +16,11 @@
 		9750586A23C1B17900BF54E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9750586923C1B17900BF54E5 /* Assets.xcassets */; };
 		9750586D23C1B17900BF54E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9750586C23C1B17900BF54E5 /* Preview Assets.xcassets */; };
 		9750587023C1B17900BF54E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */; };
+		9773017B23C7099700E3CE99 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773017A23C7099700E3CE99 /* MainMapView.swift */; };
+		9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773017C23C709BB00E3CE99 /* MainGroupView.swift */; };
+		9773017F23C709C700E3CE99 /* MainSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773017E23C709C700E3CE99 /* MainSettingView.swift */; };
+		9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773018023C71F7B00E3CE99 /* SplashView.swift */; };
+		9773018523C7277700E3CE99 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773018423C7277700E3CE99 /* MainTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,7 +39,7 @@
 /* Begin PBXFileReference section */
 		970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
-		970CFCD023C2148F00D9FB12 /* LoginWithKakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithKakao.swift; sourceTree = "<group>"; };
+		970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginButton.swift; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9750586023C1B17800BF54E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9750586223C1B17800BF54E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +49,11 @@
 		9750586C23C1B17900BF54E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9750586F23C1B17900BF54E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9750587123C1B17900BF54E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9773017A23C7099700E3CE99 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
+		9773017C23C709BB00E3CE99 /* MainGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGroupView.swift; sourceTree = "<group>"; };
+		9773017E23C709C700E3CE99 /* MainSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingView.swift; sourceTree = "<group>"; };
+		9773018023C71F7B00E3CE99 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		9773018423C7277700E3CE99 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +104,13 @@
 				9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */,
 				9750587123C1B17900BF54E5 /* Info.plist */,
 				9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */,
+				970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */,
+				9773017A23C7099700E3CE99 /* MainMapView.swift */,
+				9773017C23C709BB00E3CE99 /* MainGroupView.swift */,
+				9773017E23C709C700E3CE99 /* MainSettingView.swift */,
+				9773018023C71F7B00E3CE99 /* SplashView.swift */,
+				9773018423C7277700E3CE99 /* MainTabView.swift */,
 				9750586B23C1B17900BF54E5 /* Preview Content */,
-				970CFCD023C2148F00D9FB12 /* LoginWithKakao.swift */,
 			);
 			path = PhotoMap_IOS;
 			sourceTree = "<group>";
@@ -180,11 +195,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				970CFCD123C2148F00D9FB12 /* LoginWithKakao.swift in Sources */,
+				9773017B23C7099700E3CE99 /* MainMapView.swift in Sources */,
+				970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */,
+				9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */,
 				9750586823C1B17800BF54E5 /* LoginView.swift in Sources */,
+				9773017F23C709C700E3CE99 /* MainSettingView.swift in Sources */,
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
+				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
+				9773018523C7277700E3CE99 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

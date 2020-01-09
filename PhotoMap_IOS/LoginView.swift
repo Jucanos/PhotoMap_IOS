@@ -11,6 +11,8 @@ import SwiftUI
 let appColor = Color(red: 0.976, green: 0.875, blue: 0.196)
 
 struct LoginView: View {
+    @Binding var isAuth: Bool
+    
     var body: some View {
         VStack(alignment: .center) {
             Image("mainlogo")
@@ -25,34 +27,47 @@ struct LoginView: View {
                 .font(.body)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
-            
-            LoginWithKakao()
-                .aspectRatio(contentMode: .fit)
-                .shadow(radius: 10)
+            Button(action: {
+                if self.testAct() {
+                    self.isAuth = true
+                }
+            }) {
+                KakaoLoginButton()
+                    .aspectRatio(contentMode: .fit)
+                    .shadow(radius: 10)
+            }
             Spacer()
         }
         .padding()
         .background(appColor)
         .edgesIgnoringSafeArea(.all)
     }
-}
-
-#if DEBUG
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LoginView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-                .previewDisplayName("iPhone SE")
-            
-            LoginView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewDisplayName("iPhone 8")
-            
-            LoginView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-                .previewDisplayName("iPhone 11 Pro")
-        }
+    
+    func testAct() -> Bool {
+        print("button tapped!")
+        return true
     }
 }
+
+
+
+
+#if DEBUG
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            LoginView()
+//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+//                .previewDisplayName("iPhone SE")
+//
+//            LoginView()
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+//                .previewDisplayName("iPhone 8")
+//
+//            LoginView()
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+//                .previewDisplayName("iPhone 11 Pro")
+//        }
+//    }
+//}
 #endif
