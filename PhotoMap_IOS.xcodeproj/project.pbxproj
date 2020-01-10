@@ -16,11 +16,14 @@
 		9750586A23C1B17900BF54E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9750586923C1B17900BF54E5 /* Assets.xcassets */; };
 		9750586D23C1B17900BF54E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9750586C23C1B17900BF54E5 /* Preview Assets.xcassets */; };
 		9750587023C1B17900BF54E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */; };
+		97528EEC23C770E100B999B5 /* GroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97528EEB23C770E100B999B5 /* GroupList.swift */; };
+		97528EEF23C7717D00B999B5 /* GroupRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97528EEE23C7717D00B999B5 /* GroupRow.swift */; };
 		9773017B23C7099700E3CE99 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773017A23C7099700E3CE99 /* MainMapView.swift */; };
 		9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773017C23C709BB00E3CE99 /* MainGroupView.swift */; };
 		9773017F23C709C700E3CE99 /* MainSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773017E23C709C700E3CE99 /* MainSettingView.swift */; };
 		9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773018023C71F7B00E3CE99 /* SplashView.swift */; };
 		9773018523C7277700E3CE99 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773018423C7277700E3CE99 /* MainTabView.swift */; };
+		9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B19723C80B4100AB6E4F /* UserGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,11 +52,14 @@
 		9750586C23C1B17900BF54E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9750586F23C1B17900BF54E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9750587123C1B17900BF54E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97528EEB23C770E100B999B5 /* GroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupList.swift; sourceTree = "<group>"; };
+		97528EEE23C7717D00B999B5 /* GroupRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRow.swift; sourceTree = "<group>"; };
 		9773017A23C7099700E3CE99 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		9773017C23C709BB00E3CE99 /* MainGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGroupView.swift; sourceTree = "<group>"; };
 		9773017E23C709C700E3CE99 /* MainSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingView.swift; sourceTree = "<group>"; };
 		9773018023C71F7B00E3CE99 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		9773018423C7277700E3CE99 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		9798B19723C80B4100AB6E4F /* UserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,20 +102,15 @@
 		9750585F23C1B17800BF54E5 /* PhotoMap_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				97528EF023C771ED00B999B5 /* Models */,
+				9773018623C72C4C00E3CE99 /* Views */,
 				970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */,
 				9750586023C1B17800BF54E5 /* AppDelegate.swift */,
 				9750586223C1B17800BF54E5 /* SceneDelegate.swift */,
-				9750586723C1B17800BF54E5 /* LoginView.swift */,
 				9750586923C1B17900BF54E5 /* Assets.xcassets */,
 				9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */,
 				9750587123C1B17900BF54E5 /* Info.plist */,
 				9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */,
-				970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */,
-				9773017A23C7099700E3CE99 /* MainMapView.swift */,
-				9773017C23C709BB00E3CE99 /* MainGroupView.swift */,
-				9773017E23C709C700E3CE99 /* MainSettingView.swift */,
-				9773018023C71F7B00E3CE99 /* SplashView.swift */,
-				9773018423C7277700E3CE99 /* MainTabView.swift */,
 				9750586B23C1B17900BF54E5 /* Preview Content */,
 			);
 			path = PhotoMap_IOS;
@@ -121,6 +122,46 @@
 				9750586C23C1B17900BF54E5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		97528EED23C7716000B999B5 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				9773017C23C709BB00E3CE99 /* MainGroupView.swift */,
+				97528EEB23C770E100B999B5 /* GroupList.swift */,
+				97528EEE23C7717D00B999B5 /* GroupRow.swift */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		97528EF023C771ED00B999B5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9798B19723C80B4100AB6E4F /* UserGroup.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9773018623C72C4C00E3CE99 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9773018023C71F7B00E3CE99 /* SplashView.swift */,
+				9798B19923C832BA00AB6E4F /* Login */,
+				97528EED23C7716000B999B5 /* Group */,
+				9773018423C7277700E3CE99 /* MainTabView.swift */,
+				9773017A23C7099700E3CE99 /* MainMapView.swift */,
+				9773017E23C709C700E3CE99 /* MainSettingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9798B19923C832BA00AB6E4F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9750586723C1B17800BF54E5 /* LoginView.swift */,
+				970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,13 +238,16 @@
 			files = (
 				9773017B23C7099700E3CE99 /* MainMapView.swift in Sources */,
 				970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */,
+				97528EEF23C7717D00B999B5 /* GroupRow.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */,
+				97528EEC23C770E100B999B5 /* GroupList.swift in Sources */,
 				9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */,
 				9750586823C1B17800BF54E5 /* LoginView.swift in Sources */,
 				9773017F23C709C700E3CE99 /* MainSettingView.swift in Sources */,
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
+				9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */,
 				9773018523C7277700E3CE99 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
