@@ -10,7 +10,12 @@ import SwiftUI
 
 struct MainMapView: View {
     var body: some View {
-        Text("Main Map View!!")
+        NavigationView{
+            KoreaMap()
+            
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+        } 
     }
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
+		972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972B0FDE23C865C400BF1F65 /* KoreaMap.swift */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
@@ -43,6 +44,7 @@
 		970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginButton.swift; sourceTree = "<group>"; };
+		972B0FDE23C865C400BF1F65 /* KoreaMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaMap.swift; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9750586023C1B17800BF54E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9750586223C1B17800BF54E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,15 @@
 				970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		972B0FDD23C8649C00BF1F65 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				9773017A23C7099700E3CE99 /* MainMapView.swift */,
+				972B0FDE23C865C400BF1F65 /* KoreaMap.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		9750585423C1B17800BF54E5 = {
@@ -146,11 +157,11 @@
 			isa = PBXGroup;
 			children = (
 				9773018023C71F7B00E3CE99 /* SplashView.swift */,
+				9773018423C7277700E3CE99 /* MainTabView.swift */,
 				9798B19923C832BA00AB6E4F /* Login */,
 				97528EED23C7716000B999B5 /* Group */,
-				9773018423C7277700E3CE99 /* MainTabView.swift */,
-				9773017A23C7099700E3CE99 /* MainMapView.swift */,
-				9773017E23C709C700E3CE99 /* MainSettingView.swift */,
+				972B0FDD23C8649C00BF1F65 /* Map */,
+				97B8B0AE23C8596300E9B52C /* UserSetting */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +173,14 @@
 				970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		97B8B0AE23C8596300E9B52C /* UserSetting */ = {
+			isa = PBXGroup;
+			children = (
+				9773017E23C709C700E3CE99 /* MainSettingView.swift */,
+			);
+			path = UserSetting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +260,7 @@
 				97528EEF23C7717D00B999B5 /* GroupRow.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */,
+				972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */,
 				97528EEC23C770E100B999B5 /* GroupList.swift in Sources */,
 				9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */,
 				9750586823C1B17800BF54E5 /* LoginView.swift in Sources */,
