@@ -9,23 +9,45 @@
 import SwiftUI
 
 struct GroupDetail: View {
+    
+    init() {
+        
+        UINavigationBar.appearance().backgroundColor = .black
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
+    //    @State var groupData: UserGroup
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    var backButton : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack {
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.white)
+            }
+        }
+    }
+    
     var body: some View {
         
         KoreaMap()
-//        .navigationBarTitle("Test")
-//        .navigationBarHidden(true)
-        
-        
-        //        //            .navigationBarItems(trailing:
-        //        //                Button("Help") {
-        //        //                    print("Help tapped!")
-        //    }
-        //    )
+            .navigationBarItems(leading:
+                backButton, trailing:
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                    Image(systemName: "list.bullet")
+                        .foregroundColor(.white)
+                }
+        )
+            .navigationBarTitle("Test", displayMode: .inline)
     }
 }
 
 struct GroupDetail_Previews: PreviewProvider {
     static var previews: some View {
-        GroupDetail()
+        SplashView()
     }
 }

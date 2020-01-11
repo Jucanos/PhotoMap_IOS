@@ -44,8 +44,7 @@ struct GroupList: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
-                .navigationBarTitle("", displayMode: .inline)
-                .navigationBarHidden(true)
+                
                 VStack {
                     Spacer()
                     HStack {
@@ -62,6 +61,8 @@ struct GroupList: View {
                     }
                 }
             }
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarHidden(true)
         }
         .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
     }
