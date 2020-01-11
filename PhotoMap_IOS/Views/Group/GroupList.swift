@@ -38,7 +38,7 @@ struct GroupList: View {
                                 RoundedRectangle(cornerRadius: 25)
                                     .stroke(Color.black, lineWidth: 3)
                         )
-                        NavigationLink(destination: GroupDetail()){
+                        NavigationLink(destination: GroupDetail(groupData: group)){
                             EmptyView()
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -63,6 +63,10 @@ struct GroupList: View {
             }
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
+            .background(NavigationConfigurator { nc in
+                nc.navigationBar.barTintColor = .black
+                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            })
         }
         .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
     }

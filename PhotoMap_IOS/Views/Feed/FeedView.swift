@@ -1,28 +1,27 @@
 //
-//  GroupDetail.swift
+//  FeedView.swift
 //  PhotoMap_IOS
 //
-//  Created by 김근수 on 2020/01/10.
+//  Created by 김근수 on 2020/01/11.
 //  Copyright © 2020 김근수. All rights reserved.
 //
 
 import SwiftUI
 
-struct GroupDetail: View {
+struct FeedView: View {
     
-    @State var groupData: UserGroup
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+    @State var location: String
     var body: some View {
-        KoreaMap()
-            .navigationBarItems(leading:
+        Text("\(location)")
+        .navigationBarItems(leading:
                 backButton, trailing:
                 Button(action: {print(self.presentationMode)}) {
                     Image(systemName: "list.bullet")
                         .foregroundColor(.white)
                 }
         )
-            .navigationBarTitle("\(groupData.name)", displayMode: .inline)
+            .navigationBarTitle("\(location)", displayMode: .inline)
     }
     
     var backButton : some View {
@@ -37,9 +36,8 @@ struct GroupDetail: View {
     }
 }
 
-struct GroupDetail_Previews: PreviewProvider {
+struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        //        GroupDetail()
-        SplashView()
+        FeedView(location: "test")
     }
 }
