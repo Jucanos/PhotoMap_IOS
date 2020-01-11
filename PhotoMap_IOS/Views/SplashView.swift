@@ -14,6 +14,7 @@ struct SplashView: View {
         return Group {
             if isAuth{
                 MainTabView()
+                    .edgesIgnoringSafeArea(.top)
             }
             else {
                 LoginView(isAuth: $isAuth)
@@ -24,18 +25,18 @@ struct SplashView: View {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-            Group {
-                SplashView()
-                    .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-                    .previewDisplayName("iPhone SE")
-    
-                SplashView()
-                    .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                    .previewDisplayName("iPhone 8")
-    
-                SplashView()
-                    .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-                    .previewDisplayName("iPhone 11 Pro")
-            }
+        Group {
+            SplashView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                .previewDisplayName("iPhone SE")
+            
+            SplashView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+                .previewDisplayName("iPhone 8")
+            
+            SplashView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+                .previewDisplayName("iPhone 11 Pro")
         }
+    }
 }

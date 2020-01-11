@@ -12,14 +12,18 @@ struct FeedView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var location: String
+    
     var body: some View {
-        Text("\(location)")
+        GeometryReader { gr in
+            FeedDetail(masterViewSize: gr.size)
+            
+        }
         .navigationBarItems(leading:
-                backButton, trailing:
-                Button(action: {print(self.presentationMode)}) {
-                    Image(systemName: "list.bullet")
-                        .foregroundColor(.white)
-                }
+            backButton, trailing:
+            Button(action: {print(self.presentationMode)}) {
+                Image(systemName: "list.bullet")
+                    .foregroundColor(.white)
+            }
         )
             .navigationBarTitle("\(location)", displayMode: .inline)
     }
@@ -38,6 +42,19 @@ struct FeedView: View {
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedView(location: "test")
+        Group {
+            FeedView(location: "test")
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                .previewDisplayName("iPhone SE")
+            
+            FeedView(location: "test")
+                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+                .previewDisplayName("iPhone 8")
+            
+            FeedView(location: "test")
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+                .previewDisplayName("iPhone 11 Pro")
+        }
+        
     }
 }

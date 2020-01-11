@@ -15,37 +15,38 @@ struct MainTabView: View {
         TabView(selection: $selectedView) {
             MainGroupView()
                 .tabItem {
-                    Image(systemName: "1.circle")
-                    Text("그룹")
+                    Image(systemName: "person.3.fill")
+                    .resizable()
             }.tag(0)
             MainMapView()
                 .tabItem {
-                    Image(systemName: "2.circle")
-                    Text("대표지도")
+                    Image(systemName: "map.fill")
+                    .resizable()
             }.tag(1)
             MainSettingView()
                 .tabItem {
-                    Image(systemName: "3.circle")
-                    Text("설정")
+                    Image(systemName: "list.bullet")
+                    .resizable()
             }.tag(2)
         }
+        .accentColor(.black)
     }
 }
 
-//struct MainTabView_Previews: PreviewProvider {
-//    static var previews: some View {
-//            Group {
-//                MainTabView()
-//                    .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-//                    .previewDisplayName("iPhone SE")
-//    
-//                MainTabView()
-//                    .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//                    .previewDisplayName("iPhone 8")
-//    
-//                MainTabView()
-//                    .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-//                    .previewDisplayName("iPhone 11 Pro")
-//            }
-//        }
-//}
+struct MainTabView_Previews: PreviewProvider {
+    static var previews: some View {
+            Group {
+                MainTabView()
+                    .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                    .previewDisplayName("iPhone SE")
+    
+                MainTabView()
+                    .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+                    .previewDisplayName("iPhone 8")
+    
+                MainTabView()
+                    .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+                    .previewDisplayName("iPhone 11 Pro")
+            }
+        }
+}
