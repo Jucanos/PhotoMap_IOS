@@ -10,6 +10,11 @@ import SwiftUI
 
 struct GroupList: View {
     
+    init() {
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
+    }
+    
     @State private var showActionSheet = false
     @State var groupData: [UserGroup] = [UserGroup(name: "test1", updateTime: "2020.01.01", imageName: "t"), UserGroup(name: "test2", updateTime: "2020.01.01", imageName: "t")]
     
@@ -22,41 +27,43 @@ struct GroupList: View {
         ])
     }
     
-    init() {
-        UITableView.appearance().tableFooterView = UIView()
-        UITableView.appearance().separatorStyle = .none
-    }
-    
     var body: some View {
-        VStack {
-            NavigationView {
+        NavigationView {
+            ZStack {
                 List(groupData) {group in
-                    GroupRow(group: group)
-                        .padding()
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.black, lineWidth: 3)
-                    )
-                }
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
-            }
-            .overlay(
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        
-                        self.showActionSheet.toggle()
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .frame(width: 50,height: 50)
+                    ZStack{
+                        GroupRow(group: group)
+                            .padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 25)
+                                    .stroke(Color.black, lineWidth: 3)
+                        )
+                        NavigationLink(destination: GroupDetail()){
+                            EmptyView()
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .offset(x: -10, y: -30)
-                    .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
-            }, alignment: .bottomTrailing)
+                }
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarHidden(true)
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            self.showActionSheet.toggle()
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 50,height: 50)
+                        }
+                        .offset(x: -10, y: -30)
+                    }
+                }
+            }
         }
+        .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
     }
 }
 

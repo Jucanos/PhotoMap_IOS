@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct MainGroupView: View {
-    
     @State var isEmpty = false
     
     var body: some View {

@@ -25,6 +25,7 @@
 		9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773018023C71F7B00E3CE99 /* SplashView.swift */; };
 		9773018523C7277700E3CE99 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773018423C7277700E3CE99 /* MainTabView.swift */; };
 		9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B19723C80B4100AB6E4F /* UserGroup.swift */; };
+		97B858B923C8A88500358211 /* GroupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B858B823C8A88500358211 /* GroupDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,7 @@
 		9773018023C71F7B00E3CE99 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		9773018423C7277700E3CE99 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		9798B19723C80B4100AB6E4F /* UserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroup.swift; sourceTree = "<group>"; };
+		97B858B823C8A88500358211 /* GroupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				9773017C23C709BB00E3CE99 /* MainGroupView.swift */,
 				97528EEB23C770E100B999B5 /* GroupList.swift */,
 				97528EEE23C7717D00B999B5 /* GroupRow.swift */,
+				97B858B823C8A88500358211 /* GroupDetail.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
 				9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */,
+				97B858B923C8A88500358211 /* GroupDetail.swift in Sources */,
 				9773018523C7277700E3CE99 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
