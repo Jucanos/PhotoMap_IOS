@@ -10,20 +10,49 @@ import SwiftUI
 
 struct GroupDetail: View {
     
-    @State var groupData: UserGroup
+    @State var groupData: UserGroup // State later
+    @State private var menuOpen = false
+    @Binding var isNavigationBarHidden: Bool
+    @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        KoreaMap()
-            .navigationBarItems(leading:
-                backButton, trailing:
-                Button(action: {print(self.presentationMode)}) {
-                    Image(systemName: "list.bullet")
-                        .foregroundColor(.white)
+        ZStack {
+            KoreaMap()
+                .navigationBarItems(leading:
+                    backButton, trailing:
+                    Button(action: {self.isSideMenuActive.toggle()}) {
+                        Image(systemName: "line.horizontal.3")
+                            .foregroundColor(.white)
+                    }
+            )
+                .navigationBarTitle("\(groupData.name)", displayMode: .inline)
+                .onAppear{
+                    self.isNavigationBarHidden = false
+                    
+                    //                .overlay(GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.menuOpen, menuClose: self.openMenu)
+                    //                    .edgesIgnoringSafeArea(.all))
+//            GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.menuOpen, menuClose: self.openMenu)
+                    
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {}) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .foregroundColor(.black)
+                            .frame(width: 50,height: 50)
+                    }
+                    .offset(x: -10, y: -30)
                 }
-        )
-            .navigationBarTitle("\(groupData.name)", displayMode: .inline)
+            }
+        }
+        
     }
+    
+    
     
     var backButton : some View {
         Button(action: {
@@ -37,9 +66,9 @@ struct GroupDetail: View {
     }
 }
 
-struct GroupDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        //        GroupDetail()
-        SplashView()
-    }
-}
+//struct GroupDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"))
+//        //        SplashView()
+//    }
+//}

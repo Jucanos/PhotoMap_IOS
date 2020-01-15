@@ -10,6 +10,8 @@ import SwiftUI
 
 struct MainGroupView: View {
     @State var isEmpty = false
+    @Binding var isNavigationBarHidden: Bool
+    @Binding var isSideMenuActive: Bool
     
     var body: some View {
         return Group{
@@ -17,27 +19,30 @@ struct MainGroupView: View {
                 Text("그룹을 생성해주세요!")
             }
             else{
-                GroupList()
+                GroupList(isNavigationBarHidden: self.$isNavigationBarHidden, isSideMenuActive: self.$isSideMenuActive)
+                    .onAppear{
+                        self.isNavigationBarHidden = true
+                }
             }
         }
         
     }
 }
 
-struct MainGroupView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MainGroupView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-                .previewDisplayName("iPhone SE")
-            
-            MainGroupView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewDisplayName("iPhone 8")
-            
-            MainGroupView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-                .previewDisplayName("iPhone 11 Pro")
-        }
-    }
-}
+//struct MainGroupView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            MainGroupView()
+//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+//                .previewDisplayName("iPhone SE")
+//
+//            MainGroupView()
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+//                .previewDisplayName("iPhone 8")
+//
+//            MainGroupView()
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+//                .previewDisplayName("iPhone 11 Pro")
+//        }
+//    }
+//}

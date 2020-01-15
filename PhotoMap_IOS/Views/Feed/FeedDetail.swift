@@ -28,10 +28,12 @@ struct FeedDetail: View {
         ScrollView{
             VStack(alignment: .leading, spacing: 2){
                 ForEach(feeds, id: \.id) { feed in
-                    FeedPreviewDetail(feedData: feed, masterViewSize: self.masterViewSize).padding(.bottom, 20)
+                    FeedPreviewDetail(feedData: feed, masterViewSize: self.masterViewSize)
+                        .padding(.bottom, 20)
                 }
             }
         }
+    
     }
 }
 

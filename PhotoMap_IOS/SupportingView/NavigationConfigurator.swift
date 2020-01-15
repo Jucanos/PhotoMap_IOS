@@ -21,3 +21,4 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
     }
     
 }
+

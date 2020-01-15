@@ -10,6 +10,7 @@
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
 		972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972B0FDE23C865C400BF1F65 /* KoreaMap.swift */; };
+		973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3323CEEC9C008C4EEC /* MemberRow.swift */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
@@ -29,7 +30,10 @@
 		9773018523C7277700E3CE99 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9773018423C7277700E3CE99 /* MainTabView.swift */; };
 		97785AC323C9E38F007EDB7E /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97785AC223C9E38F007EDB7E /* NavigationConfigurator.swift */; };
 		97785AC623C9E592007EDB7E /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97785AC523C9E592007EDB7E /* FeedView.swift */; };
+		978D81EC23CB0ACD00DA75D0 /* GroupSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81EB23CB0ACD00DA75D0 /* GroupSideMenu.swift */; };
+		978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81ED23CB0BD700DA75D0 /* MemberList.swift */; };
 		9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B19723C80B4100AB6E4F /* UserGroup.swift */; };
+		97B242DB23CD912300AB0DB1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B242DA23CD912300AB0DB1 /* TestView.swift */; };
 		97B858B923C8A88500358211 /* GroupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B858B823C8A88500358211 /* GroupDetail.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +55,7 @@
 		970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginButton.swift; sourceTree = "<group>"; };
 		972B0FDE23C865C400BF1F65 /* KoreaMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaMap.swift; sourceTree = "<group>"; };
+		973F6A3323CEEC9C008C4EEC /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9750586023C1B17800BF54E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9750586223C1B17800BF54E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +77,10 @@
 		9773018423C7277700E3CE99 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		97785AC223C9E38F007EDB7E /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		97785AC523C9E592007EDB7E /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		978D81EB23CB0ACD00DA75D0 /* GroupSideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSideMenu.swift; sourceTree = "<group>"; };
+		978D81ED23CB0BD700DA75D0 /* MemberList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberList.swift; sourceTree = "<group>"; };
 		9798B19723C80B4100AB6E4F /* UserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroup.swift; sourceTree = "<group>"; };
+		97B242DA23CD912300AB0DB1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		97B858B823C8A88500358211 /* GroupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +163,9 @@
 				97528EEB23C770E100B999B5 /* GroupList.swift */,
 				97528EEE23C7717D00B999B5 /* GroupRow.swift */,
 				97B858B823C8A88500358211 /* GroupDetail.swift */,
+				978D81EB23CB0ACD00DA75D0 /* GroupSideMenu.swift */,
+				978D81ED23CB0BD700DA75D0 /* MemberList.swift */,
+				973F6A3323CEEC9C008C4EEC /* MemberRow.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 				972B0FDD23C8649C00BF1F65 /* Map */,
 				97785AC423C9E583007EDB7E /* Feed */,
 				97B8B0AE23C8596300E9B52C /* UserSetting */,
+				97B242DA23CD912300AB0DB1 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,8 +307,10 @@
 				97528EEF23C7717D00B999B5 /* GroupRow.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				975F469A23CA22500044C6AA /* FeedPreviewDetail.swift in Sources */,
+				978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */,
 				975F469823CA1D760044C6AA /* FeedDetail.swift in Sources */,
 				9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */,
+				978D81EC23CB0ACD00DA75D0 /* GroupSideMenu.swift in Sources */,
 				972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */,
 				97528EEC23C770E100B999B5 /* GroupList.swift in Sources */,
 				9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */,
@@ -305,7 +319,9 @@
 				97785AC323C9E38F007EDB7E /* NavigationConfigurator.swift in Sources */,
 				97785AC623C9E592007EDB7E /* FeedView.swift in Sources */,
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
+				973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
+				97B242DB23CD912300AB0DB1 /* TestView.swift in Sources */,
 				9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */,
 				97B858B923C8A88500358211 /* GroupDetail.swift in Sources */,
 				9773018523C7277700E3CE99 /* MainTabView.swift in Sources */,

@@ -82,7 +82,6 @@ struct FeedPreviewDetail: View {
                 Text("Liked by Person1 and Person2")
                 Text("See all comments").foregroundColor(Color(.lightGray)).font(.subheadline)
             }.padding(.leading, 5)
-            
         }
     }
 }

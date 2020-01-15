@@ -12,7 +12,6 @@ struct MainSettingView: View {
     var body: some View {
         VStack {
             UserInfoView()
-            NavigationView {
                 List {
                     Section(header: Text("앱 정보")) {
                         SettingRow(settingName: "공지사항")
@@ -24,9 +23,6 @@ struct MainSettingView: View {
                         SettingRow(settingName: "로그아웃")
                     }
                 }.listStyle(GroupedListStyle())
-                    .navigationBarTitle("")
-                    .navigationBarHidden(true)
-            }
         }
     }
 }
