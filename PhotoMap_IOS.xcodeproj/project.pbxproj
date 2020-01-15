@@ -11,6 +11,8 @@
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
 		972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972B0FDE23C865C400BF1F65 /* KoreaMap.swift */; };
 		973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3323CEEC9C008C4EEC /* MemberRow.swift */; };
+		973F6A3623CEF154008C4EEC /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3523CEF154008C4EEC /* FloatingButton.swift */; };
+		973F6A3A23CF0487008C4EEC /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3923CF0487008C4EEC /* ButtonViews.swift */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
@@ -56,6 +58,8 @@
 		970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginButton.swift; sourceTree = "<group>"; };
 		972B0FDE23C865C400BF1F65 /* KoreaMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaMap.swift; sourceTree = "<group>"; };
 		973F6A3323CEEC9C008C4EEC /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
+		973F6A3523CEF154008C4EEC /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		973F6A3923CF0487008C4EEC /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9750586023C1B17800BF54E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9750586223C1B17800BF54E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 			isa = PBXGroup;
 			children = (
 				97785AC223C9E38F007EDB7E /* NavigationConfigurator.swift */,
+				973F6A3523CEF154008C4EEC /* FloatingButton.swift */,
+				973F6A3923CF0487008C4EEC /* ButtonViews.swift */,
 			);
 			path = SupportingView;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				975F469C23CA22DC0044C6AA /* Feed.swift in Sources */,
 				970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */,
 				97528EEF23C7717D00B999B5 /* GroupRow.swift in Sources */,
+				973F6A3A23CF0487008C4EEC /* ButtonViews.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				975F469A23CA22500044C6AA /* FeedPreviewDetail.swift in Sources */,
 				978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */,
@@ -318,6 +325,7 @@
 				9773017F23C709C700E3CE99 /* MainSettingView.swift in Sources */,
 				97785AC323C9E38F007EDB7E /* NavigationConfigurator.swift in Sources */,
 				97785AC623C9E592007EDB7E /* FeedView.swift in Sources */,
+				973F6A3623CEF154008C4EEC /* FloatingButton.swift in Sources */,
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
 				973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
