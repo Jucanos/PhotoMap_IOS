@@ -11,6 +11,7 @@ import SwiftUI
 struct View1: View {
     @State var isNavigationBarHidden: Bool = true
     @State var col = Color.clear
+    @State var isHidden = true
     var body: some View {
         
         ZStack {
@@ -18,14 +19,12 @@ struct View1: View {
                 Text("List contents")
             }
             VStack {
-                
-                FloatingButton(mainButtonView: AnyView(Sub1()), buttons: [AnyView(Sub2()),AnyView(Sub2()),AnyView(Sub2())])
+                FloatingButton(mainButtonView: AnyView(Sub1()), buttons: [AnyView(Sub2()),AnyView(Sub2()),AnyView(Sub2())], isButtonActivate: .constant(false))
                     .straight()
                     .direction(.top)
                     .alignment(.left)
                     .spacing(10)
                     .initialOpacity(0)
-                    
             }
         }
         

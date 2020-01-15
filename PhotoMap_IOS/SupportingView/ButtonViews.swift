@@ -23,7 +23,7 @@ struct IconAndTextButton: View {
                 Spacer()
                 Text(buttonText)
                     .font(.system(size: 16, weight: .semibold, design: .default))
-                    .foregroundColor(Color(.black))
+                    .foregroundColor(Color(.white))
                 Image(systemName: self.imageName)
                     .resizable()
                     .aspectRatio(1, contentMode: .fill)
@@ -34,11 +34,6 @@ struct IconAndTextButton: View {
         }
         .frame(width: 190, height: 45)
         .cornerRadius(8)
-        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 1)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(.white), lineWidth: 1)
-        )
     }
 }
 
@@ -57,6 +52,11 @@ struct MainButton: View {
         //                .shadow(color: Color(hex: colorHex).opacity(0.3), radius: 15, x: 0, y: 15)
         //            Image(systemName: imageName).foregroundColor(.black)
         //        }
-        Image(systemName: imageName).frame(width: width, height: width)
+        Image(systemName: imageName)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+//            .frame(width: width, height: width)
+            .clipShape(Circle())
+            .overlay(Circle().stroke(Color.red, lineWidth: 5))
     }
 }

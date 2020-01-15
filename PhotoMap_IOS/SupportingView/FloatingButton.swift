@@ -51,14 +51,19 @@ public struct FloatingButton: View {
     @State private var sizes: [CGSize] = []
     @State private var mainButtonFrame = CGRect()
     
-    fileprivate init(mainButtonView: AnyView, buttons: [SubmenuButton]) {
+    @Binding var isButtonActivate: Bool
+    
+    fileprivate init(mainButtonView: AnyView, buttons: [SubmenuButton], isButtonActivate: Binding<Bool>) {
         self.mainButtonView = mainButtonView
         self.buttons = buttons
+        self._isButtonActivate = isButtonActivate
     }
     
-    public init(mainButtonView: AnyView, buttons: [AnyView]) {
+    public init(mainButtonView: AnyView, buttons: [AnyView], isButtonActivate: Binding<Bool>) {
         self.mainButtonView = mainButtonView
-        self.buttons = buttons.map{ SubmenuButton(buttonView: $0) }
+        self.buttons = buttons.map{ SubmenuButton(buttonView: $0)
+        }
+        self._isButtonActivate = isButtonActivate
     }
     
     public var body: some View {
@@ -80,8 +85,11 @@ public struct FloatingButton: View {
                 }
             }
             
+            
+            
             Button(action: {
                 self.isOpen.toggle()
+                self.isButtonActivate.toggle()
             }) {
                 mainButtonView
             }
@@ -191,7 +199,7 @@ public struct FloatingButton: View {
     }
     
     public func copy() -> Self {
-        var button = FloatingButton(mainButtonView: self.mainButtonView, buttons: self.buttons)
+        var button = FloatingButton(mainButtonView: self.mainButtonView, buttons: self.buttons, isButtonActivate: self.$isButtonActivate)
         button.menuType = self.menuType
         button.spacing = self.spacing
         button.initialScaling = self.initialScaling
@@ -390,7 +398,7 @@ struct MenuButtonPreferenceViewSetter: View {
     var body: some View {
         GeometryReader { geometry in
             Rectangle()
-                .fill(Color.white)
+                .fill(Color.clear)
                 .preference(key: MenuButtonPreferenceKey.self,
                             value: [geometry.frame(in: .named("FloatingButtonSpace"))])
         }

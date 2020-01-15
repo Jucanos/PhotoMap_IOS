@@ -12,6 +12,7 @@ struct GroupDetail: View {
     
     @State var groupData: UserGroup // State later
     @State private var menuOpen = false
+    @State private var isButtonActivate = false
     @Binding var isNavigationBarHidden: Bool
     @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -33,19 +34,22 @@ struct GroupDetail: View {
                 .onAppear{
                     self.isNavigationBarHidden = false
             }
-            VStack {
-                Spacer().layoutPriority(10)
-                HStack {
+            ZStack {
+                Color(.black).opacity(isButtonActivate ? 0.7 : 0)
+                VStack {
                     Spacer().layoutPriority(10)
-                    FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepImageButton)])
-                        .straight()
-                        .direction(.top)
-                        .alignment(.right)
-                        .spacing(10)
-                        .initialOpacity(0)
-                        .padding()
-                    
+                    HStack {
+                        Spacer().layoutPriority(10)
+                        FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepImageButton)], isButtonActivate: self.$isButtonActivate)
+                            .straight()
+                            .direction(.top)
+                            .alignment(.right)
+                            .spacing(10)
+                            .initialOpacity(0)
+                            .padding()
+                    }
                 }
+                
             }
         }
         
@@ -64,8 +68,10 @@ struct GroupDetail: View {
     
     var mainButton: some View {
         Image(systemName: "plus.circle.fill")
-        .resizable()
-        .frame(width: 50, height: 50)
+            .resizable()
+            .frame(width: 50, height: 50)
+            .clipShape(Circle())
+        
     }
     
     var setRepImageButton: some View {
@@ -88,10 +94,10 @@ struct GroupDetail: View {
     
 }
 
-//struct GroupDetail_Previews: PreviewProvider {
-//
-//    static var previews: some View {
-//        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"))
-//        //        SplashView()
-//    }
-//}
+struct GroupDetail_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"), isNavigationBarHidden: .constant(true), isSideMenuActive: .constant(false))
+        //        SplashView()
+    }
+}
