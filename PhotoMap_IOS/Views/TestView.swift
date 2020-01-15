@@ -17,12 +17,16 @@ struct View1: View {
             List(0 ..< 5) { item in
                 Text("List contents")
             }
-            FloatingButton(mainButtonView: AnyView(Sub1()), buttons: [AnyView(Sub2()),AnyView(Sub2()),AnyView(Sub2())])
-                .straight()
-                .direction(.top)
-                .alignment(.left)
-                .spacing(10)
-                .initialOpacity(0)
+            VStack {
+                
+                FloatingButton(mainButtonView: AnyView(Sub1()), buttons: [AnyView(Sub2()),AnyView(Sub2()),AnyView(Sub2())])
+                    .straight()
+                    .direction(.top)
+                    .alignment(.left)
+                    .spacing(10)
+                    .initialOpacity(0)
+                    
+            }
         }
         
     }

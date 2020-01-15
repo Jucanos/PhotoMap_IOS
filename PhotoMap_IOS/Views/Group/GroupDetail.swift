@@ -16,7 +16,10 @@ struct GroupDetail: View {
     @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    
+    
     var body: some View {
+        
         ZStack {
             KoreaMap()
                 .navigationBarItems(leading:
@@ -31,23 +34,22 @@ struct GroupDetail: View {
                     self.isNavigationBarHidden = false
             }
             VStack {
-                Spacer()
+                Spacer().layoutPriority(10)
                 HStack {
-                    Spacer()
-                    Button(action: {}) {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .frame(width: 50,height: 50)
-                    }
-                    .offset(x: -10, y: -30)
+                    Spacer().layoutPriority(10)
+                    FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepImageButton)])
+                        .straight()
+                        .direction(.top)
+                        .alignment(.right)
+                        .spacing(10)
+                        .initialOpacity(0)
+                        .padding()
+                    
                 }
             }
         }
         
     }
-    
-    
     
     var backButton : some View {
         Button(action: {
@@ -59,6 +61,31 @@ struct GroupDetail: View {
             }
         }
     }
+    
+    var mainButton: some View {
+        Image(systemName: "plus.circle.fill")
+        .resizable()
+        .frame(width: 50, height: 50)
+    }
+    
+    var setRepImageButton: some View {
+        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            IconAndTextButton(imageName: "map.fill", buttonText: "대표지도 설정")
+        }
+    }
+    
+    var storeImageButton: some View {
+        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            IconAndTextButton(imageName: "square.and.arrow.down.fill", buttonText: "이미지로 저장하기")
+        }
+    }
+    
+    var shareButton: some View {
+        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            IconAndTextButton(imageName: "square.and.arrow.up.fill", buttonText: "공유하기")
+        }
+    }
+    
 }
 
 //struct GroupDetail_Previews: PreviewProvider {

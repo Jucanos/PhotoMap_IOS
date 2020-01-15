@@ -390,7 +390,7 @@ struct MenuButtonPreferenceViewSetter: View {
     var body: some View {
         GeometryReader { geometry in
             Rectangle()
-                .fill(Color.clear)
+                .fill(Color.white)
                 .preference(key: MenuButtonPreferenceKey.self,
                             value: [geometry.frame(in: .named("FloatingButtonSpace"))])
         }
