@@ -29,11 +29,6 @@ struct GroupDetail: View {
                 .navigationBarTitle("\(groupData.name)", displayMode: .inline)
                 .onAppear{
                     self.isNavigationBarHidden = false
-                    
-                    //                .overlay(GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.menuOpen, menuClose: self.openMenu)
-                    //                    .edgesIgnoringSafeArea(.all))
-//            GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.menuOpen, menuClose: self.openMenu)
-                    
             }
             VStack {
                 Spacer()
@@ -67,6 +62,7 @@ struct GroupDetail: View {
 }
 
 //struct GroupDetail_Previews: PreviewProvider {
+//
 //    static var previews: some View {
 //        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"))
 //        //        SplashView()
