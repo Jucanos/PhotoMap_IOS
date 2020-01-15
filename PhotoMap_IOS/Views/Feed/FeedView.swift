@@ -14,16 +14,15 @@ struct FeedView: View {
     @State var location: String
     
     var body: some View {
-        GeometryReader { gr in
-            FeedDetail(masterViewSize: gr.size)
+        
+        FeedDetail(masterViewSize: UIScreen.main.bounds.size)
             
-        }
-        .navigationBarItems(leading:
-            backButton, trailing:
-            Button(action: {print(self.presentationMode)}) {
-                Image(systemName: "list.bullet")
-                    .foregroundColor(.white)
-            }
+            .navigationBarItems(leading:
+                backButton, trailing:
+                Button(action: {print(self.presentationMode)}) {
+                    Image(systemName: "list.bullet")
+                        .foregroundColor(.white)
+                }
         )
             .navigationBarTitle("\(location)", displayMode: .inline)
     }

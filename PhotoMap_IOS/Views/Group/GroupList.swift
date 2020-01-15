@@ -10,11 +10,7 @@ import SwiftUI
 
 struct GroupList: View {
     
-    init() {
-        UITableView.appearance().tableFooterView = UIView()
-        UITableView.appearance().separatorStyle = .none
-    }
-    
+    @Binding var isNavigationBarHidden: Bool
     @State private var showActionSheet = false
     @State var groupData: [UserGroup] = [UserGroup(name: "test1", updateTime: "2020.01.01", imageName: "t"), UserGroup(name: "test2", updateTime: "2020.01.01", imageName: "t")]
     
@@ -28,64 +24,51 @@ struct GroupList: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                List(groupData) {group in
-                    ZStack{
-                        GroupRow(group: group)
-                            .padding()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(Color.black, lineWidth: 3)
-                        )
-                        NavigationLink(destination: GroupDetail(groupData: group)){
-                            EmptyView()
-                        }
-                        .buttonStyle(PlainButtonStyle())
+        ZStack {
+            List(groupData) {group in
+                ZStack{
+                    GroupRow(group: group)
+                        .padding()
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color.black, lineWidth: 3)
+                    )
+                    
+                    NavigationLink(destination: GroupDetail(groupData: group, isNavigationBarHidden: self.$isNavigationBarHidden)
+                    ){
+                        EmptyView()
                     }
-                }
-                
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            self.showActionSheet.toggle()
-                        }) {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .foregroundColor(.black)
-                                .frame(width: 50,height: 50)
-                        }
-                        .offset(x: -10, y: -30)
-                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
-            .background(NavigationConfigurator { nc in
-                nc.navigationBar.barTintColor = .black
-                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-            })
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.showActionSheet.toggle()
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .foregroundColor(.black)
+                            .frame(width: 50,height: 50)
+                    }
+                    .offset(x: -10, y: -30)
+                }
+            }
         }
         .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
+        .onAppear{
+            self.isNavigationBarHidden = true
+            UITableView.appearance().tableFooterView = UIView()
+            UITableView.appearance().separatorStyle = .none
+        }
     }
 }
 
 struct GroupList_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            GroupList()
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-                .previewDisplayName("iPhone SE")
-            
-            GroupList()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewDisplayName("iPhone 8")
-            
-            GroupList()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-                .previewDisplayName("iPhone 11 Pro")
-        }
+        SplashView()
     }
 }

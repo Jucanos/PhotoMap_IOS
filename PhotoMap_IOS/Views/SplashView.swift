@@ -14,7 +14,6 @@ struct SplashView: View {
         return Group {
             if isAuth{
                 MainTabView()
-                    .edgesIgnoringSafeArea(.top)
             }
             else {
                 LoginView(isAuth: $isAuth)
