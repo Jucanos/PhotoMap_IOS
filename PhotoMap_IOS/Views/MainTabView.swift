@@ -12,48 +12,57 @@ struct MainTabView: View {
     
     @State var selectedView = 0
     @State var isNavigationBarHidden: Bool = true
+    @State var isSideMenuActive: Bool = false
     
     var body: some View {
-        NavigationView {
-            TabView(selection: $selectedView) {
-                MainGroupView(isNavigationBarHidden: $isNavigationBarHidden)
-                    .tabItem {
-                        Image(systemName: "person.3.fill")
-                            .resizable()
-                            .imageScale(.large)
-                }.tag(0)
-                    .navigationBarTitle("")
-                    .navigationBarHidden(self.isNavigationBarHidden)
+        ZStack {
+            NavigationView {
+                TabView(selection: $selectedView) {
+                    MainGroupView(isNavigationBarHidden: $isNavigationBarHidden, isSideMenuActive: $isSideMenuActive)
+                        .tabItem {
+                            Image(systemName: "person.3.fill")
+                                .resizable()
+                                .imageScale(.large)
+                    }.tag(0)
+                        .navigationBarTitle("")
+                        .navigationBarHidden(self.isNavigationBarHidden)
+                    
+                    
+                    MainMapView()
+                        .tabItem {
+                            Image(systemName: "map.fill")
+                                .resizable()
+                                .imageScale(.large)
+                    }.tag(1)
+                        .navigationBarTitle("")
+                        .navigationBarHidden(self.isNavigationBarHidden)
+                    MainSettingView()
+                        .tabItem {
+                            Image(systemName: "line.horizontal.3")
+                                .resizable()
+                                .imageScale(.large)
+                    }.tag(2)
+                        .navigationBarTitle("")
+                        .navigationBarHidden(self.isNavigationBarHidden)
+                }
+                .accentColor(.black)
+                .edgesIgnoringSafeArea(.top)
+                .onAppear{
+                    self.isNavigationBarHidden = true
+                }
                 
-                
-                MainMapView()
-                    .tabItem {
-                        Image(systemName: "map.fill")
-                            .resizable()
-                            .imageScale(.large)
-                }.tag(1)
-                    .navigationBarTitle("")
-                    .navigationBarHidden(self.isNavigationBarHidden)
-                MainSettingView()
-                    .tabItem {
-                        Image(systemName: "line.horizontal.3")
-                            .resizable()
-                            .imageScale(.large)
-                }.tag(2)
-                    .navigationBarTitle("")
-                    .navigationBarHidden(self.isNavigationBarHidden)
             }
-            .accentColor(.black)
-            .edgesIgnoringSafeArea(.top)
-            .onAppear{
-                self.isNavigationBarHidden = true
-            }
+            .navigationViewStyle(StackNavigationViewStyle())
             
+            GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         
     }
+    func activeSideMenu() {
+        self.isSideMenuActive.toggle()
+    }
 }
+
 extension UINavigationController {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

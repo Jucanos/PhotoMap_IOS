@@ -11,6 +11,7 @@ import SwiftUI
 struct MainGroupView: View {
     @State var isEmpty = false
     @Binding var isNavigationBarHidden: Bool
+    @Binding var isSideMenuActive: Bool
     
     var body: some View {
         return Group{
@@ -18,9 +19,9 @@ struct MainGroupView: View {
                 Text("그룹을 생성해주세요!")
             }
             else{
-                GroupList(isNavigationBarHidden: self.$isNavigationBarHidden)
-                .onAppear{
-                    self.isNavigationBarHidden = true
+                GroupList(isNavigationBarHidden: self.$isNavigationBarHidden, isSideMenuActive: self.$isSideMenuActive)
+                    .onAppear{
+                        self.isNavigationBarHidden = true
                 }
             }
         }

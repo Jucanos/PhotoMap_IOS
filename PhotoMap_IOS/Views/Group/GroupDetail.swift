@@ -13,6 +13,7 @@ struct GroupDetail: View {
     @State var groupData: UserGroup // State later
     @State private var menuOpen = false
     @Binding var isNavigationBarHidden: Bool
+    @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -20,7 +21,7 @@ struct GroupDetail: View {
             KoreaMap()
                 .navigationBarItems(leading:
                     backButton, trailing:
-                    Button(action: {self.openMenu()}) {
+                    Button(action: {self.isSideMenuActive.toggle()}) {
                         Image(systemName: "line.horizontal.3")
                             .foregroundColor(.white)
                     }
@@ -31,7 +32,7 @@ struct GroupDetail: View {
                     
                     //                .overlay(GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.menuOpen, menuClose: self.openMenu)
                     //                    .edgesIgnoringSafeArea(.all))
-            GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.menuOpen, menuClose: self.openMenu)
+//            GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.menuOpen, menuClose: self.openMenu)
                     
             }
             VStack {
@@ -51,9 +52,7 @@ struct GroupDetail: View {
         
     }
     
-    func openMenu() {
-        self.menuOpen.toggle()
-    }
+    
     
     var backButton : some View {
         Button(action: {
