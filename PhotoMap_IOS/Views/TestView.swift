@@ -13,23 +13,11 @@ struct View1: View {
     @State var col = Color.clear
     @State var isHidden = true
     var body: some View {
-        
-        ZStack {
-            List(0 ..< 5) { item in
-                Text("List contents")
-            }
-            VStack {
-                FloatingButton(mainButtonView: AnyView(Sub1()), buttons: [AnyView(Sub2()),AnyView(Sub2()),AnyView(Sub2())], isButtonActivate: .constant(false))
-                    .straight()
-                    .direction(.top)
-                    .alignment(.left)
-                    .spacing(10)
-                    .initialOpacity(0)
-            }
+        NavigationView {
+            Text("Test")
+            .navigationBarTitle("Good")
         }
-        
     }
-    
 }
 
 struct Sub1: View {

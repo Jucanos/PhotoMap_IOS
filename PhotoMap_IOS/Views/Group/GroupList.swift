@@ -10,7 +10,6 @@ import SwiftUI
 
 struct GroupList: View {
     
-    @Binding var isNavigationBarHidden: Bool
     @Binding var isSideMenuActive: Bool
     @State private var showActionSheet = false
     @State var groupData: [UserGroup] = [UserGroup(name: "test1", updateTime: "2020.01.01", imageName: "t"), UserGroup(name: "test2", updateTime: "2020.01.01", imageName: "t")]
@@ -35,7 +34,7 @@ struct GroupList: View {
                                 .stroke(Color.black, lineWidth: 3)
                     )
                     
-                    NavigationLink(destination: GroupDetail(groupData: group, isNavigationBarHidden: self.$isNavigationBarHidden, isSideMenuActive: self.$isSideMenuActive)
+                    NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
                     ){
                         EmptyView()
                     }
@@ -60,8 +59,7 @@ struct GroupList: View {
             }
         }
         .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
-        .onAppear{
-            self.isNavigationBarHidden = true
+        .onAppear{            
             UITableView.appearance().tableFooterView = UIView()
             UITableView.appearance().separatorStyle = .none
         }

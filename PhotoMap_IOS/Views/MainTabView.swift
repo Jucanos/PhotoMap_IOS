@@ -10,31 +10,26 @@ import SwiftUI
 
 struct MainTabView: View {
     
-    @State var selectedView = 0
-    @State var isNavigationBarHidden: Bool = true
-    @State var isSideMenuActive: Bool = false
-    
+    @State private var selectedView = 0
+    @State private var isSideMenuActive: Bool = false
+    private let titles = ["그룹","메인지도","설정"]
     var body: some View {
         ZStack {
             NavigationView {
                 TabView(selection: $selectedView) {
-                    MainGroupView(isNavigationBarHidden: $isNavigationBarHidden, isSideMenuActive: $isSideMenuActive)
+                    MainGroupView(isSideMenuActive: $isSideMenuActive)
                         .tabItem {
                             Image(systemName: "person.3.fill")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(0)
-                        .navigationBarTitle("")
-                        .navigationBarHidden(self.isNavigationBarHidden)
-                    
+                        
                     MainMapView()
                         .tabItem {
                             Image(systemName: "map.fill")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(1)
-                        .navigationBarTitle("")
-                        .navigationBarHidden(true)
                     
                     MainSettingView()
                         .tabItem {
@@ -42,31 +37,28 @@ struct MainTabView: View {
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(2)
-                        .navigationBarTitle("")
-                        .navigationBarHidden(true)
                 }
                 .accentColor(.black)
                 .edgesIgnoringSafeArea(.top)
-                .onAppear{
-                    self.isNavigationBarHidden = true
-                }
+                .navigationBarTitle("\(titles[self.selectedView])", displayMode: .inline)
             }
             .navigationViewStyle(StackNavigationViewStyle())
             
             GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
         }
     }
-    
+
     func activeSideMenu() {
         self.isSideMenuActive.toggle()
     }
 }
 
 extension UINavigationController {
-    override open func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let appearance = UINavigationBarAppearance()
-//        appearance.configureWithDefaultBackground()
+        appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .black
         appearance.titleTextAttributes = [.foregroundColor : UIColor.white]
         navigationBar.standardAppearance = appearance
@@ -76,21 +68,21 @@ extension UINavigationController {
 }
 
 
-//struct MainTabView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            MainTabView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-//                .previewDisplayName("iPhone SE")
-//
-//            MainTabView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//                .previewDisplayName("iPhone 8")
-//
-//            MainTabView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-//                .previewDisplayName("iPhone 11 Pro")
-//        }
-//    }
-//}
+struct MainTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            MainTabView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                .previewDisplayName("iPhone SE")
+
+            MainTabView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+                .previewDisplayName("iPhone 8")
+
+            MainTabView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+                .previewDisplayName("iPhone 11 Pro")
+        }
+    }
+}
 

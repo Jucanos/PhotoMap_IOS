@@ -13,7 +13,6 @@ struct GroupDetail: View {
     @State var groupData: UserGroup // State later
     @State private var menuOpen = false
     @State private var isButtonActivate = false
-    @Binding var isNavigationBarHidden: Bool
     @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -31,9 +30,6 @@ struct GroupDetail: View {
                     }
             )
                 .navigationBarTitle("\(groupData.name)", displayMode: .inline)
-                .onAppear{
-                    self.isNavigationBarHidden = false
-            }
             ZStack {
                 Color(.black).opacity(isButtonActivate ? 0.7 : 0)
                 VStack {
@@ -97,7 +93,7 @@ struct GroupDetail: View {
 struct GroupDetail_Previews: PreviewProvider {
     
     static var previews: some View {
-        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"), isNavigationBarHidden: .constant(true), isSideMenuActive: .constant(false))
+        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"), isSideMenuActive: .constant(false))
         //        SplashView()
     }
 }
