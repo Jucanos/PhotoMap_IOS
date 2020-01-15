@@ -27,7 +27,6 @@ struct MainTabView: View {
                         .navigationBarTitle("")
                         .navigationBarHidden(self.isNavigationBarHidden)
                     
-                    
                     MainMapView()
                         .tabItem {
                             Image(systemName: "map.fill")
@@ -35,7 +34,8 @@ struct MainTabView: View {
                                 .imageScale(.large)
                     }.tag(1)
                         .navigationBarTitle("")
-                        .navigationBarHidden(self.isNavigationBarHidden)
+                        .navigationBarHidden(true)
+                    
                     MainSettingView()
                         .tabItem {
                             Image(systemName: "line.horizontal.3")
@@ -43,21 +43,20 @@ struct MainTabView: View {
                                 .imageScale(.large)
                     }.tag(2)
                         .navigationBarTitle("")
-                        .navigationBarHidden(self.isNavigationBarHidden)
+                        .navigationBarHidden(true)
                 }
                 .accentColor(.black)
                 .edgesIgnoringSafeArea(.top)
                 .onAppear{
                     self.isNavigationBarHidden = true
                 }
-                
             }
             .navigationViewStyle(StackNavigationViewStyle())
             
             GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
         }
-        
     }
+    
     func activeSideMenu() {
         self.isSideMenuActive.toggle()
     }
@@ -67,7 +66,7 @@ extension UINavigationController {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
+//        appearance.configureWithDefaultBackground()
         appearance.backgroundColor = .black
         appearance.titleTextAttributes = [.foregroundColor : UIColor.white]
         navigationBar.standardAppearance = appearance
