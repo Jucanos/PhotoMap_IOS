@@ -57,7 +57,7 @@ struct MainTabView: View {
                         .foregroundColor(.white)
                         .frame(width: 20, height: 20)
                         .padding(5)
-                    }
+                    }.opacity(selectedView == 0 ? 1 : 0)
                 )
             }
             .navigationViewStyle(StackNavigationViewStyle())
