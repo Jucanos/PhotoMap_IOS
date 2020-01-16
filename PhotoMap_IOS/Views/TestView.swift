@@ -12,10 +12,17 @@ struct View1: View {
     @State var isNavigationBarHidden: Bool = true
     @State var col = Color.clear
     @State var isHidden = true
+//    @EnvironmentObject var testItems: [String]
     var body: some View {
         NavigationView {
-            Text("Test")
-            .navigationBarTitle("Good")
+            VStack {
+                NavigationLink(destination: Sub1()) {
+                Text("Go!")
+                }
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Text("ADD!!")
+                }
+            }
         }
     }
 }

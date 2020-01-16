@@ -16,8 +16,6 @@ struct GroupDetail: View {
     @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    
-    
     var body: some View {
         
         ZStack {

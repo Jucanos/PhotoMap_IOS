@@ -12,7 +12,9 @@ struct MainTabView: View {
     
     @State private var selectedView = 0
     @State private var isSideMenuActive: Bool = false
+    @State private var isAddGroupViewActive: Bool = false
     private let titles = ["그룹","메인지도","설정"]
+    
     var body: some View {
         ZStack {
             NavigationView {
@@ -23,7 +25,7 @@ struct MainTabView: View {
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(0)
-                        
+                    
                     MainMapView()
                         .tabItem {
                             Image(systemName: "map.fill")
@@ -40,18 +42,42 @@ struct MainTabView: View {
                 }
                 .accentColor(.black)
                 .edgesIgnoringSafeArea(.top)
-                .navigationBarTitle("\(titles[self.selectedView])", displayMode: .inline)
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarItems(leading:
+                    HStack {
+                        Text("\(self.titles[selectedView])")
+                            .font(.system(size: 25, weight: .semibold, design: .default))
+                            .foregroundColor(Color.white)
+                        Spacer()
+                    }
+                    .frame(width: 100)
+                    ,trailing: Button(action: {self.activeAddGroupView()}){
+                        Image(systemName: "plus.bubble.fill")
+                        .resizable()
+                        .foregroundColor(.white)
+                        .frame(width: 20, height: 20)
+                        .padding(5)
+                    }
+                )
             }
             .navigationViewStyle(StackNavigationViewStyle())
             
             GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
         }
     }
-
+    
     func activeSideMenu() {
         self.isSideMenuActive.toggle()
     }
+    
+    func activeAddGroupView(){
+        self.isAddGroupViewActive.toggle()
+    }
+    
+    
 }
+
+
 
 extension UINavigationController {
     
@@ -60,7 +86,7 @@ extension UINavigationController {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .black
-        appearance.titleTextAttributes = [.foregroundColor : UIColor.white]
+        appearance.titleTextAttributes = [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 20, weight: .semibold)]
         navigationBar.standardAppearance = appearance
         navigationBar.compactAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
@@ -74,11 +100,11 @@ struct MainTabView_Previews: PreviewProvider {
             MainTabView()
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
                 .previewDisplayName("iPhone SE")
-
+            
             MainTabView()
                 .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
                 .previewDisplayName("iPhone 8")
-
+            
             MainTabView()
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
                 .previewDisplayName("iPhone 11 Pro")
