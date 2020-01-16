@@ -53,21 +53,21 @@ struct LoginView: View {
 
 
 #if DEBUG
-//struct LoginView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            LoginView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-//                .previewDisplayName("iPhone SE")
-//
-//            LoginView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//                .previewDisplayName("iPhone 8")
-//
-//            LoginView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-//                .previewDisplayName("iPhone 11 Pro")
-//        }
-//    }
-//}
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            LoginView(isAuth: .constant(false))
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                .previewDisplayName("iPhone SE")
+
+            LoginView(isAuth: .constant(false))
+                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+                .previewDisplayName("iPhone 8")
+
+            LoginView(isAuth: .constant(false))
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+                .previewDisplayName("iPhone 11 Pro")
+        }
+    }
+}
 #endif
