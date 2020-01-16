@@ -14,16 +14,10 @@ struct View1: View {
     @State var isHidden = true
 //    @EnvironmentObject var testItems: [String]
     var body: some View {
-        NavigationView {
-            VStack {
-                NavigationLink(destination: Sub1()) {
-                Text("Go!")
-                }
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("ADD!!")
-                }
-            }
+        ZStack(alignment: .bottomTrailing){
+            Text("good")
         }
+    .frame(width: 50, height: 50)
     }
 }
 

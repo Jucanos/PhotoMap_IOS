@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct FeedPreviewDetail: View {
-    let feedData: Feed
+    @State var currentPage = 0
+    var viewControllers: [UIHostingController<Image>]
+    var feedData: Feed
     var masterViewSize: CGSize
     
     var body: some View {
@@ -41,10 +43,14 @@ struct FeedPreviewDetail: View {
                 .padding(.trailing, 5)
             }
             
-            Image(self.feedData.imageUrl)
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .frame(width: masterViewSize.width, height: masterViewSize.width)
+            ZStack(alignment: .bottomTrailing) {
+                PageViewController(controllers: viewControllers, currentPage: $currentPage)
+
+                PageControl(numberOfPages: viewControllers.count, currentPage: $currentPage)
+                    .padding(.trailing)
+            }
+            .frame(width: masterViewSize.width, height: masterViewSize.width)
+            
             
             HStack{
                 Button(action: {}){

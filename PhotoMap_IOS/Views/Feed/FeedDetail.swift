@@ -11,24 +11,20 @@ import SwiftUI
 struct FeedDetail: View {
     
     let feeds: [Feed] = [
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1"),
-        Feed(imageUrl: "test1")
+        Feed(imageUrl: ["test1","test1","test1"]),
+        Feed(imageUrl: ["test1"]),
+        Feed(imageUrl: ["test1"]),
+        Feed(imageUrl: ["test1"]),
+        Feed(imageUrl: ["test1"])
     ]
     var masterViewSize: CGSize
+//    var feedImages: [Image] = []
     
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 2){
                 ForEach(feeds, id: \.id) { feed in
-                    FeedPreviewDetail(feedData: feed, masterViewSize: self.masterViewSize)
+                    FeedPreviewDetail(viewControllers: feed.getImageViews(), feedData: feed, masterViewSize: self.masterViewSize)
                         .padding(.bottom, 20)
                 }
             }

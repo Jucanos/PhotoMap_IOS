@@ -12,6 +12,17 @@ struct Feed: Hashable, Codable, Identifiable {
     var id = UUID()
 //    var name: String
 //    var updateTime: String
-    var imageUrl: String
+    var imageUrl: [String]
+    
+    
+    func getImageViews() -> [UIHostingController<Image>] {
+        let images = self.imageUrl.map{
+            Image("\($0)").resizable()
+        }
+        let vcs = images.map{
+            UIHostingController(rootView: $0)
+        }
+        return vcs
+    }
 }
 
