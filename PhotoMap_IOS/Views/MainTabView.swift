@@ -63,6 +63,8 @@ struct MainTabView: View {
             .navigationViewStyle(StackNavigationViewStyle())
             
             GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
+            
+            AddGroup(isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
         }
     }
     
