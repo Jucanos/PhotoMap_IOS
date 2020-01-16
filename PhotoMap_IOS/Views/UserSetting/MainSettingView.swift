@@ -25,6 +25,7 @@ struct MainSettingView: View {
                 }.listStyle(GroupedListStyle())
         }
     }
+    
 }
 
 

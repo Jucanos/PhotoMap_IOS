@@ -12,24 +12,19 @@ struct View1: View {
     @State var isNavigationBarHidden: Bool = true
     @State var col = Color.clear
     @State var isHidden = true
+//    @EnvironmentObject var testItems: [String]
     var body: some View {
-        
-        ZStack {
-            List(0 ..< 5) { item in
-                Text("List contents")
-            }
+        NavigationView {
             VStack {
-                FloatingButton(mainButtonView: AnyView(Sub1()), buttons: [AnyView(Sub2()),AnyView(Sub2()),AnyView(Sub2())], isButtonActivate: .constant(false))
-                    .straight()
-                    .direction(.top)
-                    .alignment(.left)
-                    .spacing(10)
-                    .initialOpacity(0)
+                NavigationLink(destination: Sub1()) {
+                Text("Go!")
+                }
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Text("ADD!!")
+                }
             }
         }
-        
     }
-    
 }
 
 struct Sub1: View {

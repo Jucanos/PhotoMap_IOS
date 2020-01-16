@@ -10,19 +10,18 @@ import SwiftUI
 
 struct GroupList: View {
     
-    @Binding var isNavigationBarHidden: Bool
     @Binding var isSideMenuActive: Bool
     @State private var showActionSheet = false
     @State var groupData: [UserGroup] = [UserGroup(name: "test1", updateTime: "2020.01.01", imageName: "t"), UserGroup(name: "test2", updateTime: "2020.01.01", imageName: "t")]
     
-    private var actionSheet: ActionSheet {
-        ActionSheet(title: Text("그룹추가"), buttons: [
-            .default(Text("그룹 추가하기"), action:{
-                self.groupData.append(UserGroup(name: "add", updateTime: "2020.01.02", imageName: "url"))
-            }),
-            .destructive(Text("취소"))
-        ])
-    }
+//    private var actionSheet: ActionSheet {
+//        ActionSheet(title: Text("그룹추가"), buttons: [
+//            .default(Text("그룹 추가하기"), action:{
+//                self.groupData.append(UserGroup(name: "add", updateTime: "2020.01.02", imageName: "url"))
+//            }),
+//            .destructive(Text("취소"))
+//        ])
+//    }
     
     var body: some View {
         ZStack {
@@ -35,7 +34,7 @@ struct GroupList: View {
                                 .stroke(Color.black, lineWidth: 3)
                     )
                     
-                    NavigationLink(destination: GroupDetail(groupData: group, isNavigationBarHidden: self.$isNavigationBarHidden, isSideMenuActive: self.$isSideMenuActive)
+                    NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
                     ){
                         EmptyView()
                     }
@@ -43,25 +42,24 @@ struct GroupList: View {
                 }
             }
             
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        self.showActionSheet.toggle()
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .frame(width: 50,height: 50)
-                    }
-                    .offset(x: -10, y: -30)
-                }
-            }
+//            VStack {
+//                Spacer()
+//                HStack {
+//                    Spacer()
+//                    Button(action: {
+//                        self.showActionSheet.toggle()
+//                    }) {
+//                        Image(systemName: "plus.circle.fill")
+//                            .resizable()
+//                            .foregroundColor(.black)
+//                            .frame(width: 50,height: 50)
+//                    }
+//                    .offset(x: -10, y: -30)
+//                }
+//            }
         }
-        .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
-        .onAppear{
-            self.isNavigationBarHidden = true
+//        .actionSheet(isPresented: $showActionSheet, content: {actionSheet})
+        .onAppear{            
             UITableView.appearance().tableFooterView = UIView()
             UITableView.appearance().separatorStyle = .none
         }
