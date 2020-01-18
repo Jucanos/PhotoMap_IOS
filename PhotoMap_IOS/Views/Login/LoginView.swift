@@ -7,11 +7,15 @@
 //
 
 import SwiftUI
+import KakaoOpenSDK
+import Request
+
 
 let appColor = Color(red: 0.976, green: 0.875, blue: 0.196)
 
 struct LoginView: View {
-    @Binding var isAuth: Bool
+    //    @Binding var isAuth: Bool
+    @EnvironmentObject var userSettings: UserSettings
     
     var body: some View {
         VStack(alignment: .center) {
@@ -28,10 +32,8 @@ struct LoginView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
             Button(action: {
-                if self.testAct() {
-                    self.isAuth = true
-                }
-            }) {
+                self.attemptLogin()
+            }){
                 KakaoLoginButton()
                     .aspectRatio(contentMode: .fit)
                     .shadow(radius: 10)
@@ -41,11 +43,45 @@ struct LoginView: View {
         .padding()
         .background(appColor)
         .edgesIgnoringSafeArea(.all)
+        .onAppear(){
+            self.userSettings.getAuthFromServer()
+        }
     }
     
-    func testAct() -> Bool {
-        print("button tapped!")
-        return true
+    func attemptLogin(){
+        guard let session = KOSession.shared() else {
+            return
+        }
+        if session.isOpen() {
+            session.close()
+        }
+        print("trying to open kakao session")
+        session.open(completionHandler: { (error) -> Void in
+            if error != nil || !session.isOpen() {return}
+            print(session.token!.accessToken)
+            self.userSettings.userTocken = session.token!.accessToken
+            let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
+            AnyRequest<UserInfo>{
+                Url(authUrl)
+                Method(.get)
+                Header.Authorization(.bearer(self.userSettings.userTocken!))
+            }.onObject { usrInfo in
+                DispatchQueue.main.async {
+                    self.userSettings.userInfo = usrInfo
+                    if self.userSettings.userInfo != nil {
+                        print("UserInfo init success!")
+                        print(self.userSettings.userInfo!)
+                    } else{
+                        print("UserInfo init failed!")
+                    }
+                }
+            }
+            .onError { error in
+                print(error)
+            }
+            .call()
+        })
+        
     }
 }
 
@@ -56,15 +92,15 @@ struct LoginView: View {
 //struct LoginView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        Group {
-//            LoginView()
+//            LoginView(isAuth: .constant(false))
 //                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
 //                .previewDisplayName("iPhone SE")
 //
-//            LoginView()
+//            LoginView(isAuth: .constant(false))
 //                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
 //                .previewDisplayName("iPhone 8")
 //
-//            LoginView()
+//            LoginView(isAuth: .constant(false))
 //                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
 //                .previewDisplayName("iPhone 11 Pro")
 //        }

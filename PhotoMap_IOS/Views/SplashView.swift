@@ -9,14 +9,16 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State var isAuth = true // fasle as default!
-    var body: some View {
+//    @State var isAuth = false // fasle as default!
+    @EnvironmentObject var userSettings: UserSettings
+    
+    var body: some View {        
         return Group {
-            if isAuth{
+            if self.userSettings.userInfo != nil {
                 MainTabView()
             }
             else {
-                LoginView(isAuth: $isAuth)
+                LoginView()
             }
         }
     }

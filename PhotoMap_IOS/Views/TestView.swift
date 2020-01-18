@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Request
 
 struct View1: View {
     @State var isNavigationBarHidden: Bool = true
@@ -14,10 +15,18 @@ struct View1: View {
     @State var isHidden = true
 //    @EnvironmentObject var testItems: [String]
     var body: some View {
-        ZStack(alignment: .bottomTrailing){
-            Text("good")
+        Button(action: {
+                    let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
+                    AnyRequest<UserInfo>{
+                        Url(authUrl)
+                        Method(.get)
+                        Header.Authorization(.bearer("self.$userTocken"))
+                    }.onObject { usrInfo in
+                        print("suc")
+                    }
+        }) {
+        Text(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/)
         }
-    .frame(width: 50, height: 50)
     }
 }
 
