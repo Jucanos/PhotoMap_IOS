@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          */
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let splashView = SplashView()
+        let splashView = SplashView().environmentObject(UserSettings())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -35,6 +35,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("try to open")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,6 +51,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        print("\n\n\nDidBecomeActive")
+        KOSession.handleDidBecomeActive()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -65,6 +71,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
+        KOSession.handleDidEnterBackground()
+        print("\n\n\nBackground entered!!")
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
