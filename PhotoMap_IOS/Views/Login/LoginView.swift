@@ -32,9 +32,7 @@ struct LoginView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
             Button(action: {
-                self.userSettings.getTockenFromKakao()
-//                self.getAuthFromServer()
-                //                    self.isAuth.toggle()
+                self.attemptLogin()
             }){
                 KakaoLoginButton()
                     .aspectRatio(contentMode: .fit)
@@ -45,34 +43,45 @@ struct LoginView: View {
         .padding()
         .background(appColor)
         .edgesIgnoringSafeArea(.all)
-//        .onAppear(){
-//            if self.userSettings.userTocken != nil{
-//                self.getAuthFromServer()
-//            }
-//        }
+        .onAppear(){
+            self.userSettings.getAuthFromServer()
+        }
     }
     
-    func getAuthFromServer(){
-        let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
-        AnyRequest<UserInfo>{
-            Url(authUrl)
-            Method(.get)
-            Header.Authorization(.bearer(self.userSettings.userTocken!))
-        }.onObject { usrInfo in
-            DispatchQueue.main.async {
-                self.userSettings.userInfo = usrInfo
-                if self.userSettings.userInfo != nil {
-                    print("UserInfo init success!")
-                    print(self.userSettings.userInfo!)
-                } else{
-                    print("UserInfo init failed!")
+    func attemptLogin(){
+        guard let session = KOSession.shared() else {
+            return
+        }
+        if session.isOpen() {
+            session.close()
+        }
+        print("trying to open kakao session")
+        session.open(completionHandler: { (error) -> Void in
+            if error != nil || !session.isOpen() {return}
+            print(session.token!.accessToken)
+            self.userSettings.userTocken = session.token!.accessToken
+            let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
+            AnyRequest<UserInfo>{
+                Url(authUrl)
+                Method(.get)
+                Header.Authorization(.bearer(self.userSettings.userTocken!))
+            }.onObject { usrInfo in
+                DispatchQueue.main.async {
+                    self.userSettings.userInfo = usrInfo
+                    if self.userSettings.userInfo != nil {
+                        print("UserInfo init success!")
+                        print(self.userSettings.userInfo!)
+                    } else{
+                        print("UserInfo init failed!")
+                    }
                 }
             }
-        }
-        .onError { error in
-            print(error)
-        }
-        .call()
+            .onError { error in
+                print(error)
+            }
+            .call()
+        })
+        
     }
 }
 

@@ -18,21 +18,20 @@ class UserSettings: ObservableObject {
         return self.userTocken != nil && self.userInfo != nil
     }
     
-    func getAuthFromServer() -> Bool {
-        print("inside get auth")
-        var isValid: Bool = false
-        
+    func getAuthFromServer() -> Void {
+        print("trying to get auth from Photomap server")
         guard let session = KOSession.shared() else {
-            return false
+            return
         }
         
         if session.isOpen(){
             self.userTocken = session.token!.accessToken
+            print("getting tocken success: ", self.userTocken!)
         }
         
         if self.userTocken == nil{
             print("user tocken nil!!")
-            return false
+            return
         }
         
         let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
@@ -44,9 +43,7 @@ class UserSettings: ObservableObject {
             DispatchQueue.main.async {
                 self.userInfo = usrInfo
                 if self.userInfo != nil {
-                    print("UserInfo init success!")
-                    print(self.userInfo!)
-                    isValid = true
+                    print("UserInfo init success: ", self.userInfo!)
                 } else{
                     print("UserInfo init failed!")
                 }
@@ -56,23 +53,16 @@ class UserSettings: ObservableObject {
             print(error)
         }
         .call()
-        return isValid
     }
     
     func getTockenFromKakao() -> Void{
-        print("enter tockenFromKakao")
-        
         guard let session = KOSession.shared() else {
             return
         }
-        
-        print("before checking session open")
         if session.isOpen() {
             session.close()
         }
-        print("after checking session open")
         print("trying to open kakao session")
-        
         session.open(completionHandler: { (error) -> Void in
             if error != nil || !session.isOpen() {return}
             print(session.token!.accessToken)

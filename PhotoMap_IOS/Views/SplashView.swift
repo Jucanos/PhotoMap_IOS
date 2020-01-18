@@ -14,7 +14,7 @@ struct SplashView: View {
     
     var body: some View {        
         return Group {
-            if self.userSettings.isAuth(){                
+            if self.userSettings.userInfo != nil {
                 MainTabView()
             }
             else {

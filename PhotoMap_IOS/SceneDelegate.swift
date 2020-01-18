@@ -39,6 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("try to open")
+        for context in URLContexts {
+            if KOSession.isKakaoAgeAuthCallback(context.url.absoluteURL) {
+                KOSession.handleOpen(context.url)
+            }
+        }        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
