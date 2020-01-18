@@ -68,4 +68,37 @@ class UserSettings: ObservableObject {
             print(session.token!.accessToken)
         })
     }
+    
+    func userLogout() -> Void {
+        let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
+        Request{
+            Url(authUrl)
+            Method(.delete)
+            Header.Authorization(.bearer(self.userTocken!))
+        }.onError { error in
+            print("logout failed: ", error)
+        }
+        .onData{ data in
+            print("\nlogout success from Photomap server!")
+            DispatchQueue.main.async {
+                self.userInfo = nil
+                print("\nuserInfo deleted!")
+            }
+        }
+        .call()
+        
+        guard let session = KOSession.shared() else{
+            return
+        }
+        session.logoutAndClose(completionHandler: { (success, error) in
+            if success{
+                print("\nlogout success from kakao session")
+                self.userTocken = nil
+                print("\nuserTocken deleted!")
+            } else{
+                print(error!.localizedDescription)
+            }
+        })
+        
+    }
 }
