@@ -9,16 +9,16 @@
 import SwiftUI
 
 struct GroupRow: View {
-    var group: UserGroup
+    var group: MapData
     var body: some View {
         HStack{
             Image(systemName: "1.circle")
                 .resizable()
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading) {
-                Text(verbatim: "\(group.name)")
+                Text(verbatim: "\(group.name!)")
                     .font(.title)
-                Text("Update at: \(group.updateTime)")
+                Text("Update at: 2020.01.01")
                     .font(.footnote)
             }
             .padding(5)
@@ -27,13 +27,13 @@ struct GroupRow: View {
     }
 }
 
-struct GroupRow_Previews: PreviewProvider {
-    static var tgroup = UserGroup(name: "test", updateTime: "2020.01.01", imageName: "uir")
-    
-    static var previews: some View {
-        Group{
-            GroupRow(group: tgroup)
-        }
-        .previewLayout(.fixed(width: 300, height: 70))
-    }
-}
+//struct GroupRow_Previews: PreviewProvider {
+//    static var tgroup = UserGroup(name: "test", updateTime: "2020.01.01", imageName: "uir")
+//    
+//    static var previews: some View {
+//        Group{
+//            GroupRow(group: tgroup)
+//        }
+//        .previewLayout(.fixed(width: 300, height: 70))
+//    }
+//}

@@ -7,10 +7,45 @@
 //
 
 import SwiftUI
+import Combine
+import Request
 
-struct UserGroup: Hashable, Codable, Identifiable {
-    var id = UUID()
-    var name: String
-    var updateTime: String
-    var imageName: String
+struct UserGroup: Codable{
+    var data: [MapData?]
+    var message: String?
+}
+
+struct MapData: Codable {
+    var mid: String?
+    var name: String?
+}
+
+class UserGroupData: ObservableObject {
+    
+    let objectWillChange = ObservableObjectPublisher()
+    var mapData: [MapData] = []{
+        willSet{
+            objectWillChange.send()
+        }
+    }
+    
+    func fetch(userTocken: String) {
+        let url = NetworkURL.sharedInstance.getUrlString("/maps")
+        AnyRequest<UserGroup> {
+            Url(url)
+            Method(.get)
+            Header.Authorization(.bearer(userTocken))
+        }.onObject{ groups in
+            print("groups")
+            print(groups)
+            DispatchQueue.main.async {
+                let sampleGroup = MapData(mid: "kasdkfoas2390", name: "내그룹")
+                self.mapData.append(sampleGroup)
+            }
+            
+        }.onError{ error in
+            print(error)
+        }
+        .call()
+    }
 }

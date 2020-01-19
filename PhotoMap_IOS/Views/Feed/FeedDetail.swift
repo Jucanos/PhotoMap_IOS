@@ -18,7 +18,6 @@ struct FeedDetail: View {
         Feed(imageUrl: ["test1"])
     ]
     var masterViewSize: CGSize
-//    var feedImages: [Image] = []
     
     var body: some View {
         ScrollView{

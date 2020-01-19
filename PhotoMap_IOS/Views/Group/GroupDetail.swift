@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GroupDetail: View {
     
-    @State var groupData: UserGroup // State later
+    @State var groupData: MapData // State later
     @State private var menuOpen = false
     @State private var isButtonActivate = false
     @Binding var isSideMenuActive: Bool
@@ -27,7 +27,7 @@ struct GroupDetail: View {
                             .foregroundColor(.white)
                     }
             )
-                .navigationBarTitle("\(groupData.name)", displayMode: .inline)
+                .navigationBarTitle("\(groupData.name!)", displayMode: .inline)
             ZStack {
                 Color(.black).opacity(isButtonActivate ? 0.7 : 0)
                 VStack {
@@ -88,10 +88,10 @@ struct GroupDetail: View {
     
 }
 
-struct GroupDetail_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"), isSideMenuActive: .constant(false))
-        //        SplashView()
-    }
-}
+//struct GroupDetail_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"), isSideMenuActive: .constant(false))
+//        //        SplashView()
+//    }
+//}
