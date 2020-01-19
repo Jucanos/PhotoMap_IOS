@@ -9,19 +9,43 @@
 import SwiftUI
 
 struct MainGroupView: View {
-    @State var isEmpty = false
+    
+    @EnvironmentObject var userSettings: UserSettings
     @Binding var isSideMenuActive: Bool
+    @ObservedObject var groupData: UserGroupData
     
     var body: some View {
         return Group{
-            if isEmpty{
+            if self.groupData.mapData.isEmpty{
                 Text("그룹을 생성해주세요!")
             }
             else{
-                GroupList(isSideMenuActive: self.$isSideMenuActive)
+                ZStack {
+                    List(groupData.mapData, id: \.mid) {group in
+                        ZStack{
+                            GroupRow(group: group)
+                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.black, lineWidth: 3)
+                            )
+                            
+                            NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
+                            ){
+                                EmptyView()
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                }
+                .onAppear{
+                    UITableView.appearance().tableFooterView = UIView()
+                    UITableView.appearance().separatorStyle = .none
+                    self.groupData.loadMapData(userTocken: self.userSettings.userTocken!)
+                }
             }
+            
         }
-        
     }
 }
 

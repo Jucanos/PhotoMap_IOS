@@ -11,10 +11,8 @@ import SwiftUI
 struct GroupList: View {
     
     @Binding var isSideMenuActive: Bool
-    @State private var showActionSheet = false
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var groupData = UserGroupData()
-    
+    @ObservedObject var groupData: UserGroupData
     
     var body: some View {
         ZStack {
@@ -38,7 +36,7 @@ struct GroupList: View {
         .onAppear{            
             UITableView.appearance().tableFooterView = UIView()
             UITableView.appearance().separatorStyle = .none
-            self.groupData.fetch(userTocken: self.userSettings.userTocken!)
+            self.groupData.loadMapData(userTocken: self.userSettings.userTocken!)
         }
     }
 }

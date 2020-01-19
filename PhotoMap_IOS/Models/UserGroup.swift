@@ -18,6 +18,24 @@ struct UserGroup: Codable{
 struct MapData: Codable {
     var mid: String?
     var name: String?
+    var represents: Represent?
+}
+
+struct MapDataForAdd: Codable{
+    var data: MapData?
+    var message: String?
+}
+
+struct Represent: Codable {
+    var gyeonggi: String?
+    var gangwon: String?
+    var chungbuk: String?
+    var chungnam: String?
+    var jeonbuk: String?
+    var jeonnam: String?
+    var gyeongbuk: String?
+    var gyeongnam: String?
+    var jeju: String?
 }
 
 class UserGroupData: ObservableObject {
@@ -29,7 +47,7 @@ class UserGroupData: ObservableObject {
         }
     }
     
-    func fetch(userTocken: String) {
+    func loadMapData(userTocken: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
         AnyRequest<UserGroup> {
             Url(url)
@@ -39,8 +57,28 @@ class UserGroupData: ObservableObject {
             print("groups")
             print(groups)
             DispatchQueue.main.async {
-                let sampleGroup = MapData(mid: "kasdkfoas2390", name: "내그룹")
-                self.mapData.append(sampleGroup)
+                self.mapData = groups.data as! [MapData]
+            }
+            
+        }.onError{ error in
+            print(error)
+        }
+        .call()
+    }
+    
+    func addMap(name: String, userTocken: String) {
+        let url = NetworkURL.sharedInstance.getUrlString("/maps")
+        AnyRequest<MapDataForAdd> {
+            Url(url)
+            Method(.post)
+            Header.Authorization(.bearer(userTocken))
+            Body(["name": name])
+        }.onObject{ newGroup in
+            print("add success!!")
+            print(newGroup)
+            DispatchQueue.main.async {
+                    print(newGroup)
+                self.mapData.append(newGroup.data!)
             }
             
         }.onError{ error in
