@@ -21,21 +21,24 @@ struct MainGroupView: View {
             }
             else{
                 ZStack {
-                    List(groupData.mapData, id: \.mid) {group in
-                        ZStack{
-                            GroupRow(group: group)
-                                .padding()
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .stroke(Color.black, lineWidth: 3)
-                            )
-                            
-                            NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
-                            ){
-                                EmptyView()
+                    List{
+                        ForEach(groupData.mapData, id: \.mid){ group in
+                            ZStack{
+                                GroupRow(group: group)
+                                    .padding()
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .stroke(Color.black, lineWidth: 3)
+                                )
+                                
+                                NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
+                                ){
+                                    EmptyView()
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }
+                        .onDelete(perform: deleteGroup)
                     }
                 }
                 .onAppear{
@@ -44,8 +47,13 @@ struct MainGroupView: View {
                     self.groupData.loadMapData(userTocken: self.userSettings.userTocken!)
                 }
             }
-            
         }
+    }
+    
+    func deleteGroup(at indexSet: IndexSet) {
+        let curMid = self.groupData.mapData[indexSet.first!].mid
+        self.groupData.deleteMap(mid: curMid!, userTocken: self.userSettings.userTocken!)
+        self.groupData.mapData.remove(atOffsets: indexSet)
     }
 }
 

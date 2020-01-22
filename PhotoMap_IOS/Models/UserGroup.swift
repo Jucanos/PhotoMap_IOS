@@ -54,12 +54,10 @@ class UserGroupData: ObservableObject {
             Method(.get)
             Header.Authorization(.bearer(userTocken))
         }.onObject{ groups in
-            print("groups")
             print(groups)
             DispatchQueue.main.async {
                 self.mapData = groups.data as! [MapData]
             }
-            
         }.onError{ error in
             print(error)
         }
@@ -72,15 +70,30 @@ class UserGroupData: ObservableObject {
             Url(url)
             Method(.post)
             Header.Authorization(.bearer(userTocken))
-            Body(["name": name])
+            Header.ContentType(.json)
+            Body(["name":name])
         }.onObject{ newGroup in
-            print("add success!!")
-            print(newGroup)
+            print("add new group to server success!!")
             DispatchQueue.main.async {
-                    print(newGroup)
                 self.mapData.append(newGroup.data!)
             }
             
+        }.onError{ error in
+            print(error)
+        }
+        .call()
+    }
+    
+    func deleteMap(mid: String, userTocken: String) {
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
+//        print(url)
+        Request {
+            Url(url)
+            Method(.delete)
+            Header.Authorization(.bearer(userTocken))
+        }.onData{ data in
+            print(data)
+            print("group deletion success!")
         }.onError{ error in
             print(error)
         }

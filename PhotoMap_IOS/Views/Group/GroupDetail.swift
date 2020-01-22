@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GroupDetail: View {
     
-    @State var groupData: MapData // State later
+    @State var groupData: MapData
     @State private var menuOpen = false
     @State private var isButtonActivate = false
     @Binding var isSideMenuActive: Bool
