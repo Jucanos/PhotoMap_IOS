@@ -44,7 +44,6 @@ struct MainGroupView: View {
                 .onAppear{
                     UITableView.appearance().tableFooterView = UIView()
                     UITableView.appearance().separatorStyle = .none
-                    self.groupData.loadMapData(userTocken: self.userSettings.userTocken!)
                 }
             }
         }

@@ -25,7 +25,7 @@ struct AddGroup: View {
             }
             
             VStack {
-                SubAddGroup(groupData: groupData)
+                SubAddGroup(groupData: groupData, menuClose: menuClose)
                     .frame(height: 100)
                     .background(Color.black)
                     .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
@@ -36,7 +36,7 @@ struct AddGroup: View {
         .edgesIgnoringSafeArea(.bottom)
     }
     private func endEditing() {
-       UIApplication.shared.endEditing()
+        UIApplication.shared.endEditing()
     }
 }
 
@@ -45,6 +45,7 @@ struct SubAddGroup: View {
     @ObservedObject var groupData: UserGroupData
     @State var groupName: String = ""
     @State var showAlert: Bool = false
+    let menuClose: () -> Void
     var body: some View {
         
         VStack {
@@ -61,6 +62,8 @@ struct SubAddGroup: View {
                         self.showAlert.toggle()
                     }else{
                         self.groupData.addMap(name: self.groupName, userTocken: self.userSettings.userTocken!)
+                        self.menuClose()
+                        self.endEditing()
                     }
                 }) {
                     Image(systemName: "plus.square")
@@ -73,6 +76,9 @@ struct SubAddGroup: View {
         .alert(isPresented: $showAlert){
             Alert(title: Text("그룹 이름이 없습니다"), message: Text("그룹 이름을 정한 후 추가해주세요!"), dismissButton: .default(Text("취소")))
         }
+    }
+    private func endEditing() {
+        UIApplication.shared.endEditing()
     }
 }
 extension UIApplication {

@@ -19,6 +19,9 @@ struct MapData: Codable {
     var mid: String?
     var name: String?
     var represents: Represent?
+    var createdAt: String?
+    var updatedAt: String?
+    var owners: [UserInfoData?]?
 }
 
 struct MapDataForAdd: Codable{
@@ -47,8 +50,9 @@ class UserGroupData: ObservableObject {
         }
     }
     
-    func loadMapData(userTocken: String) {
+    func loadMaps(userTocken: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
+        print("try to road")
         AnyRequest<UserGroup> {
             Url(url)
             Method(.get)
