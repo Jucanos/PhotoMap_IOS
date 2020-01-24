@@ -9,18 +9,25 @@
 import SwiftUI
 
 struct MemberList: View {
+    @EnvironmentObject var mapStore: MapStore
     var body: some View {
-        
-        VStack {
-            MenuTtileView()
-                .frame(height: 50)
-            AddingMemberView()
-            List(0 ..< 5) { member in
-                MemberRow()
+        return Group{
+            if mapStore.mapData.owners == nil {
+                EmptyView()
+            } else{
+                VStack {
+                    MenuTtileView()
+                        .frame(height: CGFloat(50))
+                    AddingMemberView()
+                    List{
+                        ForEach(mapStore.mapData.owners!, id: \.uid) { mb in
+                            MemberRow(member: mb)                            
+                        }
+                    }
+                    MenuOptionView()
+                }
             }
-            MenuOptionView()
         }
-        
     }
 }
 struct MenuTtileView: View {

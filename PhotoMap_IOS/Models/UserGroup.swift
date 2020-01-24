@@ -15,18 +15,18 @@ struct UserGroup: Codable{
     var message: String?
 }
 
+struct MapDetail: Codable{
+    var data: MapData?
+    var message: String?
+}
+
 struct MapData: Codable {
     var mid: String?
     var name: String?
     var represents: Represent?
     var createdAt: String?
     var updatedAt: String?
-    var owners: [UserInfoData?]?
-}
-
-struct MapDataForAdd: Codable{
-    var data: MapData?
-    var message: String?
+    var owners: [UserInfoData]?
 }
 
 struct Represent: Codable {
@@ -41,7 +41,7 @@ struct Represent: Codable {
     var jeju: String?
 }
 
-class UserGroupData: ObservableObject {
+class UserGroupStore: ObservableObject {
     
     let objectWillChange = ObservableObjectPublisher()
     var mapData: [MapData] = []{
@@ -70,7 +70,7 @@ class UserGroupData: ObservableObject {
     
     func addMap(name: String, userTocken: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
-        AnyRequest<MapDataForAdd> {
+        AnyRequest<MapDetail> {
             Url(url)
             Method(.post)
             Header.Authorization(.bearer(userTocken))
@@ -90,7 +90,6 @@ class UserGroupData: ObservableObject {
     
     func deleteMap(mid: String, userTocken: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
-//        print(url)
         Request {
             Url(url)
             Method(.delete)
@@ -103,4 +102,41 @@ class UserGroupData: ObservableObject {
         }
         .call()
     }
+}
+
+
+
+
+class MapStore: ObservableObject {
+    let objectWillChange = ObservableObjectPublisher()
+    var mapData: MapData = MapData(){
+        willSet{
+            objectWillChange.send()
+        }
+    }
+    
+    init(){
+        mapData.owners = []
+    }
+    
+    func loadMapDetail(mid: String, userTocken: String) {
+        print(mid, userTocken)
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
+        AnyRequest<MapDetail> {
+            Url(url)
+            Method(.get)
+            Header.Authorization(.bearer(userTocken))
+        }.onObject{ map in
+            print("on ob: ", map)
+            DispatchQueue.main.async {
+                self.mapData = map.data!
+            }
+        }.onError{ error in
+            print(error.self)
+        }.onData{ data in
+            print(data)
+        }
+        .call()
+    }
+    
 }

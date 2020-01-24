@@ -14,7 +14,7 @@ struct UserInfo: Codable {
 }
 
 struct UserInfoData: Codable {
-    var nickname: String
-    var thumbnail: String
-    var uid: Int
+    var nickname: String?
+    var thumbnail: String?
+    var uid: String?
 }

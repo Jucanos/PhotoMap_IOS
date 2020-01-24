@@ -29,7 +29,7 @@ struct GroupRow: View {
 
 //struct GroupRow_Previews: PreviewProvider {
 //    static var tgroup = UserGroup(name: "test", updateTime: "2020.01.01", imageName: "uir")
-//    
+//
 //    static var previews: some View {
 //        Group{
 //            GroupRow(group: tgroup)

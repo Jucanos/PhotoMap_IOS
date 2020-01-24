@@ -9,22 +9,23 @@
 import SwiftUI
 
 struct MemberRow: View {
+    @State var member: UserInfoData
     var body: some View {
         HStack{
             Image(systemName: "person.crop.square.fill")
                 .resizable()
                 .frame(width: 30, height: 30)
             
-                Text(verbatim: "TestMember")
+            Text(verbatim: "user")
                     .font(.headline)
             Spacer()
         }
     }
 }
 
-struct MemberRow_Previews: PreviewProvider {
-    static var previews: some View {
-        MemberRow()
-            .previewLayout(.fixed(width: 415, height: 50))
-    }
-}
+//struct MemberRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MemberRow()
+//            .previewLayout(.fixed(width: 415, height: 50))
+//    }
+//}

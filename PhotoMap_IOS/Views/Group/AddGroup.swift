@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AddGroup: View {
-    @ObservedObject var groupData: UserGroupData
+    @ObservedObject var groupData: UserGroupStore
     let isOpen: Bool
     let menuClose: () -> Void
     var body: some View {
@@ -42,7 +42,7 @@ struct AddGroup: View {
 
 struct SubAddGroup: View {
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var groupData: UserGroupData
+    @ObservedObject var groupData: UserGroupStore
     @State var groupName: String = ""
     @State var showAlert: Bool = false
     let menuClose: () -> Void

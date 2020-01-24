@@ -22,7 +22,7 @@ struct View1: View {
                         Method(.get)
                         Header.Authorization(.bearer("self.$userTocken"))
                     }.onObject { usrInfo in
-                        print("suc")
+                        print(usrInfo)
                     }
         }) {
         Text(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/)

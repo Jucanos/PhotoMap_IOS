@@ -12,7 +12,7 @@ struct MainGroupView: View {
     
     @EnvironmentObject var userSettings: UserSettings
     @Binding var isSideMenuActive: Bool
-    @ObservedObject var groupData: UserGroupData
+    @ObservedObject var groupData: UserGroupStore
     
     var body: some View {
         return Group{
@@ -27,8 +27,9 @@ struct MainGroupView: View {
                                 GroupRow(group: group)
                                     .padding()
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .stroke(Color.black, lineWidth: 3)
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.clear, lineWidth: 1)
+                                            .shadow(radius: 5)
                                 )
                                 
                                 NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
