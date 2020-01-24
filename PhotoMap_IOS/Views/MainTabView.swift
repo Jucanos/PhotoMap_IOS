@@ -10,16 +10,19 @@ import SwiftUI
 
 struct MainTabView: View {
     
+    @ObservedObject var groupData = UserGroupStore()
+    @EnvironmentObject var userSettings: UserSettings
     @State private var selectedView = 0
     @State private var isSideMenuActive: Bool = false
     @State private var isAddGroupViewActive: Bool = false
+    
     private let titles = ["그룹","메인지도","설정"]
     
     var body: some View {
         ZStack {
             NavigationView {
                 TabView(selection: $selectedView) {
-                    MainGroupView(isSideMenuActive: $isSideMenuActive)
+                    MainGroupView(isSideMenuActive: $isSideMenuActive, groupData: groupData)
                         .tabItem {
                             Image(systemName: "person.3.fill")
                                 .resizable()
@@ -64,7 +67,10 @@ struct MainTabView: View {
             
             GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
             
-            AddGroup(isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
+            AddGroup(groupData: self.groupData, isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
+        }
+        .onAppear(){
+            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
         }
     }
     

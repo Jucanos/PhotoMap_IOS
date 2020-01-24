@@ -9,19 +9,51 @@
 import SwiftUI
 
 struct MainGroupView: View {
-    @State var isEmpty = false
+    
+    @EnvironmentObject var userSettings: UserSettings
     @Binding var isSideMenuActive: Bool
+    @ObservedObject var groupData: UserGroupStore
     
     var body: some View {
         return Group{
-            if isEmpty{
+            if self.groupData.mapData.isEmpty{
                 Text("그룹을 생성해주세요!")
             }
             else{
-                GroupList(isSideMenuActive: self.$isSideMenuActive)
+                ZStack {
+                    List{
+                        ForEach(groupData.mapData, id: \.mid){ group in
+                            ZStack{
+                                GroupRow(group: group)
+                                    .padding()
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.clear, lineWidth: 1)
+                                            .shadow(radius: 5)
+                                )
+                                
+                                NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
+                                ){
+                                    EmptyView()
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .onDelete(perform: deleteGroup)
+                    }
+                }
+                .onAppear{
+                    UITableView.appearance().tableFooterView = UIView()
+                    UITableView.appearance().separatorStyle = .none
+                }
             }
         }
-        
+    }
+    
+    func deleteGroup(at indexSet: IndexSet) {
+        let curMid = self.groupData.mapData[indexSet.first!].mid
+        self.groupData.deleteMap(mid: curMid!, userTocken: self.userSettings.userTocken!)
+        self.groupData.mapData.remove(atOffsets: indexSet)
     }
 }
 

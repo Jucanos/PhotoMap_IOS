@@ -15,7 +15,7 @@ struct SplashView: View {
     var body: some View {        
         return Group {
             if self.userSettings.userInfo != nil {
-                MainTabView()
+                MainTabView().environmentObject(MapStore())
             }
             else {
                 LoginView()

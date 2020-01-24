@@ -85,8 +85,8 @@ struct FeedPreviewDetail: View {
             }
             
             VStack(alignment: .leading){
-                Text("Liked by Person1 and Person2")
-                Text("See all comments").foregroundColor(Color(.lightGray)).font(.subheadline)
+                Text("강원도에서 이뿌게")
+                Text("정말정말 이뿌다 너무 좋다 하하하하").foregroundColor(Color(.lightGray)).font(.subheadline)
             }.padding(.leading, 5)
         }
     }

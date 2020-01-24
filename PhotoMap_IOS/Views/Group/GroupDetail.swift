@@ -10,14 +10,15 @@ import SwiftUI
 
 struct GroupDetail: View {
     
-    @State var groupData: MapData // State later
+    var groupData: MapData
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var userSettings: UserSettings
     @State private var menuOpen = false
     @State private var isButtonActivate = false
     @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        
         ZStack {
             KoreaMap()
                 .navigationBarItems(leading:
@@ -45,6 +46,10 @@ struct GroupDetail: View {
                 }
                 
             }
+        }
+        .onAppear(){
+            self.mapStore.loadMapDetail(mid: self.groupData.mid!, userTocken: self.userSettings.userTocken!)
+            print(self.mapStore.mapData)
         }
         
     }
@@ -85,7 +90,6 @@ struct GroupDetail: View {
             IconAndTextButton(imageName: "square.and.arrow.up.fill", buttonText: "공유하기")
         }
     }
-    
 }
 
 //struct GroupDetail_Previews: PreviewProvider {
