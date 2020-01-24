@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9708D69423DA9FE700FF9665 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9708D69323DA9FE700FF9665 /* URLImage */; };
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
 		9716581623D36E8C000C10DF /* UserLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716581523D36E8C000C10DF /* UserLogout.swift */; };
@@ -111,6 +112,7 @@
 			files = (
 				978FBC1623D088BC009998E5 /* Request in Frameworks */,
 				978FBC1423D088BC009998E5 /* Json in Frameworks */,
+				9708D69423DA9FE700FF9665 /* URLImage in Frameworks */,
 				970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +290,7 @@
 			packageProductDependencies = (
 				978FBC1323D088BC009998E5 /* Json */,
 				978FBC1523D088BC009998E5 /* Request */,
+				9708D69323DA9FE700FF9665 /* URLImage */,
 			);
 			productName = PhotoMap_IOS;
 			productReference = 9750585D23C1B17800BF54E5 /* PhotoMap.app */;
@@ -319,6 +322,7 @@
 			mainGroup = 9750585423C1B17800BF54E5;
 			packageReferences = (
 				978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */,
+				9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 9750585E23C1B17800BF54E5 /* Products */;
 			projectDirPath = "";
@@ -595,6 +599,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.9;
+			};
+		};
 		978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/carson-katri/swift-request";
@@ -606,6 +618,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9708D69323DA9FE700FF9665 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
 		978FBC1323D088BC009998E5 /* Json */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */;

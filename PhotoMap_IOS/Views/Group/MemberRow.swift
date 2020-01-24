@@ -7,17 +7,20 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct MemberRow: View {
     @State var member: UserInfoData
     var body: some View {
         HStack{
-            Image(systemName: "person.crop.square.fill")
-                .resizable()
-                .frame(width: 30, height: 30)
-            
-            Text(verbatim: "user")
-                    .font(.headline)
+            URLImage(URL(string: member.thumbnail!)!) { proxy in
+                proxy.image
+                    .resizable()
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .frame(width: 50, height: 50)
+            }
+            Text(verbatim: member.nickname!)
+                .font(.headline)
             Spacer()
         }
     }
