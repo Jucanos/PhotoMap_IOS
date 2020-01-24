@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9708D69423DA9FE700FF9665 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9708D69323DA9FE700FF9665 /* URLImage */; };
+		9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9708D69523DAB1E600FF9665 /* AddFeed.swift */; };
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
 		9716581623D36E8C000C10DF /* UserLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716581523D36E8C000C10DF /* UserLogout.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9708D69523DAB1E600FF9665 /* AddFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeed.swift; sourceTree = "<group>"; };
 		970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginButton.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				97785AC523C9E592007EDB7E /* FeedView.swift */,
 				975F469723CA1D760044C6AA /* FeedDetail.swift */,
 				975F469923CA22500044C6AA /* FeedPreviewDetail.swift */,
+				9708D69523DAB1E600FF9665 /* AddFeed.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				97B242DB23CD912300AB0DB1 /* TestView.swift in Sources */,
 				9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */,
 				97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */,
+				9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */,
 				97B858B923C8A88500358211 /* GroupDetail.swift in Sources */,
 				9773018523C7277700E3CE99 /* MainTabView.swift in Sources */,
 			);

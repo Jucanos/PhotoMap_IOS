@@ -25,6 +25,8 @@ struct GroupDetail: View {
                     backButton, trailing:
                     Button(action: {self.isSideMenuActive.toggle()}) {
                         Image(systemName: "line.horizontal.3")
+                            .resizable()
+                            .frame(width: 20, height: 20)
                             .foregroundColor(.white)
                     }
             )
@@ -60,7 +62,10 @@ struct GroupDetail: View {
         }) {
             HStack {
                 Image(systemName: "arrow.left")
+                    .resizable()
                     .foregroundColor(.white)
+                    .frame(width: 20, height: 20)
+                
             }
         }
     }

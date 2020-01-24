@@ -14,13 +14,13 @@ struct FeedView: View {
     @State var location: String
     
     var body: some View {
-        
         FeedDetail(masterViewSize: UIScreen.main.bounds.size)
-            
             .navigationBarItems(leading:
                 backButton, trailing:
-                Button(action: {print(self.presentationMode)}) {
-                    Image(systemName: "list.bullet")
+                NavigationLink(destination: AddFeed()) {
+                    Image(systemName: "plus.square")
+                        .resizable()
+                        .frame(width: 20, height: 20)
                         .foregroundColor(.white)
                 }
         )
@@ -33,27 +33,29 @@ struct FeedView: View {
         }) {
             HStack {
                 Image(systemName: "arrow.left")
+                    .resizable()
+                    .frame(width: 20, height: 20)
                     .foregroundColor(.white)
             }
         }
     }
 }
 
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            FeedView(location: "test")
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-                .previewDisplayName("iPhone SE")
-            
-            FeedView(location: "test")
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewDisplayName("iPhone 8")
-            
-            FeedView(location: "test")
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-                .previewDisplayName("iPhone 11 Pro")
-        }
-        
-    }
-}
+//struct FeedView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            FeedView(location: "test")
+//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+//                .previewDisplayName("iPhone SE")
+//            
+//            FeedView(location: "test")
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+//                .previewDisplayName("iPhone 8")
+//            
+//            FeedView(location: "test")
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+//                .previewDisplayName("iPhone 11 Pro")
+//        }
+//        
+//    }
+//}
