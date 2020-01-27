@@ -7,11 +7,12 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct FeedPreviewDetail: View {
     @State var currentPage = 0
-    var viewControllers: [UIHostingController<Image>]
-    var feedData: Feed
+    var viewControllers: [UIHostingController<URLImage<Image, Image>>]
+    var feedData: FeedData
     var masterViewSize: CGSize
     
     var body: some View {

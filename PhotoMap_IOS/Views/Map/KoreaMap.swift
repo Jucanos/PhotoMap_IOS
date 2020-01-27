@@ -12,47 +12,47 @@ struct KoreaMap: View {
     var body: some View {
         GeometryReader { gr in
             ZStack {
-                NavigationLink(destination: FeedView(location: "경기도")) { CustomImage(location: "gyeonggi", size: gr.size)
+                NavigationLink(destination: FeedView(location: "경기도", mapKey: "gyeonggi")) { CustomImage(location: "gyeonggi", size: gr.size)
                 }
                 .offset(x: -50, y: -151)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "강원도")) { CustomImage(location: "gangwon", size: gr.size)
+                NavigationLink(destination: FeedView(location: "강원도", mapKey: "gangwon")) { CustomImage(location: "gangwon", size: gr.size)
                 }
                 .offset(x: 35, y: -158)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "충청남도")) { CustomImage(location: "chungnam", size: gr.size)
+                NavigationLink(destination: FeedView(location: "충청남도", mapKey: "chungnam")) { CustomImage(location: "chungnam", size: gr.size)
                 }
                 .offset(x: -71, y: -46)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "충청북도")) { CustomImage(location: "chungbuk", size: gr.size)
+                NavigationLink(destination: FeedView(location: "충청북도", mapKey: "chungbuk")) { CustomImage(location: "chungbuk", size: gr.size)
                 }
                 .offset(x: 13, y: -57)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "경상북도")) { CustomImage(location: "gyeongbuk", size: gr.size)
+                NavigationLink(destination: FeedView(location: "경상북도", mapKey: "gyeongbuk")) { CustomImage(location: "gyeongbuk", size: gr.size)
                 }
                 .offset(x: 73, y: -26)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "전라북도")) { CustomImage(location: "junbuk", size: gr.size)
+                NavigationLink(destination: FeedView(location: "전라북도", mapKey: "jeonbuk")) { CustomImage(location: "junbuk", size: gr.size)
                 }
                 .offset(x: -49, y: 32)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "경상남도")) { CustomImage(location: "gyeongnam", size: gr.size)
+                NavigationLink(destination: FeedView(location: "경상남도", mapKey: "gyeongnam")) { CustomImage(location: "gyeongnam", size: gr.size)
                 }
                 .offset(x: 59, y: 64)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "전라남도")) { CustomImage(location: "junnam", size: gr.size)
+                NavigationLink(destination: FeedView(location: "전라남도", mapKey: "jeonnam")) { CustomImage(location: "junnam", size: gr.size)
                 }
                 .offset(x: -62, y: 110)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "제주도")) { CustomImage(location: "jeju", size: gr.size)
+                NavigationLink(destination: FeedView(location: "제주도", mapKey: "jeju")) { CustomImage(location: "jeju", size: gr.size)
                     
                 }
                 .offset(x: -62, y: 215)

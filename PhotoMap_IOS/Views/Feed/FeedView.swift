@@ -12,9 +12,10 @@ struct FeedView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var location: String
+    var mapKey: String
     
     var body: some View {
-        FeedDetail(masterViewSize: UIScreen.main.bounds.size)
+        FeedDetail(mapKey: self.mapKey, masterViewSize: UIScreen.main.bounds.size).environmentObject(FeedStore())
             .navigationBarItems(leading:
                 backButton, trailing:
                 NavigationLink(destination: AddFeed()) {
@@ -40,22 +41,3 @@ struct FeedView: View {
         }
     }
 }
-
-//struct FeedView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            FeedView(location: "test")
-//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-//                .previewDisplayName("iPhone SE")
-//            
-//            FeedView(location: "test")
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//                .previewDisplayName("iPhone 8")
-//            
-//            FeedView(location: "test")
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-//                .previewDisplayName("iPhone 11 Pro")
-//        }
-//        
-//    }
-//}

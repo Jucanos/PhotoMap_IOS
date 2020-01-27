@@ -9,26 +9,30 @@
 import SwiftUI
 
 struct FeedDetail: View {
-    
-    let feeds: [Feed] = [
-        Feed(imageUrl: ["test1","test1","test1"]),
-        Feed(imageUrl: ["test1"]),
-        Feed(imageUrl: ["test1"]),
-        Feed(imageUrl: ["test1"]),
-        Feed(imageUrl: ["test1"])
-    ]
+    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var feedStore: FeedStore
+    var mapKey: String
     var masterViewSize: CGSize
     
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading, spacing: 2){
-                ForEach(feeds, id: \.id) { feed in
-                    FeedPreviewDetail(viewControllers: feed.getImageViews(), feedData: feed, masterViewSize: self.masterViewSize)
-                        .padding(.bottom, 20)
+        return Group{
+            if feedStore.feedData.isEmpty {
+                Text("피드를 추가해보세요!")
+            } else{
+                ScrollView{
+                    VStack(alignment: .leading, spacing: 2){
+                        ForEach(feedStore.feedData, id: \.title) { item in
+                            FeedPreviewDetail(viewControllers: item.getImageViews(), feedData: item, masterViewSize: self.masterViewSize)
+                                .padding(.bottom, 20)
+                        }
+                    }
                 }
             }
         }
-    
+        .onAppear(){
+            self.feedStore.loadFeeds(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, mapKey: self.mapKey)
+        }
     }
 }
 
