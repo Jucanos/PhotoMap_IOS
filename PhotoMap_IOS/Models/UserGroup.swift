@@ -63,7 +63,7 @@ class UserGroupStore: ObservableObject {
                 self.mapData = groups.data as! [MapData]
             }
         }.onError{ error in
-            print(error)
+            print("Error at loadMaps", error)
         }
         .call()
     }
