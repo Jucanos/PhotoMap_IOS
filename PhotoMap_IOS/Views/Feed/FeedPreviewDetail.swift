@@ -11,9 +11,8 @@ import URLImage
 
 struct FeedPreviewDetail: View {
     @State var currentPage = 0
-    var viewControllers: [UIHostingController<URLImage<Image, Image>>]
+//    var viewControllers: [UIHostingController<URLImage<Image, Image>>]
     var feedData: FeedData
-    var masterViewSize: CGSize
     
     var body: some View {
         
@@ -44,13 +43,22 @@ struct FeedPreviewDetail: View {
                 .padding(.trailing, 5)
             }
             
-            ZStack(alignment: .bottomTrailing) {
-                PageViewController(controllers: viewControllers, currentPage: $currentPage)
-
-                PageControl(numberOfPages: viewControllers.count, currentPage: $currentPage)
-                    .padding(.trailing)
+//            ZStack(alignment: .bottomTrailing) {
+//                PageViewController(controllers: viewControllers, currentPage: $currentPage)
+//
+//                PageControl(numberOfPages: viewControllers.count, currentPage: $currentPage)
+//                    .padding(.trailing)
+//            }
+            if self.feedData.files.count == 1{
+                URLImage(URL(string: self.feedData.files.first!!)!){ proxy in
+                    proxy.image.resizable()
+                }
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+            } else{
+                PageView(self.feedData.getImageViews())
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             }
-            .frame(width: masterViewSize.width, height: masterViewSize.width)
+            
             
             
             HStack{

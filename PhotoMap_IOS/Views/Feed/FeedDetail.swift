@@ -14,13 +14,12 @@ struct FeedDetail: View {
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var feedStore: FeedStore
     var mapKey: String
-    var masterViewSize: CGSize
     
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 2){
                 ForEach(feedStore.feedData, id: \.title) { item in
-                    FeedPreviewDetail(viewControllers: item.getImageViews(), feedData: item, masterViewSize: self.masterViewSize)
+                    FeedPreviewDetail(feedData: item)
                         .padding(.bottom, 20)
                 }
             }
