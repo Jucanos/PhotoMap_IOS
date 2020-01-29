@@ -7,25 +7,36 @@
 //
 
 import SwiftUI
+import Request
 
 struct FeedView: View {
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var feedStore: FeedStore
     @State var location: String
     var mapKey: String
     
     var body: some View {
-        FeedDetail(mapKey: self.mapKey, masterViewSize: UIScreen.main.bounds.size).environmentObject(FeedStore())
-            .navigationBarItems(leading:
-                backButton, trailing:
-                NavigationLink(destination: AddFeed()) {
-                    Image(systemName: "plus.square")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(.white)
-                }
+        Group{
+            if feedStore.feedData.isEmpty{
+                Text("Empty")
+            } else{
+                FeedDetail(mapKey: self.mapKey, masterViewSize: UIScreen.main.bounds.size)
+            }
+        }
+        .navigationBarTitle("\(location)", displayMode: .inline)
+        .navigationBarItems( trailing:
+            NavigationLink(destination: AddFeed(cityKey: self.mapKey)) {
+                Image(systemName: "plus.square")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.white)
+            }
         )
-            .navigationBarTitle("\(location)", displayMode: .inline)
+            .onAppear(){
+                self.feedStore.loadFeeds(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, mapKey: self.mapKey)
+        }
     }
     
     var backButton : some View {

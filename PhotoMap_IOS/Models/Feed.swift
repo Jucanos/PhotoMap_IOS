@@ -16,6 +16,11 @@ struct Feed: Codable {
     var message: String?
 }
 
+struct FeedForAdd: Codable{
+    var data: FeedData?
+    var message: String?
+}
+
 struct FeedData: Codable {
     var createdAt: String?
     var updatedAt: String?
@@ -26,15 +31,13 @@ struct FeedData: Codable {
     var mid: String?
     
     func getImageViews() -> [UIHostingController<URLImage<Image,Image>>] {
-        let urls = self.files.map{
-            URL(string: "\(String(describing: $0))")
-//            URLImage()
-//            Image("\($0)").resizable()
-        }
-        
         var images: [URLImage<Image,Image>] = []
-        for url in urls{
-            images.append(URLImage(url!))
+        for urlStr in files {
+            let url = URL(string: urlStr!)
+            let item = URLImage(url!){ proxy in
+                proxy.image.resizable()
+            }
+            images.append(item)
         }
         let vcs = images.map{
             UIHostingController(rootView: $0)
@@ -46,7 +49,7 @@ struct FeedData: Codable {
 
 class FeedStore: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    var feedData: [FeedData] = []{
+    var feedData: [FeedData] = [] {
         willSet{
             objectWillChange.send()
         }
@@ -54,19 +57,83 @@ class FeedStore: ObservableObject {
     
     func loadFeeds(userTocken: String, mid: String, mapKey: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)/\(mapKey)")
-        print("try to road")
         AnyRequest<Feed> {
             Url(url)
-            Method(.get)
             Header.Authorization(.bearer(userTocken))
         }.onObject{ feeds in
-            print(feeds)
             DispatchQueue.main.async {
                 self.feedData = feeds.data as! [FeedData]
+                print("feed loaded!!", self.feedData)
             }
         }.onError{ error in
             print("Error at loadMaps", error)
         }
         .call()
+    }
+    
+    func addFeed(userTocken: String, mid: String, cityKey: String, title: String, context: String, images: [UIImage]){
+        let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)")
+        var imgData: [Data] = []
+        let boundary = UUID().uuidString
+
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+
+        // Set the URLRequest to POST and to the specified URL
+        var urlRequest = URLRequest(url: URL(string: url)!)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("Bearer \(userTocken)", forHTTPHeaderField: "Authorization")
+
+        // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
+        // And the boundary is also set here
+        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        var data = Data()
+
+        // Add the reqtype field and its value to the raw http request data
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"cityKey\"\r\n\r\n".data(using: .utf8)!)
+        data.append("\(cityKey)".data(using: .utf8)!)
+
+        // Add the userhash field and its value to the raw http reqyest data
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"title\"\r\n\r\n".data(using: .utf8)!)
+        data.append("\(title)".data(using: .utf8)!)
+        
+        // Add the userhash field and its value to the raw http reqyest data
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"context\"\r\n\r\n".data(using: .utf8)!)
+        data.append("\(context)".data(using: .utf8)!)
+
+        // Add the image data to the raw http request data
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"img\"; filename=\"testFile\"\r\n".data(using: .utf8)!)
+        data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        data.append(images[0].jpegData(compressionQuality: 0.5)!)
+        
+//        for img in images{
+//            imgData.append(img.jpegData(compressionQuality: 0.5)!)
+//        }
+        
+
+        // End the raw http request data, note that there is 2 extra dash ("-") at the end, this is to indicate the end of the data
+        // According to the HTTP 1.1 specification https://tools.ietf.org/html/rfc7230
+        data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
+            
+            if(error != nil){
+                print("\(error!.localizedDescription)")
+            }
+            
+            guard let responseData = responseData else {
+                print("no response data")
+                return
+            }
+            
+            if let responseString = String(data: responseData, encoding: .utf8) {
+                print("uploaded to: \(responseString)")
+            }
+        }).resume()
     }
 }

@@ -127,7 +127,6 @@ class MapStore: ObservableObject {
             Method(.get)
             Header.Authorization(.bearer(userTocken))
         }.onObject{ map in
-            print("on ob: ", map)
             DispatchQueue.main.async {
                 self.mapData = map.data!
             }

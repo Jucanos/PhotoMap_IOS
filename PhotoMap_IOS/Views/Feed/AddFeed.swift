@@ -10,6 +10,9 @@ import SwiftUI
 
 struct AddFeed: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var feedStore: FeedStore
     @State var title: String = ""
     @State var content: String = ""
     @State var selectedImage: [UIImage]?
@@ -17,6 +20,7 @@ struct AddFeed: View {
     @State var showTitleSetter = false
     @State var isCompleted = false
     @State var tag: Int? = nil
+    var cityKey: String
     
     var body: some View {
         ZStack {
@@ -94,8 +98,11 @@ struct AddFeed: View {
                 .foregroundColor(.white)
             }, trailing:
             Button(action: {
+                // 완료 버튼
+                self.feedStore.addFeed(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, cityKey: self.cityKey, title: self.title, context: self.content, images: self.selectedImage!)
                 self.tag = nil
-                self.isCompleted = true}) {
+                self.isCompleted = true
+            }) {
                     Text("완료")
                         .foregroundColor(.white)
             }

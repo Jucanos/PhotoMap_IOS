@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Request
 
 struct FeedDetail: View {
     @EnvironmentObject var userSettings: UserSettings
@@ -16,22 +17,13 @@ struct FeedDetail: View {
     var masterViewSize: CGSize
     
     var body: some View {
-        return Group{
-            if feedStore.feedData.isEmpty {
-                Text("피드를 추가해보세요!")
-            } else{
-                ScrollView{
-                    VStack(alignment: .leading, spacing: 2){
-                        ForEach(feedStore.feedData, id: \.title) { item in
-                            FeedPreviewDetail(viewControllers: item.getImageViews(), feedData: item, masterViewSize: self.masterViewSize)
-                                .padding(.bottom, 20)
-                        }
-                    }
+        ScrollView{
+            VStack(alignment: .leading, spacing: 2){
+                ForEach(feedStore.feedData, id: \.title) { item in
+                    FeedPreviewDetail(viewControllers: item.getImageViews(), feedData: item, masterViewSize: self.masterViewSize)
+                        .padding(.bottom, 20)
                 }
             }
-        }
-        .onAppear(){
-            self.feedStore.loadFeeds(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, mapKey: self.mapKey)
         }
     }
 }

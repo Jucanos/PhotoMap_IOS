@@ -247,12 +247,12 @@
 		97785AC423C9E583007EDB7E /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				973281D923D045AC00153874 /* PageControl.swift */,
-				973281DA23D045AC00153874 /* PageViewController.swift */,
 				97785AC523C9E592007EDB7E /* FeedView.swift */,
 				975F469723CA1D760044C6AA /* FeedDetail.swift */,
 				975F469923CA22500044C6AA /* FeedPreviewDetail.swift */,
 				9708D69523DAB1E600FF9665 /* AddFeed.swift */,
+				973281D923D045AC00153874 /* PageControl.swift */,
+				973281DA23D045AC00153874 /* PageViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
