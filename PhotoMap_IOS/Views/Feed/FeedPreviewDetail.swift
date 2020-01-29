@@ -7,11 +7,12 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct FeedPreviewDetail: View {
     @State var currentPage = 0
-    var viewControllers: [UIHostingController<Image>]
-    var feedData: Feed
+    var viewControllers: [UIHostingController<URLImage<Image, Image>>]
+    var feedData: FeedData
     var masterViewSize: CGSize
     
     var body: some View {
@@ -29,7 +30,7 @@ struct FeedPreviewDetail: View {
                 
                 VStack(alignment: .leading){
                     Text("User").font(.headline)
-                    Text("Upload at 2020.01.10").foregroundColor(Color(.lightGray)).font(.subheadline)
+                    Text("Upload at \(feedData.createdAt!)").foregroundColor(Color(.lightGray)).font(.subheadline)
                 }
                 
                 Spacer()
@@ -85,8 +86,8 @@ struct FeedPreviewDetail: View {
             }
             
             VStack(alignment: .leading){
-                Text("강원도에서 이뿌게")
-                Text("정말정말 이뿌다 너무 좋다 하하하하").foregroundColor(Color(.lightGray)).font(.subheadline)
+                Text("\(feedData.title!)")
+                Text("\(feedData.context!)").foregroundColor(Color(.lightGray)).font(.subheadline)
             }.padding(.leading, 5)
         }
     }

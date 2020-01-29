@@ -88,5 +88,11 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>yourWording</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>yourWording</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>yourWording</string>
 </dict>
 </plist>

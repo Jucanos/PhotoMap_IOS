@@ -63,7 +63,7 @@ class UserGroupStore: ObservableObject {
                 self.mapData = groups.data as! [MapData]
             }
         }.onError{ error in
-            print(error)
+            print("Error at loadMaps", error)
         }
         .call()
     }
@@ -127,7 +127,6 @@ class MapStore: ObservableObject {
             Method(.get)
             Header.Authorization(.bearer(userTocken))
         }.onObject{ map in
-            print("on ob: ", map)
             DispatchQueue.main.async {
                 self.mapData = map.data!
             }

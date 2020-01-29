@@ -7,24 +7,36 @@
 //
 
 import SwiftUI
+import Request
 
 struct FeedView: View {
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var feedStore: FeedStore
     @State var location: String
+    var mapKey: String
     
     var body: some View {
-        
-        FeedDetail(masterViewSize: UIScreen.main.bounds.size)
-            
-            .navigationBarItems(leading:
-                backButton, trailing:
-                Button(action: {print(self.presentationMode)}) {
-                    Image(systemName: "list.bullet")
-                        .foregroundColor(.white)
-                }
+        Group{
+            if feedStore.feedData.isEmpty{
+                Text("Empty")
+            } else{
+                FeedDetail(mapKey: self.mapKey, masterViewSize: UIScreen.main.bounds.size)
+            }
+        }
+        .navigationBarTitle("\(location)", displayMode: .inline)
+        .navigationBarItems( trailing:
+            NavigationLink(destination: AddFeed(cityKey: self.mapKey)) {
+                Image(systemName: "plus.square")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.white)
+            }
         )
-            .navigationBarTitle("\(location)", displayMode: .inline)
+            .onAppear(){
+                self.feedStore.loadFeeds(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, mapKey: self.mapKey)
+        }
     }
     
     var backButton : some View {
@@ -33,27 +45,10 @@ struct FeedView: View {
         }) {
             HStack {
                 Image(systemName: "arrow.left")
+                    .resizable()
+                    .frame(width: 20, height: 20)
                     .foregroundColor(.white)
             }
         }
-    }
-}
-
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            FeedView(location: "test")
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-                .previewDisplayName("iPhone SE")
-            
-            FeedView(location: "test")
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewDisplayName("iPhone 8")
-            
-            FeedView(location: "test")
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-                .previewDisplayName("iPhone 11 Pro")
-        }
-        
     }
 }

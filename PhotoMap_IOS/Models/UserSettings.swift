@@ -50,7 +50,7 @@ class UserSettings: ObservableObject {
             }
         }
         .onError { error in
-            print(error)
+            print("Error at getAuthFromServer", error)
         }
         .call()
     }

@@ -7,28 +7,26 @@
 //
 
 import SwiftUI
+import Request
 
 struct FeedDetail: View {
-    
-    let feeds: [Feed] = [
-        Feed(imageUrl: ["test1","test1","test1"]),
-        Feed(imageUrl: ["test1"]),
-        Feed(imageUrl: ["test1"]),
-        Feed(imageUrl: ["test1"]),
-        Feed(imageUrl: ["test1"])
-    ]
+    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var feedStore: FeedStore
+    var mapKey: String
     var masterViewSize: CGSize
     
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 2){
-                ForEach(feeds, id: \.id) { feed in
-                    FeedPreviewDetail(viewControllers: feed.getImageViews(), feedData: feed, masterViewSize: self.masterViewSize)
+                ForEach(feedStore.feedData, id: \.title) { item in
+                    FeedPreviewDetail(viewControllers: item.getImageViews(), feedData: item, masterViewSize: self.masterViewSize)
                         .padding(.bottom, 20)
                 }
             }
+        }.onDisappear(){
+            self.feedStore.feedData.removeAll()
         }
-    
     }
 }
 

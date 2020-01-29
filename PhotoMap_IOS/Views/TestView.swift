@@ -10,46 +10,36 @@ import SwiftUI
 import Request
 
 struct View1: View {
-    @State var isNavigationBarHidden: Bool = true
-    @State var col = Color.clear
-    @State var isHidden = true
-//    @EnvironmentObject var testItems: [String]
+    @State var title: String = ""
+    @State var showSub = false
+    @State var showSheet = false
     var body: some View {
-        Button(action: {
-                    let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
-                    AnyRequest<UserInfo>{
-                        Url(authUrl)
-                        Method(.get)
-                        Header.Authorization(.bearer("self.$userTocken"))
-                    }.onObject { usrInfo in
-                        print(usrInfo)
-                    }
-        }) {
-        Text(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/)
+        VStack {
+//            Button(action: {self.showSheet.toggle()}) {
+//                Text("sheet")
+//            }
+//            .sheet(isPresented: $showSheet, onDismiss: {
+//                self.showSub = true
+//            }, content: {
+//                Text("Sheet")
+//            })
+            Button(action: {self.showSub = true}) {
+            Text(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/)
+            }
+            NavigationLink(destination: View2(), isActive: $showSub) {
+                EmptyView()
+            }
         }
     }
 }
 
-struct Sub1: View {
-    
+struct View2: View {
     var body: some View {
-        
-        Text("sub1")
-        
+        Text("View2")
     }
 }
 
-struct Sub2: View {
-    @State var col = Color(.red)
-    var body: some View {
-        
-        Button(action: {self.col = Color(.blue)}) {
-            Text("Button")
-        }.foregroundColor(col)
-        
-        
-    }
-}
+
 
 struct TestView_Previews: PreviewProvider {
     static var previews: some View {
