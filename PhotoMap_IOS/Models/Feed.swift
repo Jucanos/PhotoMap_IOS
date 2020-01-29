@@ -73,7 +73,6 @@ class FeedStore: ObservableObject {
     
     func addFeed(userTocken: String, mid: String, cityKey: String, title: String, context: String, images: [UIImage]){
         let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)")
-        var imgData: [Data] = []
         let boundary = UUID().uuidString
 
         let config = URLSessionConfiguration.default
@@ -106,15 +105,13 @@ class FeedStore: ObservableObject {
         data.append("\(context)".data(using: .utf8)!)
 
         // Add the image data to the raw http request data
-        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-        data.append("Content-Disposition: form-data; name=\"img\"; filename=\"testFile\"\r\n".data(using: .utf8)!)
-        data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-        data.append(images[0].jpegData(compressionQuality: 0.5)!)
-        
-//        for img in images{
-//            imgData.append(img.jpegData(compressionQuality: 0.5)!)
-//        }
-        
+        for img in images{
+            let curTime = currentTime()
+            data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"img\"; filename=\"\(curTime).jpeg\"\r\n".data(using: .utf8)!)
+            data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+            data.append(img.jpegData(compressionQuality: 0.5)!)
+        }
 
         // End the raw http request data, note that there is 2 extra dash ("-") at the end, this is to indicate the end of the data
         // According to the HTTP 1.1 specification https://tools.ietf.org/html/rfc7230
@@ -135,5 +132,13 @@ class FeedStore: ObservableObject {
                 print("uploaded to: \(responseString)")
             }
         }).resume()
+    }
+    func currentTime() -> String {
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        let sec = calendar.component(.second, from: date)
+        return "\(hour):\(minutes):\(sec)"
     }
 }

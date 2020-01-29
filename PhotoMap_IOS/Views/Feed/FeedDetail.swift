@@ -24,6 +24,8 @@ struct FeedDetail: View {
                         .padding(.bottom, 20)
                 }
             }
+        }.onDisappear(){
+            self.feedStore.feedData.removeAll()
         }
     }
 }
