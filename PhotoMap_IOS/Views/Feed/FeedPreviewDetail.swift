@@ -10,10 +10,10 @@ import SwiftUI
 import URLImage
 
 struct FeedPreviewDetail: View {
+    @EnvironmentObject var feedStore: FeedStore
     @State var currentPage = 0
-    var viewControllers: [UIHostingController<URLImage<Image, Image>>]
+    @State var showFeedOption = false
     var feedData: FeedData
-    var masterViewSize: CGSize
     
     var body: some View {
         
@@ -35,7 +35,7 @@ struct FeedPreviewDetail: View {
                 
                 Spacer()
                 
-                Button(action: {}){
+                Button(action: {self.showFeedOption = true}){
                     Image("threeDots")
                         .resizable()
                         .frame(width: 20, height: 20)
@@ -44,13 +44,16 @@ struct FeedPreviewDetail: View {
                 .padding(.trailing, 5)
             }
             
-            ZStack(alignment: .bottomTrailing) {
-                PageViewController(controllers: viewControllers, currentPage: $currentPage)
-
-                PageControl(numberOfPages: viewControllers.count, currentPage: $currentPage)
-                    .padding(.trailing)
+            if self.feedData.files.count == 1{
+                URLImage(URL(string: self.feedData.files.first!!)!){ proxy in
+                    proxy.image.resizable()
+                }
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+            } else{
+                PageView(self.feedData.getImageViews())
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             }
-            .frame(width: masterViewSize.width, height: masterViewSize.width)
+            
             
             
             HStack{
@@ -89,6 +92,14 @@ struct FeedPreviewDetail: View {
                 Text("\(feedData.title!)")
                 Text("\(feedData.context!)").foregroundColor(Color(.lightGray)).font(.subheadline)
             }.padding(.leading, 5)
+        }
+        .actionSheet(isPresented: $showFeedOption){
+            ActionSheet(title: Text(""), message: Text(""), buttons: [
+                .default(Text("스토리 삭제"), action: {
+                    
+                }),
+                .destructive(Text("취소"))
+            ])
         }
     }
 }

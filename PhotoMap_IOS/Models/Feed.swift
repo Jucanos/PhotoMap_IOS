@@ -30,7 +30,21 @@ struct FeedData: Codable {
     var sid: String?
     var mid: String?
     
-    func getImageViews() -> [UIHostingController<URLImage<Image,Image>>] {
+//    func getImageViews() -> [UIHostingController<URLImage<Image,Image>>] {
+//        var images: [URLImage<Image,Image>] = []
+//        for urlStr in files {
+//            let url = URL(string: urlStr!)
+//            let item = URLImage(url!){ proxy in
+//                proxy.image.resizable()
+//            }
+//            images.append(item)
+//        }
+//        let vcs = images.map{
+//            UIHostingController(rootView: $0)
+//        }
+//        return vcs
+//    }
+    func getImageViews() -> [URLImage<Image,Image>] {
         var images: [URLImage<Image,Image>] = []
         for urlStr in files {
             let url = URL(string: urlStr!)
@@ -39,10 +53,8 @@ struct FeedData: Codable {
             }
             images.append(item)
         }
-        let vcs = images.map{
-            UIHostingController(rootView: $0)
-        }
-        return vcs
+        
+        return images
     }
 }
 
@@ -133,6 +145,22 @@ class FeedStore: ObservableObject {
             }
         }).resume()
     }
+    
+//    func deleteFeed() {
+//        let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)/\(mapKey)")
+//        AnyRequest<Feed> {
+//            Url(url)
+//            Header.Authorization(.bearer(userTocken))
+//        }.onObject{ feeds in
+//            DispatchQueue.main.async {
+//                self.feedData = feeds.data as! [FeedData]
+//                print("feed loaded!!", self.feedData)
+//            }
+//        }.onError{ error in
+//            print("Error at loadMaps", error)
+//        }
+//        .call()
+//    }
     func currentTime() -> String {
         let date = Date()
         let calendar = Calendar.current

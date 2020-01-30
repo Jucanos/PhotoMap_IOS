@@ -22,7 +22,7 @@ struct FeedView: View {
             if feedStore.feedData.isEmpty{
                 Text("Empty")
             } else{
-                FeedDetail(mapKey: self.mapKey, masterViewSize: UIScreen.main.bounds.size)
+                FeedDetail(mapKey: self.mapKey)
             }
         }
         .navigationBarTitle("\(location)", displayMode: .inline)
