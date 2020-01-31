@@ -39,9 +39,9 @@ struct AddFeed: View {
             self.showTitleSetter = true
             
         }, content: {
-            MyImagePicker.shared.view
+            ImagePicker.shared.view
         })
-            .onReceive(MyImagePicker.shared.$images, perform: { images in
+            .onReceive(ImagePicker.shared.$images, perform: { images in
                 self.selectedImage = images
             })
     }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9708D69423DA9FE700FF9665 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9708D69323DA9FE700FF9665 /* URLImage */; };
+		9708D69423DA9FE700FF9665 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 9708D69323DA9FE700FF9665 /* SwiftPackageProductDependency */; };
 		9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9708D69523DAB1E600FF9665 /* AddFeed.swift */; };
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
@@ -41,8 +41,8 @@
 		978D81EC23CB0ACD00DA75D0 /* GroupSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81EB23CB0ACD00DA75D0 /* GroupSideMenu.swift */; };
 		978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81ED23CB0BD700DA75D0 /* MemberList.swift */; };
 		978FBC1123D07CC0009998E5 /* NetworkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1023D07CC0009998E5 /* NetworkURL.swift */; };
-		978FBC1423D088BC009998E5 /* Json in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1323D088BC009998E5 /* Json */; };
-		978FBC1623D088BC009998E5 /* Request in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1523D088BC009998E5 /* Request */; };
+		978FBC1423D088BC009998E5 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1323D088BC009998E5 /* SwiftPackageProductDependency */; };
+		978FBC1623D088BC009998E5 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1523D088BC009998E5 /* SwiftPackageProductDependency */; };
 		978FBC1823D08E14009998E5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1723D08E14009998E5 /* UserInfo.swift */; };
 		978FBC1A23D09901009998E5 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1923D09901009998E5 /* UserSettings.swift */; };
 		9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B19723C80B4100AB6E4F /* UserGroup.swift */; };
@@ -50,7 +50,6 @@
 		97B858B923C8A88500358211 /* GroupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B858B823C8A88500358211 /* GroupDetail.swift */; };
 		97C7575023E1CC990095E3B7 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7574F23E1CC990095E3B7 /* PageView.swift */; };
 		97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDE69723CF4DE500719F89 /* HostingController.swift */; };
-		CF220198972B9AD264BBA249 /* Pods_PhotoMap_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497C7D3FCC661B9C819E445E /* Pods_PhotoMap_IOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,9 +66,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		15F6BBDAFA995869AFE3C34B /* Pods-PhotoMap_IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoMap_IOS.release.xcconfig"; path = "Target Support Files/Pods-PhotoMap_IOS/Pods-PhotoMap_IOS.release.xcconfig"; sourceTree = "<group>"; };
-		497C7D3FCC661B9C819E445E /* Pods_PhotoMap_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoMap_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		90AD6E2255889904B528ABFC /* Pods-PhotoMap_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoMap_IOS.debug.xcconfig"; path = "Target Support Files/Pods-PhotoMap_IOS/Pods-PhotoMap_IOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9708D69523DAB1E600FF9665 /* AddFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeed.swift; sourceTree = "<group>"; };
 		970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
@@ -120,11 +116,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				978FBC1623D088BC009998E5 /* Request in Frameworks */,
-				978FBC1423D088BC009998E5 /* Json in Frameworks */,
-				9708D69423DA9FE700FF9665 /* URLImage in Frameworks */,
+				978FBC1623D088BC009998E5 /* BuildFile in Frameworks */,
+				978FBC1423D088BC009998E5 /* BuildFile in Frameworks */,
+				9708D69423DA9FE700FF9665 /* BuildFile in Frameworks */,
 				970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */,
-				CF220198972B9AD264BBA249 /* Pods_PhotoMap_IOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */,
-				497C7D3FCC661B9C819E445E /* Pods_PhotoMap_IOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -289,8 +283,6 @@
 		ACFAA5809BFC1C9F00A7F06E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				90AD6E2255889904B528ABFC /* Pods-PhotoMap_IOS.debug.xcconfig */,
-				15F6BBDAFA995869AFE3C34B /* Pods-PhotoMap_IOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -302,12 +294,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9750587423C1B17900BF54E5 /* Build configuration list for PBXNativeTarget "PhotoMap_IOS" */;
 			buildPhases = (
-				FA8BCEF827534430F7302081 /* [CP] Check Pods Manifest.lock */,
 				9750585923C1B17800BF54E5 /* Sources */,
 				9750585A23C1B17800BF54E5 /* Frameworks */,
 				9750585B23C1B17800BF54E5 /* Resources */,
 				970CFCC823C208C800D9FB12 /* Embed Frameworks */,
-				E95261DFFF76D68F11D30F90 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -315,9 +305,9 @@
 			);
 			name = PhotoMap_IOS;
 			packageProductDependencies = (
-				978FBC1323D088BC009998E5 /* Json */,
-				978FBC1523D088BC009998E5 /* Request */,
-				9708D69323DA9FE700FF9665 /* URLImage */,
+				978FBC1323D088BC009998E5 /* SwiftPackageProductDependency */,
+				978FBC1523D088BC009998E5 /* SwiftPackageProductDependency */,
+				9708D69323DA9FE700FF9665 /* SwiftPackageProductDependency */,
 			);
 			productName = PhotoMap_IOS;
 			productReference = 9750585D23C1B17800BF54E5 /* PhotoMap.app */;
@@ -348,8 +338,8 @@
 			);
 			mainGroup = 9750585423C1B17800BF54E5;
 			packageReferences = (
-				978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */,
-				9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */,
+				978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */,
+				9708D69223DA9FE700FF9665 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 9750585E23C1B17800BF54E5 /* Products */;
 			projectDirPath = "";
@@ -372,48 +362,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E95261DFFF76D68F11D30F90 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PhotoMap_IOS/Pods-PhotoMap_IOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PhotoMap_IOS/Pods-PhotoMap_IOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoMap_IOS/Pods-PhotoMap_IOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA8BCEF827534430F7302081 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PhotoMap_IOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9750585923C1B17800BF54E5 /* Sources */ = {
@@ -589,7 +537,6 @@
 		};
 		9750587523C1B17900BF54E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90AD6E2255889904B528ABFC /* Pods-PhotoMap_IOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -620,7 +567,6 @@
 		};
 		9750587623C1B17900BF54E5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15F6BBDAFA995869AFE3C34B /* Pods-PhotoMap_IOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -673,7 +619,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */ = {
+		9708D69223DA9FE700FF9665 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
 			requirement = {
@@ -681,7 +627,7 @@
 				minimumVersion = 0.9.9;
 			};
 		};
-		978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */ = {
+		978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/carson-katri/swift-request";
 			requirement = {
@@ -692,19 +638,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9708D69323DA9FE700FF9665 /* URLImage */ = {
+		9708D69323DA9FE700FF9665 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */;
+			package = 9708D69223DA9FE700FF9665 /* RemoteSwiftPackageReference */;
 			productName = URLImage;
 		};
-		978FBC1323D088BC009998E5 /* Json */ = {
+		978FBC1323D088BC009998E5 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */;
+			package = 978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */;
 			productName = Json;
 		};
-		978FBC1523D088BC009998E5 /* Request */ = {
+		978FBC1523D088BC009998E5 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */;
+			package = 978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */;
 			productName = Request;
 		};
 /* End XCSwiftPackageProductDependency section */
