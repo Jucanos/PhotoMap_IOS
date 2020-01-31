@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        print("Entered OpenURL")
          if KOSession.isKakaoAccountLoginCallback(url.absoluteURL) {
              return KOSession.handleOpen(url)
            }
@@ -43,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          }
 
     internal func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        print("Entered OpenURL")
          if KOSession.isKakaoAccountLoginCallback(url.absoluteURL) {
              return KOSession.handleOpen(url)
            }

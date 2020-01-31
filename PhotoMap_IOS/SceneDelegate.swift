@@ -12,7 +12,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var application = UIApplication.shared
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -38,12 +38,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print("try to open")
-        for context in URLContexts {
-            if KOSession.isKakaoAgeAuthCallback(context.url.absoluteURL) {
-                KOSession.handleOpen(context.url)
-            }
-        }        
+        let url = URLContexts.first?.url
+        application.delegate?.application?(application, open: url!, options: [:])
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -56,7 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        KOSession.handleDidBecomeActive()
+        application.delegate?.applicationDidBecomeActive?(application)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -73,10 +69,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-
+        application.delegate?.applicationDidEnterBackground?(application)
         // Save changes in the application's managed object context when the application transitions to the background.
-        KOSession.handleDidEnterBackground()
-        print("\n\n\nBackground entered!!")
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 

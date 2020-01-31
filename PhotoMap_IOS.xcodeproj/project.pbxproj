@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9708D69423DA9FE700FF9665 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 9708D69323DA9FE700FF9665 /* SwiftPackageProductDependency */; };
+		9708D69423DA9FE700FF9665 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9708D69323DA9FE700FF9665 /* URLImage */; };
 		9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9708D69523DAB1E600FF9665 /* AddFeed.swift */; };
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
@@ -41,8 +41,8 @@
 		978D81EC23CB0ACD00DA75D0 /* GroupSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81EB23CB0ACD00DA75D0 /* GroupSideMenu.swift */; };
 		978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81ED23CB0BD700DA75D0 /* MemberList.swift */; };
 		978FBC1123D07CC0009998E5 /* NetworkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1023D07CC0009998E5 /* NetworkURL.swift */; };
-		978FBC1423D088BC009998E5 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1323D088BC009998E5 /* SwiftPackageProductDependency */; };
-		978FBC1623D088BC009998E5 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1523D088BC009998E5 /* SwiftPackageProductDependency */; };
+		978FBC1423D088BC009998E5 /* Json in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1323D088BC009998E5 /* Json */; };
+		978FBC1623D088BC009998E5 /* Request in Frameworks */ = {isa = PBXBuildFile; productRef = 978FBC1523D088BC009998E5 /* Request */; };
 		978FBC1823D08E14009998E5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1723D08E14009998E5 /* UserInfo.swift */; };
 		978FBC1A23D09901009998E5 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1923D09901009998E5 /* UserSettings.swift */; };
 		9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B19723C80B4100AB6E4F /* UserGroup.swift */; };
@@ -116,9 +116,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				978FBC1623D088BC009998E5 /* BuildFile in Frameworks */,
-				978FBC1423D088BC009998E5 /* BuildFile in Frameworks */,
-				9708D69423DA9FE700FF9665 /* BuildFile in Frameworks */,
+				978FBC1623D088BC009998E5 /* Request in Frameworks */,
+				978FBC1423D088BC009998E5 /* Json in Frameworks */,
+				9708D69423DA9FE700FF9665 /* URLImage in Frameworks */,
 				970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,7 +149,6 @@
 				9750585F23C1B17800BF54E5 /* PhotoMap_IOS */,
 				9750585E23C1B17800BF54E5 /* Products */,
 				970CFCC423C208C700D9FB12 /* Frameworks */,
-				ACFAA5809BFC1C9F00A7F06E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,17 +163,17 @@
 		9750585F23C1B17800BF54E5 /* PhotoMap_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				9750586023C1B17800BF54E5 /* AppDelegate.swift */,
+				9750586223C1B17800BF54E5 /* SceneDelegate.swift */,
+				970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */,
 				978FBC0F23D07CA4009998E5 /* Networking */,
 				97528EF023C771ED00B999B5 /* Models */,
 				9773018623C72C4C00E3CE99 /* Views */,
 				97785AC023C9E35D007EDB7E /* SupportingView */,
-				970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */,
-				9750586023C1B17800BF54E5 /* AppDelegate.swift */,
-				9750586223C1B17800BF54E5 /* SceneDelegate.swift */,
 				9750586923C1B17900BF54E5 /* Assets.xcassets */,
 				9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */,
-				9750587123C1B17900BF54E5 /* Info.plist */,
 				9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */,
+				9750587123C1B17900BF54E5 /* Info.plist */,
 				9750586B23C1B17900BF54E5 /* Preview Content */,
 			);
 			path = PhotoMap_IOS;
@@ -218,12 +217,12 @@
 			children = (
 				9773018023C71F7B00E3CE99 /* SplashView.swift */,
 				9773018423C7277700E3CE99 /* MainTabView.swift */,
+				97B242DA23CD912300AB0DB1 /* TestView.swift */,
 				9798B19923C832BA00AB6E4F /* Login */,
 				97528EED23C7716000B999B5 /* Group */,
 				972B0FDD23C8649C00BF1F65 /* Map */,
 				97785AC423C9E583007EDB7E /* Feed */,
 				97B8B0AE23C8596300E9B52C /* UserSetting */,
-				97B242DA23CD912300AB0DB1 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,13 +279,6 @@
 			path = UserSetting;
 			sourceTree = "<group>";
 		};
-		ACFAA5809BFC1C9F00A7F06E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -305,9 +297,9 @@
 			);
 			name = PhotoMap_IOS;
 			packageProductDependencies = (
-				978FBC1323D088BC009998E5 /* SwiftPackageProductDependency */,
-				978FBC1523D088BC009998E5 /* SwiftPackageProductDependency */,
-				9708D69323DA9FE700FF9665 /* SwiftPackageProductDependency */,
+				978FBC1323D088BC009998E5 /* Json */,
+				978FBC1523D088BC009998E5 /* Request */,
+				9708D69323DA9FE700FF9665 /* URLImage */,
 			);
 			productName = PhotoMap_IOS;
 			productReference = 9750585D23C1B17800BF54E5 /* PhotoMap.app */;
@@ -338,8 +330,8 @@
 			);
 			mainGroup = 9750585423C1B17800BF54E5;
 			packageReferences = (
-				978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */,
-				9708D69223DA9FE700FF9665 /* RemoteSwiftPackageReference */,
+				978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */,
+				9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 9750585E23C1B17800BF54E5 /* Products */;
 			projectDirPath = "";
@@ -619,7 +611,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9708D69223DA9FE700FF9665 /* RemoteSwiftPackageReference */ = {
+		9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
 			requirement = {
@@ -627,7 +619,7 @@
 				minimumVersion = 0.9.9;
 			};
 		};
-		978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */ = {
+		978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/carson-katri/swift-request";
 			requirement = {
@@ -638,19 +630,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9708D69323DA9FE700FF9665 /* SwiftPackageProductDependency */ = {
+		9708D69323DA9FE700FF9665 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9708D69223DA9FE700FF9665 /* RemoteSwiftPackageReference */;
+			package = 9708D69223DA9FE700FF9665 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
 		};
-		978FBC1323D088BC009998E5 /* SwiftPackageProductDependency */ = {
+		978FBC1323D088BC009998E5 /* Json */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */;
+			package = 978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */;
 			productName = Json;
 		};
-		978FBC1523D088BC009998E5 /* SwiftPackageProductDependency */ = {
+		978FBC1523D088BC009998E5 /* Request */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 978FBC1223D088BC009998E5 /* RemoteSwiftPackageReference */;
+			package = 978FBC1223D088BC009998E5 /* XCRemoteSwiftPackageReference "swift-request" */;
 			productName = Request;
 		};
 /* End XCSwiftPackageProductDependency section */
