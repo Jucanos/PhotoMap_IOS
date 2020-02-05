@@ -11,6 +11,9 @@
 		9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9708D69523DAB1E600FF9665 /* AddFeed.swift */; };
 		970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */; };
 		970CFCD123C2148F00D9FB12 /* KakaoLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */; };
+		9712887723EA7CED00DBB233 /* PryntTrimmerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974F645823E4056E00F798B0 /* PryntTrimmerView.framework */; };
+		9712887823EA7CED00DBB233 /* Stevia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974F645923E4056E00F798B0 /* Stevia.framework */; };
+		9712887923EA7CED00DBB233 /* YPImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976E636E23E401A300246541 /* YPImagePicker.framework */; };
 		9716581623D36E8C000C10DF /* UserLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716581523D36E8C000C10DF /* UserLogout.swift */; };
 		971B35DF23DAF76800689C96 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971B35DE23DAF76800689C96 /* ImagePicker.swift */; };
 		972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972B0FDE23C865C400BF1F65 /* KoreaMap.swift */; };
@@ -46,7 +49,6 @@
 		978FBC1823D08E14009998E5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1723D08E14009998E5 /* UserInfo.swift */; };
 		978FBC1A23D09901009998E5 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1923D09901009998E5 /* UserSettings.swift */; };
 		9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B19723C80B4100AB6E4F /* UserGroup.swift */; };
-		97B242DB23CD912300AB0DB1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B242DA23CD912300AB0DB1 /* TestView.swift */; };
 		97B858B923C8A88500358211 /* GroupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B858B823C8A88500358211 /* GroupDetail.swift */; };
 		97C7575023E1CC990095E3B7 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7574F23E1CC990095E3B7 /* PageView.swift */; };
 		97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDE69723CF4DE500719F89 /* HostingController.swift */; };
@@ -79,6 +81,8 @@
 		973F6A3323CEEC9C008C4EEC /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		973F6A3523CEF154008C4EEC /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		973F6A3923CF0487008C4EEC /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
+		974F645823E4056E00F798B0 /* PryntTrimmerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PryntTrimmerView.framework; path = Carthage/Build/iOS/PryntTrimmerView.framework; sourceTree = "<group>"; };
+		974F645923E4056E00F798B0 /* Stevia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stevia.framework; path = Carthage/Build/iOS/Stevia.framework; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9750586023C1B17800BF54E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9750586223C1B17800BF54E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 		975F469723CA1D760044C6AA /* FeedDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetail.swift; sourceTree = "<group>"; };
 		975F469923CA22500044C6AA /* FeedPreviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPreviewDetail.swift; sourceTree = "<group>"; };
 		975F469B23CA22DC0044C6AA /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		976E636E23E401A300246541 /* YPImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YPImagePicker.framework; path = Carthage/Build/iOS/YPImagePicker.framework; sourceTree = "<group>"; };
 		9773017A23C7099700E3CE99 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		9773017C23C709BB00E3CE99 /* MainGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGroupView.swift; sourceTree = "<group>"; };
 		9773017E23C709C700E3CE99 /* MainSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingView.swift; sourceTree = "<group>"; };
@@ -105,10 +110,10 @@
 		978FBC1723D08E14009998E5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		978FBC1923D09901009998E5 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		9798B19723C80B4100AB6E4F /* UserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroup.swift; sourceTree = "<group>"; };
-		97B242DA23CD912300AB0DB1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		97B858B823C8A88500358211 /* GroupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetail.swift; sourceTree = "<group>"; };
 		97C7574F23E1CC990095E3B7 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		97CDE69723CF4DE500719F89 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		97ECB20123E4160E00706580 /* Gallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Gallery.framework; path = Carthage/Build/iOS/Gallery.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +121,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9712887723EA7CED00DBB233 /* PryntTrimmerView.framework in Frameworks */,
+				9712887823EA7CED00DBB233 /* Stevia.framework in Frameworks */,
+				9712887923EA7CED00DBB233 /* YPImagePicker.framework in Frameworks */,
 				978FBC1623D088BC009998E5 /* Request in Frameworks */,
 				978FBC1423D088BC009998E5 /* Json in Frameworks */,
 				9708D69423DA9FE700FF9665 /* URLImage in Frameworks */,
@@ -129,6 +137,10 @@
 		970CFCC423C208C700D9FB12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				97ECB20123E4160E00706580 /* Gallery.framework */,
+				974F645823E4056E00F798B0 /* PryntTrimmerView.framework */,
+				974F645923E4056E00F798B0 /* Stevia.framework */,
+				976E636E23E401A300246541 /* YPImagePicker.framework */,
 				970CFCCC23C20D5600D9FB12 /* KakaoOpenSDK.framework */,
 			);
 			name = Frameworks;
@@ -217,7 +229,6 @@
 			children = (
 				9773018023C71F7B00E3CE99 /* SplashView.swift */,
 				9773018423C7277700E3CE99 /* MainTabView.swift */,
-				97B242DA23CD912300AB0DB1 /* TestView.swift */,
 				9798B19923C832BA00AB6E4F /* Login */,
 				97528EED23C7716000B999B5 /* Group */,
 				972B0FDD23C8649C00BF1F65 /* Map */,
@@ -290,6 +301,7 @@
 				9750585A23C1B17800BF54E5 /* Frameworks */,
 				9750585B23C1B17800BF54E5 /* Resources */,
 				970CFCC823C208C800D9FB12 /* Embed Frameworks */,
+				976E636D23E4009E00246541 /* Carthage Run Script */,
 			);
 			buildRules = (
 			);
@@ -355,6 +367,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		976E636D23E4009E00246541 /* Carthage Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/PryntTrimmerView.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Stevia.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/YPImagePicker.framework",
+			);
+			name = "Carthage Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9750585923C1B17800BF54E5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -390,7 +426,6 @@
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
 				973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
-				97B242DB23CD912300AB0DB1 /* TestView.swift in Sources */,
 				9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */,
 				97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */,
 				9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */,
@@ -464,6 +499,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -518,6 +554,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -531,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoMap_IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = EKU567YQE4;
@@ -538,6 +576,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PhotoMap_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -551,6 +590,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.apps.jucano.PhotoMap-IOS";
 				PRODUCT_NAME = PhotoMap;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -561,6 +601,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoMap_IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = EKU567YQE4;
@@ -568,6 +609,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PhotoMap_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -581,6 +623,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.apps.jucano.PhotoMap-IOS";
 				PRODUCT_NAME = PhotoMap;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
