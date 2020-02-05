@@ -9,74 +9,192 @@
 import SwiftUI
 
 struct KoreaMap: View {
+    @State var selected: Int? = 0
     var body: some View {
         GeometryReader { gr in
             ZStack {
-                NavigationLink(destination: FeedView(location: "경기도", mapKey: "gyeonggi")) { CustomImage(location: "gyeonggi", size: gr.size)
+                Group {
+                    BackImage(mapImage: "chungbuk", masterSize: CGSize(width: 140,height: 140), maskImage: "test1")
+                        .offset(x: 12.4, y: -57.3)
+                    BackImage(mapImage: "chungnam", masterSize: CGSize(width: 135,height: 130))
+                        .offset(x: -71, y: -46)
+                    BackImage(mapImage: "gangwon", masterSize: CGSize(width: 215,height: 215))
+                        .offset(x: 35, y: -158)
+                    BackImage(mapImage: "gyeongbuk", masterSize: CGSize(width: 170,height: 180))
+                        .offset(x: 73, y: -26)
+                    BackImage(mapImage: "gyeonggi", masterSize: CGSize(width: 125,height: 150))
+                        .offset(x: -50, y: -151)
+                    BackImage(mapImage: "gyeongnam", masterSize: CGSize(width: 175,height: 130))
+                        .offset(x: 59, y: 64)
+                    BackImage(mapImage: "jeju", masterSize: CGSize(width: 90,height: 60))
+                        .offset(x: -62, y: 215)
+                    BackImage(mapImage: "junbuk", masterSize: CGSize(width: 145,height: 120))
+                        .offset(x: -49, y: 32)
+                    BackImage(mapImage: "junnam", masterSize: CGSize(width: 150,height: 135))
+                        .offset(x: -62, y: 110)
                 }
-                .offset(x: -50, y: -151)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "강원도", mapKey: "gangwon")) { CustomImage(location: "gangwon", size: gr.size)
+                
+                Group{
+                    NavigationLink(destination: FeedView(location: "충청북도", mapKey: "chungbuk"), tag: 1, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "충청남도", mapKey: "chungnam"), tag: 2, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "강원도", mapKey: "gangwon"), tag: 3, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "경상북도", mapKey: "gyeongbuk"), tag: 4, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "경기도", mapKey: "gyeonggi"), tag: 5, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "경상남도", mapKey: "gyeongnam"), tag: 6, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "제주도", mapKey: "jeju"), tag: 7, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "전라북도", mapKey: "jeonbuk"), tag: 8, selection: self.$selected) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: FeedView(location: "전라남도", mapKey: "jeonnam"), tag: 9, selection: self.$selected) {
+                        EmptyView()
+                    }
                 }
-                .offset(x: 35, y: -158)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "충청남도", mapKey: "chungnam")) { CustomImage(location: "chungnam", size: gr.size)
-                }
-                .offset(x: -71, y: -46)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "충청북도", mapKey: "chungbuk")) { CustomImage(location: "chungbuk", size: gr.size)
-                }
-                .offset(x: 13, y: -57)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "경상북도", mapKey: "gyeongbuk")) { CustomImage(location: "gyeongbuk", size: gr.size)
-                }
-                .offset(x: 73, y: -26)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "전라북도", mapKey: "jeonbuk")) { CustomImage(location: "junbuk", size: gr.size)
-                }
-                .offset(x: -49, y: 32)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "경상남도", mapKey: "gyeongnam")) { CustomImage(location: "gyeongnam", size: gr.size)
-                }
-                .offset(x: 59, y: 64)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "전라남도", mapKey: "jeonnam")) { CustomImage(location: "junnam", size: gr.size)
-                }
-                .offset(x: -62, y: 110)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                NavigationLink(destination: FeedView(location: "제주도", mapKey: "jeju")) { CustomImage(location: "jeju", size: gr.size)
-                    
-                }
-                .offset(x: -62, y: 215)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
+                TouchHandler(num: self.$selected, masterViewSize: gr.size)
+                    .opacity(0.1)
                 
             }
-            .frame(width: gr.size.width, height: gr.size.height)
         }
     }
 }
 
-struct CustomImage: View {
-    @State var location: String
-    @State var size: CGSize
-    
+/// View for Background Map Image
+/// Masked or UnMasked
+struct BackImage: View {
+    @State var mapImage: String
+    var masterSize: CGSize
+    @State var maskImage: String?
     var body: some View {
-        Image("\(location)")
-            //            .resizable()
-            .scaledToFit()
-        //            .frame(width: 150, height: 150)
+        Group{
+            if maskImage == nil{
+                Image(mapImage)
+                    .scaledToFit()
+            }else{
+                Image(maskImage!)
+                    .resizable()
+                    .frame(width: masterSize.width, height: masterSize.height)
+                    .scaledToFit()
+                    .mask(Image(mapImage)
+                        .resizable()
+                        .scaledToFit())
+            }
+        }
     }
 }
 
+@objc class ClosureSleeve: NSObject {
+    let closure: ()->()
+    
+    init (_ closure: @escaping ()->()) {
+        self.closure = closure
+    }
+    
+    @objc func invoke () {
+        closure()
+    }
+}
+
+extension UIControl {
+    func addAction(for controlEvents: UIControl.Event = .touchUpInside, _ closure: @escaping ()->()) {
+        let sleeve = ClosureSleeve(closure)
+        addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
+        objc_setAssociatedObject(self, "[\(arc4random())]", sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+    }
+}
+
+extension UIButton {
+    func getColorFromPoint(point: CGPoint) -> UIColor {
+        let colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        
+        var pixelData:[UInt8] = [0, 0, 0, 0]
+        
+        let context = CGContext.init(data: &pixelData, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace, bitmapInfo: UInt32(bitmapInfo.rawValue))
+        context!.translateBy(x: -point.x, y: -point.y)
+        
+        self.layer.render(in: context!)
+        
+        let red: CGFloat = CGFloat(pixelData[0])/CGFloat(255.0)
+        let green: CGFloat = CGFloat(pixelData[1])/CGFloat(255.0)
+        let blue: CGFloat = CGFloat(pixelData[2])/CGFloat(255.0)
+        let alpha: CGFloat = CGFloat(pixelData[3])/CGFloat(255.0)
+        
+        let color: UIColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        return color
+    }
+    
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if(!self.bounds.contains(point)){
+            return nil
+        }
+        else{
+            let color: UIColor = self.getColorFromPoint(point: point)
+            var red: CGFloat = 0
+            var green: CGFloat = 0
+            var blue: CGFloat = 0
+            var alpha: CGFloat = 0
+            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            if (alpha<=0.0) {
+                return nil
+            }
+            return self
+        }
+    }
+}
+
+struct TouchHandler: UIViewRepresentable {
+    @Binding var num: Int?
+    var masterViewSize: CGSize
+    struct Elements {
+        let name: String
+        let navigationTag: Int
+        let position: CGPoint
+    }
+    
+    func makeUIView(context: UIViewRepresentableContext<TouchHandler>) -> UIView {
+        let masterView = UIView(frame: CGRect(origin: .zero, size: masterViewSize))
+        let elements: [Elements] = [
+            Elements(name: "chungbuk", navigationTag: 1, position: CGPoint(x: 12.4,y: -57.3)),
+            Elements(name: "chungnam", navigationTag: 2, position: CGPoint(x: -71, y: -46)),
+            Elements(name: "gangwon", navigationTag: 3, position: CGPoint(x: 35, y: -158)),
+            Elements(name: "gyeongbuk", navigationTag: 4, position: CGPoint(x: 73, y: -26)),
+            Elements(name: "gyeonggi", navigationTag: 5, position: CGPoint(x: -50, y: -151)),
+            Elements(name: "gyeongnam", navigationTag: 6, position: CGPoint(x: 59, y: 64)),
+            Elements(name: "jeju", navigationTag: 7, position: CGPoint(x: -62, y: 215)),
+            Elements(name: "junbuk", navigationTag: 8, position: CGPoint(x: -49, y: 32)),
+            Elements(name: "junnam", navigationTag: 9, position: CGPoint(x: -62, y: 110))
+        ]
+        
+        for ele in elements {
+            let btn = UIButton()
+            btn.addAction {
+                self.num = ele.navigationTag
+            }
+            let img = UIImage(named: ele.name)
+            btn.frame = CGRect(origin: .zero, size: img!.size)
+            btn.setImage(img, for: .normal)
+            let calcPos = CGPoint(x: masterView.center.x + ele.position.x, y: masterView.center.y + ele.position.y)
+            btn.center = calcPos
+            masterView.addSubview(btn)
+        }
+        return masterView
+    }
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<TouchHandler>) {
+    }
+}
 
 
 struct KoreaMap_Previews: PreviewProvider {

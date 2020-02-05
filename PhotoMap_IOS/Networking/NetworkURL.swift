@@ -11,7 +11,7 @@ import Foundation
 class NetworkURL {
     
     static let sharedInstance = NetworkURL()
-    private let baseUrlString = "https://soybeans.tech/dev"
+    private let baseUrlString = "https://soybeans.tech/api"
     
     func getBaseUrlString() -> String {
         return baseUrlString
