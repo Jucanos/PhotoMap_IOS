@@ -77,6 +77,8 @@ extension MyImagePicker{
         func makeUIViewController(context: Context) -> YPImagePicker {
             MyImagePicker.shared.images.removeAll()
             var config = YPImagePickerConfiguration()
+            
+            config.startOnScreen = YPPickerScreen.library
             config.library.maxNumberOfItems = 5
             config.wordings.libraryTitle = "갤러리"
             config.wordings.cameraTitle = "카메라"
@@ -100,7 +102,7 @@ extension MyImagePicker{
                         print(video)
                     }
                 }
-                picker.dismiss(animated: true, completion: nil)
+                picker.dismiss(animated: false, completion: nil)
             }
             
             return picker
