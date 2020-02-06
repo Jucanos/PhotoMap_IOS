@@ -31,9 +31,9 @@ struct KoreaMap: View {
                         .offset(x: 59, y: 64)
                     BackImage(mapImage: "jeju", masterSize: CGSize(width: 90,height: 60), maskImage: self.mapStore.mapData.represents?.jeju)
                         .offset(x: -62, y: 215)
-                    BackImage(mapImage: "junbuk", masterSize: CGSize(width: 145,height: 120), maskImage: self.mapStore.mapData.represents?.jeonbuk)
+                    BackImage(mapImage: "jeonbuk", masterSize: CGSize(width: 145,height: 120), maskImage: self.mapStore.mapData.represents?.jeonbuk)
                         .offset(x: -49, y: 32)
-                    BackImage(mapImage: "junnam", masterSize: CGSize(width: 150,height: 135), maskImage: self.mapStore.mapData.represents?.jeonnam)
+                    BackImage(mapImage: "jeonnam", masterSize: CGSize(width: 150,height: 135), maskImage: self.mapStore.mapData.represents?.jeonnam)
                         .offset(x: -62, y: 110)
                 }
                 
@@ -66,18 +66,18 @@ struct KoreaMap: View {
                         EmptyView()
                     }
                 }
-//                Group{
-//                    NavigationLink(destination: /*@START_MENU_TOKEN@*/ /*@PLACEHOLDER=Destination@*/Text("Destination")/*@END_MENU_TOKEN@*/) {
-//                    /*@START_MENU_TOKEN@*/ /*@PLACEHOLDER=Label Content@*/Text("Navigate")/*@END_MENU_TOKEN@*/
-//                    }
-//                }
+                Group{
+                    NavigationLink(destination: SetRepresent(mid: self.mapStore.mapData.mid!, mapKey: self.$selectedLoc), tag: 10, selection: self.$selected) {
+                    EmptyView()
+                    }
+                }
                 TouchHandler(num: self.$selected, selectedLoc: self.$selectedLoc, showActionSheet: self.$showActionSheet, masterViewSize: gr.size)
                     .opacity(0.1)
             }
             .actionSheet(isPresented: self.$showActionSheet){
                 ActionSheet(title: Text(""), message: Text(""), buttons: [
                     .default(Text("대표사진 설정"), action: {
-                        
+                        self.selected = 10
                     }),
                     .default(Text("대표사진 지우기"), action: {
                         
@@ -204,8 +204,8 @@ struct TouchHandler: UIViewRepresentable {
             Elements(name: "gyeonggi", navigationTag: 5, position: CGPoint(x: -50, y: -151)),
             Elements(name: "gyeongnam", navigationTag: 6, position: CGPoint(x: 59, y: 64)),
             Elements(name: "jeju", navigationTag: 7, position: CGPoint(x: -62, y: 215)),
-            Elements(name: "junbuk", navigationTag: 8, position: CGPoint(x: -49, y: 32)),
-            Elements(name: "junnam", navigationTag: 9, position: CGPoint(x: -62, y: 110))
+            Elements(name: "jeonbuk", navigationTag: 8, position: CGPoint(x: -49, y: 32)),
+            Elements(name: "jeonnam", navigationTag: 9, position: CGPoint(x: -62, y: 110))
         ]
         
         for ele in elements {

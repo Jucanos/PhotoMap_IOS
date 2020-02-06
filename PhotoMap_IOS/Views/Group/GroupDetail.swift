@@ -19,40 +19,48 @@ struct GroupDetail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        ZStack {
-            KoreaMap()
-                .navigationBarItems(leading:
-                    backButton, trailing:
-                    Button(action: {self.isSideMenuActive.toggle()}) {
-                        Image(systemName: "line.horizontal.3")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.white)
-                    }
-            )
-                .navigationBarTitle("\(groupData.name!)", displayMode: .inline)
-            ZStack {
-                Color(.black).opacity(isButtonActivate ? 0.7 : 0)
-                VStack {
-                    Spacer().layoutPriority(10)
-                    HStack {
-                        Spacer().layoutPriority(10)
-                        FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepImageButton)], isButtonActivate: self.$isButtonActivate)
-                            .straight()
-                            .direction(.top)
-                            .alignment(.right)
-                            .spacing(10)
-                            .initialOpacity(0)
-                            .padding()
+        Group{
+            if mapStore.mapData.mid != nil{
+                ZStack {
+                    KoreaMap()
+                        .navigationBarItems(leading:
+                            backButton, trailing:
+                            Button(action: {self.isSideMenuActive.toggle()}) {
+                                Image(systemName: "line.horizontal.3")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.white)
+                            }
+                    )
+                        .navigationBarTitle("\(groupData.name!)", displayMode: .inline)
+                    ZStack {
+                        Color(.black).opacity(isButtonActivate ? 0.7 : 0)
+                        VStack {
+                            Spacer().layoutPriority(10)
+                            HStack {
+                                Spacer().layoutPriority(10)
+                                FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepImageButton)], isButtonActivate: self.$isButtonActivate)
+                                    .straight()
+                                    .direction(.top)
+                                    .alignment(.right)
+                                    .spacing(10)
+                                    .initialOpacity(0)
+                                    .padding()
+                            }
+                        }
+                        
                     }
                 }
-                
             }
+            else{
+                Text("Loading mapdata...")
+            }
+            
         }
         .onAppear(){
             self.mapStore.loadMapDetail(mid: self.groupData.mid!, userTocken: self.userSettings.userTocken!)
-            print(self.mapStore.mapData)
         }
+        
         
     }
     
