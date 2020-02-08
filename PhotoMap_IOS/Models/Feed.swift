@@ -146,21 +146,24 @@ class FeedStore: ObservableObject {
         }).resume()
     }
     
-//    func deleteFeed() {
-//        let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)/\(mapKey)")
-//        AnyRequest<Feed> {
-//            Url(url)
-//            Header.Authorization(.bearer(userTocken))
-//        }.onObject{ feeds in
-//            DispatchQueue.main.async {
-//                self.feedData = feeds.data as! [FeedData]
-//                print("feed loaded!!", self.feedData)
-//            }
-//        }.onError{ error in
-//            print("Error at loadMaps", error)
-//        }
-//        .call()
-//    }
+    func deleteFeed(sid: String ,userTocken: String) {
+        let url = NetworkURL.sharedInstance.getUrlString("/stories/\(sid)")
+        AnyRequest<Feed> {
+            Url(url)
+            Method(.delete)
+            Header.Authorization(.bearer(userTocken))
+        }.onData{ data in
+            if let stringData = String(data: data, encoding: .utf8){
+                print(stringData)
+            }
+        }.onError{ error in
+            if let stringData = String(data: error.error!, encoding: .utf8){
+                print(stringData)
+            }
+            print("Error at deleteFeed", error)
+        }
+        .call()
+    }
     func currentTime() -> String {
         let date = Date()
         let calendar = Calendar.current

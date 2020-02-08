@@ -11,8 +11,9 @@ import URLImage
 
 struct FeedPreviewDetail: View {
     @EnvironmentObject var feedStore: FeedStore
+    @EnvironmentObject var userSettings: UserSettings
     @State var currentPage = 0
-    @State var showFeedOption = false
+    @State var showFeedOption: Bool = false
     var feedData: FeedData
     
     var body: some View {
@@ -96,7 +97,7 @@ struct FeedPreviewDetail: View {
         .actionSheet(isPresented: $showFeedOption){
             ActionSheet(title: Text(""), message: Text(""), buttons: [
                 .default(Text("스토리 삭제"), action: {
-                    
+                    self.feedStore.deleteFeed(sid: self.feedData.sid!, userTocken: self.userSettings.userTocken!)
                 }),
                 .destructive(Text("취소"))
             ])

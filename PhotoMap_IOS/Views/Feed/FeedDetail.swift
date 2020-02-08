@@ -13,17 +13,19 @@ struct FeedDetail: View {
     @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var feedStore: FeedStore
+    @State var showFeedOption: Bool = false
     var mapKey: String
     
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 2){
-                ForEach(feedStore.feedData, id: \.title) { item in
+                ForEach(feedStore.feedData, id: \.sid) { item in
                     FeedPreviewDetail(feedData: item)
                         .padding(.bottom, 20)
                 }
             }
-        }.onDisappear(){
+        }
+        .onDisappear(){
             self.feedStore.feedData.removeAll()
         }
     }
