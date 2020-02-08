@@ -13,7 +13,8 @@ struct FeedPreviewDetail: View {
     @EnvironmentObject var feedStore: FeedStore
     @EnvironmentObject var userSettings: UserSettings
     @State var currentPage = 0
-    @State var showFeedOption: Bool = false
+    @Binding var showFeedOption: Bool
+    @Binding var selectedFeed: String
     var feedData: FeedData
     
     var body: some View {
@@ -36,7 +37,10 @@ struct FeedPreviewDetail: View {
                 
                 Spacer()
                 
-                Button(action: {self.showFeedOption = true}){
+                Button(action: {
+                    self.showFeedOption = true
+                    self.selectedFeed = self.feedData.sid!
+                }){
                     Image("threeDots")
                         .resizable()
                         .frame(width: 20, height: 20)
@@ -93,14 +97,6 @@ struct FeedPreviewDetail: View {
                 Text("\(feedData.title!)")
                 Text("\(feedData.context!)").foregroundColor(Color(.lightGray)).font(.subheadline)
             }.padding(.leading, 5)
-        }
-        .actionSheet(isPresented: $showFeedOption){
-            ActionSheet(title: Text(""), message: Text(""), buttons: [
-                .default(Text("스토리 삭제"), action: {
-                    self.feedStore.deleteFeed(sid: self.feedData.sid!, userTocken: self.userSettings.userTocken!)
-                }),
-                .destructive(Text("취소"))
-            ])
         }
     }
 }
