@@ -8,26 +8,7 @@
 
 import SwiftUI
 
-extension UIView {
-  var renderedImage: UIImage {
-    let image = UIGraphicsImageRenderer(size: self.bounds.size).image { context in
-      UIColor.lightGray.set(); UIRectFill(bounds)
-      context.cgContext.setAlpha(0.75)
-      self.layer.render(in: context.cgContext)
-    }
-    return image
-  }
-}
-extension View {
-  var renderedImage: UIImage {
-    let window = UIWindow(frame: CGRect(origin: .zero, size: CGSize(width: 320, height: 160)))
-    let hosting = UIHostingController(rootView: self)
-    hosting.view.frame = window.frame
-    window.rootViewController = hosting
-    window.makeKey()
-    return hosting.view.renderedImage
-  }
-}
+
 
 struct SetRepresent: View {
     var mid: String
@@ -62,63 +43,108 @@ struct SetRepresent: View {
 
 struct AdjustImage: View {
     @Binding var targetImage: UIImage?
-    @State var rotationState: Double = 0
-    @State var scale: CGFloat = 1.0
+    var location: String
+    @State private var rotationState: Double = 0
+    @State private var scale: CGFloat = 1.0
     @State private var currentPosition: CGSize = .zero
     @State private var newPosition: CGSize = .zero
-    var location: String
+    @State var fixedPos: CGPoint?
+    @State var fixedSize: CGSize?
+    //    @State var isCompleted: Bool = false
+    
     
     var body: some View {
-        ZStack{
-            // 1. selected image to be modified
-            Image(uiImage: targetImage!)
-                .resizable()
-                .scaledToFit()
-                .rotationEffect(Angle(degrees: self.rotationState))
-                .scaleEffect(scale)
-                .offset(x: self.currentPosition.width, y: self.currentPosition.height)
-                .gesture(MagnificationGesture()
-                    .onChanged{ value in
-                        self.scale = value.magnitude
-                })
-                .simultaneousGesture(RotationGesture()
-                    .onChanged{ value in
-                        self.rotationState = value.degrees
-                })
-                .simultaneousGesture(DragGesture()
-                    .onChanged { value in
-                        self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
-                }
-                .onEnded { value in
+        let TargetView = Image(uiImage: targetImage!)
+            .resizable()
+            .scaledToFit()
+            .rotationEffect(Angle(degrees: self.rotationState))
+            .scaleEffect(scale)
+            .offset(x: self.currentPosition.width, y: self.currentPosition.height)
+            .gesture(MagnificationGesture()
+                .onChanged{ value in
+                    self.scale = value.magnitude
+            })
+            .simultaneousGesture(RotationGesture()
+                .onChanged{ value in
+                    self.rotationState = value.degrees
+            })
+            .simultaneousGesture(DragGesture()
+                .onChanged { value in
                     self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
-                    print(self.newPosition.width)
-                    self.newPosition = self.currentPosition
-                })
-            
-            // 2. Guideline layer
-            VStack(spacing: 0){
-                Color(.black)
-                    .opacity(0.7)
-                Image(location+"Hole")
-                    .resizable()
-                    .scaledToFill()
-                    .foregroundColor(.black)
-                    .opacity(0.7)
-                Color(.black)
-                    .opacity(0.7)
             }
-            .allowsHitTesting(false)
+            .onEnded { value in
+                self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
+                print(self.newPosition.width)
+                self.newPosition = self.currentPosition
+            })
+        
+        return GeometryReader{ gr in
+            ZStack{
+                // 1. selected image to be modified
+                TargetView
+                // 2. Guideline layer
+                VStack(spacing: 0){
+                    Color(.black)
+                        .opacity(0.7)
+                    Image(self.location+"Hole")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.black)
+                        .opacity(0.9)
+                        .layoutPriority(10)
+                    Color(.black)
+                        .opacity(0.7)
+                }
+                .allowsHitTesting(false)
+            }
+            .navigationBarItems(trailing: Button(action: {
+                let imgSize = UIImage(named: self.location)?.size
+                let ratio = imgSize!.height / imgSize!.width
+                
+                let newHeight = gr.size.width * ratio
+                let newOffset = (gr.frame(in: .global).size.height - newHeight) / 2
+                
+                let image = TargetView.takeScreenshot(origin: gr.frame(in: .global).origin , size: gr.size)
+                
+                let cgimg = image.cgImage!
+                let offset = newOffset * (CGFloat(cgimg.height) / gr.size.height)
+                let ssize = CGSize(width: CGFloat(cgimg.width), height: CGFloat(cgimg.width) * ratio)
+                
+                let rect = CGRect(origin: CGPoint(x: 0, y: offset), size: ssize)
+                let imageRef = image.cgImage!.cropping(to: rect)
+                
+                let newImage = UIImage(cgImage: imageRef!)
+                print(newImage)
+                
+            }) {
+                Text("확인")
+            })
         }
     }
 }
 
+extension UIView {
+    var renderedImage: UIImage {
+        // rect of capure
+        let rect = self.bounds
+        // create the context of bitmap
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        self.layer.render(in: context)
+        // get a image from current context bitmap
+        let capturedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return capturedImage
+    }
+}
 
-
-struct SetRepresent_Previews: PreviewProvider {
-    static var previews: some View {
-//        Image(uiImage: AdjustImage( targetImage: .constant(UIImage(named: "test")), location: "gangwon").renderedImage)
-        Image(uiImage: Text("good").renderedImage)
-        .resizable()
-        .scaledToFit()
+extension View {
+    func takeScreenshot(origin: CGPoint, size: CGSize) -> UIImage {
+        let window = UIWindow(frame: CGRect(origin: origin, size: size))
+        let hosting = UIHostingController(rootView: self)
+        hosting.view.frame = window.frame
+        window.addSubview(hosting.view)
+        window.makeKeyAndVisible()
+        return hosting.view.renderedImage
     }
 }
