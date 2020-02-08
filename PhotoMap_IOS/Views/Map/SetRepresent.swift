@@ -11,7 +11,6 @@ import SwiftUI
 
 
 struct SetRepresent: View {
-    var mid: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var selectedBaseImage: UIImage? = nil
     @State var showImagePicker = true
@@ -42,15 +41,16 @@ struct SetRepresent: View {
 }
 
 struct AdjustImage: View {
-    @Binding var targetImage: UIImage?
-    var location: String
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var userSettings: UserSettings
     @State private var rotationState: Double = 0
     @State private var scale: CGFloat = 1.0
     @State private var currentPosition: CGSize = .zero
     @State private var newPosition: CGSize = .zero
-    @State var fixedPos: CGPoint?
-    @State var fixedSize: CGSize?
-    //    @State var isCompleted: Bool = false
+    @Binding var targetImage: UIImage?
+    var location: String
+    
     
     
     var body: some View {
@@ -115,6 +115,11 @@ struct AdjustImage: View {
                 
                 let newImage = UIImage(cgImage: imageRef!)
                 print(newImage)
+                
+                self.mapStore.setRepresentImage(cityKey: self.location, userTocken: self.userSettings.userTocken!, image: newImage){
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+//                self.presentationMode.wrappedValue.dismiss()
                 
             }) {
                 Text("확인")

@@ -10,6 +10,7 @@ import SwiftUI
 import URLImage
 struct KoreaMap: View {
     @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var userSettings: UserSettings
     @State var selected: Int? = 0
     @State var selectedLoc: String?
     @State var showActionSheet: Bool = false
@@ -67,7 +68,7 @@ struct KoreaMap: View {
                     }
                 }
                 Group{
-                    NavigationLink(destination: SetRepresent(mid: self.mapStore.mapData.mid!, mapKey: self.$selectedLoc), tag: 10, selection: self.$selected) {
+                    NavigationLink(destination: SetRepresent(mapKey: self.$selectedLoc), tag: 10, selection: self.$selected) {
                     EmptyView()
                     }
                 }
@@ -80,7 +81,7 @@ struct KoreaMap: View {
                         self.selected = 10
                     }),
                     .default(Text("대표사진 지우기"), action: {
-                        
+                        self.mapStore.deleteRepresentImage(cityKey: self.selectedLoc!, userTocken: self.userSettings.userTocken!)
                     }),
                     .destructive(Text("취소"))
                 ])

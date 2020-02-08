@@ -41,6 +41,11 @@ struct Represent: Codable {
     var jeju: String?
 }
 
+struct RepresentData: Codable {
+    var data: Represent?
+    var message: String?
+}
+
 class UserGroupStore: ObservableObject {
     
     let objectWillChange = ObservableObjectPublisher()
@@ -109,7 +114,7 @@ class UserGroupStore: ObservableObject {
 
 class MapStore: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    var mapData: MapData = MapData(){
+    @Published var mapData: MapData = MapData(){
         willSet{
             objectWillChange.send()
         }
@@ -137,8 +142,8 @@ class MapStore: ObservableObject {
         .call()
     }
     
-    func setRepresentImage(mid: String, cityKey: String, userTocken: String, image: UIImage) {
-        let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)")
+    func setRepresentImage(cityKey: String, userTocken: String, image: UIImage, _ handler: @escaping () -> ()) {
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mapData.mid!)")
         let boundary = UUID().uuidString
         
         let config = URLSessionConfiguration.default
@@ -182,11 +187,60 @@ class MapStore: ObservableObject {
                 return
             }
             
+            
+            if let newRep = try? JSONDecoder().decode(RepresentData.self, from: responseData){
+                //                print(newRep)
+                DispatchQueue.main.async {
+                    handler()
+                }
+            } else{
+                print("Represent Image set failed after get data!")
+            }
+            
+            
+        }).resume()
+    }
+    
+    func deleteRepresentImage(cityKey: String, userTocken: String) {
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mapData.mid!)")
+        let boundary = UUID().uuidString
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        // Set the URLRequest to POST and to the specified URL
+        var urlRequest = URLRequest(url: URL(string: url)!)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("Bearer \(userTocken)", forHTTPHeaderField: "Authorization")
+        
+        // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
+        // And the boundary is also set here
+        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var data = Data()
+        
+        // Add the reqtype field and its value to the raw http request data
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"cityKey\"\r\n\r\n".data(using: .utf8)!)
+        data.append("\(cityKey)".data(using: .utf8)!)
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"remove\"\r\n\r\n".data(using: .utf8)!)
+        data.append("true".data(using: .utf8)!)
+        data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
+            if(error != nil){
+                print("\(error!.localizedDescription)")
+            }
+            guard let responseData = responseData else {
+                print("no response data")
+                return
+            }
             if let responseString = String(data: responseData, encoding: .utf8) {
-                print("uploaded to: \(responseString)")
+                print("Deletion Success!!\nuploaded to: \(responseString)")
             }
         }).resume()
     }
+    
     func currentTime() -> String {
         let date = Date()
         let calendar = Calendar.current
