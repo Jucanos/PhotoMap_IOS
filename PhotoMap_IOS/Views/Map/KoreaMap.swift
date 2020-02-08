@@ -7,30 +7,34 @@
 //
 
 import SwiftUI
-
+import URLImage
 struct KoreaMap: View {
+    @EnvironmentObject var mapStore: MapStore
+    @EnvironmentObject var userSettings: UserSettings
     @State var selected: Int? = 0
+    @State var selectedLoc: String?
+    @State var showActionSheet: Bool = false
     var body: some View {
         GeometryReader { gr in
             ZStack {
                 Group {
-                    BackImage(mapImage: "chungbuk", masterSize: CGSize(width: 140,height: 140), maskImage: "test1")
+                    BackImage(mapImage: "chungbuk", masterSize: CGSize(width: 140,height: 140), maskImage: self.mapStore.mapData.represents?.chungbuk)
                         .offset(x: 12.4, y: -57.3)
-                    BackImage(mapImage: "chungnam", masterSize: CGSize(width: 135,height: 130))
+                    BackImage(mapImage: "chungnam", masterSize: CGSize(width: 135,height: 130), maskImage: self.mapStore.mapData.represents?.chungnam)
                         .offset(x: -71, y: -46)
-                    BackImage(mapImage: "gangwon", masterSize: CGSize(width: 215,height: 215))
+                    BackImage(mapImage: "gangwon", masterSize: CGSize(width: 215,height: 215), maskImage: self.mapStore.mapData.represents?.gangwon)
                         .offset(x: 35, y: -158)
-                    BackImage(mapImage: "gyeongbuk", masterSize: CGSize(width: 170,height: 180))
+                    BackImage(mapImage: "gyeongbuk", masterSize: CGSize(width: 170,height: 180), maskImage: self.mapStore.mapData.represents?.gyeongbuk)
                         .offset(x: 73, y: -26)
-                    BackImage(mapImage: "gyeonggi", masterSize: CGSize(width: 125,height: 150))
+                    BackImage(mapImage: "gyeonggi", masterSize: CGSize(width: 125,height: 150), maskImage: self.mapStore.mapData.represents?.gyeonggi)
                         .offset(x: -50, y: -151)
-                    BackImage(mapImage: "gyeongnam", masterSize: CGSize(width: 175,height: 130))
+                    BackImage(mapImage: "gyeongnam", masterSize: CGSize(width: 175,height: 130), maskImage: self.mapStore.mapData.represents?.gyeongnam)
                         .offset(x: 59, y: 64)
-                    BackImage(mapImage: "jeju", masterSize: CGSize(width: 90,height: 60))
+                    BackImage(mapImage: "jeju", masterSize: CGSize(width: 90,height: 60), maskImage: self.mapStore.mapData.represents?.jeju)
                         .offset(x: -62, y: 215)
-                    BackImage(mapImage: "junbuk", masterSize: CGSize(width: 145,height: 120))
+                    BackImage(mapImage: "jeonbuk", masterSize: CGSize(width: 145,height: 120), maskImage: self.mapStore.mapData.represents?.jeonbuk)
                         .offset(x: -49, y: 32)
-                    BackImage(mapImage: "junnam", masterSize: CGSize(width: 150,height: 135))
+                    BackImage(mapImage: "jeonnam", masterSize: CGSize(width: 150,height: 135), maskImage: self.mapStore.mapData.represents?.jeonnam)
                         .offset(x: -62, y: 110)
                 }
                 
@@ -63,9 +67,24 @@ struct KoreaMap: View {
                         EmptyView()
                     }
                 }
-                TouchHandler(num: self.$selected, masterViewSize: gr.size)
+                Group{
+                    NavigationLink(destination: SetRepresent(mapKey: self.$selectedLoc), tag: 10, selection: self.$selected) {
+                    EmptyView()
+                    }
+                }
+                TouchHandler(num: self.$selected, selectedLoc: self.$selectedLoc, showActionSheet: self.$showActionSheet, masterViewSize: gr.size)
                     .opacity(0.1)
-                
+            }
+            .actionSheet(isPresented: self.$showActionSheet){
+                ActionSheet(title: Text(""), message: Text(""), buttons: [
+                    .default(Text("대표사진 설정"), action: {
+                        self.selected = 10
+                    }),
+                    .default(Text("대표사진 지우기"), action: {
+                        self.mapStore.deleteRepresentImage(cityKey: self.selectedLoc!, userTocken: self.userSettings.userTocken!)
+                    }),
+                    .destructive(Text("취소"))
+                ])
             }
         }
     }
@@ -83,13 +102,16 @@ struct BackImage: View {
                 Image(mapImage)
                     .scaledToFit()
             }else{
-                Image(maskImage!)
+                URLImage(URL(string: maskImage!)!){ proxy in
+                    proxy.image
                     .resizable()
-                    .frame(width: masterSize.width, height: masterSize.height)
+                    .frame(width: self.masterSize.width, height: self.masterSize.height)
                     .scaledToFit()
-                    .mask(Image(mapImage)
+                        .mask(Image(self.mapImage)
                         .resizable()
+                        .frame(width: self.masterSize.width, height: self.masterSize.height)
                         .scaledToFit())
+                }
             }
         }
     }
@@ -108,9 +130,16 @@ struct BackImage: View {
 }
 
 extension UIControl {
-    func addAction(for controlEvents: UIControl.Event = .touchUpInside, _ closure: @escaping ()->()) {
+    func addAction(for controlEvents: UIControl.Event, _ closure: @escaping ()->()) {
         let sleeve = ClosureSleeve(closure)
         addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
+        objc_setAssociatedObject(self, "[\(arc4random())]", sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+    }
+    
+    func addLongPressAction(_ closuer: @escaping ()->()) {
+        let sleeve = ClosureSleeve(closuer)
+        let getureReg = UILongPressGestureRecognizer(target: sleeve, action: #selector(ClosureSleeve.invoke))
+        addGestureRecognizer(getureReg)
         objc_setAssociatedObject(self, "[\(arc4random())]", sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
     }
 }
@@ -157,6 +186,8 @@ extension UIButton {
 
 struct TouchHandler: UIViewRepresentable {
     @Binding var num: Int?
+    @Binding var selectedLoc: String?
+    @Binding var showActionSheet: Bool
     var masterViewSize: CGSize
     struct Elements {
         let name: String
@@ -174,15 +205,20 @@ struct TouchHandler: UIViewRepresentable {
             Elements(name: "gyeonggi", navigationTag: 5, position: CGPoint(x: -50, y: -151)),
             Elements(name: "gyeongnam", navigationTag: 6, position: CGPoint(x: 59, y: 64)),
             Elements(name: "jeju", navigationTag: 7, position: CGPoint(x: -62, y: 215)),
-            Elements(name: "junbuk", navigationTag: 8, position: CGPoint(x: -49, y: 32)),
-            Elements(name: "junnam", navigationTag: 9, position: CGPoint(x: -62, y: 110))
+            Elements(name: "jeonbuk", navigationTag: 8, position: CGPoint(x: -49, y: 32)),
+            Elements(name: "jeonnam", navigationTag: 9, position: CGPoint(x: -62, y: 110))
         ]
         
         for ele in elements {
             let btn = UIButton()
-            btn.addAction {
+            btn.addAction(for: .touchUpInside) {
                 self.num = ele.navigationTag
             }
+            btn.addLongPressAction {
+                self.selectedLoc = ele.name
+                self.showActionSheet = true
+            }
+            
             let img = UIImage(named: ele.name)
             btn.frame = CGRect(origin: .zero, size: img!.size)
             btn.setImage(img, for: .normal)

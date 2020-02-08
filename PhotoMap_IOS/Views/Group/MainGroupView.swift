@@ -11,6 +11,7 @@ import SwiftUI
 struct MainGroupView: View {
     
     @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var mapStore: MapStore
     @Binding var isSideMenuActive: Bool
     @ObservedObject var groupData: UserGroupStore
     
@@ -45,6 +46,7 @@ struct MainGroupView: View {
                 .onAppear{
                     UITableView.appearance().tableFooterView = UIView()
                     UITableView.appearance().separatorStyle = .none
+                    self.mapStore.mapData = MapData()
                 }
             }
         }

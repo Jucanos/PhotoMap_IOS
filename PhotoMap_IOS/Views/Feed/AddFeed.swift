@@ -103,8 +103,8 @@ struct AddFeed: View {
                 self.tag = nil
                 self.isCompleted = true
             }) {
-                    Text("완료")
-                        .foregroundColor(.white)
+                Text("완료")
+                    .foregroundColor(.white)
             }
         )
     }
