@@ -99,9 +99,10 @@ struct AddFeed: View {
             }, trailing:
             Button(action: {
                 // 완료 버튼
-                self.feedStore.addFeed(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, cityKey: self.cityKey, title: self.title, context: self.content, images: self.selectedImage!)
-                self.tag = nil
-                self.isCompleted = true
+                self.feedStore.addFeed(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, cityKey: self.cityKey, title: self.title, context: self.content, images: self.selectedImage!){
+                    self.tag = nil
+                    self.isCompleted = true
+                }
             }) {
                 Text("완료")
                     .foregroundColor(.white)

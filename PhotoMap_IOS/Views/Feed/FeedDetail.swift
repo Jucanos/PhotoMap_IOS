@@ -13,17 +13,28 @@ struct FeedDetail: View {
     @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var feedStore: FeedStore
+    @State var showFeedOption: Bool = false
+    @State var selectedFeed: String = ""
     var mapKey: String
     
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 2){
-                ForEach(feedStore.feedData, id: \.title) { item in
-                    FeedPreviewDetail(feedData: item)
+                ForEach(feedStore.feedData, id: \.sid) { item in
+                    FeedPreviewDetail(showFeedOption: self.$showFeedOption, selectedFeed: self.$selectedFeed, feedData: item)
                         .padding(.bottom, 20)
                 }
             }
-        }.onDisappear(){
+        }
+        .actionSheet(isPresented: $showFeedOption){
+            ActionSheet(title: Text(""), message: Text(""), buttons: [
+                .default(Text("스토리 삭제"), action: {
+                    self.feedStore.deleteFeed(sid: self.selectedFeed, userTocken: self.userSettings.userTocken!)
+                }),
+                .destructive(Text("취소"))
+            ])
+        }
+        .onDisappear(){
             self.feedStore.feedData.removeAll()
         }
     }
