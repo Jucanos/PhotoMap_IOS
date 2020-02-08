@@ -18,23 +18,23 @@ struct KoreaMap: View {
         GeometryReader { gr in
             ZStack {
                 Group {
-                    BackImage(mapImage: "chungbuk", masterSize: CGSize(width: 140,height: 140), maskImage: self.mapStore.mapData.represents?.chungbuk)
+                    BackImage(mapImage: "chungbuk", masterSize: CGSize(width: 140,height: 140))
                         .offset(x: 12.4, y: -57.3)
-                    BackImage(mapImage: "chungnam", masterSize: CGSize(width: 135,height: 130), maskImage: self.mapStore.mapData.represents?.chungnam)
+                    BackImage(mapImage: "chungnam", masterSize: CGSize(width: 135,height: 130))
                         .offset(x: -71, y: -46)
-                    BackImage(mapImage: "gangwon", masterSize: CGSize(width: 215,height: 215), maskImage: self.mapStore.mapData.represents?.gangwon)
+                    BackImage(mapImage: "gangwon", masterSize: CGSize(width: 215,height: 215))
                         .offset(x: 35, y: -158)
-                    BackImage(mapImage: "gyeongbuk", masterSize: CGSize(width: 170,height: 180), maskImage: self.mapStore.mapData.represents?.gyeongbuk)
+                    BackImage(mapImage: "gyeongbuk", masterSize: CGSize(width: 170,height: 180))
                         .offset(x: 73, y: -26)
-                    BackImage(mapImage: "gyeonggi", masterSize: CGSize(width: 125,height: 150), maskImage: self.mapStore.mapData.represents?.gyeonggi)
+                    BackImage(mapImage: "gyeonggi", masterSize: CGSize(width: 125,height: 150))
                         .offset(x: -50, y: -151)
-                    BackImage(mapImage: "gyeongnam", masterSize: CGSize(width: 175,height: 130), maskImage: self.mapStore.mapData.represents?.gyeongnam)
+                    BackImage(mapImage: "gyeongnam", masterSize: CGSize(width: 175,height: 130))
                         .offset(x: 59, y: 64)
-                    BackImage(mapImage: "jeju", masterSize: CGSize(width: 90,height: 60), maskImage: self.mapStore.mapData.represents?.jeju)
+                    BackImage(mapImage: "jeju", masterSize: CGSize(width: 90,height: 60))
                         .offset(x: -62, y: 215)
-                    BackImage(mapImage: "jeonbuk", masterSize: CGSize(width: 145,height: 120), maskImage: self.mapStore.mapData.represents?.jeonbuk)
+                    BackImage(mapImage: "jeonbuk", masterSize: CGSize(width: 145,height: 120))
                         .offset(x: -49, y: 32)
-                    BackImage(mapImage: "jeonnam", masterSize: CGSize(width: 150,height: 135), maskImage: self.mapStore.mapData.represents?.jeonnam)
+                    BackImage(mapImage: "jeonnam", masterSize: CGSize(width: 150,height: 135))
                         .offset(x: -62, y: 110)
                 }
                 
@@ -93,16 +93,17 @@ struct KoreaMap: View {
 /// View for Background Map Image
 /// Masked or UnMasked
 struct BackImage: View {
+    @EnvironmentObject var mapStore: MapStore
     @State var mapImage: String
     var masterSize: CGSize
-    @State var maskImage: String?
+//    @State var maskImage: String?
     var body: some View {
         Group{
-            if maskImage == nil{
+            if mapStore.mapData.represents?.getStr(location: mapImage) == nil{
                 Image(mapImage)
                     .scaledToFit()
             }else{
-                URLImage(URL(string: maskImage!)!){ proxy in
+                URLImage(URL(string: (mapStore.mapData.represents?.getStr(location: mapImage))!)!){ proxy in
                     proxy.image
                     .resizable()
                     .frame(width: self.masterSize.width, height: self.masterSize.height)

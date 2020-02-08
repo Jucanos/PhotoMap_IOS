@@ -39,6 +39,19 @@ struct Represent: Codable {
     var gyeongbuk: String?
     var gyeongnam: String?
     var jeju: String?
+    
+    func getStr(location: String) -> String? {
+        let dict = ["gyeonggi": gyeonggi,
+                    "gangwon": gangwon,
+                    "chungbuk": chungbuk,
+                    "chungnam": chungnam,
+                    "jeonbuk": jeonbuk,
+                    "jeonnam": jeonnam,
+                    "gyeongbuk": gyeongbuk,
+                    "gyeongnam": gyeongnam,
+                    "jeju": jeju]
+        return dict[location] ?? nil
+    }
 }
 
 struct RepresentData: Codable {
@@ -186,18 +199,14 @@ class MapStore: ObservableObject {
                 print("no response data")
                 return
             }
-            
-            
-            if let newRep = try? JSONDecoder().decode(RepresentData.self, from: responseData){
-                //                print(newRep)
+            if let responseString = String(data: responseData, encoding: .utf8) {
+                print("uploaded to: \(responseString)")
                 DispatchQueue.main.async {
                     handler()
                 }
-            } else{
+            }else{
                 print("Represent Image set failed after get data!")
             }
-            
-            
         }).resume()
     }
     
@@ -235,9 +244,13 @@ class MapStore: ObservableObject {
                 print("no response data")
                 return
             }
-            if let responseString = String(data: responseData, encoding: .utf8) {
-                print("Deletion Success!!\nuploaded to: \(responseString)")
+            if let newRep = try? JSONDecoder().decode(RepresentData.self, from: responseData){
+                print("Deletion Success!!")
+                DispatchQueue.main.async {
+                    self.mapData.represents =  newRep.data
+                }
             }
+            
         }).resume()
     }
     
