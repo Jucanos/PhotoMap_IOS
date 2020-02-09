@@ -11,6 +11,7 @@ import SwiftUI
 struct ModifyFeed: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var feedStore: FeedStore
+    @EnvironmentObject var userSettings: UserSettings
     @Binding var selectedFeed: FeedData?
     @State var modifiedTitle: String = ""
     @State var modifiedContext: String = ""
@@ -36,10 +37,15 @@ struct ModifyFeed: View {
             .padding()
             .navigationBarTitle("스토리 수정하기", displayMode: .inline)
             .navigationBarItems(leading: backButton, trailing: Button(action: {
-                print("temp button")
+                self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!,userTocken: self.userSettings.userTocken!, title: self.modifiedTitle, context: self.modifiedContext){
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             }) {
                 Text("확인")
             })
+        }
+        .onAppear(){
+            print(self.feedStore.feedData, self.userSettings)
         }
     }
     var backButton : some View {

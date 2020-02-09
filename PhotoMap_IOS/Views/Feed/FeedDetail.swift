@@ -39,7 +39,7 @@ struct FeedDetail: View {
             ])
         }
         .sheet(isPresented: self.$showModifyFeed) {
-            ModifyFeed(selectedFeed: self.$selectedFeed)
+            ModifyFeed(selectedFeed: self.$selectedFeed).environmentObject(self.userSettings).environmentObject(self.feedStore)
         }
         .onDisappear(){
             self.feedStore.feedData.removeAll()

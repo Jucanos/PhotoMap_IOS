@@ -149,6 +149,37 @@ class FeedStore: ObservableObject {
         }).resume()
     }
     
+    func modifyFeed(sid: String, userTocken: String, title: String, context: String, _ handler: @escaping ()->()) {
+        let url = NetworkURL.sharedInstance.getUrlString("/stories/\(sid)")
+        Request {
+            Url(url)
+            Method(.patch)
+            Header.Authorization(.bearer(userTocken))
+            Header.ContentType(.json)
+            Body(["title": title, "context": context])
+        }.onError{ error in
+            if let stringData = String(data: error.error!, encoding: .utf8) {
+                print(stringData)
+            }
+        }.onData { data in
+            DispatchQueue.main.async {
+                self.modifyFeed(sid: sid, title: title, context: context)
+                handler()
+            }
+        }
+        .call()
+    }
+    func modifyFeed(sid: String, title: String, context: String){
+        var idx = 0
+        for item in self.feedData{
+            if item.sid == sid{
+                feedData[idx].title = title
+                feedData[idx].context = context
+                return
+            }
+            idx += 1
+        }
+    }
     func deleteFeed(sid: String ,userTocken: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/stories/\(sid)")
         AnyRequest<Feed> {
