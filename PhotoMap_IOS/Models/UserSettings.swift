@@ -99,6 +99,30 @@ class UserSettings: ObservableObject {
                 print(error!.localizedDescription)
             }
         })
+    }
+    
+    func setRepresentMap(mid: String, _ handler: @escaping ()->()) {
+        print("try to set REPMAP at NETWORK")
+        let url = NetworkURL.sharedInstance.getUrlString("/users/\(mid)")
+        print(url)
+        Request{
+            Url(url)
+            Method(.patch)
+            Header.Authorization(.bearer(self.userTocken!))
+            Header.ContentType(.json)
+            Body(["remove": "false"])
+        }.onError { error in
+            print("error occuered!", error)
+            if let stringData = String(data: error.error!, encoding: .utf8){
+                print(stringData)
+            }
+        }.onData{data in
+            print("setting REPMAP success!")
+            DispatchQueue.main.async {
+                self.userInfo?.data?.primary = mid
+                handler()
+            }
+        }.call()
         
     }
 }

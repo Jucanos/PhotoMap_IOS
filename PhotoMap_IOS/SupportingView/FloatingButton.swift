@@ -44,7 +44,7 @@ public struct FloatingButton: View {
     fileprivate var endAngle: Double = 2 * .pi
     fileprivate var radius: Double?
     
-    @State private var isOpen = false
+    @State private var isOpen: Bool = false
     @State private var coords: [CGPoint] = []
     @State private var alignmentOffsets: [CGSize] = []
     @State private var initialPositions: [CGPoint] = [] // if there is initial offset
@@ -52,6 +52,7 @@ public struct FloatingButton: View {
     @State private var mainButtonFrame = CGRect()
     
     @Binding var isButtonActivate: Bool
+    
     
     fileprivate init(mainButtonView: AnyView, buttons: [SubmenuButton], isButtonActivate: Binding<Bool>) {
         self.mainButtonView = mainButtonView
@@ -84,8 +85,6 @@ public struct FloatingButton: View {
                         .animation(self.buttonAnimation(at: i))
                 }
             }
-            
-            
             
             Button(action: {
                 self.isOpen.toggle()
