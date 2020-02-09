@@ -14,7 +14,8 @@ struct FeedDetail: View {
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var feedStore: FeedStore
     @State var showFeedOption: Bool = false
-    @State var selectedFeed: String = ""
+    @State var selectedFeed: FeedData?
+    @State var showModifyFeed: Bool = false
     var mapKey: String
     
     var body: some View {
@@ -29,10 +30,16 @@ struct FeedDetail: View {
         .actionSheet(isPresented: $showFeedOption){
             ActionSheet(title: Text(""), message: Text(""), buttons: [
                 .default(Text("스토리 삭제"), action: {
-                    self.feedStore.deleteFeed(sid: self.selectedFeed, userTocken: self.userSettings.userTocken!)
+                    self.feedStore.deleteFeed(sid: (self.selectedFeed?.sid!)!, userTocken: self.userSettings.userTocken!)
+                }),
+                .default(Text("스토리 수정"), action: {
+                    self.showModifyFeed = true
                 }),
                 .destructive(Text("취소"))
             ])
+        }
+        .sheet(isPresented: self.$showModifyFeed) {
+            ModifyFeed(selectedFeed: self.$selectedFeed)
         }
         .onDisappear(){
             self.feedStore.feedData.removeAll()
