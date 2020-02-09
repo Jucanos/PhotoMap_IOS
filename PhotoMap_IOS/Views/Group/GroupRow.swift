@@ -7,18 +7,20 @@
 //
 
 import SwiftUI
-
+import URLImage
 struct GroupRow: View {
     var group: MapData
     var body: some View {
         HStack{
-            Image(systemName: "1.circle")
-                .resizable()
-                .frame(width: 50, height: 50)
+            URLImage(URL(string: "https://s3.soybeans.tech/uploads/\(group.mid!)/main.png")!){ proxy in
+                proxy.image
+                    .resizable()
+                    .frame(width: 50, height: 50)
+            }
             VStack(alignment: .leading) {
                 Text(verbatim: "\(group.name!)")
                     .font(.title)
-                Text("Update at: 2020.01.01")
+                Text(group.updatedAt!)
                     .font(.footnote)
             }
             .padding(5)
