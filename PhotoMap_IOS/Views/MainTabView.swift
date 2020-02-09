@@ -28,6 +28,9 @@ struct MainTabView: View {
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(0)
+                        .onAppear(){
+                            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
+                    }
                     
                     MainMapView()
                         .tabItem {
@@ -69,9 +72,9 @@ struct MainTabView: View {
             
             AddGroup(groupData: self.groupData, isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
         }
-        .onAppear(){
-            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
-        }
+//        .onAppear(){
+//            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
+//        }
     }
     
     func activeSideMenu() {

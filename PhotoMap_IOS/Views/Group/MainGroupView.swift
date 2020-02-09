@@ -16,7 +16,7 @@ struct MainGroupView: View {
     @ObservedObject var groupData: UserGroupStore
     
     var body: some View {
-        return Group{
+        Group{
             if self.groupData.mapData.isEmpty{
                 Text("그룹을 생성해주세요!")
             }

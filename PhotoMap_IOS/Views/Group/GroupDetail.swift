@@ -39,7 +39,7 @@ struct GroupDetail: View {
                             Spacer().layoutPriority(10)
                             HStack {
                                 Spacer().layoutPriority(10)
-                                FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepImageButton)], isButtonActivate: self.$isButtonActivate)
+                                FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepMapButton)], isButtonActivate: self.$isButtonActivate)
                                     .straight()
                                     .direction(.top)
                                     .alignment(.right)
@@ -48,7 +48,9 @@ struct GroupDetail: View {
                                     .padding()
                             }
                         }
-                        
+                    }
+                    .onTapGesture {
+                        self.isButtonActivate.toggle()
                     }
                 }
             }
@@ -86,8 +88,13 @@ struct GroupDetail: View {
         
     }
     
-    var setRepImageButton: some View {
-        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+    var setRepMapButton: some View {
+        Button(action: {
+            print("try to set REPMAP")
+            self.userSettings.setRepresentMap(mid: self.mapStore.mapData.mid!){
+                self.isButtonActivate = false
+            }
+        }) {
             IconAndTextButton(imageName: "map.fill", buttonText: "대표지도 설정")
         }
     }

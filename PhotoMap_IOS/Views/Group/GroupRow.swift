@@ -20,7 +20,7 @@ struct GroupRow: View {
             VStack(alignment: .leading) {
                 Text(verbatim: "\(group.name!)")
                     .font(.title)
-                Text(group.updatedAt!)
+                Text(group.updatedAt ?? "")
                     .font(.footnote)
             }
             .padding(5)
