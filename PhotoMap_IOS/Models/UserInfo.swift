@@ -17,4 +17,5 @@ struct UserInfoData: Codable {
     var nickname: String?
     var thumbnail: String?
     var uid: String?
+    var primary: String?
 }
