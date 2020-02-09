@@ -52,6 +52,7 @@
 		9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B19723C80B4100AB6E4F /* UserGroup.swift */; };
 		97B858B923C8A88500358211 /* GroupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B858B823C8A88500358211 /* GroupDetail.swift */; };
 		97C7575023E1CC990095E3B7 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7574F23E1CC990095E3B7 /* PageView.swift */; };
+		97C758CA23EFCDD20012386C /* ModifyFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C758C923EFCDD20012386C /* ModifyFeed.swift */; };
 		97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDE69723CF4DE500719F89 /* HostingController.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,7 @@
 		9798B19723C80B4100AB6E4F /* UserGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroup.swift; sourceTree = "<group>"; };
 		97B858B823C8A88500358211 /* GroupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetail.swift; sourceTree = "<group>"; };
 		97C7574F23E1CC990095E3B7 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		97C758C923EFCDD20012386C /* ModifyFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyFeed.swift; sourceTree = "<group>"; };
 		97CDE69723CF4DE500719F89 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		97ECB20123E4160E00706580 /* Gallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Gallery.framework; path = Carthage/Build/iOS/Gallery.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -260,6 +262,7 @@
 				975F469723CA1D760044C6AA /* FeedDetail.swift */,
 				975F469923CA22500044C6AA /* FeedPreviewDetail.swift */,
 				9708D69523DAB1E600FF9665 /* AddFeed.swift */,
+				97C758C923EFCDD20012386C /* ModifyFeed.swift */,
 				973281D923D045AC00153874 /* PageControl.swift */,
 				973281DA23D045AC00153874 /* PageViewController.swift */,
 				97C7574F23E1CC990095E3B7 /* PageView.swift */,
@@ -434,6 +437,7 @@
 				97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */,
 				9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */,
 				97B858B923C8A88500358211 /* GroupDetail.swift in Sources */,
+				97C758CA23EFCDD20012386C /* ModifyFeed.swift in Sources */,
 				9773018523C7277700E3CE99 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

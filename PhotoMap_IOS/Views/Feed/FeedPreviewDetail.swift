@@ -14,7 +14,7 @@ struct FeedPreviewDetail: View {
     @EnvironmentObject var userSettings: UserSettings
     @State var currentPage = 0
     @Binding var showFeedOption: Bool
-    @Binding var selectedFeed: String
+    @Binding var selectedFeed: FeedData?
     var feedData: FeedData
     
     var body: some View {
@@ -39,7 +39,7 @@ struct FeedPreviewDetail: View {
                 
                 Button(action: {
                     self.showFeedOption = true
-                    self.selectedFeed = self.feedData.sid!
+                    self.selectedFeed = self.feedData
                 }){
                     Image("threeDots")
                         .resizable()
