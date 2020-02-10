@@ -33,7 +33,7 @@
 	<string>0b88a181f02396007f460485e02c3d9e</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>kakao네이티브앱키</string>
+		<string>kakao0b88a181f02396007f460485e02c3d9e</string>
 		<string>kakaokompassauth</string>
 		<string>storykompassauth</string>
 		<string>kakaolink</string>
@@ -83,16 +83,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-    </dict>
-    <key>NSCameraUsageDescription</key>
-    <string>yourWording</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>yourWording</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>yourWording</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>사용자의 카메라에 접근하려 합니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사용자의 사진에 접근하려 합니다.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>사용자의 마이크에 접근하려 합니다.</string>
 </dict>
 </plist>

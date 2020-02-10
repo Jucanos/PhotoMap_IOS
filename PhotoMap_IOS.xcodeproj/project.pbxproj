@@ -24,6 +24,9 @@
 		973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3323CEEC9C008C4EEC /* MemberRow.swift */; };
 		973F6A3623CEF154008C4EEC /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3523CEF154008C4EEC /* FloatingButton.swift */; };
 		973F6A3A23CF0487008C4EEC /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3923CF0487008C4EEC /* ButtonViews.swift */; };
+		9741C1DA23F117C600E8A7C8 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D723F117C500E8A7C8 /* KakaoCommon.framework */; };
+		9741C1DB23F117C600E8A7C8 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */; };
+		9741C1DC23F117C600E8A7C8 /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D923F117C600E8A7C8 /* KakaoLink.framework */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
@@ -56,19 +59,6 @@
 		97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDE69723CF4DE500719F89 /* HostingController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		970CFCC823C208C800D9FB12 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		9708D69523DAB1E600FF9665 /* AddFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeed.swift; sourceTree = "<group>"; };
 		970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -84,6 +74,9 @@
 		973F6A3323CEEC9C008C4EEC /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		973F6A3523CEF154008C4EEC /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		973F6A3923CF0487008C4EEC /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
+		9741C1D723F117C500E8A7C8 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoCommon.framework; sourceTree = "<group>"; };
+		9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
+		9741C1D923F117C600E8A7C8 /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoLink.framework; sourceTree = "<group>"; };
 		974F645823E4056E00F798B0 /* PryntTrimmerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PryntTrimmerView.framework; path = Carthage/Build/iOS/PryntTrimmerView.framework; sourceTree = "<group>"; };
 		974F645923E4056E00F798B0 /* Stevia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stevia.framework; path = Carthage/Build/iOS/Stevia.framework; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,11 +119,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9712887723EA7CED00DBB233 /* PryntTrimmerView.framework in Frameworks */,
+				9741C1DA23F117C600E8A7C8 /* KakaoCommon.framework in Frameworks */,
+				9741C1DC23F117C600E8A7C8 /* KakaoLink.framework in Frameworks */,
 				9712887823EA7CED00DBB233 /* Stevia.framework in Frameworks */,
 				9712887923EA7CED00DBB233 /* YPImagePicker.framework in Frameworks */,
 				978FBC1623D088BC009998E5 /* Request in Frameworks */,
 				978FBC1423D088BC009998E5 /* Json in Frameworks */,
 				9708D69423DA9FE700FF9665 /* URLImage in Frameworks */,
+				9741C1DB23F117C600E8A7C8 /* KakaoMessageTemplate.framework in Frameworks */,
 				970CFCCD23C20D5600D9FB12 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +137,9 @@
 		970CFCC423C208C700D9FB12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9741C1D723F117C500E8A7C8 /* KakaoCommon.framework */,
+				9741C1D923F117C600E8A7C8 /* KakaoLink.framework */,
+				9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */,
 				97ECB20123E4160E00706580 /* Gallery.framework */,
 				974F645823E4056E00F798B0 /* PryntTrimmerView.framework */,
 				974F645923E4056E00F798B0 /* Stevia.framework */,
@@ -306,7 +305,6 @@
 				9750585923C1B17800BF54E5 /* Sources */,
 				9750585A23C1B17800BF54E5 /* Frameworks */,
 				9750585B23C1B17800BF54E5 /* Resources */,
-				970CFCC823C208C800D9FB12 /* Embed Frameworks */,
 				976E636D23E4009E00246541 /* Carthage Run Script */,
 			);
 			buildRules = (
@@ -488,6 +486,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -549,6 +548,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -576,7 +576,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoMap_IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = EKU567YQE4;
@@ -609,7 +611,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoMap_IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = EKU567YQE4;
