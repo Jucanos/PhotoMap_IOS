@@ -12,8 +12,11 @@ struct MainGroupView: View {
     
     @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var mapStore: MapStore
-    @Binding var isSideMenuActive: Bool
     @ObservedObject var groupData: UserGroupStore
+    @Binding var isSideMenuActive: Bool
+    
+    @State var showActionsheet = false
+    @State var selectedGroup: String?
     
     var body: some View {
         Group{
@@ -30,8 +33,12 @@ struct MainGroupView: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 5)
                                             .stroke(Color.clear, lineWidth: 1)
-                                            .shadow(radius: 5)
-                                )
+                                            .shadow(radius: 5))
+                                    .gesture(LongPressGesture()
+                                        .onEnded{ _ in
+                                            self.showActionsheet = true
+                                            self.selectedGroup = group.mid
+                                    })
                                 
                                 NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
                                 ){
@@ -43,9 +50,18 @@ struct MainGroupView: View {
                         .onDelete(perform: deleteGroup)
                     }
                 }
+                .actionSheet(isPresented: self.$showActionsheet) {
+                    ActionSheet(title: Text(""), buttons: [
+                        .default(Text("그룹 나가기"), action: {
+                            self.groupData.exitGroup(from: self.selectedGroup!)
+                        }),
+                        .destructive(Text("취소"))
+                    ])
+                }
                 .onAppear{
                     UITableView.appearance().tableFooterView = UIView()
                     UITableView.appearance().separatorStyle = .none
+                    
                     self.mapStore.mapData = MapData()
                 }
             }

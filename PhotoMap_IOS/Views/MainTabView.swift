@@ -22,13 +22,14 @@ struct MainTabView: View {
         ZStack {
             NavigationView {
                 TabView(selection: $selectedView) {
-                    MainGroupView(isSideMenuActive: $isSideMenuActive, groupData: groupData)
+                    MainGroupView(groupData: groupData, isSideMenuActive: $isSideMenuActive)
                         .tabItem {
                             Image(systemName: "person.3.fill")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(0)
                         .onAppear(){
+                            print("excuted!")
                             self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
                     }
                     
@@ -59,10 +60,10 @@ struct MainTabView: View {
                     .frame(width: 100)
                     ,trailing: Button(action: {self.activeAddGroupView()}){
                         Image(systemName: "plus.bubble.fill")
-                        .resizable()
-                        .foregroundColor(.white)
-                        .frame(width: 20, height: 20)
-                        .padding(5)
+                            .resizable()
+                            .foregroundColor(.white)
+                            .frame(width: 20, height: 20)
+                            .padding(5)
                     }.opacity(selectedView == 0 ? 1 : 0)
                 )
             }
@@ -72,9 +73,6 @@ struct MainTabView: View {
             
             AddGroup(groupData: self.groupData, isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
         }
-//        .onAppear(){
-//            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
-//        }
     }
     
     func activeSideMenu() {

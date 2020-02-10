@@ -137,6 +137,7 @@ class UserGroupStore: ObservableObject {
             }
         }.onData{ data in
             print("join success")
+            self.loadMaps(userTocken: UserSettings.shared.userTocken!)
         }
         .call()
     }
@@ -156,7 +157,16 @@ class UserGroupStore: ObservableObject {
                 print(stringData)
             }
         }.onData{ data in
-            print("exit success")
+            DispatchQueue.main.async {
+                print("exit success")
+                var idx = 0
+                for map in self.mapData{
+                    if map.mid == mid{
+                        self.mapData.remove(at: idx)
+                    }
+                    idx += 1
+                }
+            }
         }
         .call()
     }
