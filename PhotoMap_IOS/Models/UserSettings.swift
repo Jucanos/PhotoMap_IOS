@@ -14,6 +14,9 @@ class UserSettings: ObservableObject {
     @Published var userTocken: String?
     @Published var userInfo: UserInfo?
     
+    static let shared: UserSettings = UserSettings()
+    private init() {}
+    
     func isAuth() -> Bool {
         return self.userTocken != nil && self.userInfo != nil
     }

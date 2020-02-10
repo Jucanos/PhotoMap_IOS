@@ -68,6 +68,8 @@ class UserGroupStore: ObservableObject {
         }
     }
     
+    static let shared: UserGroupStore = UserGroupStore()
+    
     func loadMaps(userTocken: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
         print("try to road")
@@ -120,6 +122,44 @@ class UserGroupStore: ObservableObject {
         }
         .call()
     }
+    
+    func joinGroup(at mid:String) {
+        print("try to join!!!!!!")
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
+        Request{
+            Url(url)
+            Method(.patch)
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
+        }.onError{ error in
+            print("error ocured!!!!")
+            if let stringData = String(data: error.error!, encoding: .utf8){
+                print(stringData)
+            }
+        }.onData{ data in
+            print("join success")
+        }
+        .call()
+    }
+    
+    func exitGroup(from mid: String) {
+        print("try to exit!!!!")
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
+        Request{
+            Url(url)
+            Method(.patch)
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
+            Header.ContentType(.json)
+            Body(["remove": "true"])
+        }.onError{ error in
+            print("error ocured!!!!")
+            if let stringData = String(data: error.error!, encoding: .utf8){
+                print(stringData)
+            }
+        }.onData{ data in
+            print("exit success")
+        }
+        .call()
+    }
 }
 
 
@@ -133,6 +173,7 @@ class MapStore: ObservableObject {
         }
     }
     
+    static let shared: MapStore = MapStore()
     init(){
         mapData.owners = []
     }

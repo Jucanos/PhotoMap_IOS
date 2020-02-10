@@ -1,5 +1,5 @@
 /**
- * Copyright 2015-2017 Kakao Corp.
+ * Copyright 2017 Kakao Corp.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-#ifndef KakaoLinkSenderForSwift_KakaoOpenSDK_Bridging_Header_h
-#define KakaoLinkSenderForSwift_KakaoOpenSDK_Bridging_Header_h
+#import <Foundation/Foundation.h>
 
-#import <KakaoOpenSDK/KakaoOpenSDK.h>
-#import <KakaoLink/KakaoLink.h>
-#import <KakaoMessageTemplate/KakaoMessageTemplate.h>
+//! Project version number for KakaoCommon.
+FOUNDATION_EXPORT double KakaoCommonVersionNumber;
 
-#endif
+//! Project version string for KakaoCommon.
+FOUNDATION_EXPORT const unsigned char KakaoCommonVersionString[];
+
+#import <KakaoCommon/KCMConfiguration.h>
+#import <KakaoCommon/KCMAgent.h>
+#import <KakaoCommon/KCMError.h>
+#import <KakaoCommon/KCMUtils.h>
+#import <KakaoCommon/KCMException.h>

@@ -55,9 +55,35 @@ struct MenuOptionView: View {
 }
 
 struct AddingMemberView: View {
+    @EnvironmentObject var mapStore: MapStore
     var body: some View {
         HStack{
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            Button(action: {
+                let template = KMTFeedTemplate { feedTemplateBuilder in
+                    feedTemplateBuilder.content = KMTContentObject(builderBlock: { contentBuilder in
+                        contentBuilder.title = "포토맵"
+                        contentBuilder.imageURL = URL(string: "https://ifh.cc/g/ODD7n.png")!
+                        contentBuilder.link = KMTLinkObject(builderBlock: { (linkBuilder) in
+                            linkBuilder.iosExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                            linkBuilder.androidExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                        })
+                    })
+                    feedTemplateBuilder.addButton(KMTButtonObject(builderBlock: { buttonBuilder in
+                        buttonBuilder.title = "초대받기"
+                        buttonBuilder.link = KMTLinkObject(builderBlock: { linkBuilder in
+                            linkBuilder.iosExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                            linkBuilder.androidExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                        })
+                    }))
+                }
+                
+                KLKTalkLinkCenter.shared().sendDefault(with: template, success: { (warningMsg, argumentMsg) in
+                    print("warnings!: ", String(describing: warningMsg))
+                    print("argumentMsg!: ", String(describing: argumentMsg))
+                }, failure: { error in
+                    print(error)
+                })
+            }) {
                 Image(systemName: "person.badge.plus.fill")
                     .resizable()
                     .frame(width: 30, height: 30)
@@ -71,12 +97,14 @@ struct AddingMemberView: View {
         .padding()
         
     }
+    
+    
+    
+    
 }
 
 struct MemberList_Previews: PreviewProvider {
     static var previews: some View {
-        MemberList()
-        //        MenuOptionView()
-        //            .previewLayout(.fixed(width: 375, height: 70))
+        AddingMemberView()
     }
 }
