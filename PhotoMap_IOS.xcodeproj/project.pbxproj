@@ -220,10 +220,10 @@
 		97528EF023C771ED00B999B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				978FBC1923D09901009998E5 /* UserSettings.swift */,
 				9798B19723C80B4100AB6E4F /* UserGroup.swift */,
 				975F469B23CA22DC0044C6AA /* Feed.swift */,
 				978FBC1723D08E14009998E5 /* UserInfo.swift */,
-				978FBC1923D09901009998E5 /* UserSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

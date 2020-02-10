@@ -55,12 +55,29 @@ struct MenuOptionView: View {
 }
 
 struct AddingMemberView: View {
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var mapStore: MapStore
     var body: some View {
         HStack{
             Button(action: {
+                let template = KMTFeedTemplate { feedTemplateBuilder in
+                    feedTemplateBuilder.content = KMTContentObject(builderBlock: { contentBuilder in
+                        contentBuilder.title = "포토맵"
+                        contentBuilder.imageURL = URL(string: "https://ifh.cc/g/ODD7n.png")!
+                        contentBuilder.link = KMTLinkObject(builderBlock: { (linkBuilder) in
+                            linkBuilder.iosExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                            linkBuilder.androidExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                        })
+                    })
+                    feedTemplateBuilder.addButton(KMTButtonObject(builderBlock: { buttonBuilder in
+                        buttonBuilder.title = "초대받기"
+                        buttonBuilder.link = KMTLinkObject(builderBlock: { linkBuilder in
+                            linkBuilder.iosExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                            linkBuilder.androidExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
+                        })
+                    }))
+                }
                 
-                KLKTalkLinkCenter.shared().sendDefault(with: self.template, success: { (warningMsg, argumentMsg) in
+                KLKTalkLinkCenter.shared().sendDefault(with: template, success: { (warningMsg, argumentMsg) in
                     print("warnings!: ", String(describing: warningMsg))
                     print("argumentMsg!: ", String(describing: argumentMsg))
                 }, failure: { error in
@@ -81,21 +98,7 @@ struct AddingMemberView: View {
         
     }
     
-    let template = KMTFeedTemplate { feedTemplateBuilder in
-        feedTemplateBuilder.content = KMTContentObject(builderBlock: { contentBuilder in
-            contentBuilder.title = "포토맵"
-            contentBuilder.imageURL = URL(string: "https://ifh.cc/g/ODD7n.png")!
-            contentBuilder.link = KMTLinkObject(builderBlock: { (linkBuilder) in
-                linkBuilder.iosExecutionParams = "test"
-            })
-        })
-        feedTemplateBuilder.addButton(KMTButtonObject(builderBlock: { buttonBuilder in
-            buttonBuilder.title = "초대받기"
-            buttonBuilder.link = KMTLinkObject(builderBlock: { linkBuilder in
-                linkBuilder.iosExecutionParams = "test"
-            })
-        }))
-    }
+    
     
     
 }

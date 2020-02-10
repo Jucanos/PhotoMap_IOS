@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MainTabView: View {
     
-    @ObservedObject var groupData = UserGroupStore()
+    @ObservedObject var groupData = UserGroupStore.shared
     @EnvironmentObject var userSettings: UserSettings
     @State private var selectedView = 0
     @State private var isSideMenuActive: Bool = false

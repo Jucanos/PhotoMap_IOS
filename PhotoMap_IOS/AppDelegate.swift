@@ -32,11 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if KOSession.isKakaoAccountLoginCallback(url.absoluteURL) {
             return KOSession.handleOpen(url)
         } else if KLKTalkLinkCenter.shared().isTalkLinkCallback(url.absoluteURL){
-            print(url)
+            UserGroupStore.shared.joinGroup(at: url.valueOf("mid")!)
         }
         return true
     }
-    
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -102,6 +101,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
 }
 
+extension URL {
+    func valueOf(_ queryParamaterName: String) -> String? {
+        guard let url = URLComponents(string: self.absoluteString) else { return nil }
+        return url.queryItems?.first(where: { $0.name == queryParamaterName })?.value
+    }
+}
