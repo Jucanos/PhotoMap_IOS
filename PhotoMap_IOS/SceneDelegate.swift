@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import URLImage
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     

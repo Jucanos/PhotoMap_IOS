@@ -24,6 +24,7 @@
 		973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3323CEEC9C008C4EEC /* MemberRow.swift */; };
 		973F6A3623CEF154008C4EEC /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3523CEF154008C4EEC /* FloatingButton.swift */; };
 		973F6A3A23CF0487008C4EEC /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F6A3923CF0487008C4EEC /* ButtonViews.swift */; };
+		974094D523F28248005979C0 /* ChangeGroupName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974094D423F28248005979C0 /* ChangeGroupName.swift */; };
 		9741C1DA23F117C600E8A7C8 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D723F117C500E8A7C8 /* KakaoCommon.framework */; };
 		9741C1DB23F117C600E8A7C8 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */; };
 		9741C1DC23F117C600E8A7C8 /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D923F117C600E8A7C8 /* KakaoLink.framework */; };
@@ -74,6 +75,7 @@
 		973F6A3323CEEC9C008C4EEC /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		973F6A3523CEF154008C4EEC /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		973F6A3923CF0487008C4EEC /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
+		974094D423F28248005979C0 /* ChangeGroupName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGroupName.swift; sourceTree = "<group>"; };
 		9741C1D723F117C500E8A7C8 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoCommon.framework; sourceTree = "<group>"; };
 		9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
 		9741C1D923F117C600E8A7C8 /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoLink.framework; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				978D81ED23CB0BD700DA75D0 /* MemberList.swift */,
 				973F6A3323CEEC9C008C4EEC /* MemberRow.swift */,
 				973281D723D02D1800153874 /* AddGroup.swift */,
+				974094D423F28248005979C0 /* ChangeGroupName.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				975F469823CA1D760044C6AA /* FeedDetail.swift in Sources */,
 				978FBC1A23D09901009998E5 /* UserSettings.swift in Sources */,
 				9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */,
+				974094D523F28248005979C0 /* ChangeGroupName.swift in Sources */,
 				978D81EC23CB0ACD00DA75D0 /* GroupSideMenu.swift in Sources */,
 				972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */,
 				9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */,

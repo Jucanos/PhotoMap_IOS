@@ -16,7 +16,8 @@ struct MainGroupView: View {
     @Binding var isSideMenuActive: Bool
     
     @State var showActionsheet = false
-    @State var selectedGroup: String?
+    @State var showSheet = false
+    @State var selectedGroup: MapData?
     
     var body: some View {
         Group{
@@ -37,7 +38,7 @@ struct MainGroupView: View {
                                     .gesture(LongPressGesture()
                                         .onEnded{ _ in
                                             self.showActionsheet = true
-                                            self.selectedGroup = group.mid
+                                            self.selectedGroup = group
                                     })
                                 
                                 NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
@@ -53,10 +54,16 @@ struct MainGroupView: View {
                 .actionSheet(isPresented: self.$showActionsheet) {
                     ActionSheet(title: Text(""), buttons: [
                         .default(Text("그룹 나가기"), action: {
-                            self.groupStore.exitGroup(from: self.selectedGroup!)
+                            self.groupStore.exitGroup(from: self.selectedGroup!.mid!)
+                        }),
+                        .default(Text("이름 바꾸기"), action: {
+                            self.showSheet.toggle()
                         }),
                         .destructive(Text("취소"))
                     ])
+                }
+                .sheet(isPresented: self.$showSheet) {
+                    ChangeGroupName(selectedGroup: self.$selectedGroup)
                 }
             }
         }
