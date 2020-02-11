@@ -58,6 +58,8 @@
 		97C7575023E1CC990095E3B7 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C7574F23E1CC990095E3B7 /* PageView.swift */; };
 		97C758CA23EFCDD20012386C /* ModifyFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C758C923EFCDD20012386C /* ModifyFeed.swift */; };
 		97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDE69723CF4DE500719F89 /* HostingController.swift */; };
+		97E452B523F2BC9D0073B89A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E452B423F2BC9D0073B89A /* Notice.swift */; };
+		97E452B723F2C8F60073B89A /* AppNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E452B623F2C8F60073B89A /* AppNotice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		97C7574F23E1CC990095E3B7 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		97C758C923EFCDD20012386C /* ModifyFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyFeed.swift; sourceTree = "<group>"; };
 		97CDE69723CF4DE500719F89 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		97E452B423F2BC9D0073B89A /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		97E452B623F2C8F60073B89A /* AppNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNotice.swift; sourceTree = "<group>"; };
 		97ECB20123E4160E00706580 /* Gallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Gallery.framework; path = Carthage/Build/iOS/Gallery.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +231,7 @@
 				9798B19723C80B4100AB6E4F /* UserGroup.swift */,
 				975F469B23CA22DC0044C6AA /* Feed.swift */,
 				978FBC1723D08E14009998E5 /* UserInfo.swift */,
+				97E452B623F2C8F60073B89A /* AppNotice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 			children = (
 				9773017E23C709C700E3CE99 /* MainSettingView.swift */,
 				9716581523D36E8C000C10DF /* UserLogout.swift */,
+				97E452B423F2BC9D0073B89A /* Notice.swift */,
 			);
 			path = UserSetting;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 				978FBC1A23D09901009998E5 /* UserSettings.swift in Sources */,
 				9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */,
 				974094D523F28248005979C0 /* ChangeGroupName.swift in Sources */,
+				97E452B523F2BC9D0073B89A /* Notice.swift in Sources */,
 				978D81EC23CB0ACD00DA75D0 /* GroupSideMenu.swift in Sources */,
 				972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */,
 				9773017D23C709BB00E3CE99 /* MainGroupView.swift in Sources */,
@@ -436,6 +443,7 @@
 				973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
 				9798B19823C80B4100AB6E4F /* UserGroup.swift in Sources */,
+				97E452B723F2C8F60073B89A /* AppNotice.swift in Sources */,
 				97CDE69823CF4DE500719F89 /* HostingController.swift in Sources */,
 				9708D69623DAB1E600FF9665 /* AddFeed.swift in Sources */,
 				97B858B923C8A88500358211 /* GroupDetail.swift in Sources */,
