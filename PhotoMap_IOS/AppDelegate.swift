@@ -32,7 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if KOSession.isKakaoAccountLoginCallback(url.absoluteURL) {
             return KOSession.handleOpen(url)
         } else if KLKTalkLinkCenter.shared().isTalkLinkCallback(url.absoluteURL){
-            UserGroupStore.shared.joinGroup(at: url.valueOf("mid")!)
+            DispatchQueue.main.async {
+                UserGroupStore.shared.joinGroup(at: url.valueOf("mid")!)
+            }
         }
         return true
     }

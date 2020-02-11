@@ -22,16 +22,12 @@ struct MainTabView: View {
         ZStack {
             NavigationView {
                 TabView(selection: $selectedView) {
-                    MainGroupView(groupData: groupData, isSideMenuActive: $isSideMenuActive)
+                    MainGroupView(isSideMenuActive: $isSideMenuActive)
                         .tabItem {
                             Image(systemName: "person.3.fill")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(0)
-                        .onAppear(){
-                            print("excuted!")
-                            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
-                    }
                     
                     MainMapView()
                         .tabItem {
@@ -71,7 +67,10 @@ struct MainTabView: View {
             
             GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
             
-            AddGroup(groupData: self.groupData, isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
+            AddGroup(isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
+        }
+        .onAppear(){
+            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
         }
     }
     

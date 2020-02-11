@@ -12,7 +12,7 @@ struct MainGroupView: View {
     
     @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var mapStore: MapStore
-    @ObservedObject var groupData: UserGroupStore
+    @ObservedObject var groupStore = UserGroupStore.shared
     @Binding var isSideMenuActive: Bool
     
     @State var showActionsheet = false
@@ -20,13 +20,13 @@ struct MainGroupView: View {
     
     var body: some View {
         Group{
-            if self.groupData.mapData.isEmpty{
+            if self.groupStore.mapData.isEmpty{
                 Text("그룹을 생성해주세요!")
             }
             else{
                 ZStack {
                     List{
-                        ForEach(groupData.mapData, id: \.mid){ group in
+                        ForEach(groupStore.mapData, id: \.mid){ group in
                             ZStack{
                                 GroupRow(group: group)
                                     .padding()
@@ -53,25 +53,24 @@ struct MainGroupView: View {
                 .actionSheet(isPresented: self.$showActionsheet) {
                     ActionSheet(title: Text(""), buttons: [
                         .default(Text("그룹 나가기"), action: {
-                            self.groupData.exitGroup(from: self.selectedGroup!)
+                            self.groupStore.exitGroup(from: self.selectedGroup!)
                         }),
                         .destructive(Text("취소"))
                     ])
                 }
-                .onAppear{
-                    UITableView.appearance().tableFooterView = UIView()
-                    UITableView.appearance().separatorStyle = .none
-                    
-                    self.mapStore.mapData = MapData()
-                }
             }
+        }
+        .onAppear{
+            UITableView.appearance().tableFooterView = UIView()
+            UITableView.appearance().separatorStyle = .none
+            self.mapStore.mapData = MapData()
         }
     }
     
     func deleteGroup(at indexSet: IndexSet) {
-        let curMid = self.groupData.mapData[indexSet.first!].mid
-        self.groupData.deleteMap(mid: curMid!, userTocken: self.userSettings.userTocken!)
-        self.groupData.mapData.remove(atOffsets: indexSet)
+        let curMid = self.groupStore.mapData[indexSet.first!].mid
+        self.groupStore.deleteMap(mid: curMid!, userTocken: self.userSettings.userTocken!)
+        self.groupStore.mapData.remove(atOffsets: indexSet)
     }
 }
 

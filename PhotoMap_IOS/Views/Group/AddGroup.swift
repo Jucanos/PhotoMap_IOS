@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct AddGroup: View {
-    @ObservedObject var groupData: UserGroupStore
     let isOpen: Bool
     let menuClose: () -> Void
     var body: some View {
@@ -25,7 +24,7 @@ struct AddGroup: View {
             }
             
             VStack {
-                SubAddGroup(groupData: groupData, menuClose: menuClose)
+                SubAddGroup(menuClose: menuClose)
                     .frame(height: 100)
                     .background(Color.black)
                     .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
@@ -42,7 +41,8 @@ struct AddGroup: View {
 
 struct SubAddGroup: View {
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var groupData: UserGroupStore
+//    @ObservedObject var groupData: UserGroupStore
+    @ObservedObject var userGroupStore = UserGroupStore.shared
     @State var groupName: String = ""
     @State var showAlert: Bool = false
     let menuClose: () -> Void
@@ -61,7 +61,7 @@ struct SubAddGroup: View {
                     if self.groupName.isEmpty{
                         self.showAlert.toggle()
                     }else{
-                        self.groupData.addMap(name: self.groupName, userTocken: self.userSettings.userTocken!)
+                        self.userGroupStore.addMap(name: self.groupName, userTocken: self.userSettings.userTocken!)
                         self.menuClose()
                         self.endEditing()
                     }
