@@ -12,21 +12,21 @@ struct MainSettingView: View {
     var body: some View {
         VStack {
             UserInfoView()
-                List {
-                    Section(header: Text("앱 정보")) {
-                        
+            List {
+                Section(header: Text("앱 정보")) {
+                    NavigationLink(destination: Notice()) {
                         SettingRow(settingName: "공지사항")
-                        SettingRow(settingName: "리뷰 작성하기")
-                        SettingRow(settingName: "앱 공유하기")
                     }
-                    Section(header: Text("회원정보관리")) {
-                        SettingRow(settingName: "비밀번호 변경")
-                        NavigationLink(destination: UserLogout()) {
+                    SettingRow(settingName: "리뷰 작성하기")
+                    SettingRow(settingName: "앱 공유하기")
+                }
+                Section(header: Text("회원정보관리")) {
+                    SettingRow(settingName: "비밀번호 변경")
+                    NavigationLink(destination: UserLogout()) {
                         SettingRow(settingName: "로그아웃")
-                        }
-                        
                     }
-                }.listStyle(GroupedListStyle())
+                }
+            }.listStyle(GroupedListStyle())
         }
     }
     
