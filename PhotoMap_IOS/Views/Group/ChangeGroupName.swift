@@ -19,14 +19,11 @@ struct ChangeGroupName: View {
                 VStack(alignment: .leading){
                     Text("그룹의 이름을 입력해 주세요")
                         .foregroundColor(.gray)
-                    Divider()
-                        .background(Color.gray)
                     Spacer()
-                        .frame(height: 10)
+                        .frame(height: 20)
                     TextField(self.selectedGroup!.name!, text: self.$strFromUser)
-                        .font(.largeTitle)
                     Divider()
-                        .background(Color.gray)
+                    .background(Color.gray)
                 }
                 .offset(y: -geo.frame(in: .global).size.width / 2)
             }
@@ -37,6 +34,7 @@ struct ChangeGroupName: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Image(systemName: "multiply")
+                        .resizable()
                         .foregroundColor(.white)
                 }, trailing:
                 Button(action: {
