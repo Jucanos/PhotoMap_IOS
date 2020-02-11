@@ -12,20 +12,20 @@ import Request
 
 struct AppNotice: Codable {
     var message: String?
-    var data: AppNoticeData?
+    var data: [AppNoticeData?] = []
 }
 
 struct AppNoticeData: Codable{
     var context: String?
-    var createdAt: Date?
+    var createdAt: String?
     var id: String?
     var title: String?
-    var updatedAt: Date?
+    var updatedAt: String?
 }
 
 class AppNoticeStore: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    @Published var noticeData: AppNoticeData? {
+    @Published var noticeData: [AppNoticeData] = [] {
         willSet{
             objectWillChange.send()
         }
@@ -35,15 +35,17 @@ class AppNoticeStore: ObservableObject {
     init() {}
     
     func loadNotice() {
+        print("try to load notices!!")
         let url = NetworkURL.sharedInstance.getUrlString("/notice")
-        AnyRequest<AppNoticeData> {
+        AnyRequest<AppNotice> {
             Url(url)
             Method(.get)
             Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject { notice in
             print("Get notice Success!")
+            print(notice)
             DispatchQueue.main.async {
-                self.noticeData = notice
+                self.noticeData = notice.data as! [AppNoticeData]
             }
         }.onError{ error in
             if let stringError = String(data: error.error!, encoding: .utf8){

@@ -11,10 +11,18 @@ import SwiftUI
 struct Notice: View {
     @ObservedObject var noticeStore = AppNoticeStore.shared
     var body: some View {
-        List(0 ..< 5) {_ in
-              NoticeRow()
+        Group{
+            if !noticeStore.noticeData.isEmpty{
+                List{
+                    ForEach(noticeStore.noticeData, id: \.id) { notice in
+                        NoticeRow(notice: notice)
+                    }
+                }
+                .listStyle(PlainListStyle())
+            } else {
+                Text("공지사항이 없습니다!")
+            }
         }
-        .listStyle(PlainListStyle())
         .navigationBarTitle("공지사항", displayMode: .inline)
         .onAppear(){
             self.noticeStore.loadNotice()
@@ -24,31 +32,31 @@ struct Notice: View {
 
 struct NoticeRow: View {
     @State var isActivate: Bool = false
+    var notice: AppNoticeData
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("2020.01.01")
+                    Text(notice.updatedAt!)
                         .foregroundColor(.gray)
-                    Text("오픈 공지 오픈 공지 오픈 공지")
+                    Text(notice.title!)
                         .font(.system(size: 20))
                 }
                 Spacer()
                 isActivate ? Image(systemName: "chevron.up") : Image(systemName: "chevron.down")
             }
+            .padding()
             .onTapGesture {
                 self.isActivate.toggle()
             }
             if isActivate{
-                Text("ContextContextContextContextContextContextContextContextContextContext")
+                Text(notice.context!)
                     .lineLimit(nil)
                     .multilineTextAlignment(.leading)
                     .background(Color(.secondarySystemBackground))
             }
         }
-        .padding()
         .animation(.spring())
-        
     }
 }
 
