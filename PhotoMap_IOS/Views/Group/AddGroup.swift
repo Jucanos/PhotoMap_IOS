@@ -28,7 +28,7 @@ struct AddGroup: View {
                     .frame(height: 100)
                     .background(Color.black)
                     .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
-                    .animation(.easeInOut(duration: 0.25))
+                    .animation(.easeInOut(duration: 0.4))
                 Spacer()
             }
         }

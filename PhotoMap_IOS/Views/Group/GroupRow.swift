@@ -12,7 +12,7 @@ struct GroupRow: View {
     var group: MapData
     var body: some View {
         HStack{
-            URLImage(URL(string: "https://s3.soybeans.tech/uploads/\(group.mid!)/main.png")!){ proxy in
+            URLImage(URL(string: "https://s3.soybeans.tech/uploads/\(group.mid!)/main.png")!, expireAfter: Date(timeIntervalSinceNow: 0.1)){ proxy in
                 proxy.image
                     .resizable()
                     .frame(width: 50, height: 50)

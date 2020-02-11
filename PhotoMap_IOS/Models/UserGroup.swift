@@ -123,6 +123,28 @@ class UserGroupStore: ObservableObject {
         .call()
     }
     
+    func changeGroupName(mid: String, newName: String, handler: @escaping ()->()) {
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
+        Request {
+            Url(url)
+            Method(.put)
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
+            Header.ContentType(.json)
+            Body(["name": newName])
+        }.onData{ data in
+            print("group name change success!")
+            DispatchQueue.main.async {
+                self.loadMaps(userTocken: UserSettings.shared.userTocken!)
+                handler()
+            }
+        }.onError{ error in
+            if let stringError = String(data: error.error!, encoding: .utf8){
+                print(stringError)
+            }
+        }
+        .call()
+    }
+    
     func joinGroup(at mid:String) {
         print("try to join!!!!!!")
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
