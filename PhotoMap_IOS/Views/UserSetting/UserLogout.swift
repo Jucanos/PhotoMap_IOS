@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct UserLogout: View {
-    @EnvironmentObject var userSettings: UserSettings
+    @ObservedObject var userSettings = UserSettings.shared
     var body: some View {
         HStack {
             VStack {

@@ -67,37 +67,39 @@ class UserSettings: ObservableObject {
             self.getAuthFromServer()
         })
     }
-    
     func userLogout() -> Void {
+        guard let session = KOSession.shared() else{
+            return
+        }
+        session.logoutAndClose(completionHandler: { (success, error) in
+            if success{
+                print("Logout success!")
+                DispatchQueue.main.async {
+                    self.userInfo = nil
+                    self.userTocken = nil
+                }
+            } else{
+                print(error!.localizedDescription)
+            }
+        })
+    }
+    /// 회원 탈퇴
+    func userWithdrawal() -> Void {
         let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
         Request{
             Url(authUrl)
             Method(.delete)
             Header.Authorization(.bearer(self.userTocken!))
         }.onError { error in
-            print("logout failed: ", error)
+            if let stringError = String(data: error.error!, encoding: .utf8){
+                print(stringError)
+            }
         }
         .onData{ data in
-            print("\nlogout success from Photomap server!")
-            DispatchQueue.main.async {
-                self.userInfo = nil
-                print("\nuserInfo deleted!")
-            }
+            self.userLogout()
+            print("withdrawal success!")
         }
         .call()
-        
-        guard let session = KOSession.shared() else{
-            return
-        }
-        session.logoutAndClose(completionHandler: { (success, error) in
-            if success{
-                print("\nlogout success from kakao session")
-                self.userTocken = nil
-                print("\nuserTocken deleted!")
-            } else{
-                print(error!.localizedDescription)
-            }
-        })
     }
     
     func setRepresentMap(mid: String, _ handler: @escaping ()->()) {
