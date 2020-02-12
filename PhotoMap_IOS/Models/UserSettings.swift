@@ -17,26 +17,25 @@ class UserSettings: ObservableObject {
     static let shared: UserSettings = UserSettings()
     private init() {}
     
-    func isAuth() -> Bool {
+    func isValid() -> Bool {
         return self.userTocken != nil && self.userInfo != nil
     }
     
     func getAuthFromServer() -> Void {
-        print("trying to get auth from Photomap server")
+        // 1. 카카오 세션이 유효한지 검사 후, 유효하면 tocken 참조
         guard let session = KOSession.shared() else {
             return
         }
-        
         if session.isOpen(){
             self.userTocken = session.token!.accessToken
             print("getting tocken success: ", self.userTocken!)
         }
-        
         if self.userTocken == nil{
             print("user tocken nil!!")
             return
         }
         
+        // 2. 참조 된 카카오 tocken으로 Photomap server에 인증 시도
         let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
         AnyRequest<UserInfo>{
             Url(authUrl)
@@ -45,30 +44,27 @@ class UserSettings: ObservableObject {
         }.onObject { usrInfo in
             DispatchQueue.main.async {
                 self.userInfo = usrInfo
-                if self.userInfo != nil {
-                    print("UserInfo init success: ", self.userInfo!)
-                } else{
-                    print("UserInfo init failed!")
-                }
             }
         }
         .onError { error in
-            print("Error at getAuthFromServer", error)
+            if let stringError = String(data: error.error!, encoding: .utf8){
+                print(stringError)
+            }
         }
         .call()
     }
     
-    func getTockenFromKakao() -> Void{
+    func loginFromKakao() -> Void{
         guard let session = KOSession.shared() else {
             return
         }
         if session.isOpen() {
             session.close()
         }
-        print("trying to open kakao session")
+        
         session.open(completionHandler: { (error) -> Void in
             if error != nil || !session.isOpen() {return}
-            print(session.token!.accessToken)
+            self.getAuthFromServer()
         })
     }
     
