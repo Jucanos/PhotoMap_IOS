@@ -10,11 +10,11 @@ import SwiftUI
 
 struct SplashView: View {
 //    @State var isAuth = false // fasle as default!
-    @EnvironmentObject var userSettings: UserSettings
+    @ObservedObject var userSettings = UserSettings.shared
     
     var body: some View {        
         return Group {
-            if self.userSettings.userInfo != nil {
+            if self.userSettings.isValid() {
                 MainTabView().environmentObject(MapStore()).environmentObject(FeedStore())
             }
             else {

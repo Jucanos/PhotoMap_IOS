@@ -14,8 +14,7 @@ import Request
 let appColor = Color(red: 0.976, green: 0.875, blue: 0.196)
 
 struct LoginView: View {
-    //    @Binding var isAuth: Bool
-    @EnvironmentObject var userSettings: UserSettings
+    @ObservedObject var userSettings = UserSettings.shared
     
     var body: some View {
         VStack(alignment: .center) {
@@ -32,7 +31,7 @@ struct LoginView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
             Button(action: {
-                self.attemptLogin()
+                self.userSettings.loginFromKakao()
             }){
                 KakaoLoginButton()
                     .aspectRatio(contentMode: .fit)
@@ -47,63 +46,4 @@ struct LoginView: View {
             self.userSettings.getAuthFromServer()
         }
     }
-    
-    func attemptLogin(){
-        guard let session = KOSession.shared() else {
-            return
-        }
-        if session.isOpen() {
-            session.close()
-        }
-        print("trying to open kakao session")
-        session.open(completionHandler: { (error) -> Void in
-            if error != nil || !session.isOpen() {return}
-            print(session.token!.accessToken)
-            self.userSettings.userTocken = session.token!.accessToken
-            let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
-            AnyRequest<UserInfo>{
-                Url(authUrl)
-                Method(.get)
-                Header.Authorization(.bearer(self.userSettings.userTocken!))
-            }.onObject { usrInfo in
-                DispatchQueue.main.async {
-                    self.userSettings.userInfo = usrInfo
-                    if self.userSettings.userInfo != nil {
-                        print("UserInfo init success!")
-                        print(self.userSettings.userInfo!)
-                    } else{
-                        print("UserInfo init failed!")
-                    }
-                }
-            }
-            .onError { error in
-                print(error)
-            }
-            .call()
-        })
-        
-    }
 }
-
-
-
-
-#if DEBUG
-//struct LoginView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            LoginView(isAuth: .constant(false))
-//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-//                .previewDisplayName("iPhone SE")
-//
-//            LoginView(isAuth: .constant(false))
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//                .previewDisplayName("iPhone 8")
-//
-//            LoginView(isAuth: .constant(false))
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-//                .previewDisplayName("iPhone 11 Pro")
-//        }
-//    }
-//}
-#endif
