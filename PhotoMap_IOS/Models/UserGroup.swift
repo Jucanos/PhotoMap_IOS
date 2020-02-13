@@ -83,7 +83,10 @@ class UserGroupStore: ObservableObject {
                 self.mapData = groups.data as! [MapData]
             }
         }.onError{ error in
-            print("Error at loadMaps", error)
+            print("Error at loadMaps")
+            if let stringError = String(data: error.error!, encoding: .utf8) {
+                print(stringError)
+            }
         }
         .call()
     }
@@ -103,7 +106,10 @@ class UserGroupStore: ObservableObject {
             }
             
         }.onError{ error in
-            print(error)
+            print("Error at addMap")
+            if let stringError = String(data: error.error!, encoding: .utf8){
+                print(stringError)
+            }
         }
         .call()
     }
@@ -118,7 +124,10 @@ class UserGroupStore: ObservableObject {
             print(data)
             print("group deletion success!")
         }.onError{ error in
-            print(error)
+            print("Error at deleteMap")
+            if let stringError = String(data: error.error!, encoding: .utf8){
+                print(stringError)
+            }
         }
         .call()
     }
@@ -146,14 +155,13 @@ class UserGroupStore: ObservableObject {
     }
     
     func joinGroup(at mid:String) {
-        print("try to join!!!!!!")
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
         Request{
             Url(url)
             Method(.patch)
             Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onError{ error in
-            print("error ocured!!!!")
+            print("Error at joinGroup")
             if let stringData = String(data: error.error!, encoding: .utf8){
                 print(stringData)
             }
@@ -165,7 +173,6 @@ class UserGroupStore: ObservableObject {
     }
     
     func exitGroup(from mid: String) {
-        print("try to exit!!!!")
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
         Request{
             Url(url)

@@ -25,6 +25,9 @@ struct MainSettingView: View {
                     NavigationLink(destination: UserLogout()) {
                         SettingRow(settingName: "로그아웃")
                     }
+                    NavigationLink(destination: UserWithdrawal()) {
+                        SettingRow(settingName: "회원탈퇴")
+                    }
                 }
             }.listStyle(GroupedListStyle())
         }
