@@ -13,7 +13,6 @@ final class KakaoLoginButton: UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<KakaoLoginButton>) -> UIButton {
         let loginButton = KOLoginButton()
-        //        loginButton.addTarget(self, action: #selector(touchUpLoginButton(_:)), for: .touchUpInside)
         return loginButton
     }
     

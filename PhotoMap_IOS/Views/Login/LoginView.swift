@@ -11,39 +11,64 @@ import KakaoOpenSDK
 import Request
 
 
-let appColor = Color(red: 0.976, green: 0.875, blue: 0.196)
+let appColor = Color(red: 0.467, green: 0.867, blue: 0.467)
 
 struct LoginView: View {
     @ObservedObject var userSettings = UserSettings.shared
     
     var body: some View {
-        VStack(alignment: .center) {
-            Image("mainlogo")
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .scaledToFit()
-                .padding(.top, 80)
-            
-            Spacer()
-            
-            Text("포토맵에 오신것을 환영합니다!")
-                .font(.body)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
-            Button(action: {
-                self.userSettings.loginFromKakao()
-            }){
-                KakaoLoginButton()
-                    .aspectRatio(contentMode: .fit)
-                    .shadow(radius: 10)
+        GeometryReader{ geo in
+            VStack(alignment: .center, spacing: 40) {
+                VStack(spacing: 10) {
+                    Text("PhotoMap")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.white)
+                    Image("mainlogo")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.red)
+                        .frame(height: geo.size.height / 3)
+                }
+                .shadow(radius: 5)
+                Spacer()
+                    .frame(height: 10)
+                VStack() {
+                    Text("포토맵에 오신것을 환영합니다!")
+                        .font(.body)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    Button(action: {
+                        self.userSettings.loginFromKakao()
+                    }){
+                        KakaoLoginButton()
+                            .scaledToFit()
+                    }
+                }
+                .shadow(radius: 5)
             }
-            Spacer()
         }
         .padding()
         .background(appColor)
         .edgesIgnoringSafeArea(.all)
         .onAppear(){
             self.userSettings.getAuthFromServer()
+        }
+    }
+}
+
+struct Login_Pre: PreviewProvider {
+    static var previews: some View {
+        Group{
+            LoginView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+                .previewDisplayName("iPhone SE")
+            LoginView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+                .previewDisplayName("iPhone 8")
+            LoginView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+                .previewDisplayName("iPhone 11")
         }
     }
 }
