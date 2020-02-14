@@ -26,27 +26,25 @@ struct MainGroupView: View {
             }
             else{
                 ZStack {
+                    Color(.secondarySystemBackground)
                     List{
                         ForEach(groupStore.mapData, id: \.mid){ group in
                             ZStack{
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color(.white))
+                                    .shadow(radius: 5)
                                 GroupRow(group: group)
                                     .padding()
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.clear, lineWidth: 1)
-                                            .shadow(radius: 5))
-                                    .gesture(LongPressGesture()
-                                        .onEnded{ _ in
-                                            self.showActionsheet = true
-                                            self.selectedGroup = group
-                                    })
-                                
-                                NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)
-                                ){
+                                    .onLongPressGesture {
+                                        self.showActionsheet = true
+                                        self.selectedGroup = group
+                                }
+                                NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)){
                                     EmptyView()
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
+                            .listRowInsets(.init(top: 30, leading: 10, bottom: 0, trailing: 10))
                         }
                         .onDelete(perform: deleteGroup)
                     }
@@ -68,8 +66,8 @@ struct MainGroupView: View {
             }
         }
         .onAppear{
-            UITableView.appearance().tableFooterView = UIView()
-            UITableView.appearance().separatorStyle = .none
+            UITableView.appearance().backgroundColor = UIColor.clear
+            UITableViewCell.appearance().backgroundColor = UIColor.clear
             self.mapStore.mapData = MapData()
         }
     }
@@ -81,20 +79,17 @@ struct MainGroupView: View {
     }
 }
 
-//struct MainGroupView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            MainGroupView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-//                .previewDisplayName("iPhone SE")
-//
-//            MainGroupView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//                .previewDisplayName("iPhone 8")
-//
-//            MainGroupView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-//                .previewDisplayName("iPhone 11 Pro")
-//        }
+//extension UITableViewController {
+//    override open func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        let appearance = UITableView.appearance()
+//        appearance.tableFooterView = UIView()
+//        appearance.separatorStyle = .none
+//        appearance.backgroundColor = UIColor.clear
+//        
+//        
+//        let cellAppearance = UITableViewCell.appearance()
+//        cellAppearance.backgroundColor = UIColor.clear
 //    }
 //}

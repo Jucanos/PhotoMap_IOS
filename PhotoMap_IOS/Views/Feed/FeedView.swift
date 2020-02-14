@@ -31,7 +31,7 @@ struct FeedView: View {
                 Image(systemName: "plus.square")
                     .resizable()
                     .frame(width: 20, height: 20)
-                    .foregroundColor(.white)
+//                    .foregroundColor(.white)
             }
         )
             .onAppear(){
@@ -39,16 +39,16 @@ struct FeedView: View {
         }
     }
     
-    var backButton : some View {
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }) {
-            HStack {
-                Image(systemName: "arrow.left")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.white)
-            }
-        }
-    }
+//    var backButton : some View {
+//        Button(action: {
+//            self.presentationMode.wrappedValue.dismiss()
+//        }) {
+//            HStack {
+//                Image(systemName: "arrow.left")
+//                    .resizable()
+//                    .frame(width: 20, height: 20)
+//                    .foregroundColor(.white)
+//            }
+//        }
+//    }
 }

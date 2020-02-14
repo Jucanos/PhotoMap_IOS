@@ -8,8 +8,9 @@
 
 import SwiftUI
 
+let appColor = UIColor(red: 0.467, green: 0.867, blue: 0.467, alpha: 1)
+
 struct SplashView: View {
-//    @State var isAuth = false // fasle as default!
     @ObservedObject var userSettings = UserSettings.shared
     
     var body: some View {        

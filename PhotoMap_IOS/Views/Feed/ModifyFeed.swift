@@ -36,7 +36,7 @@ struct ModifyFeed: View {
             }
             .padding()
             .navigationBarTitle("스토리 수정하기", displayMode: .inline)
-            .navigationBarItems(leading: backButton, trailing: Button(action: {
+            .navigationBarItems(trailing: Button(action: {
                 self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!,userTocken: self.userSettings.userTocken!, title: self.modifiedTitle, context: self.modifiedContext){
                     self.presentationMode.wrappedValue.dismiss()
                 }
@@ -48,18 +48,18 @@ struct ModifyFeed: View {
             print(self.feedStore.feedData, self.userSettings)
         }
     }
-    var backButton : some View {
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }) {
-            HStack {
-                Image(systemName: "multiply")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.white)
-            }
-        }
-    }
+//    var backButton : some View {
+//        Button(action: {
+//            self.presentationMode.wrappedValue.dismiss()
+//        }) {
+//            HStack {
+//                Image(systemName: "multiply")
+//                    .resizable()
+//                    .frame(width: 20, height: 20)
+//                    .foregroundColor(.white)
+//            }
+//        }
+//    }
 }
 
 //struct ModifyFeed_Previews: PreviewProvider {

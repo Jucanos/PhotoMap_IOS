@@ -24,14 +24,14 @@ struct MainTabView: View {
                 TabView(selection: $selectedView) {
                     MainGroupView(isSideMenuActive: $isSideMenuActive)
                         .tabItem {
-                            Image(systemName: "person.3.fill")
+                            Image(systemName: "person.3")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(0)
                     
                     MainMapView()
                         .tabItem {
-                            Image(systemName: "map.fill")
+                            Image(systemName: "map")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(1)
@@ -43,21 +43,20 @@ struct MainTabView: View {
                                 .imageScale(.large)
                     }.tag(2)
                 }
-                .accentColor(.black)
+                .accentColor(Color(appColor))
                 .edgesIgnoringSafeArea(.top)
                 .navigationBarTitle("", displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
                         Text("\(self.titles[selectedView])")
-                            .font(.system(size: 25, weight: .semibold, design: .default))
-                            .foregroundColor(Color.white)
+                            .font(.system(size: 25, weight: .heavy))
+                            .foregroundColor(.white)
                         Spacer()
                     }
                     .frame(width: 100)
                     ,trailing: Button(action: {self.activeAddGroupView()}){
                         Image(systemName: "plus.bubble.fill")
                             .resizable()
-                            .foregroundColor(.white)
                             .frame(width: 20, height: 20)
                             .padding(5)
                     }.opacity(selectedView == 0 ? 1 : 0)
@@ -85,16 +84,19 @@ struct MainTabView: View {
     
 }
 
-
-
 extension UINavigationController {
-    
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .black
-        appearance.titleTextAttributes = [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 20, weight: .semibold)]
+        let backBtn = UIImage(systemName: "chevron.left")
+        
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = appColor
+        appearance.titleTextAttributes = [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 20)]
+        appearance.setBackIndicatorImage(backBtn, transitionMaskImage: nil)
+        
+        navigationBar.tintColor = UIColor.white
         navigationBar.standardAppearance = appearance
         navigationBar.compactAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance

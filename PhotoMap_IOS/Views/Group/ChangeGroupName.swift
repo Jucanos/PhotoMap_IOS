@@ -35,7 +35,7 @@ struct ChangeGroupName: View {
                 }) {
                     Image(systemName: "multiply")
                         .resizable()
-                        .foregroundColor(.white)
+//                        .foregroundColor(.white)
                 }, trailing:
                 Button(action: {
                     self.groupStore.changeGroupName(mid: self.selectedGroup!.mid!, newName: self.strFromUser) {
@@ -43,7 +43,7 @@ struct ChangeGroupName: View {
                     }
                 }) {
                     Text("확인")
-                        .foregroundColor(.white)
+//                        .foregroundColor(.white)
             })
         }
     }

@@ -13,7 +13,7 @@ import URLImage
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    var application = UIApplication.shared 
+    var application = UIApplication.shared
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -39,7 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             print("attacjing ... ")
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = HostingController(rootView: splashView)
+            window.rootViewController = UIHostingController(rootView: splashView)
             self.window = window
             window.makeKeyAndVisible()
         }

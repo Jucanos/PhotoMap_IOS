@@ -23,13 +23,12 @@ struct GroupDetail: View {
             if mapStore.mapData.mid != nil{
                 ZStack {
                     KoreaMap()
-                        .navigationBarItems(leading:
-                            backButton, trailing:
+                        .navigationBarItems(trailing:
                             Button(action: {self.isSideMenuActive.toggle()}) {
                                 Image(systemName: "line.horizontal.3")
                                     .resizable()
                                     .frame(width: 20, height: 20)
-                                    .foregroundColor(.white)
+//                                    .foregroundColor(.white)
                             }
                     )
                         .navigationBarTitle("\(groupData.name!)", displayMode: .inline)
@@ -59,6 +58,7 @@ struct GroupDetail: View {
             }
             
         }
+    
         .onAppear(){
             self.mapStore.loadMapDetail(mid: self.groupData.mid!, userTocken: self.userSettings.userTocken!)
         }
@@ -66,19 +66,19 @@ struct GroupDetail: View {
         
     }
     
-    var backButton : some View {
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }) {
-            HStack {
-                Image(systemName: "arrow.left")
-                    .resizable()
-                    .foregroundColor(.white)
-                    .frame(width: 20, height: 20)
-                
-            }
-        }
-    }
+//    var backButton : some View {
+//        Button(action: {
+//            self.presentationMode.wrappedValue.dismiss()
+//        }) {
+//            HStack {
+//                Image(systemName: "arrow.left")
+//                    .resizable()
+//                    .foregroundColor(.white)
+//                    .frame(width: 20, height: 20)
+//                
+//            }
+//        }
+//    }
     
     var mainButton: some View {
         Image(systemName: "plus.circle.fill")

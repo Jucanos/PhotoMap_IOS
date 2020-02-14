@@ -95,7 +95,7 @@ struct AddFeed: View {
             Image(systemName: "arrow.left")
                 .resizable()
                 .frame(width: 20, height: 20)
-                .foregroundColor(.white)
+//                .foregroundColor(.white)
             }, trailing:
             Button(action: {
                 // 완료 버튼
@@ -105,7 +105,7 @@ struct AddFeed: View {
                 }
             }) {
                 Text("완료")
-                    .foregroundColor(.white)
+//                    .foregroundColor(.white)
             }
         )
     }

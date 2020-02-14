@@ -11,7 +11,7 @@ import KakaoOpenSDK
 import Request
 
 
-let appColor = Color(red: 0.467, green: 0.867, blue: 0.467)
+
 
 struct LoginView: View {
     @ObservedObject var userSettings = UserSettings.shared
@@ -49,7 +49,7 @@ struct LoginView: View {
             }
         }
         .padding()
-        .background(appColor)
+        .background(Color(appColor))
         .edgesIgnoringSafeArea(.all)
         .onAppear(){
             self.userSettings.getAuthFromServer()

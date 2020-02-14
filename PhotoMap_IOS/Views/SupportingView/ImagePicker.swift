@@ -84,11 +84,11 @@ extension MyImagePicker{
             config.wordings.cameraTitle = "카메라"
             config.wordings.next = "다음"
             config.wordings.filter = "필터"
-            config.colors.tintColor = .white
-            config.colors.multipleItemsSelectedCircleColor = .black
+//            config.colors.tintColor = .white
+//            config.colors.multipleItemsSelectedCircleColor = .black
             
-            UINavigationBar.appearance().tintColor = .white
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+//            UINavigationBar.appearance().tintColor = .white
+//            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
             let picker = YPImagePicker(configuration: config)
             picker.didFinishPicking { [unowned picker] items, cancelled in
                 if cancelled {
@@ -102,7 +102,7 @@ extension MyImagePicker{
                         print(video)
                     }
                 }
-                picker.dismiss(animated: false, completion: nil)
+                picker.dismiss(animated: true, completion: nil)
             }
             
             return picker
