@@ -27,6 +27,7 @@ struct MapData: Codable {
     var createdAt: String?
     var updatedAt: String?
     var owners: [UserInfoData]?
+    var logNumber: Int?
 }
 
 struct Represent: Codable {
