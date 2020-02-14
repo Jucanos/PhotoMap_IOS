@@ -40,7 +40,6 @@ struct NoticeRow: View {
                     Text(notice.updatedAt!)
                         .foregroundColor(.gray)
                     Text(notice.title!)
-                        .font(.system(size: 20))
                 }
                 Spacer()
                 isActivate ? Image(systemName: "chevron.up") : Image(systemName: "chevron.down")
@@ -50,10 +49,12 @@ struct NoticeRow: View {
                 self.isActivate.toggle()
             }
             if isActivate{
-                Text(notice.context!)
-                    .lineLimit(nil)
-                    .multilineTextAlignment(.leading)
-                    .background(Color(.secondarySystemBackground))
+                ZStack(alignment: .leading){
+                    Color(.secondarySystemBackground)
+                    Text(notice.context!)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                }
             }
         }
         .animation(.spring())
