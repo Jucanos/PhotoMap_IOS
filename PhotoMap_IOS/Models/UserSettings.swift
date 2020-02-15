@@ -103,9 +103,7 @@ class UserSettings: ObservableObject {
     }
     
     func setRepresentMap(mid: String, _ handler: @escaping ()->()) {
-        print("try to set REPMAP at NETWORK")
         let url = NetworkURL.sharedInstance.getUrlString("/users/\(mid)")
-        print(url)
         Request{
             Url(url)
             Method(.patch)
