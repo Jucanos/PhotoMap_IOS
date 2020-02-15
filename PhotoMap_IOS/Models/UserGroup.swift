@@ -71,6 +71,7 @@ class UserGroupStore: ObservableObject {
     
     static let shared: UserGroupStore = UserGroupStore()
     
+    // MARK:- Network functions
     func loadMaps(userTocken: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
         print("try to road")
@@ -81,7 +82,7 @@ class UserGroupStore: ObservableObject {
         }.onObject{ groups in
             print(groups)
             DispatchQueue.main.async {
-                self.mapData = groups.data as! [MapData]
+                self.mapData = self.getSortedMaps(from: groups.data as! [MapData])
             }
         }.onError{ error in
             print("Error at loadMaps")
@@ -199,6 +200,25 @@ class UserGroupStore: ObservableObject {
             }
         }
         .call()
+    }
+    
+    // MARK:- Local functions
+    func getSortedMaps(from oldArr: [MapData]) -> [MapData] {
+        var newArr: [MapData] = []
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = NSTimeZone(name: "KST") as TimeZone?
+        
+        newArr = oldArr.sorted(by: {dateFormatter.date(from: $0.updatedAt!)! < dateFormatter.date(from: $1.updatedAt!)!})
+        
+        if UserSettings.shared.userInfo?.data?.primary != nil {
+            let idx = newArr.firstIndex(where: {$0.mid == UserSettings.shared.userInfo?.data?.primary})!
+            let primary = newArr[idx]
+            newArr.remove(at: idx)
+            newArr.insert(primary, at: 0)
+        }
+        return newArr
     }
 }
 
