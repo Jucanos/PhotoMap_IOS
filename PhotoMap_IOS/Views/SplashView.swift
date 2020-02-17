@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-let appColor = UIColor(red: 0.467, green: 0.867, blue: 0.467, alpha: 1)
+let appColor = UIColor(red: 0.149, green: 0.667, blue: 0.439, alpha: 1)
 
 struct SplashView: View {
     @ObservedObject var userSettings = UserSettings.shared
