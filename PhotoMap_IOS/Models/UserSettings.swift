@@ -9,6 +9,8 @@
 import SwiftUI
 import KakaoOpenSDK
 import Request
+import Firebase
+import FirebaseMessaging
 
 class UserSettings: ObservableObject {
     @Published var userTocken: String?
@@ -28,10 +30,10 @@ class UserSettings: ObservableObject {
         }
         if session.isOpen(){
             self.userTocken = session.token!.accessToken
-            print("getting tocken success: ", self.userTocken!)
+            print("kakao tocken: ", self.userTocken!)
         }
         if self.userTocken == nil{
-            print("user tocken nil!!")
+            print("kakao tocken nil!!")
             return
         }
         
@@ -43,7 +45,13 @@ class UserSettings: ObservableObject {
             Header.Authorization(.bearer(self.userTocken!))
         }.onObject { usrInfo in
             DispatchQueue.main.async {
-                self.userInfo = usrInfo
+                self.getFirebaseBackup(uid: (usrInfo.data?.uid!)!) {
+                    print("get firebase backup success!")
+                    self.userInfo = usrInfo
+                    Messaging.messaging().subscribe(toTopic: (self.userInfo?.data?.uid!)!) { error in
+                        print(error.debugDescription)
+                    }
+                }
             }
         }
         .onError { error in
@@ -123,5 +131,46 @@ class UserSettings: ObservableObject {
             }
         }.call()
         
+    }
+    
+    func getFirebaseBackup(uid: String, handler: @escaping () -> ()) {
+        let ref = Database.database().reference()
+        ref.child("users").child(uid).observeSingleEvent(of: .value, with: { snapShot in
+            let mapDic = snapShot.value as? Dictionary<String, AnyObject>
+            if self.saveDictionary(dict: mapDic!, key: "midList") {
+                handler()
+            } else{
+                print("save mid list failed!")
+            }
+        })
+    }
+    
+    func saveDictionary(dict: Dictionary<String, AnyObject>, key: String) -> Bool{
+        let preferences = UserDefaults.standard
+        if let encodedData: Data = try? NSKeyedArchiver.archivedData(withRootObject: dict, requiringSecureCoding: false){
+            print(encodedData)
+            preferences.set(encodedData, forKey: key)
+        } else {
+            print("data archiving failed!")
+            return false
+        }
+        
+        // Checking the preference is saved or not
+        return preferences.synchronize()
+    }
+    
+    func getDictionary(key: String) -> Dictionary<String, AnyObject> {
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: key) != nil{
+            let decoded = preferences.object(forKey: key)  as! Data
+            guard let decodedDict = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSDictionary.self, from: decoded) else{
+                print("object couldn't unarchived!")
+                return Dictionary<String, AnyObject>()
+            }
+            return decodedDict as! Dictionary<String, AnyObject>
+        } else {
+            let emptyDict = Dictionary<String, AnyObject>()
+            return emptyDict
+        }
     }
 }
