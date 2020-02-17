@@ -41,18 +41,16 @@ struct AddGroup: View {
 
 struct SubAddGroup: View {
     @EnvironmentObject var userSettings: UserSettings
-//    @ObservedObject var groupData: UserGroupStore
     @ObservedObject var userGroupStore = UserGroupStore.shared
     @State var groupName: String = ""
     @State var showAlert: Bool = false
     let menuClose: () -> Void
     var body: some View {
         
-        VStack {
+        VStack(spacing: 0) {
             Text("그룹 추가하기")
                 .font(.title)
                 .fontWeight(.semibold)
-//                .foregroundColor(.white)
             HStack{
                 TextField("그룹 이름을 입력하세요", text: $groupName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -69,9 +67,9 @@ struct SubAddGroup: View {
                     Image(systemName: "plus.square")
                         .resizable()
                         .frame(width: 30, height: 30)
-//                        .foregroundColor(.white)
                 }
             }
+        .padding()
         }
         .alert(isPresented: $showAlert){
             Alert(title: Text("그룹 이름이 없습니다"), message: Text("그룹 이름을 정한 후 추가해주세요!"), dismissButton: .default(Text("취소")))
@@ -87,8 +85,9 @@ extension UIApplication {
     }
 }
 
-//struct AddGroup_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SubAddGroup()
-//    }
-//}
+struct AddGroup_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        SubAddGroup(menuClose: {})
+    }
+}
