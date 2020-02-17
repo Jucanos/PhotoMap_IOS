@@ -133,6 +133,8 @@ class UserSettings: ObservableObject {
         
     }
     
+    // MARK: -Firebase with UserDefault functions
+    
     func getFirebaseBackup(uid: String, handler: @escaping () -> ()) {
         let ref = Database.database().reference()
         ref.child("users").child(uid).observeSingleEvent(of: .value, with: { snapShot in

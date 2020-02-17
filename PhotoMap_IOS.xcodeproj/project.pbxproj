@@ -30,6 +30,8 @@
 		9741C1DB23F117C600E8A7C8 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */; };
 		9741C1DC23F117C600E8A7C8 /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D923F117C600E8A7C8 /* KakaoLink.framework */; };
 		974C93CE23FA648000D01252 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 974C93CD23FA648000D01252 /* GoogleService-Info.plist */; };
+		974C93D023FA915700D01252 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974C93CF23FA915700D01252 /* Map.swift */; };
+		974C93D223FA91D600D01252 /* Represent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974C93D123FA91D600D01252 /* Represent.swift */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
@@ -87,6 +89,8 @@
 		9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
 		9741C1D923F117C600E8A7C8 /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoLink.framework; sourceTree = "<group>"; };
 		974C93CD23FA648000D01252 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		974C93CF23FA915700D01252 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		974C93D123FA91D600D01252 /* Represent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Represent.swift; sourceTree = "<group>"; };
 		974F645823E4056E00F798B0 /* PryntTrimmerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PryntTrimmerView.framework; path = Carthage/Build/iOS/PryntTrimmerView.framework; sourceTree = "<group>"; };
 		974F645923E4056E00F798B0 /* Stevia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stevia.framework; path = Carthage/Build/iOS/Stevia.framework; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,10 +253,12 @@
 		97528EF023C771ED00B999B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				978FBC1723D08E14009998E5 /* UserInfo.swift */,
 				978FBC1923D09901009998E5 /* UserSettings.swift */,
 				9798B19723C80B4100AB6E4F /* UserGroup.swift */,
+				974C93CF23FA915700D01252 /* Map.swift */,
+				974C93D123FA91D600D01252 /* Represent.swift */,
 				975F469B23CA22DC0044C6AA /* Feed.swift */,
-				978FBC1723D08E14009998E5 /* UserInfo.swift */,
 				97E452B623F2C8F60073B89A /* AppNotice.swift */,
 			);
 			path = Models;
@@ -476,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9716581623D36E8C000C10DF /* UserLogout.swift in Sources */,
+				974C93D223FA91D600D01252 /* Represent.swift in Sources */,
 				9725067D23EAE993004D8EBD /* SetRepresent.swift in Sources */,
 				978FBC1123D07CC0009998E5 /* NetworkURL.swift in Sources */,
 				9773017B23C7099700E3CE99 /* MainMapView.swift in Sources */,
@@ -485,6 +492,7 @@
 				973F6A3A23CF0487008C4EEC /* ButtonViews.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				97C4194023F4FEA10031E7FC /* UserWithdrawal.swift in Sources */,
+				974C93D023FA915700D01252 /* Map.swift in Sources */,
 				975F469A23CA22500044C6AA /* FeedPreviewDetail.swift in Sources */,
 				978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */,
 				975F469823CA1D760044C6AA /* FeedDetail.swift in Sources */,
