@@ -9,7 +9,8 @@ target 'PhotoMap_IOS' do
   pod 'Firebase/Analytics'
   # Pods for Firebase Cloud Message
   pod 'Firebase/Messaging'
-
+  # Pods for Firebase Database
+  pod 'Firebase/Database'
   # Pods for PhotoMap_IOS
 
 end

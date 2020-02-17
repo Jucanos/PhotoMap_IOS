@@ -30,20 +30,6 @@ struct FeedData: Codable {
     var sid: String?
     var mid: String?
     
-    //    func getImageViews() -> [UIHostingController<URLImage<Image,Image>>] {
-    //        var images: [URLImage<Image,Image>] = []
-    //        for urlStr in files {
-    //            let url = URL(string: urlStr!)
-    //            let item = URLImage(url!){ proxy in
-    //                proxy.image.resizable()
-    //            }
-    //            images.append(item)
-    //        }
-    //        let vcs = images.map{
-    //            UIHostingController(rootView: $0)
-    //        }
-    //        return vcs
-    //    }
     func getImageViews() -> [URLImage<Image,Image>] {
         var images: [URLImage<Image,Image>] = []
         for urlStr in files {

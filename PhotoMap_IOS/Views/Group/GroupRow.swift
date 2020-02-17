@@ -8,7 +8,10 @@
 
 import SwiftUI
 import URLImage
+import FirebaseDatabase
+
 struct GroupRow: View {
+    @State var badgeCounter: Int = 0
     var group: MapData
     var body: some View {
         HStack{
@@ -19,16 +22,17 @@ struct GroupRow: View {
                         .frame(width: 50, height: 50)
                 }
                 
-                //                ZStack {
-                //                    Circle()
-                //                        .frame(width: 20, height: 20)
-                //                        .foregroundColor(.red)
-                //                    Text("1")
-                //                        .foregroundColor(.white)
-                //                }
-                //                .frame(width: 15, height: 15)
-                //                .foregroundColor(.red)
-                //                .offset(x: 20, y: -20)
+                ZStack {
+                    Circle()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.red)
+                    Text(String(badgeCounter))
+                        .foregroundColor(.white)
+                }
+                .opacity(self.badgeCounter != 0 ? 1 : 0)
+                .frame(width: 15, height: 15)
+                .foregroundColor(.red)
+                .offset(x: 20, y: -20)
             }
             VStack(alignment: .leading) {
                 Text(verbatim: "\(group.name!)")
@@ -44,6 +48,16 @@ struct GroupRow: View {
                 .frame(width: 20, height: 20)
                 .foregroundColor(.yellow)
                 .opacity(UserSettings.shared.userInfo?.data?.primary == group.mid ? 1 : 0)
+        }
+        .onAppear(){
+            let midRep = Database.database().reference().child("maps")
+            midRep.observe(DataEventType.value, with: { snapShot in
+                print("observed!!")
+                let curMid = self.group.mid!
+                let remoteDic = snapShot.value as? [String : AnyObject] ?? [:]
+                let localDic = UserSettings.shared.getDictionary(key: "midList")
+                self.badgeCounter = (remoteDic[curMid] as! Int) - (localDic[curMid] as! Int)
+            })
         }
     }
 }

@@ -17,7 +17,6 @@
 		9712887923EA7CED00DBB233 /* YPImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976E636E23E401A300246541 /* YPImagePicker.framework */; };
 		9716581623D36E8C000C10DF /* UserLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716581523D36E8C000C10DF /* UserLogout.swift */; };
 		971B35DF23DAF76800689C96 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971B35DE23DAF76800689C96 /* ImagePicker.swift */; };
-		97224E1F23F3FA12007F2F91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97224E1E23F3FA12007F2F91 /* GoogleService-Info.plist */; };
 		9725067D23EAE993004D8EBD /* SetRepresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725067C23EAE993004D8EBD /* SetRepresent.swift */; };
 		972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972B0FDE23C865C400BF1F65 /* KoreaMap.swift */; };
 		973281D823D02D1800153874 /* AddGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973281D723D02D1800153874 /* AddGroup.swift */; };
@@ -30,6 +29,9 @@
 		9741C1DA23F117C600E8A7C8 /* KakaoCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D723F117C500E8A7C8 /* KakaoCommon.framework */; };
 		9741C1DB23F117C600E8A7C8 /* KakaoMessageTemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */; };
 		9741C1DC23F117C600E8A7C8 /* KakaoLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9741C1D923F117C600E8A7C8 /* KakaoLink.framework */; };
+		974C93CE23FA648000D01252 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 974C93CD23FA648000D01252 /* GoogleService-Info.plist */; };
+		974C93D023FA915700D01252 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974C93CF23FA915700D01252 /* Map.swift */; };
+		974C93D223FA91D600D01252 /* Represent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974C93D123FA91D600D01252 /* Represent.swift */; };
 		9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586023C1B17800BF54E5 /* AppDelegate.swift */; };
 		9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9750586223C1B17800BF54E5 /* SceneDelegate.swift */; };
 		9750586623C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */; };
@@ -73,7 +75,6 @@
 		970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginButton.swift; sourceTree = "<group>"; };
 		9716581523D36E8C000C10DF /* UserLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogout.swift; sourceTree = "<group>"; };
 		971B35DE23DAF76800689C96 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		97224E1E23F3FA12007F2F91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9725067C23EAE993004D8EBD /* SetRepresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRepresent.swift; sourceTree = "<group>"; };
 		972B0FDE23C865C400BF1F65 /* KoreaMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaMap.swift; sourceTree = "<group>"; };
 		973281D723D02D1800153874 /* AddGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroup.swift; sourceTree = "<group>"; };
@@ -87,6 +88,9 @@
 		9741C1D723F117C500E8A7C8 /* KakaoCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoCommon.framework; sourceTree = "<group>"; };
 		9741C1D823F117C500E8A7C8 /* KakaoMessageTemplate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoMessageTemplate.framework; sourceTree = "<group>"; };
 		9741C1D923F117C600E8A7C8 /* KakaoLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoLink.framework; sourceTree = "<group>"; };
+		974C93CD23FA648000D01252 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		974C93CF23FA915700D01252 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		974C93D123FA91D600D01252 /* Represent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Represent.swift; sourceTree = "<group>"; };
 		974F645823E4056E00F798B0 /* PryntTrimmerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PryntTrimmerView.framework; path = Carthage/Build/iOS/PryntTrimmerView.framework; sourceTree = "<group>"; };
 		974F645923E4056E00F798B0 /* Stevia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stevia.framework; path = Carthage/Build/iOS/Stevia.framework; sourceTree = "<group>"; };
 		9750585D23C1B17800BF54E5 /* PhotoMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +210,7 @@
 		9750585F23C1B17800BF54E5 /* PhotoMap_IOS */ = {
 			isa = PBXGroup;
 			children = (
-				97224E1E23F3FA12007F2F91 /* GoogleService-Info.plist */,
+				974C93CD23FA648000D01252 /* GoogleService-Info.plist */,
 				9735596A23F3E830006B7A97 /* PhotoMap.entitlements */,
 				9750586023C1B17800BF54E5 /* AppDelegate.swift */,
 				9750586223C1B17800BF54E5 /* SceneDelegate.swift */,
@@ -249,10 +253,12 @@
 		97528EF023C771ED00B999B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				978FBC1723D08E14009998E5 /* UserInfo.swift */,
 				978FBC1923D09901009998E5 /* UserSettings.swift */,
 				9798B19723C80B4100AB6E4F /* UserGroup.swift */,
+				974C93CF23FA915700D01252 /* Map.swift */,
+				974C93D123FA91D600D01252 /* Represent.swift */,
 				975F469B23CA22DC0044C6AA /* Feed.swift */,
-				978FBC1723D08E14009998E5 /* UserInfo.swift */,
 				97E452B623F2C8F60073B89A /* AppNotice.swift */,
 			);
 			path = Models;
@@ -399,7 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9750587023C1B17900BF54E5 /* LaunchScreen.storyboard in Resources */,
-				97224E1F23F3FA12007F2F91 /* GoogleService-Info.plist in Resources */,
+				974C93CE23FA648000D01252 /* GoogleService-Info.plist in Resources */,
 				9750586D23C1B17900BF54E5 /* Preview Assets.xcassets in Resources */,
 				9750586A23C1B17900BF54E5 /* Assets.xcassets in Resources */,
 			);
@@ -476,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9716581623D36E8C000C10DF /* UserLogout.swift in Sources */,
+				974C93D223FA91D600D01252 /* Represent.swift in Sources */,
 				9725067D23EAE993004D8EBD /* SetRepresent.swift in Sources */,
 				978FBC1123D07CC0009998E5 /* NetworkURL.swift in Sources */,
 				9773017B23C7099700E3CE99 /* MainMapView.swift in Sources */,
@@ -485,6 +492,7 @@
 				973F6A3A23CF0487008C4EEC /* ButtonViews.swift in Sources */,
 				9750586123C1B17800BF54E5 /* AppDelegate.swift in Sources */,
 				97C4194023F4FEA10031E7FC /* UserWithdrawal.swift in Sources */,
+				974C93D023FA915700D01252 /* Map.swift in Sources */,
 				975F469A23CA22500044C6AA /* FeedPreviewDetail.swift in Sources */,
 				978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */,
 				975F469823CA1D760044C6AA /* FeedDetail.swift in Sources */,
