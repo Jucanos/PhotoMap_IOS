@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 import Request
+import FirebaseDatabase
 
 struct MapDetail: Codable{
     var data: MapData?
@@ -48,6 +49,16 @@ class MapStore: ObservableObject {
         }.onObject{ map in
             DispatchQueue.main.async {
                 self.mapData = map.data!
+                let midRef = Database.database().reference(withPath: "maps/" + self.mapData.mid!)
+                midRef.observeSingleEvent(of: .value, with: { snapShot in
+                    // 1. Local Update
+                    var localDic = UserSettings.shared.getDictionary(key: "midList")
+                    localDic[self.mapData.mid!] = snapShot.value as AnyObject?
+                    UserSettings.shared.saveDictionary(dict: localDic, key: "midList")
+                    // 2. Remote Update
+                    let usrRef = Database.database().reference(withPath:"users/" +  (UserSettings.shared.userInfo?.data?.uid!)!).child(self.mapData.mid!)
+                    usrRef.setValue(snapShot.value)
+                })
             }
         }.onError{ error in
             print(error.self)

@@ -8,6 +8,8 @@
 
 import SwiftUI
 import URLImage
+import FirebaseDatabase
+
 struct GroupRow: View {
     @State var badgeCounter: Int = 0
     var group: MapData
@@ -48,7 +50,14 @@ struct GroupRow: View {
                 .opacity(UserSettings.shared.userInfo?.data?.primary == group.mid ? 1 : 0)
         }
         .onAppear(){
-            self.badgeCounter += 1
+            let midRep = Database.database().reference().child("maps")
+            midRep.observe(DataEventType.value, with: { snapShot in
+                print("observed!!")
+                let curMid = self.group.mid!
+                let remoteDic = snapShot.value as? [String : AnyObject] ?? [:]
+                let localDic = UserSettings.shared.getDictionary(key: "midList")
+                self.badgeCounter = (remoteDic[curMid] as! Int) - (localDic[curMid] as! Int)
+            })
         }
     }
 }

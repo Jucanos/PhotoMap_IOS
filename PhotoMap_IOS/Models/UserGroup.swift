@@ -174,5 +174,3 @@ class UserGroupStore: ObservableObject {
         return newArr
     }
 }
-
-
