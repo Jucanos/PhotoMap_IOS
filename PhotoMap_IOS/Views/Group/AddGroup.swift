@@ -26,7 +26,7 @@ struct AddGroup: View {
             VStack {
                 SubAddGroup(menuClose: menuClose)
                     .frame(height: 100)
-                    .background(Color.white)
+                    .background(Color(appColor))
                     .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
                     .animation(.easeInOut(duration: 0.4))
                 Spacer()
@@ -50,7 +50,7 @@ struct SubAddGroup: View {
         VStack(spacing: 0) {
             Text("그룹 추가하기")
                 .font(.title)
-                .fontWeight(.semibold)
+                .foregroundColor(.white)
             HStack{
                 TextField("그룹 이름을 입력하세요", text: $groupName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -67,6 +67,7 @@ struct SubAddGroup: View {
                     Image(systemName: "plus.square")
                         .resizable()
                         .frame(width: 30, height: 30)
+                        .foregroundColor(.white)
                 }
             }
         .padding()
