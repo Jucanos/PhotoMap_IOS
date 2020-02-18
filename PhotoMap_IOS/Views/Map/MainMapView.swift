@@ -21,7 +21,7 @@ struct MainMapView: View {
         }
         .onAppear(){
             if self.userSettings.userInfo?.data?.primary != nil {
-                self.mapStore.loadMapDetail(mid: (self.userSettings.userInfo?.data?.primary!)!, userTocken: self.userSettings.userTocken!)
+                self.mapStore.loadMapDetail(mid: (self.userSettings.userInfo?.data?.primary!)!)
             }
         }
         

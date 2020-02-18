@@ -8,9 +8,15 @@
 
 import SwiftUI
 import FirebaseDatabase
-
+import Combine
 class FireBaseBackMid: ObservableObject {
-    @Published var mids: Dictionary<String, AnyObject> = [:]
+    let objectWillChange = ObservableObjectPublisher()
+    @Published var mids: Dictionary<String, AnyObject> = [:] {
+        willSet {
+            print("will reload View at FirebaseBackMid!!!")
+            objectWillChange.send()
+        }
+    }
     var ref = DatabaseReference()
     init() {}
     static let shared: FireBaseBackMid = FireBaseBackMid()

@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import FirebaseDatabase
 
 struct GroupDetail: View {
     
     var groupData: MapData
+    @State var ref = DatabaseReference()
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var userSettings: UserSettings
     @State private var menuOpen = false
@@ -28,7 +30,6 @@ struct GroupDetail: View {
                                 Image(systemName: "line.horizontal.3")
                                     .resizable()
                                     .frame(width: 20, height: 20)
-//                                    .foregroundColor(.white)
                             }
                     )
                         .navigationBarTitle("\(groupData.name!)", displayMode: .inline)
@@ -58,27 +59,18 @@ struct GroupDetail: View {
             }
             
         }
-    
         .onAppear(){
-            self.mapStore.loadMapDetail(mid: self.groupData.mid!, userTocken: self.userSettings.userTocken!)
+            self.ref = Database.database().reference(withPath: "maps").child(self.groupData.mid!)
+            self.ref.observe(DataEventType.value, with: { snapShot in
+                print("at groupDetail callback")
+                FireBaseBackMid.shared.syncUpdateNumber(mid: self.groupData.mid!, value: snapShot.value as! Int)
+                self.mapStore.loadMapDetail(mid: self.groupData.mid!)
+            })
         }
-        
-        
+        .onDisappear(){
+            self.ref.removeAllObservers()
+        }
     }
-    
-//    var backButton : some View {
-//        Button(action: {
-//            self.presentationMode.wrappedValue.dismiss()
-//        }) {
-//            HStack {
-//                Image(systemName: "arrow.left")
-//                    .resizable()
-//                    .foregroundColor(.white)
-//                    .frame(width: 20, height: 20)
-//                
-//            }
-//        }
-//    }
     
     var mainButton: some View {
         Image(systemName: "plus.circle.fill")
