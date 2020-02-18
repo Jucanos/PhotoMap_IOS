@@ -44,14 +44,17 @@ class UserSettings: ObservableObject {
             Method(.get)
             Header.Authorization(.bearer(self.userTocken!))
         }.onObject { usrInfo in
+            print(usrInfo)
             DispatchQueue.main.async {
-                self.getFirebaseBackup(uid: (usrInfo.data?.uid!)!) {
-                    print("get firebase backup success!")
-                    self.userInfo = usrInfo
-                    Messaging.messaging().subscribe(toTopic: (self.userInfo?.data?.uid!)!) { error in
-                        print(error.debugDescription)
-                    }
-                }
+//                self.getFirebaseBackup(uid: (usrInfo.data?.uid!)!) {
+//                    print("get firebase backup success!")
+//                    self.userInfo = usrInfo
+//                    Messaging.messaging().subscribe(toTopic: (self.userInfo?.data?.uid!)!) { error in
+//                        print(error.debugDescription)
+//                    }
+//                }
+                self.userInfo = usrInfo
+                FireBaseBackMid.shared.initObserve(uid: (usrInfo.data?.uid!)!)
             }
         }
         .onError { error in
@@ -139,10 +142,14 @@ class UserSettings: ObservableObject {
         let ref = Database.database().reference()
         ref.child("users").child(uid).observeSingleEvent(of: .value, with: { snapShot in
             let mapDic = snapShot.value as? Dictionary<String, AnyObject>
-            if self.saveDictionary(dict: mapDic!, key: "midList") {
+            if mapDic == nil {
                 handler()
-            } else{
-                print("save mid list failed!")
+            }else{
+                if self.saveDictionary(dict: mapDic!, key: "midList") {
+                    handler()
+                } else{
+                    print("save mid list failed!")
+                }
             }
         })
     }
