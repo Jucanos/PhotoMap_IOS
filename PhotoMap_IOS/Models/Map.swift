@@ -40,30 +40,19 @@ class MapStore: ObservableObject {
         mapData.owners = []
     }
     
-    func loadMapDetail(mid: String, userTocken: String) {
+    func loadMapDetail(mid: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
         AnyRequest<MapDetail> {
             Url(url)
             Method(.get)
-            Header.Authorization(.bearer(userTocken))
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ map in
+            print("map loadid!")
             DispatchQueue.main.async {
                 self.mapData = map.data!
-                let midRef = Database.database().reference(withPath: "maps/" + self.mapData.mid!)
-                midRef.observeSingleEvent(of: .value, with: { snapShot in
-                    // 1. Local Update
-                    var localDic = UserSettings.shared.getDictionary(key: "midList")
-                    localDic[self.mapData.mid!] = snapShot.value as AnyObject?
-                    UserSettings.shared.saveDictionary(dict: localDic, key: "midList")
-                    // 2. Remote Update
-                    let usrRef = Database.database().reference(withPath:"users/" +  (UserSettings.shared.userInfo?.data?.uid!)!).child(self.mapData.mid!)
-                    usrRef.setValue(snapShot.value)
-                })
             }
         }.onError{ error in
             print(error.self)
-        }.onData{ data in
-            print(data)
         }
         .call()
     }
