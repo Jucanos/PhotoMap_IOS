@@ -18,6 +18,7 @@ struct MainGroupView: View {
     @State var showActionsheet = false
     @State var showSheet = false
     @State var selectedGroup: MapData?
+    @State var activateNavi = false
     
     var body: some View {
         Group{
@@ -35,19 +36,24 @@ struct MainGroupView: View {
                                     .shadow(radius: 5)
                                 GroupRow(group: group)
                                     .padding()
-                                    .onLongPressGesture {
-                                        self.showActionsheet = true
-                                        self.selectedGroup = group
-                                }
-                                NavigationLink(destination: GroupDetail(groupData: group, isSideMenuActive: self.$isSideMenuActive)){
-                                    EmptyView()
-                                }
-                                .buttonStyle(PlainButtonStyle())
                             }
                             .listRowInsets(.init(top: 30, leading: 10, bottom: 0, trailing: 10))
+                            .onTapGesture {
+                                self.selectedGroup = group
+                                self.activateNavi = true
+                                print("tapped!")
+                            }
+                            .onLongPressGesture {
+                                self.showActionsheet = true
+                                self.selectedGroup = group
+                            }
+                            
                         }
-                        .onDelete(perform: deleteGroup)
                     }
+                    NavigationLink(destination: GroupDetail(groupData: self.selectedGroup, isSideMenuActive: self.$isSideMenuActive), isActive: self.$activateNavi){
+                        Text("")
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
                 .actionSheet(isPresented: self.$showActionsheet) {
                     ActionSheet(title: Text(""), buttons: [

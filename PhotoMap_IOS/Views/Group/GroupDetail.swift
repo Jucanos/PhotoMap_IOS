@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 struct GroupDetail: View {
     
-    var groupData: MapData
+    var groupData: MapData?
     @State var ref = DatabaseReference()
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var userSettings: UserSettings
@@ -35,7 +35,7 @@ struct GroupDetail: View {
                                     .resizable()
                                     .frame(width: 20, height: 20)
                         })
-                        .navigationBarTitle("\(groupData.name!)", displayMode: .inline)
+                        .navigationBarTitle("\((groupData?.name!)!)", displayMode: .inline)
                         .scaleEffect(self.scale)
                         .offset(x: self.currentPosition.width, y: self.currentPosition.height)
                         .gesture(MagnificationGesture()
@@ -85,11 +85,11 @@ struct GroupDetail: View {
             
         }
         .onAppear(){
-            self.ref = Database.database().reference(withPath: "maps").child(self.groupData.mid!)
+            self.ref = Database.database().reference(withPath: "maps").child((self.groupData?.mid!)!)
             self.ref.observe(DataEventType.value, with: { snapShot in
                 print("at groupDetail callback")
-                FireBaseBackMid.shared.syncUpdateNumber(mid: self.groupData.mid!, value: snapShot.value as! Int)
-                self.mapStore.loadMapDetail(mid: self.groupData.mid!)
+                FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
+                self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!)
             })
         }
         .onDisappear(){

@@ -22,15 +22,15 @@ struct PageViewController: UIViewControllerRepresentable {
             navigationOrientation: .horizontal)
         pageViewController.dataSource = context.coordinator
         pageViewController.delegate = context.coordinator
+        pageViewController.setViewControllers(
+            [controllers[currentPage]], direction: .forward, animated: true)
         
         return pageViewController
     }
     
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
-        
-        pageViewController.setViewControllers(
-            [controllers[currentPage]], direction: .forward, animated: true)
-        
+        //        pageViewController.setViewControllers(
+        //            [controllers[currentPage]], direction: .forward, animated: true)
     }
     
     class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
