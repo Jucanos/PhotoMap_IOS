@@ -44,27 +44,24 @@ public struct FloatingButton: View {
     fileprivate var endAngle: Double = 2 * .pi
     fileprivate var radius: Double?
     
-    @State private var isOpen: Bool = false
+    @Binding private var isOpen: Bool
     @State private var coords: [CGPoint] = []
     @State private var alignmentOffsets: [CGSize] = []
     @State private var initialPositions: [CGPoint] = [] // if there is initial offset
     @State private var sizes: [CGSize] = []
     @State private var mainButtonFrame = CGRect()
     
-    @Binding var isButtonActivate: Bool
-    
-    
-    fileprivate init(mainButtonView: AnyView, buttons: [SubmenuButton], isButtonActivate: Binding<Bool>) {
+    fileprivate init(mainButtonView: AnyView, buttons: [SubmenuButton], isOpen: Binding<Bool>) {
         self.mainButtonView = mainButtonView
         self.buttons = buttons
-        self._isButtonActivate = isButtonActivate
+        self._isOpen = isOpen
     }
     
-    public init(mainButtonView: AnyView, buttons: [AnyView], isButtonActivate: Binding<Bool>) {
+    public init(mainButtonView: AnyView, buttons: [AnyView], isOpen: Binding<Bool>) {
         self.mainButtonView = mainButtonView
         self.buttons = buttons.map{ SubmenuButton(buttonView: $0)
         }
-        self._isButtonActivate = isButtonActivate
+        self._isOpen = isOpen
     }
     
     public var body: some View {
@@ -88,7 +85,6 @@ public struct FloatingButton: View {
             
             Button(action: {
                 self.isOpen.toggle()
-                self.isButtonActivate.toggle()
             }) {
                 mainButtonView
             }
@@ -198,7 +194,7 @@ public struct FloatingButton: View {
     }
     
     public func copy() -> Self {
-        var button = FloatingButton(mainButtonView: self.mainButtonView, buttons: self.buttons, isButtonActivate: self.$isButtonActivate)
+        var button = FloatingButton(mainButtonView: self.mainButtonView, buttons: self.buttons, isOpen: self.$isOpen)
         button.menuType = self.menuType
         button.spacing = self.spacing
         button.initialScaling = self.initialScaling

@@ -14,10 +14,11 @@ struct KoreaMap: View {
     @State var selected: Int? = 0
     @State var selectedLoc: String?
     @State var showActionSheet: Bool = false
+    
     var body: some View {
         GeometryReader { gr in
             ZStack {
-                Group {
+                Group{
                     BackImage(mapImage: "chungbuk", masterSize: CGSize(width: 140,height: 140))
                         .offset(x: 12.4, y: -57.3)
                     BackImage(mapImage: "chungnam", masterSize: CGSize(width: 135,height: 130))
@@ -25,12 +26,14 @@ struct KoreaMap: View {
                     BackImage(mapImage: "gangwon", masterSize: CGSize(width: 215,height: 215))
                         .offset(x: 35, y: -158)
                     BackImage(mapImage: "gyeongbuk", masterSize: CGSize(width: 170,height: 180))
-                        .offset(x: 73, y: -26)
+                    .offset(x: 73, y: -26)
+                }
+                Group {
                     BackImage(mapImage: "gyeonggi", masterSize: CGSize(width: 125,height: 150))
                         .offset(x: -50, y: -151)
                     BackImage(mapImage: "gyeongnam", masterSize: CGSize(width: 175,height: 130))
                         .offset(x: 59, y: 64)
-                    BackImage(mapImage: "jeju", masterSize: CGSize(width: 90,height: 60))
+                    BackImage(mapImage: "jeju", masterSize: CGSize(width: 150,height: 100))
                         .offset(x: -62, y: 215)
                     BackImage(mapImage: "jeonbuk", masterSize: CGSize(width: 145,height: 120))
                         .offset(x: -49, y: 32)
@@ -69,7 +72,7 @@ struct KoreaMap: View {
                 }
                 Group{
                     NavigationLink(destination: SetRepresent(mapKey: self.$selectedLoc), tag: 10, selection: self.$selected) {
-                    EmptyView()
+                        EmptyView()
                     }
                 }
                 TouchHandler(num: self.$selected, selectedLoc: self.$selectedLoc, showActionSheet: self.$showActionSheet, masterViewSize: gr.size)
@@ -96,22 +99,29 @@ struct BackImage: View {
     @EnvironmentObject var mapStore: MapStore
     @State var mapImage: String
     var masterSize: CGSize
-//    @State var maskImage: String?
+    //    @State var maskImage: String?
     var body: some View {
         Group{
             if mapStore.mapData.represents?.getStr(location: mapImage) == nil{
                 Image(mapImage)
                     .scaledToFit()
             }else{
-                URLImage(URL(string: (mapStore.mapData.represents?.getStr(location: mapImage))!)!){ proxy in
-                    proxy.image
+                ZStack{
+                    URLImage(URL(string: (mapStore.mapData.represents?.getStr(location: mapImage))!)!){ proxy in
+                        proxy.image
+                            .resizable()
+                            .frame(width: self.masterSize.width, height: self.masterSize.height)
+                            .scaledToFit()
+                            .mask(Image(self.mapImage)
+                                .resizable()
+                                .frame(width: self.masterSize.width, height: self.masterSize.height)
+                                .scaledToFit())
+                    }
+                    .shadow(color: .gray, radius: 2)
+                    Image(self.mapImage + "White")
                     .resizable()
                     .frame(width: self.masterSize.width, height: self.masterSize.height)
                     .scaledToFit()
-                        .mask(Image(self.mapImage)
-                        .resizable()
-                        .frame(width: self.masterSize.width, height: self.masterSize.height)
-                        .scaledToFit())
                 }
             }
         }

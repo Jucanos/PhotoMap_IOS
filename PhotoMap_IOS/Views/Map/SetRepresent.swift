@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-
-
 struct SetRepresent: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var selectedBaseImage: UIImage? = nil
@@ -45,7 +43,9 @@ struct AdjustImage: View {
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var userSettings: UserSettings
     @State private var rotationState: Double = 0
+    @State private var lastRotationState: Double = 0
     @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
     @State private var currentPosition: CGSize = .zero
     @State private var newPosition: CGSize = .zero
     @Binding var targetImage: UIImage?
@@ -61,12 +61,23 @@ struct AdjustImage: View {
             .scaleEffect(scale)
             .offset(x: self.currentPosition.width, y: self.currentPosition.height)
             .gesture(MagnificationGesture()
-                .onChanged{ value in
-                    self.scale = value.magnitude
+                .onChanged { val in
+                    let delta = val / self.lastScale
+                    self.lastScale = val
+                    let newScale = self.scale * delta
+                    self.scale = newScale
+            }
+            .onEnded { _ in
+                self.lastScale = 1.0
             })
             .simultaneousGesture(RotationGesture()
                 .onChanged{ value in
-                    self.rotationState = value.degrees
+                    let diff = value.degrees - self.lastRotationState
+                    self.lastRotationState = value.degrees
+                    self.rotationState += diff
+            }
+            .onEnded{ _ in
+                self.lastRotationState = .zero
             })
             .simultaneousGesture(DragGesture()
                 .onChanged { value in
@@ -74,7 +85,6 @@ struct AdjustImage: View {
             }
             .onEnded { value in
                 self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
-                print(self.newPosition.width)
                 self.newPosition = self.currentPosition
             })
         
@@ -119,7 +129,7 @@ struct AdjustImage: View {
                 self.mapStore.setRepresentImage(cityKey: self.location, userTocken: self.userSettings.userTocken!, image: newImage){
                     self.presentationMode.wrappedValue.dismiss()
                 }
-//                self.presentationMode.wrappedValue.dismiss()
+                //                self.presentationMode.wrappedValue.dismiss()
                 
             }) {
                 Text("확인")
