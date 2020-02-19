@@ -12,10 +12,11 @@ let appColor = UIColor(red: 0.149, green: 0.667, blue: 0.439, alpha: 1)
 
 struct SplashView: View {
     @ObservedObject var userSettings = UserSettings.shared
+    @ObservedObject var fbBackMid = FireBaseBackMid.shared
     
     var body: some View {        
         return Group {
-            if self.userSettings.isValid() {
+            if self.userSettings.isValid() && fbBackMid.isValid() {
                 MainTabView().environmentObject(MapStore()).environmentObject(FeedStore())
             }
             else {

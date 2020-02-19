@@ -11,7 +11,7 @@ import FirebaseDatabase
 import Combine
 class FireBaseBackMid: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    @Published var mids: Dictionary<String, AnyObject> = [:] {
+    @Published var mids: Dictionary<String, AnyObject>? {
         willSet {
             print("will reload View at FirebaseBackMid!!!")
             objectWillChange.send()
@@ -20,6 +20,10 @@ class FireBaseBackMid: ObservableObject {
     var ref = DatabaseReference()
     init() {}
     static let shared: FireBaseBackMid = FireBaseBackMid()
+    
+    func isValid() -> Bool {
+        return self.mids != nil ? true : false
+    }
     
     func initObserve(uid: String) {
         ref = Database.database().reference(withPath: "users/" + uid)
@@ -30,7 +34,7 @@ class FireBaseBackMid: ObservableObject {
     }
     
     func getUpdateNumber(mid: String) -> Int{
-        return mids[mid] as! Int
+        return mids![mid] as! Int
     }
     
     func syncUpdateNumber(mid: String, value: Int) {
