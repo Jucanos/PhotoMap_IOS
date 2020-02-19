@@ -19,20 +19,23 @@ struct FeedPreviewDetail: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
+            // User Profile
             HStack{
-                Image("pro_test")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 60, height: 60)
-                    .clipShape(Circle())
-                    .shadow(radius: 3)
-                    .overlay(Circle().stroke(Color.pink, lineWidth: 1))
-                    .padding(.leading, 5)
+                URLImage(URL(string: (UserSettings.shared.userInfo?.data?.thumbnail!)!)!) { proxy in
+                    proxy.image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .shadow(radius: 3)
+                        .overlay(Circle().stroke(Color(appColor), lineWidth: 1))
+                        .padding(.leading, 5)
+                }
                 
                 VStack(alignment: .leading){
-                    Text("User").font(.headline)
-                    Text("Upload at \(feedData.createdAt!)").foregroundColor(Color(.lightGray)).font(.subheadline)
+                    Text((UserSettings.shared.userInfo?.data?.nickname!)!).font(.headline)
+                    Text("Upload at \(feedData.updatedAt!)").foregroundColor(Color(.lightGray)).font(.subheadline)
                 }
                 
                 Spacer()
@@ -49,6 +52,7 @@ struct FeedPreviewDetail: View {
                 .padding(.trailing, 5)
             }
             
+            // Image PageView
             if self.feedData.files.count == 1{
                 URLImage(URL(string: self.feedData.files.first!!)!){ proxy in
                     proxy.image.resizable()
@@ -56,47 +60,14 @@ struct FeedPreviewDetail: View {
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             } else{
                 PageView(self.feedData.getImageViews())
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             }
             
-            
-            
-            HStack{
-                Button(action: {}){
-                    Image(systemName:"heart")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.black)
-                }.padding(.leading, 5)
-                
-                Button(action: {}){
-                    Image(systemName:"message")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.black)
-                }.padding(.leading, 5)
-                
-                Button(action: {}){
-                    Image(systemName: "location")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.black)
-                }.padding(.leading, 5)
-                
-                Spacer()
-                
-                Button(action: {}){
-                    Image(systemName:"flag")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.black)
-                }.padding(.trailing, 5)
-            }
-            
+            // Title & Context
             VStack(alignment: .leading){
                 Text("\(feedData.title!)")
                 Text("\(feedData.context!)").foregroundColor(Color(.lightGray)).font(.subheadline)
-            }.padding(.leading, 5)
+            }.padding(.leading, 10)
         }
     }
 }

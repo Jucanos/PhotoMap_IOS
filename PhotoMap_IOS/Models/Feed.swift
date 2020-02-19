@@ -39,7 +39,6 @@ struct FeedData: Codable {
             }
             images.append(item)
         }
-        
         return images
     }
 }

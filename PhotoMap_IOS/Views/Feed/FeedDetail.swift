@@ -23,7 +23,7 @@ struct FeedDetail: View {
             VStack(alignment: .leading, spacing: 2){
                 ForEach(feedStore.feedData, id: \.sid) { item in
                     FeedPreviewDetail(showFeedOption: self.$showFeedOption, selectedFeed: self.$selectedFeed, feedData: item)
-                        .padding(.bottom, 20)
+                        .padding(.top, 10)
                 }
             }
         }
