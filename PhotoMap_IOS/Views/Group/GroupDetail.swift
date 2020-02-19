@@ -62,21 +62,22 @@ struct GroupDetail: View {
                             Spacer().layoutPriority(10)
                             HStack {
                                 Spacer().layoutPriority(10)
-                                FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepMapButton)], isButtonActivate: self.$isButtonActivate)
+                                FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepMapButton)], isOpen: self.$isButtonActivate)
                                     .straight()
                                     .direction(.top)
                                     .alignment(.right)
                                     .spacing(10)
                                     .initialOpacity(0)
+                                    .offset(y: -15)
                                     .padding()
                             }
                         }
                     }
+                    .edgesIgnoringSafeArea(.bottom)
                     .onTapGesture {
                         self.isButtonActivate.toggle()
                     }
                 }
-                
             }
             else{
                 Text("Loading mapdata...")
@@ -97,33 +98,36 @@ struct GroupDetail: View {
     }
     
     var mainButton: some View {
-        Image(systemName: "plus.circle.fill")
+        ZStack{
+            Circle().foregroundColor(Color(appColor))
+            Image(systemName: "plus.circle.fill")
             .resizable()
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
-        
+            .foregroundColor(.white)
+        }
+        .frame(width: 60, height: 60)
+        .shadow(radius: 2)
     }
     
     var setRepMapButton: some View {
         Button(action: {
             print("try to set REPMAP")
             self.userSettings.setRepresentMap(mid: self.mapStore.mapData.mid!){
-                self.isButtonActivate = false
+                self.isButtonActivate.toggle()
             }
         }) {
-            IconAndTextButton(imageName: "map.fill", buttonText: "대표지도 설정")
+            IconAndTextButton(imageName: "mappin.and.ellipse", buttonText: "대표지도 설정")
         }
     }
     
     var storeImageButton: some View {
         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-            IconAndTextButton(imageName: "square.and.arrow.down.fill", buttonText: "이미지로 저장하기")
+            IconAndTextButton(imageName: "photo", buttonText: "이미지로 저장하기")
         }
     }
     
     var shareButton: some View {
         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-            IconAndTextButton(imageName: "square.and.arrow.up.fill", buttonText: "공유하기")
+            IconAndTextButton(imageName: "square.and.arrow.up", buttonText: "공유하기")
         }
     }
 }
