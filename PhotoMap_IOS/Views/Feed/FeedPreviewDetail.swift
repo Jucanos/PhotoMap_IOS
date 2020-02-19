@@ -41,7 +41,7 @@ struct FeedPreviewDetail: View {
                 Spacer()
                 
                 Button(action: {
-                    self.showFeedOption = true
+                    self.showFeedOption.toggle()
                     self.selectedFeed = self.feedData
                 }){
                     Image("threeDots")
