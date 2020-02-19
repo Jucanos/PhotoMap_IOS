@@ -14,11 +14,11 @@ struct KoreaMap: View {
     @State var selected: Int? = 0
     @State var selectedLoc: String?
     @State var showActionSheet: Bool = false
-    @State var scale: CGFloat = 1.0
+    
     var body: some View {
         GeometryReader { gr in
             ZStack {
-                Group {
+                Group{
                     BackImage(mapImage: "chungbuk", masterSize: CGSize(width: 140,height: 140))
                         .offset(x: 12.4, y: -57.3)
                     BackImage(mapImage: "chungnam", masterSize: CGSize(width: 135,height: 130))
@@ -26,7 +26,9 @@ struct KoreaMap: View {
                     BackImage(mapImage: "gangwon", masterSize: CGSize(width: 215,height: 215))
                         .offset(x: 35, y: -158)
                     BackImage(mapImage: "gyeongbuk", masterSize: CGSize(width: 170,height: 180))
-                        .offset(x: 73, y: -26)
+                    .offset(x: 73, y: -26)
+                }
+                Group {
                     BackImage(mapImage: "gyeonggi", masterSize: CGSize(width: 125,height: 150))
                         .offset(x: -50, y: -151)
                     BackImage(mapImage: "gyeongnam", masterSize: CGSize(width: 175,height: 130))
@@ -87,14 +89,6 @@ struct KoreaMap: View {
                     .destructive(Text("취소"))
                 ])
             }
-            .scaleEffect(self.scale)
-            .gesture(MagnificationGesture()
-            .onChanged{ value in
-                self.scale = value.magnitude
-            })
-        }
-        .onAppear(){
-            self.scale = 1.0
         }
     }
 }

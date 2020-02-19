@@ -46,6 +46,7 @@ struct AdjustImage: View {
     @EnvironmentObject var userSettings: UserSettings
     @State private var rotationState: Double = 0
     @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
     @State private var currentPosition: CGSize = .zero
     @State private var newPosition: CGSize = .zero
     @Binding var targetImage: UIImage?
@@ -61,8 +62,14 @@ struct AdjustImage: View {
             .scaleEffect(scale)
             .offset(x: self.currentPosition.width, y: self.currentPosition.height)
             .gesture(MagnificationGesture()
-                .onChanged{ value in
-                    self.scale = value.magnitude
+                .onChanged { val in
+                    let delta = val / self.lastScale
+                    self.lastScale = val
+                    let newScale = self.scale * delta
+                    self.scale = newScale
+            }
+            .onEnded { _ in
+                self.lastScale = 1.0
             })
             .simultaneousGesture(RotationGesture()
                 .onChanged{ value in
@@ -119,7 +126,7 @@ struct AdjustImage: View {
                 self.mapStore.setRepresentImage(cityKey: self.location, userTocken: self.userSettings.userTocken!, image: newImage){
                     self.presentationMode.wrappedValue.dismiss()
                 }
-//                self.presentationMode.wrappedValue.dismiss()
+                //                self.presentationMode.wrappedValue.dismiss()
                 
             }) {
                 Text("확인")

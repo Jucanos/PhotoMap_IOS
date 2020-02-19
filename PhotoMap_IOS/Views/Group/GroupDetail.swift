@@ -17,6 +17,10 @@ struct GroupDetail: View {
     @EnvironmentObject var userSettings: UserSettings
     @State private var menuOpen = false
     @State private var isButtonActivate = false
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+    @State private var currentPosition: CGSize = .zero
+    @State private var newPosition: CGSize = .zero
     @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -30,9 +34,28 @@ struct GroupDetail: View {
                                 Image(systemName: "line.horizontal.3")
                                     .resizable()
                                     .frame(width: 20, height: 20)
-                            }
-                    )
+                        })
                         .navigationBarTitle("\(groupData.name!)", displayMode: .inline)
+                        .scaleEffect(self.scale)
+                        .offset(x: self.currentPosition.width, y: self.currentPosition.height)
+                        .gesture(MagnificationGesture()
+                            .onChanged { val in
+                                let delta = val / self.lastScale
+                                self.lastScale = val
+                                let newScale = self.scale * delta
+                                self.scale = newScale
+                        }
+                        .onEnded { _ in
+                            self.lastScale = 1.0
+                        })
+                        .simultaneousGesture(DragGesture()
+                            .onChanged { value in
+                                self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
+                        }
+                        .onEnded { value in
+                            self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
+                            self.newPosition = self.currentPosition
+                        })
                     ZStack {
                         Color(.black).opacity(isButtonActivate ? 0.7 : 0)
                         VStack {
@@ -53,6 +76,7 @@ struct GroupDetail: View {
                         self.isButtonActivate.toggle()
                     }
                 }
+                
             }
             else{
                 Text("Loading mapdata...")
