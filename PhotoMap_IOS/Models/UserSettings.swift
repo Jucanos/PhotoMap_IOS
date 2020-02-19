@@ -23,7 +23,7 @@ class UserSettings: ObservableObject {
         return self.userTocken != nil && self.userInfo != nil
     }
     
-    func getAuthFromServer() -> Void {
+    func getAuthFromServer(onEndHandler: @escaping () -> Void) -> Void {
         // 1. 카카오 세션이 유효한지 검사 후, 유효하면 tocken 참조
         guard let session = KOSession.shared() else {
             return
@@ -34,6 +34,7 @@ class UserSettings: ObservableObject {
         }
         if self.userTocken == nil{
             print("kakao tocken nil!!")
+            onEndHandler()
             return
         }
         
@@ -48,17 +49,19 @@ class UserSettings: ObservableObject {
             DispatchQueue.main.async {
                 self.userInfo = usrInfo
                 FireBaseBackMid.shared.initObserve(uid: (usrInfo.data?.uid!)!)
+                onEndHandler()
             }
         }
         .onError { error in
             if let stringError = String(data: error.error!, encoding: .utf8){
                 print(stringError)
             }
+            onEndHandler()
         }
         .call()
     }
     
-    func loginFromKakao() -> Void{
+    func loginFromKakao(handler: @escaping ()->Void) -> Void{
         guard let session = KOSession.shared() else {
             return
         }
@@ -68,7 +71,9 @@ class UserSettings: ObservableObject {
         
         session.open(completionHandler: { (error) -> Void in
             if error != nil || !session.isOpen() {return}
-            self.getAuthFromServer()
+            self.getAuthFromServer(){
+                handler()
+            }
         })
     }
     func userLogout() -> Void {
