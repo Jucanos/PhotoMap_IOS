@@ -46,7 +46,7 @@ struct FeedData: Codable {
 
 class FeedStore: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    var feedData: [FeedData] = [] {
+    var feedData: [FeedData]? {
         willSet{
             objectWillChange.send()
         }
@@ -59,7 +59,7 @@ class FeedStore: ObservableObject {
             Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ feeds in
             DispatchQueue.main.async {
-                self.feedData = feeds.data as! [FeedData]
+                self.feedData = feeds.data as? [FeedData]
                 completionHandler()
             }
         }.onError{ error in
@@ -156,10 +156,10 @@ class FeedStore: ObservableObject {
     }
     func modifyFeed(sid: String, title: String, context: String){
         var idx = 0
-        for item in self.feedData{
+        for item in self.feedData!{
             if item.sid == sid{
-                feedData[idx].title = title
-                feedData[idx].context = context
+                feedData![idx].title = title
+                feedData![idx].context = context
                 return
             }
             idx += 1
@@ -189,9 +189,9 @@ class FeedStore: ObservableObject {
     
     func deleteFeed(sid: String) {
         var idx = 0
-        for item in self.feedData {
+        for item in self.feedData! {
             if item.sid == sid {
-                feedData.remove(at: idx)
+                feedData!.remove(at: idx)
                 return
             }
             idx += 1
