@@ -18,7 +18,7 @@ struct UserGroup: Codable{
 class UserGroupStore: ObservableObject {
     
     let objectWillChange = ObservableObjectPublisher()
-    var mapData: [MapData] = []{
+    var mapData: [MapData]?{
         willSet{
             objectWillChange.send()
         }
@@ -26,13 +26,13 @@ class UserGroupStore: ObservableObject {
     
     static let shared: UserGroupStore = UserGroupStore()
     
-    func loadMaps(userTocken: String) {
+    func loadMaps() {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
         print("try to road")
         AnyRequest<UserGroup> {
             Url(url)
             Method(.get)
-            Header.Authorization(.bearer(userTocken))
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ groups in
             print(groups)
             DispatchQueue.main.async {
@@ -58,7 +58,8 @@ class UserGroupStore: ObservableObject {
         }.onObject{ newGroup in
             print("add new group to server success!!")
             DispatchQueue.main.async {
-                self.mapData.append(newGroup.data!)
+//                self.mapData.append(newGroup.data!)
+                self.loadMaps()
                 completionHandler()
             }
             
@@ -100,7 +101,7 @@ class UserGroupStore: ObservableObject {
         }.onData{ data in
             print("group name change success!")
             DispatchQueue.main.async {
-                self.loadMaps(userTocken: UserSettings.shared.userTocken!)
+                self.loadMaps()
                 handler()
             }
         }.onError{ error in
@@ -124,7 +125,7 @@ class UserGroupStore: ObservableObject {
             }
         }.onData{ data in
             print("join success")
-            self.loadMaps(userTocken: UserSettings.shared.userTocken!)
+            self.loadMaps()
         }
         .call()
     }
@@ -145,13 +146,13 @@ class UserGroupStore: ObservableObject {
         }.onData{ data in
             DispatchQueue.main.async {
                 print("exit success")
-                if UserSettings.shared.userInfo?.data?.primary! == mid{
+                if UserSettings.shared.userInfo?.data?.primary == mid{
                     UserSettings.shared.deleteRepresentMap(mid: mid){}
                 }
                 var idx = 0
-                for map in self.mapData{
+                for map in self.mapData!{
                     if map.mid == mid{
-                        self.mapData.remove(at: idx)
+                        self.mapData!.remove(at: idx)
                     }
                     idx += 1
                 }

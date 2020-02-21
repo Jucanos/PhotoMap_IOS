@@ -14,6 +14,11 @@ struct SplashView: View {
     @ObservedObject var userSettings = UserSettings.shared
     @ObservedObject var fbBackMid = FireBaseBackMid.shared
     
+    init() {
+        UITableView.appearance().backgroundColor = UIColor.clear
+        UITableViewCell.appearance().backgroundColor = UIColor.clear
+    }
+    
     var body: some View {
         Group {
             if self.userSettings.isValid() && fbBackMid.isValid() {

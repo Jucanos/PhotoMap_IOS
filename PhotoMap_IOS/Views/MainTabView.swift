@@ -69,7 +69,7 @@ struct MainTabView: View {
             AddGroup(isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
         }
         .onAppear(){
-            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
+            self.groupData.loadMaps()
         }
     }
     
