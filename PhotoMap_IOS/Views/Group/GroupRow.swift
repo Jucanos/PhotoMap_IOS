@@ -55,7 +55,7 @@ struct GroupRow: View {
             }
         .onAppear(){
             self.midRep = Database.database().reference(withPath: "maps").child(self.group.mid!)
-            self.midRep.observe(DataEventType.value, with: { snapShot in
+            self.midRepHandle = self.midRep.observe(DataEventType.value, with: { snapShot in
                 print("at groupRow callback")
                 let remoteValue = snapShot.value as? Int ?? 0
                 print(remoteValue)
@@ -64,7 +64,7 @@ struct GroupRow: View {
             })
         }
         .onDisappear(){
-            self.midRep.removeAllObservers()
+            self.midRep.removeObserver(withHandle: self.midRepHandle)
         }
     }
 }
