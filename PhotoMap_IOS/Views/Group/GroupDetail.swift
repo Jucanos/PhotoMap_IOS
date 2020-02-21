@@ -22,74 +22,78 @@ struct GroupDetail: View {
     @State private var lastScale: CGFloat = 1.0
     @State private var currentPosition: CGSize = .zero
     @State private var newPosition: CGSize = .zero
+    @State var isLoading = false
     @Binding var isSideMenuActive: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        Group{
-            if mapStore.mapData.mid != nil{
-                ZStack {
-                    KoreaMap()
-                        .navigationBarItems(trailing:
-                            Button(action: {self.isSideMenuActive.toggle()}) {
-                                Image(systemName: "line.horizontal.3")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                        })
-                        .navigationBarTitle("\((groupData?.name!)!)", displayMode: .inline)
-                        .scaleEffect(self.scale)
-                        .offset(x: self.currentPosition.width, y: self.currentPosition.height)
-                        .gesture(MagnificationGesture()
-                            .onChanged { val in
-                                let delta = val / self.lastScale
-                                self.lastScale = val
-                                let newScale = self.scale * delta
-                                self.scale = newScale
-                        }
-                        .onEnded { _ in
-                            self.lastScale = 1.0
-                        })
-                        .simultaneousGesture(DragGesture()
-                            .onChanged { value in
-                                self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
-                        }
-                        .onEnded { value in
-                            self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
-                            self.newPosition = self.currentPosition
-                        })
+        LoadingView(isShowing: self.$isLoading){
+            Group{
+                if self.mapStore.mapData.mid != nil{
                     ZStack {
-                        Color(.black).opacity(isButtonActivate ? 0.7 : 0)
-                        VStack {
-                            Spacer().layoutPriority(10)
-                            HStack {
+                        KoreaMap()
+                            .navigationBarItems(trailing:
+                                Button(action: {self.isSideMenuActive.toggle()}) {
+                                    Image(systemName: "line.horizontal.3")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                            })
+                            .navigationBarTitle("\((self.groupData?.name!)!)", displayMode: .inline)
+                            .scaleEffect(self.scale)
+                            .offset(x: self.currentPosition.width, y: self.currentPosition.height)
+                            .gesture(MagnificationGesture()
+                                .onChanged { val in
+                                    let delta = val / self.lastScale
+                                    self.lastScale = val
+                                    let newScale = self.scale * delta
+                                    self.scale = newScale
+                            }
+                            .onEnded { _ in
+                                self.lastScale = 1.0
+                            })
+                            .simultaneousGesture(DragGesture()
+                                .onChanged { value in
+                                    self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
+                            }
+                            .onEnded { value in
+                                self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
+                                self.newPosition = self.currentPosition
+                            })
+                        ZStack {
+                            Color(.black).opacity(self.isButtonActivate ? 0.7 : 0)
+                            VStack {
                                 Spacer().layoutPriority(10)
-                                FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(shareButton),AnyView(storeImageButton),AnyView(setRepMapButton)], isOpen: self.$isButtonActivate)
-                                    .straight()
-                                    .direction(.top)
-                                    .alignment(.right)
-                                    .spacing(10)
-                                    .initialOpacity(0)
-                                    .offset(y: -15)
-                                    .padding()
+                                HStack {
+                                    Spacer().layoutPriority(10)
+                                    FloatingButton(mainButtonView: AnyView(self.mainButton), buttons: [AnyView(self.shareButton),AnyView(self.storeImageButton),AnyView(self.setRepMapButton)], isOpen: self.$isButtonActivate)
+                                        .straight()
+                                        .direction(.top)
+                                        .alignment(.right)
+                                        .spacing(10)
+                                        .initialOpacity(0)
+                                        .offset(y: -15)
+                                        .padding()
+                                }
                             }
                         }
-                    }
-                    .edgesIgnoringSafeArea(.bottom)
-                    .onTapGesture {
-                        self.isButtonActivate.toggle()
+                        .edgesIgnoringSafeArea(.bottom)
+                        .onTapGesture {
+                            self.isButtonActivate.toggle()
+                        }
                     }
                 }
-            }
-            else{
-                Text("Loading mapdata...")
+                else{
+                    EmptyView()
+                }
             }
         }
         .onAppear(){
+            self.isLoading = true
             self.ref = Database.database().reference(withPath: "maps").child((self.groupData?.mid!)!)
             self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
                 print("at groupDetail callback")
                 FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
-                self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!){}
+                self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!){self.isLoading = false}
             })
         }
         .onDisappear(){
@@ -131,11 +135,3 @@ struct GroupDetail: View {
         }
     }
 }
-
-//struct GroupDetail_Previews: PreviewProvider {
-//
-//    static var previews: some View {
-//        GroupDetail(groupData: UserGroup(name: "test", updateTime: "test", imageName: "fse"), isSideMenuActive: .constant(false))
-//        //        SplashView()
-//    }
-//}
