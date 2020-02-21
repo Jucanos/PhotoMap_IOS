@@ -40,7 +40,7 @@ class MapStore: ObservableObject {
         mapData.owners = []
     }
     
-    func loadMapDetail(mid: String) {
+    func loadMapDetail(mid: String, completionHandler: @escaping ()->()) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
         AnyRequest<MapDetail> {
             Url(url)
@@ -50,6 +50,7 @@ class MapStore: ObservableObject {
             print("map loadid!")
             DispatchQueue.main.async {
                 self.mapData = map.data!
+                completionHandler()
             }
         }.onError{ error in
             print(error.self)

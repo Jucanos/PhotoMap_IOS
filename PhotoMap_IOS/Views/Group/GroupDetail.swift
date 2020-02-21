@@ -89,7 +89,7 @@ struct GroupDetail: View {
             self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
                 print("at groupDetail callback")
                 FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
-                self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!)
+                self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!){}
             })
         }
         .onDisappear(){
