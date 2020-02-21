@@ -34,7 +34,7 @@ class FireBaseBackMid: ObservableObject {
     }
     
     func getUpdateNumber(mid: String) -> Int{
-        return mids![mid] as! Int
+        return mids![mid] != nil ? mids![mid] as! Int : 0
     }
     
     func syncUpdateNumber(mid: String, value: Int) {

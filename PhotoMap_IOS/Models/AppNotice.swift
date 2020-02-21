@@ -34,7 +34,7 @@ class AppNoticeStore: ObservableObject {
     static let shared: AppNoticeStore = AppNoticeStore()
     init() {}
     
-    func loadNotice() {
+    func loadNotice(completionHandler: @escaping ()->()) {
         print("try to load notices!!")
         let url = NetworkURL.sharedInstance.getUrlString("/notice")
         AnyRequest<AppNotice> {
@@ -46,6 +46,7 @@ class AppNoticeStore: ObservableObject {
             print(notice)
             DispatchQueue.main.async {
                 self.noticeData = notice.data as! [AppNoticeData]
+                completionHandler()
             }
         }.onError{ error in
             if let stringError = String(data: error.error!, encoding: .utf8){

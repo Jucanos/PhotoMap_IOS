@@ -46,6 +46,7 @@ struct SettingRow: View {
         HStack{
             Image(systemName: setImage)
                 .resizable()
+                .scaledToFit()
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color(appColor))
             Text("\(settingName)")
@@ -73,19 +74,19 @@ struct UserInfoView: View {
 
 struct MainSettingView_Previews: PreviewProvider {
     static var previews: some View {
-//        Group {
-//            MainSettingView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-//                .previewDisplayName("iPhone SE")
-//
-//            MainSettingView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//                .previewDisplayName("iPhone 8")
-//
-//            MainSettingView()
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
-//                .previewDisplayName("iPhone 11 Pro")
-//        }
+        //        Group {
+        //            MainSettingView()
+        //                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+        //                .previewDisplayName("iPhone SE")
+        //
+        //            MainSettingView()
+        //                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+        //                .previewDisplayName("iPhone 8")
+        //
+        //            MainSettingView()
+        //                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+        //                .previewDisplayName("iPhone 11 Pro")
+        //        }
         UserInfoView()
     }
 }

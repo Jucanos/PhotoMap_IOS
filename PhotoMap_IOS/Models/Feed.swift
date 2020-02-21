@@ -52,15 +52,15 @@ class FeedStore: ObservableObject {
         }
     }
     
-    func loadFeeds(userTocken: String, mid: String, mapKey: String) {
+    func loadFeeds(mid: String, mapKey: String, completionHandler: @escaping ()->()) {
         let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)/\(mapKey)")
         AnyRequest<Feed> {
             Url(url)
-            Header.Authorization(.bearer(userTocken))
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ feeds in
             DispatchQueue.main.async {
                 self.feedData = feeds.data as! [FeedData]
-                print("feed loaded!!", self.feedData)
+                completionHandler()
             }
         }.onError{ error in
             print("Error at loadMaps", error)
@@ -68,7 +68,7 @@ class FeedStore: ObservableObject {
         .call()
     }
     
-    func addFeed(userTocken: String, mid: String, cityKey: String, title: String, context: String, images: [UIImage], _ handler: @escaping () -> ()){
+    func addFeed(mid: String, cityKey: String, title: String, context: String, images: [UIImage], _ handler: @escaping () -> ()){
         let url = NetworkURL.sharedInstance.getUrlString("/stories/\(mid)")
         let boundary = UUID().uuidString
         
@@ -78,7 +78,7 @@ class FeedStore: ObservableObject {
         // Set the URLRequest to POST and to the specified URL
         var urlRequest = URLRequest(url: URL(string: url)!)
         urlRequest.httpMethod = "POST"
-        urlRequest.setValue("Bearer \(userTocken)", forHTTPHeaderField: "Authorization")
+        urlRequest.setValue("Bearer \(UserSettings.shared.userTocken!)", forHTTPHeaderField: "Authorization")
         
         // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
         // And the boundary is also set here

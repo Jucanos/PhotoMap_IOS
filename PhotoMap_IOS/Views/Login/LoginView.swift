@@ -10,12 +10,10 @@ import SwiftUI
 import KakaoOpenSDK
 import Request
 
-
-
-
 struct LoginView: View {
     @ObservedObject var userSettings = UserSettings.shared
-    @State var isLoading = true
+    @ObservedObject var fbBackMid = FireBaseBackMid.shared
+    @State var isLoading = false
     var body: some View {
         LoadingView(isShowing: self.$isLoading){
             GeometryReader{ geo in
@@ -40,8 +38,9 @@ struct LoginView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                         Button(action: {
+                            self.isLoading.toggle()
                             self.userSettings.loginFromKakao(){
-                                self.isLoading = false
+                                self.isLoading.toggle()
                             }
                         }){
                             KakaoLoginButton()
@@ -57,7 +56,7 @@ struct LoginView: View {
         }
         .onAppear(){
             self.userSettings.getAuthFromServer(){
-                self.isLoading = false
+                self.isLoading = !self.fbBackMid.isValid()
             }
         }
     }

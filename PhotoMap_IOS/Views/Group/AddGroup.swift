@@ -9,30 +9,34 @@
 import SwiftUI
 
 struct AddGroup: View {
+    @State var isLoading: Bool = false
     let isOpen: Bool
     let menuClose: () -> Void
     var body: some View {
-        ZStack{
-            GeometryReader { _ in
-                EmptyView()
+        LoadingView(isShowing: $isLoading){
+            ZStack{
+                GeometryReader { _ in
+                    EmptyView()
+                }
+                .background(Color.black.opacity(0.7))
+                .opacity(self.isOpen ? 1.0 : 0.0)
+                .onTapGesture {
+                    self.menuClose()
+                    self.endEditing()
+                }
+                
+                VStack {
+                    SubAddGroup(isLoading: self.$isLoading, menuClose: self.menuClose)
+                        .frame(height: 100)
+                        .background(Color(appColor))
+                        .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
+                        .animation(.easeInOut(duration: 0.4))
+                    Spacer()
+                }
             }
-            .background(Color.black.opacity(0.7))
-            .opacity(self.isOpen ? 1.0 : 0.0)            
-            .onTapGesture {
-                self.menuClose()
-                self.endEditing()
-            }
-            
-            VStack {
-                SubAddGroup(menuClose: menuClose)
-                    .frame(height: 100)
-                    .background(Color(appColor))
-                    .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
-                    .animation(.easeInOut(duration: 0.4))
-                Spacer()
-            }
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .edgesIgnoringSafeArea(.bottom)
+        
     }
     private func endEditing() {
         UIApplication.shared.endEditing()
@@ -44,6 +48,7 @@ struct SubAddGroup: View {
     @ObservedObject var userGroupStore = UserGroupStore.shared
     @State var groupName: String = ""
     @State var showAlert: Bool = false
+    @Binding var isLoading: Bool
     let menuClose: () -> Void
     var body: some View {
         
@@ -59,9 +64,12 @@ struct SubAddGroup: View {
                     if self.groupName.isEmpty{
                         self.showAlert.toggle()
                     }else{
-                        self.userGroupStore.addMap(name: self.groupName, userTocken: self.userSettings.userTocken!)
-                        self.menuClose()
-                        self.endEditing()
+                        self.isLoading = true
+                        self.userGroupStore.addMap(name: self.groupName){
+                            self.isLoading = false
+                            self.menuClose()
+                            self.endEditing()
+                        }
                     }
                 }) {
                     Image(systemName: "plus.square")
@@ -83,12 +91,5 @@ struct SubAddGroup: View {
 extension UIApplication {
     func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
-struct AddGroup_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        SubAddGroup(menuClose: {})
     }
 }

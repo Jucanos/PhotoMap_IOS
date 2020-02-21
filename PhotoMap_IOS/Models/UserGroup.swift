@@ -47,18 +47,19 @@ class UserGroupStore: ObservableObject {
         .call()
     }
     
-    func addMap(name: String, userTocken: String) {
+    func addMap(name: String, completionHandler: @escaping ()->()) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
         AnyRequest<MapDetail> {
             Url(url)
             Method(.post)
-            Header.Authorization(.bearer(userTocken))
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
             Header.ContentType(.json)
             Body(["name":name])
         }.onObject{ newGroup in
             print("add new group to server success!!")
             DispatchQueue.main.async {
                 self.mapData.append(newGroup.data!)
+                completionHandler()
             }
             
         }.onError{ error in
@@ -144,6 +145,9 @@ class UserGroupStore: ObservableObject {
         }.onData{ data in
             DispatchQueue.main.async {
                 print("exit success")
+                if UserSettings.shared.userInfo?.data?.primary! == mid{
+                    UserSettings.shared.deleteRepresentMap(mid: mid){}
+                }
                 var idx = 0
                 for map in self.mapData{
                     if map.mid == mid{

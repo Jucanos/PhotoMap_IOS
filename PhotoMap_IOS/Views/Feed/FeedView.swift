@@ -15,14 +15,17 @@ struct FeedView: View {
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var feedStore: FeedStore
     @State var location: String
+    @State var isLoading = true
     var mapKey: String
     
     var body: some View {
-        Group{
-            if feedStore.feedData.isEmpty{
-                Text("Empty")
-            } else{
-                FeedDetail(mapKey: self.mapKey)
+        LoadingView(isShowing: self.$isLoading){
+            Group{
+                if self.feedStore.feedData.isEmpty{
+                    Text("피드가 없어요!")
+                } else{
+                    FeedDetail(mapKey: self.mapKey)
+                }
             }
         }
         .navigationBarTitle("\(location)", displayMode: .inline)
@@ -35,7 +38,9 @@ struct FeedView: View {
             }
         )
             .onAppear(){
-                self.feedStore.loadFeeds(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, mapKey: self.mapKey)
+                self.feedStore.loadFeeds(mid: self.mapStore.mapData.mid!, mapKey: self.mapKey) {
+                    self.isLoading = false
+                }
         }
     }
     

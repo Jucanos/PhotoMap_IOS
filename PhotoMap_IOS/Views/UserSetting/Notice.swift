@@ -10,22 +10,28 @@ import SwiftUI
 
 struct Notice: View {
     @ObservedObject var noticeStore = AppNoticeStore.shared
+    @State var isLoading: Bool = false
     var body: some View {
-        Group{
-            if !noticeStore.noticeData.isEmpty{
-                List{
-                    ForEach(noticeStore.noticeData, id: \.id) { notice in
-                        NoticeRow(notice: notice)
+        LoadingView(isShowing: self.$isLoading){
+            Group{
+                if !self.noticeStore.noticeData.isEmpty{
+                    List{
+                        ForEach(self.noticeStore.noticeData, id: \.id) { notice in
+                            NoticeRow(notice: notice)
+                        }
                     }
+                    .listStyle(PlainListStyle())
+                } else {
+                    Text("공지사항이 없습니다!")
                 }
-                .listStyle(PlainListStyle())
-            } else {
-                Text("공지사항이 없습니다!")
             }
         }
         .navigationBarTitle("공지사항", displayMode: .inline)
         .onAppear(){
-            self.noticeStore.loadNotice()
+            self.isLoading = true
+            self.noticeStore.loadNotice(){
+                self.isLoading = false
+            }
         }
     }
 }

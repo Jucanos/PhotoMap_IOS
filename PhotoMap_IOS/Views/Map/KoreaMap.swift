@@ -107,7 +107,7 @@ struct BackImage: View {
                     .scaledToFit()
             }else{
                 ZStack{
-                    URLImage(URL(string: (mapStore.mapData.represents?.getStr(location: mapImage))!)!){ proxy in
+                    URLImage(URL(string: (mapStore.mapData.represents?.getStr(location: mapImage))!)!, placeholder: {_ in EmptyView()}){ proxy in
                         proxy.image
                             .resizable()
                             .frame(width: self.masterSize.width, height: self.masterSize.height)
@@ -117,7 +117,9 @@ struct BackImage: View {
                                 .frame(width: self.masterSize.width, height: self.masterSize.height)
                                 .scaledToFit())
                     }
+                    .animation(.default)
                     .shadow(color: .gray, radius: 2)
+                    
                     Image(self.mapImage + "White")
                     .resizable()
                     .frame(width: self.masterSize.width, height: self.masterSize.height)

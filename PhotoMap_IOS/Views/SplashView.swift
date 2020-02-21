@@ -14,8 +14,8 @@ struct SplashView: View {
     @ObservedObject var userSettings = UserSettings.shared
     @ObservedObject var fbBackMid = FireBaseBackMid.shared
     
-    var body: some View {        
-        return Group {
+    var body: some View {
+        Group {
             if self.userSettings.isValid() && fbBackMid.isValid() {
                 MainTabView().environmentObject(MapStore()).environmentObject(FeedStore())
             }

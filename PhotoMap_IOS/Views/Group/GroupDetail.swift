@@ -13,6 +13,7 @@ struct GroupDetail: View {
     
     var groupData: MapData?
     @State var ref = DatabaseReference()
+    @State var refHandle = DatabaseHandle()
     @EnvironmentObject var mapStore: MapStore
     @EnvironmentObject var userSettings: UserSettings
     @State private var menuOpen = false
@@ -82,18 +83,17 @@ struct GroupDetail: View {
             else{
                 Text("Loading mapdata...")
             }
-            
         }
         .onAppear(){
             self.ref = Database.database().reference(withPath: "maps").child((self.groupData?.mid!)!)
-            self.ref.observe(DataEventType.value, with: { snapShot in
+            self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
                 print("at groupDetail callback")
                 FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
                 self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!)
             })
         }
         .onDisappear(){
-            self.ref.removeAllObservers()
+            self.ref.removeObserver(withHandle: self.refHandle)
         }
     }
     

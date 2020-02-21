@@ -78,11 +78,11 @@ struct MainGroupView: View {
         }
     }
     
-    func deleteGroup(at indexSet: IndexSet) {
-        let curMid = self.groupStore.mapData[indexSet.first!].mid
-        self.groupStore.deleteMap(mid: curMid!, userTocken: self.userSettings.userTocken!)
-        self.groupStore.mapData.remove(atOffsets: indexSet)
-    }
+//    func deleteGroup(at indexSet: IndexSet) {
+//        let curMid = self.groupStore.mapData[indexSet.first!].mid
+//        self.groupStore.deleteMap(mid: curMid!, userTocken: self.userSettings.userTocken!)
+//        self.groupStore.mapData.remove(atOffsets: indexSet)
+//    }
 }
 
 //extension UITableViewController {
