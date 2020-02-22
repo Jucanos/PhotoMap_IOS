@@ -156,6 +156,23 @@ class MapStore: ObservableObject {
         }).resume()
     }
     
+    func getOwnerName(from uid: String) -> String{
+        if let target = self.mapData.owners!.firstIndex(where: {$0.uid == uid}){
+            return self.mapData.owners![target].nickname!
+        } else{
+            return "존재하지 않는 맴버!"
+        }
+    }
+    
+    func getOwnerThumbnail(from uid: String) -> String{
+        if let target = self.mapData.owners!.firstIndex(where: {$0.uid == uid}){
+            print(target)
+            return self.mapData.owners![target].thumbnail!
+        } else{
+            return ""
+        }
+    }
+    
     func currentTime() -> String {
         let date = Date()
         let calendar = Calendar.current

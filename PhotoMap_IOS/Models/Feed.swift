@@ -29,6 +29,7 @@ struct FeedData: Codable {
     var files: [String?]
     var sid: String?
     var mid: String?
+    var creator: String?
     
     func getImageViews() -> [URLImage<Image,Image>] {
         var images: [URLImage<Image,Image>] = []
