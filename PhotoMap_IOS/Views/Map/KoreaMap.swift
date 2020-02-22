@@ -9,7 +9,7 @@
 import SwiftUI
 import URLImage
 struct KoreaMap: View {
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @EnvironmentObject var userSettings: UserSettings
     @State var selected: Int? = 0
     @State var selectedLoc: String?
@@ -96,7 +96,7 @@ struct KoreaMap: View {
 /// View for Background Map Image
 /// Masked or UnMasked
 struct BackImage: View {
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @State var mapImage: String
     var masterSize: CGSize
     //    @State var maskImage: String?

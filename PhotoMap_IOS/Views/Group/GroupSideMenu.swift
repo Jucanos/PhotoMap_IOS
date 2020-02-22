@@ -34,7 +34,7 @@ struct GroupSideMenu: View {
                     .animation(.default)    
             }
         }
-        .onAppear{            
+        .onAppear{
             UITableView.appearance().tableFooterView = UIView()
             UITableView.appearance().separatorStyle = .none
         }

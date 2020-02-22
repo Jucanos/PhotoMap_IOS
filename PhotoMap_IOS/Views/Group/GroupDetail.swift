@@ -14,7 +14,7 @@ struct GroupDetail: View {
     var groupData: MapData?
     @State var ref = DatabaseReference()
     @State var refHandle = DatabaseHandle()
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @EnvironmentObject var userSettings: UserSettings
     @State private var menuOpen = false
     @State private var isButtonActivate = false
@@ -93,7 +93,7 @@ struct GroupDetail: View {
             self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
                 print("at groupDetail callback")
                 FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
-                self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!){self.isLoading = false}
+                self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!) {self.isLoading = false}
             })
         }
         .onDisappear(){

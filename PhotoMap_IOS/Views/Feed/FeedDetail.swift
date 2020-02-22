@@ -11,7 +11,7 @@ import Request
 
 struct FeedDetail: View {
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @EnvironmentObject var feedStore: FeedStore
     @State var showFeedOption: Bool = false
     @State var selectedFeed: FeedData?

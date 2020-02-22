@@ -32,13 +32,11 @@ class MapStore: ObservableObject {
     @Published var mapData: MapData = MapData(){
         willSet{
             objectWillChange.send()
+            print("mapData Changed!!")
         }
     }
     
     static let shared: MapStore = MapStore()
-    init(){
-        mapData.owners = []
-    }
     
     func loadMapDetail(mid: String, completionHandler: @escaping ()->()) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
@@ -50,6 +48,7 @@ class MapStore: ObservableObject {
             print("map loadid!")
             DispatchQueue.main.async {
                 self.mapData = map.data!
+                print(self.mapData.owners! as Any)
                 completionHandler()
             }
         }.onError{ error in

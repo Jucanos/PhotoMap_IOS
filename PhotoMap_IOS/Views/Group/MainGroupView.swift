@@ -11,7 +11,7 @@ import SwiftUI
 struct MainGroupView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @ObservedObject var groupStore = UserGroupStore.shared
     @Binding var isSideMenuActive: Bool
     
@@ -76,8 +76,8 @@ struct MainGroupView: View {
                         }
                     }
                     .onAppear(){
-                        self.mapStore.mapData = MapData()
                         self.isLoading = false
+                        self.mapStore.mapData = MapData()
                     }
                 } else{
                     EmptyView()

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MainMapView: View {
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @State var isLoading = false
     var body: some View {
         Group{

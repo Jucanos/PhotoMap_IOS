@@ -12,7 +12,7 @@ import Request
 struct FeedView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @EnvironmentObject var feedStore: FeedStore
     @State var location: String
     @State var isLoading = true
