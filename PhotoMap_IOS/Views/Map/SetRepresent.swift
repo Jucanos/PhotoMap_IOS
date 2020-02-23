@@ -48,6 +48,7 @@ struct AdjustImage: View {
     @State private var lastScale: CGFloat = 1.0
     @State private var currentPosition: CGSize = .zero
     @State private var newPosition: CGSize = .zero
+    @State var isLoading = false
     @Binding var targetImage: UIImage?
     var location: String
     
@@ -87,51 +88,53 @@ struct AdjustImage: View {
                 self.newPosition = self.currentPosition
             })
         
-        return GeometryReader{ gr in
-            
-            
-            ZStack{
-                // 1. selected image to be modified
-                TargetView
-                // 2. Guideline layer
-                VStack(spacing: 0){
-                    Color(.black)
-                        .opacity(0.6)
-                    Image(self.location+"Hole")
-                        .resizable()
-                        .scaledToFit()
-                        .layoutPriority(10)
-                    Color(.black)
-                        .opacity(0.6)
+        return LoadingView(isShowing: self.$isLoading){
+            GeometryReader{ gr in
+                ZStack{
+                    // 1. selected image to be modified
+                    TargetView
+                    // 2. Guideline layer
+                    VStack(spacing: 0){
+                        Color(.black)
+                            .opacity(0.6)
+                        Image(self.location+"Hole")
+                            .resizable()
+                            .scaledToFit()
+                            .layoutPriority(10)
+                        Color(.black)
+                            .opacity(0.6)
+                    }
+                    .allowsHitTesting(false)
                 }
-                .allowsHitTesting(false)
+                .edgesIgnoringSafeArea(.bottom)
+                .navigationBarItems(trailing: Button(action: {
+                    self.isLoading = true
+                    let imgSize = UIImage(named: self.location)?.size
+                    let ratio = imgSize!.height / imgSize!.width
+                    
+                    let newHeight = gr.size.width * ratio
+                    let newOffset = (gr.frame(in: .global).size.height - newHeight) / 2
+                    
+                    let image = TargetView.takeScreenshot(origin: gr.frame(in: .global).origin , size: gr.size)
+                    
+                    let cgimg = image.cgImage!
+                    let offset = newOffset * (CGFloat(cgimg.height) / gr.size.height)
+                    let ssize = CGSize(width: CGFloat(cgimg.width), height: CGFloat(cgimg.width) * ratio)
+                    
+                    let rect = CGRect(origin: CGPoint(x: 0, y: offset), size: ssize)
+                    let imageRef = image.cgImage!.cropping(to: rect)
+                    
+                    let newImage = UIImage(cgImage: imageRef!)
+                    print(newImage)
+                    
+                    self.mapStore.setRepresentImage(cityKey: self.location, userTocken: self.userSettings.userTocken!, image: newImage){
+                        self.isLoading = false
+                        self.presentationMode.wrappedValue.dismiss()
+                    }})
+                {
+                    Text("확인")
+                })
             }
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationBarItems(trailing: Button(action: {
-                let imgSize = UIImage(named: self.location)?.size
-                let ratio = imgSize!.height / imgSize!.width
-                
-                let newHeight = gr.size.width * ratio
-                let newOffset = (gr.frame(in: .global).size.height - newHeight) / 2
-                
-                let image = TargetView.takeScreenshot(origin: gr.frame(in: .global).origin , size: gr.size)
-                
-                let cgimg = image.cgImage!
-                let offset = newOffset * (CGFloat(cgimg.height) / gr.size.height)
-                let ssize = CGSize(width: CGFloat(cgimg.width), height: CGFloat(cgimg.width) * ratio)
-                
-                let rect = CGRect(origin: CGPoint(x: 0, y: offset), size: ssize)
-                let imageRef = image.cgImage!.cropping(to: rect)
-                
-                let newImage = UIImage(cgImage: imageRef!)
-                print(newImage)
-                
-                self.mapStore.setRepresentImage(cityKey: self.location, userTocken: self.userSettings.userTocken!, image: newImage){
-                    self.presentationMode.wrappedValue.dismiss()
-                }})
-            {
-                Text("확인")
-            })
         }
     }
 }
