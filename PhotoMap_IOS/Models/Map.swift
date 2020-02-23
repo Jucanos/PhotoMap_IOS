@@ -58,7 +58,7 @@ class MapStore: ObservableObject {
     }
     
     func setRepresentImage(cityKey: String, userTocken: String, image: UIImage, _ handler: @escaping () -> ()) {
-        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mapData.mid!)")
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(MapStore.shared.mapData.mid!)")
         let boundary = UUID().uuidString
         
         let config = URLSessionConfiguration.default
@@ -113,7 +113,7 @@ class MapStore: ObservableObject {
     }
     
     func deleteRepresentImage(cityKey: String, userTocken: String) {
-        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mapData.mid!)")
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(MapStore.shared.mapData.mid!)")
         let boundary = UUID().uuidString
         
         let config = URLSessionConfiguration.default

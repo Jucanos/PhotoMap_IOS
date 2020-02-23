@@ -16,7 +16,7 @@ struct SetRepresent: View {
     var body: some View {
         Group{
             if selectedBaseImage == nil {
-                Text("base")
+                Text("")
                     .sheet(isPresented: $showImagePicker, onDismiss: {
                         if self.selectedBaseImage == nil{
                             self.presentationMode.wrappedValue.dismiss()
@@ -51,12 +51,11 @@ struct AdjustImage: View {
     @Binding var targetImage: UIImage?
     var location: String
     
-    
-    
     var body: some View {
+        let ratio = targetImage!.size.height / targetImage!.size.width
         let TargetView = Image(uiImage: targetImage!)
             .resizable()
-            .scaledToFit()
+            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width * ratio)
             .rotationEffect(Angle(degrees: self.rotationState))
             .scaleEffect(scale)
             .offset(x: self.currentPosition.width, y: self.currentPosition.height)
@@ -89,6 +88,8 @@ struct AdjustImage: View {
             })
         
         return GeometryReader{ gr in
+            
+            
             ZStack{
                 // 1. selected image to be modified
                 TargetView
@@ -100,13 +101,13 @@ struct AdjustImage: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.black)
-                        .opacity(0.9)
                         .layoutPriority(10)
                     Color(.black)
                         .opacity(0.7)
                 }
                 .allowsHitTesting(false)
             }
+            .edgesIgnoringSafeArea(.bottom)
             .navigationBarItems(trailing: Button(action: {
                 let imgSize = UIImage(named: self.location)?.size
                 let ratio = imgSize!.height / imgSize!.width
@@ -128,10 +129,8 @@ struct AdjustImage: View {
                 
                 self.mapStore.setRepresentImage(cityKey: self.location, userTocken: self.userSettings.userTocken!, image: newImage){
                     self.presentationMode.wrappedValue.dismiss()
-                }
-                //                self.presentationMode.wrappedValue.dismiss()
-                
-            }) {
+                }})
+            {
                 Text("확인")
             })
         }
