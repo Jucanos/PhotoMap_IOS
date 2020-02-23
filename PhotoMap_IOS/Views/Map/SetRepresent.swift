@@ -96,14 +96,13 @@ struct AdjustImage: View {
                 // 2. Guideline layer
                 VStack(spacing: 0){
                     Color(.black)
-                        .opacity(0.7)
+                        .opacity(0.6)
                     Image(self.location+"Hole")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(.black)
                         .layoutPriority(10)
                     Color(.black)
-                        .opacity(0.7)
+                        .opacity(0.6)
                 }
                 .allowsHitTesting(false)
             }
