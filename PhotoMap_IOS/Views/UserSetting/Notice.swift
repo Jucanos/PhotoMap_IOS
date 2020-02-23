@@ -14,15 +14,21 @@ struct Notice: View {
     var body: some View {
         LoadingView(isShowing: self.$isLoading){
             Group{
-                if !self.noticeStore.noticeData.isEmpty{
-                    List{
-                        ForEach(self.noticeStore.noticeData, id: \.id) { notice in
-                            NoticeRow(notice: notice)
+                if self.noticeStore.noticeData != nil{
+                    Group{
+                        if !self.noticeStore.noticeData!.isEmpty{
+                            List{
+                                ForEach(self.noticeStore.noticeData!, id: \.id) { notice in
+                                    NoticeRow(notice: notice)
+                                }
+                            }
+                            .listStyle(PlainListStyle())
+                        } else {
+                            Text("공지사항이 없습니다!")
                         }
                     }
-                    .listStyle(PlainListStyle())
                 } else {
-                    Text("공지사항이 없습니다!")
+                    EmptyView()
                 }
             }
         }
