@@ -23,6 +23,20 @@ struct MapData: Codable {
     var createdAt: String?
     var updatedAt: String?
     var owners: [UserInfoData]?
+    
+    func getProperUpdateAt() -> String {
+        if updatedAt != nil{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            dateFormatter.timeZone = NSTimeZone(name: "KST") as TimeZone?
+            let date = dateFormatter.date(from: updatedAt!)
+            
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            return dateFormatter.string(from: date!)
+        } else {
+            return ""
+        }
+    }
 }
 
 // MARK:- MapStore

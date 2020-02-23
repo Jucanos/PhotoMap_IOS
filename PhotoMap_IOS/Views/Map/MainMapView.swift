@@ -20,7 +20,11 @@ struct MainMapView: View {
                         if self.isLoading{
                             EmptyView()
                         } else{
-                            KoreaMap()
+                            ZStack {
+                                KoreaMap()
+                                Color(.white).opacity(0).allowsHitTesting(false)
+                            }
+                            
                         }
                     }
                 }
@@ -28,6 +32,7 @@ struct MainMapView: View {
                 Text("대표 지도가 없습니다!")
             }
         }
+    
         .onAppear(){
             if self.userSettings.userInfo?.data?.primary != nil {
                 self.isLoading = true

@@ -41,7 +41,7 @@ struct GroupRow: View {
                 VStack(alignment: .leading) {
                     Text(verbatim: "\(self.group.name!)")
                         .font(.title)
-                    Text(self.group.updatedAt ?? "")
+                    Text(self.group.getProperUpdateAt())
                         .font(.footnote)
                 }
                 .padding(5)

@@ -168,7 +168,7 @@ class UserGroupStore: ObservableObject {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateFormatter.timeZone = NSTimeZone(name: "KST") as TimeZone?
         
-        newArr = oldArr.sorted(by: {dateFormatter.date(from: $0.updatedAt!)! < dateFormatter.date(from: $1.updatedAt!)!})
+        newArr = oldArr.sorted(by: {dateFormatter.date(from: $0.updatedAt!)! > dateFormatter.date(from: $1.updatedAt!)!})
         
         if UserSettings.shared.userInfo?.data?.primary != nil {
             let idx = newArr.firstIndex(where: {$0.mid == UserSettings.shared.userInfo?.data?.primary})!
