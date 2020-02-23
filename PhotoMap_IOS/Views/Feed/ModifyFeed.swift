@@ -44,9 +44,6 @@ struct ModifyFeed: View {
                 Text("확인")
             })
         }
-        .onAppear(){
-            print(self.feedStore.feedData, self.userSettings)
-        }
     }
 //    var backButton : some View {
 //        Button(action: {

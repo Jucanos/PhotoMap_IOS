@@ -10,7 +10,7 @@ import SwiftUI
 import URLImage
 
 struct MemberRow: View {
-    @State var member: UserInfoData
+    var member: UserInfoData
     var body: some View {
         HStack{
             URLImage(URL(string: member.thumbnail!)!) { proxy in

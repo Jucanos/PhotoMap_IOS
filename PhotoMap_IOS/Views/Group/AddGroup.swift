@@ -9,30 +9,36 @@
 import SwiftUI
 
 struct AddGroup: View {
+    @State var isLoading: Bool = false
     let isOpen: Bool
     let menuClose: () -> Void
     var body: some View {
-        ZStack{
-            GeometryReader { _ in
-                EmptyView()
+        LoadingView(isShowing: $isLoading){
+            ZStack{
+                GeometryReader { _ in
+                    EmptyView()
+                }
+                .background(Color.black.opacity(0.7))
+                .onTapGesture {
+                    self.menuClose()
+                    self.endEditing()
+                }
+                
+                VStack {
+                    SubAddGroup(isLoading: self.$isLoading, menuClose: self.menuClose)
+                        .frame(height: 90)
+                        .background(Color(appColor))
+                        //                        .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
+                        .offset(y: 0)
+                    EmptyView().frame(height: 30)
+                    Spacer()
+                }
             }
-            .background(Color.black.opacity(0.7))
-            .opacity(self.isOpen ? 1.0 : 0.0)            
-            .onTapGesture {
-                self.menuClose()
-                self.endEditing()
-            }
-            
-            VStack {
-                SubAddGroup(menuClose: menuClose)
-                    .frame(height: 100)
-                    .background(Color(appColor))
-                    .offset(y: self.isOpen ? 0 : -UIScreen.main.bounds.height)
-                    .animation(.easeInOut(duration: 0.4))
-                Spacer()
-            }
+            .opacity(self.isOpen ? 1.0 : 0.0)
+            .animation(.default)
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .edgesIgnoringSafeArea(.bottom)
+        
     }
     private func endEditing() {
         UIApplication.shared.endEditing()
@@ -44,13 +50,15 @@ struct SubAddGroup: View {
     @ObservedObject var userGroupStore = UserGroupStore.shared
     @State var groupName: String = ""
     @State var showAlert: Bool = false
+    @Binding var isLoading: Bool
     let menuClose: () -> Void
     var body: some View {
         
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 5) {
             Text("그룹 추가하기")
-                .font(.title)
+                .font(.system(size: 25, weight: .heavy))
                 .foregroundColor(.white)
+                .padding(.leading, 15)
             HStack{
                 TextField("그룹 이름을 입력하세요", text: $groupName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -59,18 +67,21 @@ struct SubAddGroup: View {
                     if self.groupName.isEmpty{
                         self.showAlert.toggle()
                     }else{
-                        self.userGroupStore.addMap(name: self.groupName, userTocken: self.userSettings.userTocken!)
-                        self.menuClose()
-                        self.endEditing()
+                        self.isLoading = true
+                        self.userGroupStore.addMap(name: self.groupName){
+                            self.isLoading = false
+                            self.menuClose()
+                            self.endEditing()
+                        }
                     }
                 }) {
-                    Image(systemName: "plus.square")
+                    Image(systemName: "checkmark.circle")
                         .resizable()
+                        .scaledToFit()
                         .frame(width: 30, height: 30)
                         .foregroundColor(.white)
                 }
-            }
-        .padding()
+            }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
         }
         .alert(isPresented: $showAlert){
             Alert(title: Text("그룹 이름이 없습니다"), message: Text("그룹 이름을 정한 후 추가해주세요!"), dismissButton: .default(Text("취소")))
@@ -86,9 +97,8 @@ extension UIApplication {
     }
 }
 
-struct AddGroup_Previews: PreviewProvider {
-    
+struct SubAddGroup_Previews: PreviewProvider {
     static var previews: some View {
-        SubAddGroup(menuClose: {})
+        SubAddGroup(isLoading: .constant(false), menuClose: {})
     }
 }

@@ -12,18 +12,35 @@ import Request
 struct FeedView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @EnvironmentObject var feedStore: FeedStore
     @State var location: String
+    @State var isLoading = true
     var mapKey: String
     
     var body: some View {
-        Group{
-            if feedStore.feedData.isEmpty{
-                Text("Empty")
-            } else{
-                FeedDetail(mapKey: self.mapKey)
+        LoadingView(isShowing: self.$isLoading){
+            Group{
+                if self.feedStore.feedData != nil{
+                    Group{
+                        if self.feedStore.feedData!.isEmpty{
+                            Text("피드가 없어요!")
+                        } else{
+                            FeedDetail(mapKey: self.mapKey)
+                        }
+                    }
+                } else {
+                    EmptyView()
+                }
             }
+        }
+        .onAppear(){
+            self.feedStore.loadFeeds(mid: self.mapStore.mapData.mid!, mapKey: self.mapKey) {
+                self.isLoading = false
+            }
+        }
+        .onDisappear(){
+            self.feedStore.feedData = nil
         }
         .navigationBarTitle("\(location)", displayMode: .inline)
         .navigationBarItems( trailing:
@@ -31,24 +48,7 @@ struct FeedView: View {
                 Image(systemName: "plus.square")
                     .resizable()
                     .frame(width: 20, height: 20)
-//                    .foregroundColor(.white)
             }
         )
-            .onAppear(){
-                self.feedStore.loadFeeds(userTocken: self.userSettings.userTocken!, mid: self.mapStore.mapData.mid!, mapKey: self.mapKey)
-        }
     }
-    
-//    var backButton : some View {
-//        Button(action: {
-//            self.presentationMode.wrappedValue.dismiss()
-//        }) {
-//            HStack {
-//                Image(systemName: "arrow.left")
-//                    .resizable()
-//                    .frame(width: 20, height: 20)
-//                    .foregroundColor(.white)
-//            }
-//        }
-//    }
 }

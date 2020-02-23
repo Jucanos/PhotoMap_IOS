@@ -10,21 +10,32 @@ import SwiftUI
 
 struct MainMapView: View {
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
+    @State var isLoading = false
     var body: some View {
         Group{
             if userSettings.userInfo?.data?.primary != nil {
-                KoreaMap()
+                LoadingView(isShowing: self.$isLoading){
+                    Group{
+                        if self.isLoading{
+                            EmptyView()
+                        } else{
+                            KoreaMap()
+                        }
+                    }
+                }
             } else{
                 Text("대표 지도가 없습니다!")
             }
         }
         .onAppear(){
             if self.userSettings.userInfo?.data?.primary != nil {
-                self.mapStore.loadMapDetail(mid: (self.userSettings.userInfo?.data?.primary!)!)
+                self.isLoading = true
+                self.mapStore.loadMapDetail(mid: (self.userSettings.userInfo?.data?.primary!)!){
+                    self.isLoading = false
+                }
             }
         }
-        
     }
 }
 

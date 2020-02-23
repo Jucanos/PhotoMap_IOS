@@ -11,7 +11,7 @@ import Request
 
 struct FeedDetail: View {
     @EnvironmentObject var userSettings: UserSettings
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     @EnvironmentObject var feedStore: FeedStore
     @State var showFeedOption: Bool = false
     @State var selectedFeed: FeedData?
@@ -19,36 +19,34 @@ struct FeedDetail: View {
     var mapKey: String
     
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading, spacing: 2){
-                ForEach(feedStore.feedData, id: \.sid) { item in
-                    FeedPreviewDetail(showFeedOption: self.$showFeedOption, selectedFeed: self.$selectedFeed, feedData: item)
-                        .padding(.top, 10)
+        Group{
+            if self.feedStore.feedData != nil{
+                ScrollView{
+                    VStack(alignment: .leading, spacing: 2){
+                        ForEach(feedStore.feedData!, id: \.sid) { item in
+                            FeedPreviewDetail(showFeedOption: self.$showFeedOption, selectedFeed: self.$selectedFeed, feedData: item)
+                                .padding(.top, 10)
+                        }
+                    }
+                }
+                .actionSheet(isPresented: $showFeedOption){
+                    ActionSheet(title: Text(""), message: Text(""), buttons: [
+                        .default(Text("스토리 삭제"), action: {
+                            self.feedStore.deleteFeed(sid: (self.selectedFeed?.sid!)!, userTocken: self.userSettings.userTocken!)
+                        }),
+                        .default(Text("스토리 수정"), action: {
+                            self.showModifyFeed = true
+                        }),
+                        .destructive(Text("취소"))
+                    ])
+                }
+                .sheet(isPresented: self.$showModifyFeed) {
+                    ModifyFeed(selectedFeed: self.$selectedFeed).environmentObject(self.userSettings).environmentObject(self.feedStore)
                 }
             }
-        }
-        .actionSheet(isPresented: $showFeedOption){
-            ActionSheet(title: Text(""), message: Text(""), buttons: [
-                .default(Text("스토리 삭제"), action: {
-                    self.feedStore.deleteFeed(sid: (self.selectedFeed?.sid!)!, userTocken: self.userSettings.userTocken!)
-                }),
-                .default(Text("스토리 수정"), action: {
-                    self.showModifyFeed = true
-                }),
-                .destructive(Text("취소"))
-            ])
-        }
-        .sheet(isPresented: self.$showModifyFeed) {
-            ModifyFeed(selectedFeed: self.$selectedFeed).environmentObject(self.userSettings).environmentObject(self.feedStore)
-        }
-        .onDisappear(){
-            self.feedStore.feedData.removeAll()
+            else {
+                EmptyView()
+            }
         }
     }
 }
-
-//struct FeedDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FeedDetail()
-//    }
-//}

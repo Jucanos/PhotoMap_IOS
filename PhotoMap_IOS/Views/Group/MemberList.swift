@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct MemberList: View {
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     var body: some View {
-        return Group{
+        Group{
             if mapStore.mapData.owners == nil {
                 EmptyView()
             } else{
@@ -55,7 +55,7 @@ struct MenuOptionView: View {
 }
 
 struct AddingMemberView: View {
-    @EnvironmentObject var mapStore: MapStore
+    @ObservedObject var mapStore = MapStore.shared
     var body: some View {
         HStack{
             Button(action: {

@@ -24,14 +24,14 @@ struct MainTabView: View {
                 TabView(selection: $selectedView) {
                     MainGroupView(isSideMenuActive: $isSideMenuActive)
                         .tabItem {
-                            Image(systemName: "person.3")
+                            Image(systemName: "person.3.fill")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(0)
                     
                     MainMapView()
                         .tabItem {
-                            Image(systemName: "map")
+                            Image(systemName: "map.fill")
                                 .resizable()
                                 .imageScale(.large)
                     }.tag(1)
@@ -65,11 +65,14 @@ struct MainTabView: View {
             .navigationViewStyle(StackNavigationViewStyle())
             
             GroupSideMenu(width: UIScreen.main.bounds.width * 0.7, isOpen: self.isSideMenuActive, menuClose: self.activeSideMenu)
+                .onAppear(){
+                    print("sideMenu apeared!!")
+            }
             
             AddGroup(isOpen: self.isAddGroupViewActive, menuClose: self.activeAddGroupView)
         }
         .onAppear(){
-            self.groupData.loadMaps(userTocken: self.userSettings.userTocken!)
+            self.groupData.loadMaps()
         }
     }
     

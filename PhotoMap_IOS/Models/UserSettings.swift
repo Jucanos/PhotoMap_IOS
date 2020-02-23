@@ -34,7 +34,6 @@ class UserSettings: ObservableObject {
         }
         if self.userTocken == nil{
             print("kakao tocken nil!!")
-            onEndHandler()
             return
         }
         
@@ -131,7 +130,28 @@ class UserSettings: ObservableObject {
                 handler()
             }
         }.call()
-        
+    }
+    
+    func deleteRepresentMap(mid: String, completionHandler: @escaping ()->()) {
+        let url = NetworkURL.sharedInstance.getUrlString("/users/\(mid)")
+        Request{
+            Url(url)
+            Method(.patch)
+            Header.Authorization(.bearer(self.userTocken!))
+            Header.ContentType(.json)
+            Body(["remove": "true"])
+        }.onError { error in
+            print("error occuered!", error)
+            if let stringData = String(data: error.error!, encoding: .utf8){
+                print(stringData)
+            }
+        }.onData{data in
+            print("deleting REPMAP success!")
+            DispatchQueue.main.async {
+                self.userInfo?.data?.primary = nil
+                completionHandler()
+            }
+        }.call()
     }
     
     // MARK: -Firebase with UserDefault functions

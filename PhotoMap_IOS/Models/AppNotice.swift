@@ -12,7 +12,7 @@ import Request
 
 struct AppNotice: Codable {
     var message: String?
-    var data: [AppNoticeData?] = []
+    var data: [AppNoticeData?]
 }
 
 struct AppNoticeData: Codable{
@@ -25,7 +25,7 @@ struct AppNoticeData: Codable{
 
 class AppNoticeStore: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    @Published var noticeData: [AppNoticeData] = [] {
+    @Published var noticeData: [AppNoticeData]? {
         willSet{
             objectWillChange.send()
         }
@@ -34,7 +34,7 @@ class AppNoticeStore: ObservableObject {
     static let shared: AppNoticeStore = AppNoticeStore()
     init() {}
     
-    func loadNotice() {
+    func loadNotice(completionHandler: @escaping ()->()) {
         print("try to load notices!!")
         let url = NetworkURL.sharedInstance.getUrlString("/notice")
         AnyRequest<AppNotice> {
@@ -45,7 +45,8 @@ class AppNoticeStore: ObservableObject {
             print("Get notice Success!")
             print(notice)
             DispatchQueue.main.async {
-                self.noticeData = notice.data as! [AppNoticeData]
+                self.noticeData = (notice.data as! [AppNoticeData])
+                completionHandler()
             }
         }.onError{ error in
             if let stringError = String(data: error.error!, encoding: .utf8){

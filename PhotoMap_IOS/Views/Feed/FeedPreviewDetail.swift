@@ -12,6 +12,7 @@ import URLImage
 struct FeedPreviewDetail: View {
     @EnvironmentObject var feedStore: FeedStore
     @EnvironmentObject var userSettings: UserSettings
+    @ObservedObject var mapStore = MapStore.shared
     @State var currentPage = 0
     @Binding var showFeedOption: Bool
     @Binding var selectedFeed: FeedData?
@@ -22,19 +23,32 @@ struct FeedPreviewDetail: View {
         VStack(alignment: .leading, spacing: 10) {
             // User Profile
             HStack{
-                URLImage(URL(string: (UserSettings.shared.userInfo?.data?.thumbnail!)!)!) { proxy in
-                    proxy.image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                        .shadow(radius: 3)
-                        .overlay(Circle().stroke(Color(appColor), lineWidth: 1))
-                        .padding(.leading, 5)
+                Group{
+                    if self.mapStore.getOwnerThumbnail(from: self.feedData.creator!).isEmpty{
+                        Image(systemName: "questionmark.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color(appColor))
+                        
+                    } else{
+                        URLImage(URL(string: self.mapStore.getOwnerThumbnail(from: self.feedData.creator!))!) { proxy in
+                            proxy.image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .shadow(radius: 3)
+                                .overlay(Circle().stroke(Color(appColor), lineWidth: 1))
+                                .padding(.leading, 5)
+                        }
+                    }
                 }
                 
+                
                 VStack(alignment: .leading){
-                    Text((UserSettings.shared.userInfo?.data?.nickname!)!).font(.headline)
+                    Text(mapStore.getOwnerName(from: feedData.creator!)).font(.headline)
                     Text("Upload at \(feedData.updatedAt!)").foregroundColor(Color(.lightGray)).font(.subheadline)
                 }
                 

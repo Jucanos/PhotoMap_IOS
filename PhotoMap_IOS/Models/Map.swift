@@ -32,15 +32,13 @@ class MapStore: ObservableObject {
     @Published var mapData: MapData = MapData(){
         willSet{
             objectWillChange.send()
+            print("mapData Changed!!")
         }
     }
     
     static let shared: MapStore = MapStore()
-    init(){
-        mapData.owners = []
-    }
     
-    func loadMapDetail(mid: String) {
+    func loadMapDetail(mid: String, completionHandler: @escaping ()->()) {
         let url = NetworkURL.sharedInstance.getUrlString("/maps/\(mid)")
         AnyRequest<MapDetail> {
             Url(url)
@@ -50,6 +48,8 @@ class MapStore: ObservableObject {
             print("map loadid!")
             DispatchQueue.main.async {
                 self.mapData = map.data!
+                print(self.mapData.owners! as Any)
+                completionHandler()
             }
         }.onError{ error in
             print(error.self)
@@ -154,6 +154,23 @@ class MapStore: ObservableObject {
             }
             
         }).resume()
+    }
+    
+    func getOwnerName(from uid: String) -> String{
+        if let target = self.mapData.owners!.firstIndex(where: {$0.uid == uid}){
+            return self.mapData.owners![target].nickname!
+        } else{
+            return "존재하지 않는 맴버!"
+        }
+    }
+    
+    func getOwnerThumbnail(from uid: String) -> String{
+        if let target = self.mapData.owners!.firstIndex(where: {$0.uid == uid}){
+            print(target)
+            return self.mapData.owners![target].thumbnail!
+        } else{
+            return ""
+        }
     }
     
     func currentTime() -> String {
