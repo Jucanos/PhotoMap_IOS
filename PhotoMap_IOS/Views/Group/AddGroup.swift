@@ -55,7 +55,7 @@ struct SubAddGroup: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 5) {
-            Text("그룹 추가하기")
+            Text("그룹생성")
                 .font(.system(size: 25, weight: .heavy))
                 .foregroundColor(.white)
                 .padding(.leading, 15)

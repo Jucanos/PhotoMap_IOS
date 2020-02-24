@@ -24,7 +24,7 @@ struct MemberList: View {
                             MemberRow(member: mb)                            
                         }
                     }
-                    MenuOptionView()
+//                    MenuOptionView()
                 }
             }
         }
@@ -33,10 +33,10 @@ struct MemberList: View {
 struct MenuTtileView: View {
     var body: some View {
         ZStack{
-            Color(.gray)
+            Color(.white)
             HStack {
                 Text("그룹멤버")
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .padding()
                 Spacer()
             }
@@ -84,14 +84,17 @@ struct AddingMemberView: View {
                     print(error)
                 })
             }) {
-                Image(systemName: "person.badge.plus.fill")
+                HStack{
+                    Image(systemName: "person.badge.plus.fill")
                     .resizable()
                     .frame(width: 30, height: 30)
                     .foregroundColor(.black)
+                    
+                    Text(verbatim: "그룹멤버 초대")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                }
             }
-            Text(verbatim: "그룹멤버 초대")
-                .font(.headline)
-                .foregroundColor(.blue)
             Spacer()
         }
         .padding()
