@@ -48,6 +48,14 @@ extension ImagePicker {
         func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker.View>) -> UIImagePickerController {
             let picker = UIImagePickerController()
             picker.delegate = context.coordinator
+            
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+            UINavigationBar.appearance().shadowImage = UIImage()
+            UINavigationBar.appearance().backgroundColor = appColor
+            UINavigationBar.appearance().isTranslucent = true
+            
             return picker
         }
         func updateUIViewController(_ uiViewController: UIImagePickerController,
