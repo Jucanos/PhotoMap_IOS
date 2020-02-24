@@ -27,45 +27,79 @@ struct GroupDetail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        LoadingView(isShowing: self.$isLoading){
+        var MapView = KoreaMap()
+            .navigationBarItems(trailing:
+                Button(action: {self.isSideMenuActive.toggle()}) {
+                    Image(systemName: "line.horizontal.3")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+            })
+            .navigationBarTitle("\((self.groupData?.name!)!)", displayMode: .inline)
+            .scaleEffect(self.scale)
+            .offset(x: self.currentPosition.width, y: self.currentPosition.height)
+            .gesture(MagnificationGesture()
+                .onChanged { val in
+                    let delta = val / self.lastScale
+                    self.lastScale = val
+                    let newScale = self.scale * delta
+                    self.scale = newScale
+            }
+            .onEnded { _ in
+                self.lastScale = 1.0
+            })
+            .simultaneousGesture(DragGesture()
+                .onChanged { value in
+                    self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
+            }
+            .onEnded { value in
+                self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
+                self.newPosition = self.currentPosition
+            })
+        
+        var mainButton: some View {
+            ZStack{
+                Circle().foregroundColor(Color(appColor))
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .foregroundColor(.white)
+                    .rotationEffect(self.isButtonActivate ? Angle(degrees: 45.0) : Angle(degrees: 0.0))
+                    .animation(.default)
+            }
+            .frame(width: 60, height: 60)
+            .shadow(radius: 2)
+        }
+        
+        var setRepMapButton: some View {
+            Button(action: {
+                self.isLoading = true
+                self.userSettings.setRepresentMap(mid: self.mapStore.mapData.mid!){
+                    self.isLoading = false
+                    self.isButtonActivate.toggle()
+                }
+            }) {
+                IconAndTextButton(imageName: "mappin.and.ellipse", buttonText: "메인지도 설정")
+            }
+        }
+        
+        var storeImageButton: some View {
+            Button(action: {}) {
+                IconAndTextButton(imageName: "photo", buttonText: "이미지로 저장하기")
+            }
+        }
+        
+        return LoadingView(isShowing: self.$isLoading){
             Group{
                 if self.mapStore.mapData.mid != nil{
                     ZStack {
-                        KoreaMap()
-                            .navigationBarItems(trailing:
-                                Button(action: {self.isSideMenuActive.toggle()}) {
-                                    Image(systemName: "line.horizontal.3")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                            })
-                            .navigationBarTitle("\((self.groupData?.name!)!)", displayMode: .inline)
-                            .scaleEffect(self.scale)
-                            .offset(x: self.currentPosition.width, y: self.currentPosition.height)
-                            .gesture(MagnificationGesture()
-                                .onChanged { val in
-                                    let delta = val / self.lastScale
-                                    self.lastScale = val
-                                    let newScale = self.scale * delta
-                                    self.scale = newScale
-                            }
-                            .onEnded { _ in
-                                self.lastScale = 1.0
-                            })
-                            .simultaneousGesture(DragGesture()
-                                .onChanged { value in
-                                    self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
-                            }
-                            .onEnded { value in
-                                self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
-                                self.newPosition = self.currentPosition
-                            })
+                        MapView
+                        
                         ZStack {
                             Color(.black).opacity(self.isButtonActivate ? 0.7 : 0)
                             VStack {
                                 Spacer().layoutPriority(10)
                                 HStack {
                                     Spacer().layoutPriority(10)
-                                    FloatingButton(mainButtonView: AnyView(self.mainButton), buttons: [AnyView(self.shareButton),AnyView(self.storeImageButton),AnyView(self.setRepMapButton)], isOpen: self.$isButtonActivate)
+                                    FloatingButton(mainButtonView: AnyView(mainButton), buttons: [AnyView(storeImageButton),AnyView(setRepMapButton)], isOpen: self.$isButtonActivate)
                                         .straight()
                                         .direction(.top)
                                         .alignment(.right)
@@ -98,40 +132,6 @@ struct GroupDetail: View {
         }
         .onDisappear(){
             self.ref.removeObserver(withHandle: self.refHandle)
-        }
-    }
-    
-    var mainButton: some View {
-        ZStack{
-            Circle().foregroundColor(Color(appColor))
-            Image(systemName: "plus.circle.fill")
-            .resizable()
-            .foregroundColor(.white)
-        }
-        .frame(width: 60, height: 60)
-        .shadow(radius: 2)
-    }
-    
-    var setRepMapButton: some View {
-        Button(action: {
-            print("try to set REPMAP")
-            self.userSettings.setRepresentMap(mid: self.mapStore.mapData.mid!){
-                self.isButtonActivate.toggle()
-            }
-        }) {
-            IconAndTextButton(imageName: "mappin.and.ellipse", buttonText: "대표지도 설정")
-        }
-    }
-    
-    var storeImageButton: some View {
-        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-            IconAndTextButton(imageName: "photo", buttonText: "이미지로 저장하기")
-        }
-    }
-    
-    var shareButton: some View {
-        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-            IconAndTextButton(imageName: "square.and.arrow.up", buttonText: "공유하기")
         }
     }
 }
