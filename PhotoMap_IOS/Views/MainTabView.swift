@@ -16,7 +16,7 @@ struct MainTabView: View {
     @State private var isSideMenuActive: Bool = false
     @State private var isAddGroupViewActive: Bool = false
     
-    private let titles = ["그룹","메인지도","설정"]
+    private let titles = ["그룹","대표지도","설정"]
     
     var body: some View {
         ZStack {

@@ -15,48 +15,63 @@ struct ModifyFeed: View {
     @Binding var selectedFeed: FeedData?
     @State var modifiedTitle: String = ""
     @State var modifiedContext: String = ""
+    @State var isLoading = false
+    @State var showAlert = false
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Text("제목")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                TextField(self.selectedFeed!.title!.isEmpty ? "제목을 정해랏!" : self.selectedFeed!.title!,  text: self.$modifiedTitle)
-                
-                Spacer()
-                    .frame(height: 100)
-                
-                Text("내용")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                TextField(self.selectedFeed!.context!.isEmpty ? "제목을 정해랏!" : self.selectedFeed!.context!,  text: self.$modifiedContext)
-                
-                Spacer()
+            LoadingView(isShowing: self.$isLoading){
+                VStack(alignment: .leading) {
+                    Text("제목")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    TextField(self.selectedFeed!.title!.isEmpty ? "제목을 정해주세요!" : self.selectedFeed!.title!,  text: self.$modifiedTitle)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    Spacer()
+                        .frame(height: 100)
+                    
+                    Text("내용")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    TextField(self.selectedFeed!.context!.isEmpty ? "내용을 정해주세요!" : self.selectedFeed!.context!,  text: self.$modifiedContext)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Spacer()
+                }
             }
             .padding()
+            .alert(isPresented: self.$showAlert){
+                Alert(title: Text("제목이 없습니다!"), dismissButton: .default(Text("확인")))
+            }
             .navigationBarTitle("스토리 수정하기", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!,userTocken: self.userSettings.userTocken!, title: self.modifiedTitle, context: self.modifiedContext){
-                    self.presentationMode.wrappedValue.dismiss()
+            .navigationBarItems(leading: backButton, trailing: Button(action: {
+                if self.modifiedTitle.isEmpty{
+                    self.showAlert = true
+                } else{
+                    self.isLoading = true
+                    self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!,userTocken: self.userSettings.userTocken!, title: self.modifiedTitle, context: self.modifiedContext){
+                        self.isLoading = false
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                 }
             }) {
                 Text("확인")
             })
         }
     }
-//    var backButton : some View {
-//        Button(action: {
-//            self.presentationMode.wrappedValue.dismiss()
-//        }) {
-//            HStack {
-//                Image(systemName: "multiply")
-//                    .resizable()
-//                    .frame(width: 20, height: 20)
-//                    .foregroundColor(.white)
-//            }
-//        }
-//    }
+    var backButton : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack {
+                Image(systemName: "multiply")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 15, height: 15)
+                    .foregroundColor(.white)
+            }
+        }
+    }
 }
 
 //struct ModifyFeed_Previews: PreviewProvider {

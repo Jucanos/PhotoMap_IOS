@@ -77,7 +77,7 @@ struct GroupDetail: View {
                     self.isButtonActivate.toggle()
                 }
             }) {
-                IconAndTextButton(imageName: "mappin.and.ellipse", buttonText: "메인지도 설정")
+                IconAndTextButton(imageName: "mappin.and.ellipse", buttonText: "대표지도 설정")
             }
         }
         

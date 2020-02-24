@@ -48,6 +48,14 @@ extension ImagePicker {
         func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker.View>) -> UIImagePickerController {
             let picker = UIImagePickerController()
             picker.delegate = context.coordinator
+            
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+            UINavigationBar.appearance().shadowImage = UIImage()
+            UINavigationBar.appearance().backgroundColor = appColor
+            UINavigationBar.appearance().isTranslucent = true
+            
             return picker
         }
         func updateUIViewController(_ uiViewController: UIImagePickerController,
@@ -84,11 +92,10 @@ extension MyImagePicker{
             config.wordings.cameraTitle = "카메라"
             config.wordings.next = "다음"
             config.wordings.filter = "필터"
-//            config.colors.tintColor = .white
-//            config.colors.multipleItemsSelectedCircleColor = .black
+            config.wordings.cancel = "취소"
             
-//            UINavigationBar.appearance().tintColor = .white
-//            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
             let picker = YPImagePicker(configuration: config)
             picker.didFinishPicking { [unowned picker] items, cancelled in
                 if cancelled {
