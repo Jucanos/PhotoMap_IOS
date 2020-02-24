@@ -65,7 +65,7 @@ struct GroupDetail: View {
                                 Spacer().layoutPriority(10)
                                 HStack {
                                     Spacer().layoutPriority(10)
-                                    FloatingButton(mainButtonView: AnyView(self.mainButton), buttons: [AnyView(self.shareButton),AnyView(self.storeImageButton),AnyView(self.setRepMapButton)], isOpen: self.$isButtonActivate)
+                                    FloatingButton(mainButtonView: AnyView(self.mainButton), buttons: [AnyView(self.storeImageButton),AnyView(self.setRepMapButton)], isOpen: self.$isButtonActivate)
                                         .straight()
                                         .direction(.top)
                                         .alignment(.right)
@@ -104,9 +104,17 @@ struct GroupDetail: View {
     var mainButton: some View {
         ZStack{
             Circle().foregroundColor(Color(appColor))
-            Image(systemName: "plus.circle.fill")
-            .resizable()
-            .foregroundColor(.white)
+            Group{
+                if self.isButtonActivate {
+                    Image(systemName: "multiply.circle.fill")
+                    .resizable()
+                    .foregroundColor(.white)
+                } else{
+                    Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .foregroundColor(.white)
+                }
+            }
         }
         .frame(width: 60, height: 60)
         .shadow(radius: 2)
@@ -114,24 +122,19 @@ struct GroupDetail: View {
     
     var setRepMapButton: some View {
         Button(action: {
-            print("try to set REPMAP")
+            self.isLoading = true
             self.userSettings.setRepresentMap(mid: self.mapStore.mapData.mid!){
+                self.isLoading = false
                 self.isButtonActivate.toggle()
             }
         }) {
-            IconAndTextButton(imageName: "mappin.and.ellipse", buttonText: "대표지도 설정")
+            IconAndTextButton(imageName: "mappin.and.ellipse", buttonText: "메인지도 설정")
         }
     }
     
     var storeImageButton: some View {
         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
             IconAndTextButton(imageName: "photo", buttonText: "이미지로 저장하기")
-        }
-    }
-    
-    var shareButton: some View {
-        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-            IconAndTextButton(imageName: "square.and.arrow.up", buttonText: "공유하기")
         }
     }
 }
