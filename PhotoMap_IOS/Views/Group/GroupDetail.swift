@@ -59,17 +59,11 @@ struct GroupDetail: View {
         var mainButton: some View {
             ZStack{
                 Circle().foregroundColor(Color(appColor))
-                Group{
-                    if self.isButtonActivate {
-                        Image(systemName: "multiply.circle.fill")
-                            .resizable()
-                            .foregroundColor(.white)
-                    } else{
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .foregroundColor(.white)
-                    }
-                }
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .foregroundColor(.white)
+                    .rotationEffect(self.isButtonActivate ? Angle(degrees: 45.0) : Angle(degrees: 0.0))
+                    .animation(.default)
             }
             .frame(width: 60, height: 60)
             .shadow(radius: 2)
