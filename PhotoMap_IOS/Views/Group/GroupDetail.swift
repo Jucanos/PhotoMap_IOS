@@ -58,10 +58,11 @@ struct GroupDetail: View {
         
         var mainButton: some View {
             ZStack{
-                Circle().foregroundColor(Color(appColor))
                 Image(systemName: "plus.circle.fill")
                     .resizable()
                     .foregroundColor(.white)
+                    .background(Color(appColor))
+                    .clipShape(Circle())
                     .rotationEffect(self.isButtonActivate ? Angle(degrees: 45.0) : Angle(degrees: 0.0))
                     .animation(.default)
             }
