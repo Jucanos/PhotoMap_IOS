@@ -33,8 +33,7 @@ struct LoginView: View {
                         .frame(height: 10)
                     VStack() {
                         Text("포토맵에 오신것을 환영합니다!")
-                            .font(.body)
-                            .fontWeight(.bold)
+                            .font(.custom("NanumSquareRoundB", size: 17))
                             .foregroundColor(.white)
                         Button(action: {
                             self.isLoading.toggle()
