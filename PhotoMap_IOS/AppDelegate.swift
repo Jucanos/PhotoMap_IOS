@@ -138,9 +138,14 @@ extension URL {
         return url.queryItems?.first(where: { $0.name == queryParamaterName })?.value
     }
 }
+
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("\(#function)")
+        let content = notification.request.content
+        // Process notification content
+        print("\(content.userInfo)")
+        completionHandler([.alert, .sound])
     }
 }
 
@@ -150,4 +155,13 @@ extension AppDelegate: MessagingDelegate {
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
     }
+    // [END refresh_token]
+    // [START ios_10_data_message]
+    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+//    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+//        print("Received data message: \(remoteMessage.appData)")
+//        Messaging.messaging().shouldEstablishDirectChannel = true
+//    }
 }
+

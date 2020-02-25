@@ -48,6 +48,7 @@ class UserSettings: ObservableObject {
             DispatchQueue.main.async {
                 self.userInfo = usrInfo
                 FireBaseBackMid.shared.initObserve(uid: (usrInfo.data?.uid!)!)
+                Messaging.messaging().subscribe(toTopic: (usrInfo.data?.uid!)!)
                 onEndHandler()
             }
         }
