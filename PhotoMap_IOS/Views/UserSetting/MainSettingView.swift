@@ -11,9 +11,9 @@ import URLImage
 
 struct MainSettingView: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 5) {
             UserInfoView()
-                .padding()
+                .padding(10)
             List {
                 Section(header: Text("앱 정보")) {
                     NavigationLink(destination: Notice()) {
@@ -23,7 +23,6 @@ struct MainSettingView: View {
                     SettingRow(setImage: "square.and.arrow.up",settingName: "앱 공유하기")
                 }
                 Section(header: Text("회원정보관리")) {
-                    SettingRow(setImage: "lock",settingName: "비밀번호 변경")
                     NavigationLink(destination: UserLogout()) {
                         SettingRow(setImage: "person.crop.circle.badge.exclam",settingName: "로그아웃")
                     }
@@ -61,8 +60,8 @@ struct UserInfoView: View {
             URLImage(URL(string: (UserSettings.shared.userInfo?.data?.thumbnail!)!)!) { proxy in
                 proxy.image
                     .resizable()
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
+                    .frame(width: 55, height: 55)
             }
             Text((UserSettings.shared.userInfo?.data?.nickname!)!)
                 .font(.title)
