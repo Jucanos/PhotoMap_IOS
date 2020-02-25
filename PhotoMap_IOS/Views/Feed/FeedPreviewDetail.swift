@@ -46,10 +46,9 @@ struct FeedPreviewDetail: View {
                     }
                 }
                 
-                
                 VStack(alignment: .leading){
                     Text(mapStore.getOwnerName(from: feedData.creator!)).font(.headline)
-                    Text("Upload at \(feedData.updatedAt!)").foregroundColor(Color(.lightGray)).font(.subheadline)
+                    Text("\(feedData.getProperUpdateAt())").foregroundColor(Color(.lightGray)).font(.subheadline)
                 }
                 
                 Spacer()
@@ -63,8 +62,8 @@ struct FeedPreviewDetail: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(.black)
                 }
-                .padding(.trailing, 5)
-            }
+                .padding(5)
+            }.frame(width: UIScreen.main.bounds.width)
             
             // Image PageView
             if self.feedData.files.count == 1{

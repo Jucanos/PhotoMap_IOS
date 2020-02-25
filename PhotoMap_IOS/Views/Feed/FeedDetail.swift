@@ -10,7 +10,6 @@ import SwiftUI
 import Request
 
 struct FeedDetail: View {
-    @EnvironmentObject var userSettings: UserSettings
     @ObservedObject var mapStore = MapStore.shared
     @EnvironmentObject var feedStore: FeedStore
     @State var showFeedOption: Bool = false
@@ -32,7 +31,7 @@ struct FeedDetail: View {
                 .actionSheet(isPresented: $showFeedOption){
                     ActionSheet(title: Text(""), message: Text(""), buttons: [
                         .default(Text("스토리 삭제"), action: {
-                            self.feedStore.deleteFeed(sid: (self.selectedFeed?.sid!)!, userTocken: self.userSettings.userTocken!)
+                            self.feedStore.deleteFeed(sid: (self.selectedFeed?.sid!)!)
                         }),
                         .default(Text("스토리 수정"), action: {
                             self.showModifyFeed = true
@@ -41,7 +40,7 @@ struct FeedDetail: View {
                     ])
                 }
                 .sheet(isPresented: self.$showModifyFeed) {
-                    ModifyFeed(selectedFeed: self.$selectedFeed).environmentObject(self.userSettings).environmentObject(self.feedStore)
+                    ModifyFeed(selectedFeed: self.$selectedFeed).environmentObject(self.feedStore)
                 }
             }
             else {

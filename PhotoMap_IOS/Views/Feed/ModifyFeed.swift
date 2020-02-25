@@ -11,7 +11,6 @@ import SwiftUI
 struct ModifyFeed: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var feedStore: FeedStore
-    @EnvironmentObject var userSettings: UserSettings
     @Binding var selectedFeed: FeedData?
     @State var modifiedTitle: String = ""
     @State var modifiedContext: String = ""
@@ -49,7 +48,7 @@ struct ModifyFeed: View {
                     self.showAlert = true
                 } else{
                     self.isLoading = true
-                    self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!,userTocken: self.userSettings.userTocken!, title: self.modifiedTitle, context: self.modifiedContext){
+                    self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!, title: self.modifiedTitle, context: self.modifiedContext){
                         self.isLoading = false
                         self.presentationMode.wrappedValue.dismiss()
                     }
