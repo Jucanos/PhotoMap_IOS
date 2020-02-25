@@ -20,8 +20,7 @@ struct LoginView: View {
                 VStack(alignment: .center, spacing: 40) {
                     VStack(spacing: 10) {
                         Text("PhotoMap")
-                            .font(.largeTitle)
-                            .fontWeight(.heavy)
+                            .font(.custom("Recipekorea", size: 40))
                             .foregroundColor(.white)
                         Image("mainlogo")
                             .resizable()

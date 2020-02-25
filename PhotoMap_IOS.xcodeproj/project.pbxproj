@@ -52,6 +52,8 @@
 		97785AC323C9E38F007EDB7E /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97785AC223C9E38F007EDB7E /* NavigationConfigurator.swift */; };
 		97785AC623C9E592007EDB7E /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97785AC523C9E592007EDB7E /* FeedView.swift */; };
 		977B2CFF2404F13500912EFA /* CautionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B2CFE2404F13500912EFA /* CautionView.swift */; };
+		977B2D062405035900912EFA /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B2D052405035900912EFA /* TestView.swift */; };
+		977B2D082405042700912EFA /* Recipekorea.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 977B2D072405042700912EFA /* Recipekorea.ttf */; };
 		978D81EC23CB0ACD00DA75D0 /* GroupSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81EB23CB0ACD00DA75D0 /* GroupSideMenu.swift */; };
 		978D81EE23CB0BD700DA75D0 /* MemberList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D81ED23CB0BD700DA75D0 /* MemberList.swift */; };
 		978FBC1123D07CC0009998E5 /* NetworkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978FBC1023D07CC0009998E5 /* NetworkURL.swift */; };
@@ -120,6 +122,8 @@
 		97785AC223C9E38F007EDB7E /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		97785AC523C9E592007EDB7E /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		977B2CFE2404F13500912EFA /* CautionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CautionView.swift; sourceTree = "<group>"; };
+		977B2D052405035900912EFA /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		977B2D072405042700912EFA /* Recipekorea.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Recipekorea.ttf; sourceTree = "<group>"; };
 		978D81EB23CB0ACD00DA75D0 /* GroupSideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSideMenu.swift; sourceTree = "<group>"; };
 		978D81ED23CB0BD700DA75D0 /* MemberList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberList.swift; sourceTree = "<group>"; };
 		978FBC1023D07CC0009998E5 /* NetworkURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkURL.swift; sourceTree = "<group>"; };
@@ -223,13 +227,14 @@
 				9750586023C1B17800BF54E5 /* AppDelegate.swift */,
 				9750586223C1B17800BF54E5 /* SceneDelegate.swift */,
 				970CFCC923C20C8100D9FB12 /* KakaoOpenSDK-Bridging-Header.h */,
-				978FBC0F23D07CA4009998E5 /* Networking */,
-				97528EF023C771ED00B999B5 /* Models */,
-				9773018623C72C4C00E3CE99 /* Views */,
 				9750586923C1B17900BF54E5 /* Assets.xcassets */,
 				9750586E23C1B17900BF54E5 /* LaunchScreen.storyboard */,
 				9750586423C1B17800BF54E5 /* PhotoMap_IOS.xcdatamodeld */,
 				9750587123C1B17900BF54E5 /* Info.plist */,
+				978FBC0F23D07CA4009998E5 /* Networking */,
+				97528EF023C771ED00B999B5 /* Models */,
+				9773018623C72C4C00E3CE99 /* Views */,
+				977B2D00240500B300912EFA /* Fonts */,
 				9750586B23C1B17900BF54E5 /* Preview Content */,
 			);
 			path = PhotoMap_IOS;
@@ -284,6 +289,7 @@
 				97785AC423C9E583007EDB7E /* Feed */,
 				97B8B0AE23C8596300E9B52C /* UserSetting */,
 				97785AC023C9E35D007EDB7E /* SupportingView */,
+				977B2D052405035900912EFA /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -316,6 +322,14 @@
 				97C7574F23E1CC990095E3B7 /* PageView.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		977B2D00240500B300912EFA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				977B2D072405042700912EFA /* Recipekorea.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		978FBC0F23D07CA4009998E5 /* Networking */ = {
@@ -418,6 +432,7 @@
 			files = (
 				9750587023C1B17900BF54E5 /* LaunchScreen.storyboard in Resources */,
 				974C93CE23FA648000D01252 /* GoogleService-Info.plist in Resources */,
+				977B2D082405042700912EFA /* Recipekorea.ttf in Resources */,
 				9750586D23C1B17900BF54E5 /* Preview Assets.xcassets in Resources */,
 				9750586A23C1B17900BF54E5 /* Assets.xcassets in Resources */,
 			);
@@ -529,6 +544,7 @@
 				9754A48E23FBAFD9000D8326 /* FirebaseBackupMid.swift in Sources */,
 				97C7575023E1CC990095E3B7 /* PageView.swift in Sources */,
 				973281DC23D045AC00153874 /* PageViewController.swift in Sources */,
+				977B2D062405035900912EFA /* TestView.swift in Sources */,
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
 				973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,
