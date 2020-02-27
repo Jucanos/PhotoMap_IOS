@@ -8,6 +8,7 @@
 
 import SwiftUI
 import FirebaseDatabase
+import URLImage
 
 struct GroupDetail: View {
     
@@ -85,7 +86,16 @@ struct GroupDetail: View {
         }
         
         var storeImageButton: some View {
-            Button(action: {}) {
+            Button(action: {
+                self.isLoading = true
+                self.mapStore.getMapImage() { target in
+                    print(target)
+                    let tmpView = Image(uiImage: target).resizable().scaledToFit()
+                    let img = tmpView.takeScreenshot(origin: .zero, size: UIScreen.main.bounds.size)
+                    UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
+                    self.isLoading = false
+                    }
+            }) {
                 IconAndTextButton(imageName: "photo", buttonText: "이미지로 저장하기")
             }
         }
@@ -136,5 +146,17 @@ struct GroupDetail: View {
         .onDisappear(){
             self.ref.removeObserver(withHandle: self.refHandle)
         }
+    }
+    
+    func saveImage(image: UIImage) {
+        if let data = image.pngData() {
+            let filename = getDocumentsDirectory().appendingPathComponent("copy.png")
+            try? data.write(to: filename)
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }

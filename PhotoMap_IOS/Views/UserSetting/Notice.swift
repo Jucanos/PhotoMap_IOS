@@ -24,8 +24,8 @@ struct Notice: View {
                             }
                             .listStyle(PlainListStyle())
                         } else {
-                            Text("공지사항이 없습니다!")
-                                .font(.custom("NanumSquareRoundB", size: 17))
+                            Text("공지사항이 없습니다🤔")
+                                .font(.custom("NanumSquareRoundR", size: 15))
                         }
                     }
                 } else {

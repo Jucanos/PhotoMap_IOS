@@ -113,6 +113,7 @@ struct AdjustImage: View {
                     self.isLoading = true
                     let imgSize = UIImage(named: self.location)?.size
                     let ratio = imgSize!.height / imgSize!.width
+                    print(ratio)
                     
                     let newHeight = gr.size.width * ratio
                     let newOffset = (gr.frame(in: .global).size.height - newHeight) / 2

@@ -28,7 +28,7 @@ struct MainGroupView: View {
                     Group{
                         if self.groupStore.mapData!.isEmpty{
                             Text("그룹을 생성해주세요🤔")
-                                .font(.custom("NanumSquareRoundB", size: 20))
+                                .font(.custom("NanumSquareRoundR", size: 15))
                         }
                         else{
                             ZStack {

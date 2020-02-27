@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 import Request
 import FirebaseDatabase
+import URLImage
 
 struct MapDetail: Codable{
     var data: MapData?
@@ -37,6 +38,11 @@ struct MapData: Codable {
             return ""
         }
     }
+}
+
+struct MapImage: Codable {
+    var data: String?
+    var message: String?
 }
 
 // MARK:- MapStore
@@ -168,6 +174,32 @@ class MapStore: ObservableObject {
             }
             
         }).resume()
+    }
+    
+    func getMapImage(completionHandler: @escaping(_ target: UIImage) -> Void) {
+        let url = NetworkURL.sharedInstance.getUrlString("/maps/\(MapStore.shared.mapData.mid!)/represents")
+        print(url)
+        AnyRequest<MapImage> {
+            Url(url)
+            Method(.get)
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
+        }.onObject{ mapImg in
+            let imgUrl = mapImg.data!
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: URL(string: imgUrl)!) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            completionHandler(image)
+                        }
+                    }
+                }
+            }
+        }.onError{ error in
+            if let stringError = String(data: error.error!, encoding: .utf8) {
+                print(stringError)
+            }
+        }
+        .call()
     }
     
     func getOwnerName(from uid: String) -> String{

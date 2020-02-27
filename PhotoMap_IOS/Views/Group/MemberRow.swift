@@ -20,7 +20,7 @@ struct MemberRow: View {
                     .frame(width: 50, height: 50)
             }
             Text(member.nickname!)
-                .font(.custom("NanumSquareRoundR", size: 17))
+                .font(.custom("NanumSquareRoundR", size: 15))
             Spacer()
         }
     }

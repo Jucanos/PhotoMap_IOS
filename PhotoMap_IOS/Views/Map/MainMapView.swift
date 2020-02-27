@@ -30,9 +30,9 @@ struct MainMapView: View {
                 }
             } else{
                 Text("대표지도가 없습니다🤔")
+                    .font(.custom("NanumSquareRoundR", size: 15))
             }
         }
-    
         .onAppear(){
             if self.userSettings.userInfo?.data?.primary != nil {
                 self.isLoading = true

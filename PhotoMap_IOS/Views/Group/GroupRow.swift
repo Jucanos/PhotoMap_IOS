@@ -20,7 +20,7 @@ struct GroupRow: View {
     var body: some View {
             HStack{
                 ZStack {
-                    URLImage(URL(string: "https://s3.soybeans.tech/uploads/prod/\(self.group.mid!)/main.png")!, expireAfter: Date(timeIntervalSinceNow: 0.1)){ proxy in
+                    URLImage(URL(string: "https://s3.soybeans.tech/uploads/dev/\(self.group.mid!)/main.png")!, expireAfter: Date(timeIntervalSinceNow: 0.1)){ proxy in
                         proxy.image
                             .resizable()
                             .frame(width: 60, height: 60)
