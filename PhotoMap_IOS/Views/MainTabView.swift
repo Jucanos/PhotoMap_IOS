@@ -49,7 +49,7 @@ struct MainTabView: View {
                 .navigationBarItems(leading:
                     HStack {
                         Text("\(self.titles[selectedView])")
-                            .font(.system(size: 25, weight: .heavy))
+                            .font(.custom("NanumSquareRoundB", size: 25))
                             .foregroundColor(.white)
                         Spacer()
                     }
@@ -96,7 +96,7 @@ extension UINavigationController {
         
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = appColor
-        appearance.titleTextAttributes = [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 20)]
+        appearance.titleTextAttributes = [.foregroundColor : UIColor.white, .font: UIFont(name: "NanumSquareRoundR", size: 20)!]
         appearance.setBackIndicatorImage(backBtn, transitionMaskImage: nil)
         
         navigationBar.tintColor = UIColor.white

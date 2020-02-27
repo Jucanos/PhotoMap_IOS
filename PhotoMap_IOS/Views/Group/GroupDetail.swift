@@ -39,10 +39,12 @@ struct GroupDetail: View {
             .offset(x: self.currentPosition.width, y: self.currentPosition.height)
             .gesture(MagnificationGesture()
                 .onChanged { val in
+                    let minZoom: CGFloat = 0.5
+                    let maxZoom: CGFloat = 2.0
                     let delta = val / self.lastScale
                     self.lastScale = val
                     let newScale = self.scale * delta
-                    self.scale = newScale
+                    self.scale = max(min(newScale, maxZoom), minZoom)
             }
             .onEnded { _ in
                 self.lastScale = 1.0
@@ -58,10 +60,11 @@ struct GroupDetail: View {
         
         var mainButton: some View {
             ZStack{
-                Circle().foregroundColor(Color(appColor))
                 Image(systemName: "plus.circle.fill")
                     .resizable()
                     .foregroundColor(.white)
+                    .background(Color(appColor))
+                    .clipShape(Circle())
                     .rotationEffect(self.isButtonActivate ? Angle(degrees: 45.0) : Angle(degrees: 0.0))
                     .animation(.default)
             }

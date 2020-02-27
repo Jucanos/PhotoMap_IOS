@@ -46,10 +46,12 @@ struct FeedPreviewDetail: View {
                     }
                 }
                 
-                
-                VStack(alignment: .leading){
-                    Text(mapStore.getOwnerName(from: feedData.creator!)).font(.headline)
-                    Text("Upload at \(feedData.updatedAt!)").foregroundColor(Color(.lightGray)).font(.subheadline)
+                VStack(alignment: .leading, spacing: 5){
+                    Text(mapStore.getOwnerName(from: feedData.creator!))
+                    .font(.custom("NanumSquareRoundB", size: 17))
+                    Text("\(feedData.getProperCreatedAt())")
+                    .font(.custom("NanumSquareRoundR", size: 12))
+                        .foregroundColor(Color(.lightGray))
                 }
                 
                 Spacer()
@@ -63,8 +65,8 @@ struct FeedPreviewDetail: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(.black)
                 }
-                .padding(.trailing, 5)
-            }
+                .padding(5)
+            }.frame(width: UIScreen.main.bounds.width)
             
             // Image PageView
             if self.feedData.files.count == 1{
@@ -78,9 +80,12 @@ struct FeedPreviewDetail: View {
             }
             
             // Title & Context
-            VStack(alignment: .leading){
+            VStack(alignment: .leading, spacing: 5){
                 Text("\(feedData.title!)")
-                Text("\(feedData.context!)").foregroundColor(Color(.lightGray)).font(.subheadline)
+                    .font(.custom("NanumSquareRoundB", size: 17))
+                Text("\(feedData.context!)")
+                    .font(.custom("NanumSquareRoundR", size: 12))
+                    .foregroundColor(Color(.lightGray))
             }.padding(.leading, 10)
         }
     }

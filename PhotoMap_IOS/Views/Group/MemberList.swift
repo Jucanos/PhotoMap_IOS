@@ -36,6 +36,7 @@ struct MenuTtileView: View {
             Color(.white)
             HStack {
                 Text("그룹멤버")
+                    .font(.custom("NanumSquareRoundB", size: 17))
                     .foregroundColor(.black)
                     .padding()
                 Spacer()
@@ -90,8 +91,8 @@ struct AddingMemberView: View {
                     .frame(width: 30, height: 30)
                     .foregroundColor(.black)
                     
-                    Text(verbatim: "그룹멤버 초대")
-                    .font(.headline)
+                    Text("그룹멤버 초대")
+                    .font(.custom("NanumSquareRoundB", size: 17))
                     .foregroundColor(.black)
                 }
             }

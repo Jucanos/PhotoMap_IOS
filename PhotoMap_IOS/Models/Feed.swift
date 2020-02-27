@@ -42,6 +42,20 @@ struct FeedData: Codable {
         }
         return images
     }
+    
+    func getProperCreatedAt() -> String {
+        if createdAt != nil{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            dateFormatter.timeZone = NSTimeZone(name: "KST") as TimeZone?
+            let date = dateFormatter.date(from: createdAt!)
+            
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            return dateFormatter.string(from: date!)
+        } else {
+            return ""
+        }
+    }
 }
 
 
@@ -60,7 +74,7 @@ class FeedStore: ObservableObject {
             Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ feeds in
             DispatchQueue.main.async {
-                self.feedData = feeds.data as? [FeedData]
+                self.feedData = self.getSortedFeeds(from: (feeds.data as? [FeedData])!)
                 completionHandler()
             }
         }.onError{ error in
@@ -135,12 +149,12 @@ class FeedStore: ObservableObject {
         }).resume()
     }
     
-    func modifyFeed(sid: String, userTocken: String, title: String, context: String, _ handler: @escaping ()->()) {
+    func modifyFeed(sid: String, title: String, context: String, _ handler: @escaping ()->()) {
         let url = NetworkURL.sharedInstance.getUrlString("/stories/\(sid)")
         Request {
             Url(url)
             Method(.patch)
-            Header.Authorization(.bearer(userTocken))
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
             Header.ContentType(.json)
             Body(["title": title, "context": context])
         }.onError{ error in
@@ -149,32 +163,37 @@ class FeedStore: ObservableObject {
             }
         }.onData { data in
             DispatchQueue.main.async {
-                self.modifyFeed(sid: sid, title: title, context: context)
+                var idx = 0
+                for item in self.feedData!{
+                    if item.sid == sid{
+                        self.feedData![idx].title = title
+                        self.feedData![idx].context = context
+                        break
+                    }
+                    idx += 1
+                }
                 handler()
             }
         }
         .call()
     }
-    func modifyFeed(sid: String, title: String, context: String){
-        var idx = 0
-        for item in self.feedData!{
-            if item.sid == sid{
-                feedData![idx].title = title
-                feedData![idx].context = context
-                return
-            }
-            idx += 1
-        }
-    }
-    func deleteFeed(sid: String ,userTocken: String) {
+    
+    func deleteFeed(sid: String) {
         let url = NetworkURL.sharedInstance.getUrlString("/stories/\(sid)")
         AnyRequest<Feed> {
             Url(url)
             Method(.delete)
-            Header.Authorization(.bearer(userTocken))
+            Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onData{ data in
-            if let stringData = String(data: data, encoding: .utf8){
-                print(stringData)
+            DispatchQueue.main.async {
+                var idx = 0
+                for item in self.feedData! {
+                    if item.sid == sid {
+                        self.feedData!.remove(at: idx)
+                        return
+                    }
+                    idx += 1
+                }
             }
         }.onError{ error in
             if let stringData = String(data: error.error!, encoding: .utf8){
@@ -184,20 +203,8 @@ class FeedStore: ObservableObject {
             return
         }
         .call()
-        
-        deleteFeed(sid: sid)
     }
     
-    func deleteFeed(sid: String) {
-        var idx = 0
-        for item in self.feedData! {
-            if item.sid == sid {
-                feedData!.remove(at: idx)
-                return
-            }
-            idx += 1
-        }
-    }
     func currentTime() -> String {
         let date = Date()
         let calendar = Calendar.current
@@ -205,5 +212,16 @@ class FeedStore: ObservableObject {
         let minutes = calendar.component(.minute, from: date)
         let sec = calendar.component(.second, from: date)
         return "\(hour):\(minutes):\(sec)"
+    }
+    
+    func getSortedFeeds(from oldArr: [FeedData]) -> [FeedData] {
+        var newArr: [FeedData] = []
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = NSTimeZone(name: "KST") as TimeZone?
+        
+        newArr = oldArr.sorted(by: {dateFormatter.date(from: $0.createdAt!)! > dateFormatter.date(from: $1.createdAt!)!})
+        return newArr
     }
 }

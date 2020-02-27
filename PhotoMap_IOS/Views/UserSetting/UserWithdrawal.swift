@@ -14,6 +14,7 @@ struct UserWithdrawal: View {
         VStack {
             Spacer()
             Text("정말 회원탈퇴 하시겠습니까?\n\n회원탈퇴를 하시면 모든 데이터가 사라집니다.")
+            .font(.custom("NanumSquareRoundB", size: 17))
             Spacer()
             Button(action: {
                 self.userSettings.userWithdrawal()
@@ -21,6 +22,7 @@ struct UserWithdrawal: View {
                 ZStack {
                     Color(.gray)
                     Text("회원탈퇴 하기")
+                        .font(.custom("NanumSquareRoundB", size: 17))
                         .foregroundColor(.white)
                 }
                 .frame(height: 70)

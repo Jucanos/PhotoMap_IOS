@@ -24,19 +24,23 @@ struct AddFeed: View {
         LoadingView(isShowing: self.$isLoading){
             GeometryReader { geo in
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("제목을 정해주세요")
-                        .font(.title)
-                        .fontWeight(.bold)
-                    TextField("스토리의 제목을 정해주세요", text: self.$title)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Text("제목")
+                        .font(.custom("NanumSquareRoundB", size: 25))
+                    VStack(spacing: 2) {
+                        TextField("스토리의 제목을 정해주세요", text: self.$title)
+                            .font(.custom("NanumSquareRoundR", size: 15))
+                        Divider().foregroundColor(Color(.lightGray))
+                    }
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("내용을 정해주세요")
-                        .font(.title)
-                        .fontWeight(.bold)
-                    TextField("스토리의 내용을 정해주세요", text: self.$content)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Text("내용")
+                        .font(.custom("NanumSquareRoundB", size: 25))
+                    VStack(spacing: 2) {
+                        TextField("스토리의 내용을 정해주세요", text: self.$content)
+                            .font(.custom("NanumSquareRoundR", size: 15))
+                        Divider().foregroundColor(Color(.lightGray))
+                    }
                 }
                 .offset(y: geo.size.height * 0.2)
             }
@@ -69,6 +73,7 @@ struct AddFeed: View {
                         }
                     }) {
                         Text("업로드")
+                            .font(.custom("NanumSquareRoundB", size: 17))
                             .foregroundColor(.white)
                     }
             )

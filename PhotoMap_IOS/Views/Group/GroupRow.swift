@@ -20,10 +20,10 @@ struct GroupRow: View {
     var body: some View {
             HStack{
                 ZStack {
-                    URLImage(URL(string: "https://s3.soybeans.tech/uploads/\(self.group.mid!)/main.png")!, expireAfter: Date(timeIntervalSinceNow: 0.1)){ proxy in
+                    URLImage(URL(string: "https://s3.soybeans.tech/uploads/prod/\(self.group.mid!)/main.png")!, expireAfter: Date(timeIntervalSinceNow: 0.1)){ proxy in
                         proxy.image
                             .resizable()
-                            .frame(width: 50, height: 50)
+                            .frame(width: 60, height: 60)
                     }
                     
                     ZStack {
@@ -38,11 +38,12 @@ struct GroupRow: View {
                     .foregroundColor(.red)
                     .offset(x: 20, y: -20)
                 }
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 5) {
                     Text(verbatim: "\(self.group.name!)")
-                        .font(.title)
+                        .font(.custom("NanumSquareRoundB", size: 25))
                     Text(self.group.getProperUpdateAt())
-                        .font(.footnote)
+                        .font(.custom("NanumSquareRoundL", size: 12))
+                        .foregroundColor(.gray)
                 }
                 .padding(5)
                 Spacer()

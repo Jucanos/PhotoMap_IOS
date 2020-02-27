@@ -50,7 +50,7 @@ extension ImagePicker {
             picker.delegate = context.coordinator
             
             UINavigationBar.appearance().tintColor = .white
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "NanumSquareRoundR", size: 20)!]
             UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
             UINavigationBar.appearance().shadowImage = UIImage()
             UINavigationBar.appearance().backgroundColor = appColor
@@ -87,6 +87,7 @@ extension MyImagePicker{
             var config = YPImagePickerConfiguration()
             
             config.startOnScreen = YPPickerScreen.library
+            config.shouldSaveNewPicturesToAlbum = false
             config.library.maxNumberOfItems = 5
             config.wordings.libraryTitle = "갤러리"
             config.wordings.cameraTitle = "카메라"
@@ -95,7 +96,7 @@ extension MyImagePicker{
             config.wordings.cancel = "취소"
             
             UINavigationBar.appearance().tintColor = .white
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "NanumSquareRoundB", size: 17)!]
             let picker = YPImagePicker(configuration: config)
             picker.didFinishPicking { [unowned picker] items, cancelled in
                 if cancelled {

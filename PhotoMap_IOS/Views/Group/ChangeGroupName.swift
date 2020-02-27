@@ -20,14 +20,16 @@ struct ChangeGroupName: View {
                 GeometryReader{ geo in
                     VStack(alignment: .leading){
                         Text("그룹의 이름을 입력해 주세요")
+                            .font(.custom("NanumSquareRoundB", size: 17))
                             .foregroundColor(.gray)
                         Spacer()
-                            .frame(height: 20)
+                            .frame(height: 30)
                         TextField(self.selectedGroup!.name!, text: self.$strFromUser)
+                            .font(.custom("NanumSquareRoundR", size: 17))
                         Divider()
                             .background(Color.gray)
                     }
-                    .offset(y: -geo.frame(in: .global).size.width / 2)
+                    .offset(y: -geo.frame(in: .global).size.width / 1.5)
                 }
                 .padding()
                 .navigationBarTitle("그룹 이름", displayMode: .inline)
@@ -37,6 +39,8 @@ struct ChangeGroupName: View {
                     }) {
                         Image(systemName: "multiply")
                             .resizable()
+                        .scaledToFit()
+                        .frame(width: 15)
                     }, trailing:
                     Button(action: {
                         self.isLoading = true
@@ -46,6 +50,7 @@ struct ChangeGroupName: View {
                         }
                     }) {
                         Text("확인")
+                        .font(.custom("NanumSquareRoundB", size: 17))
                 })
             }
             

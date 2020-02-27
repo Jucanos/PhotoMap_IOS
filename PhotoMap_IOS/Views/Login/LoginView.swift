@@ -20,8 +20,7 @@ struct LoginView: View {
                 VStack(alignment: .center, spacing: 40) {
                     VStack(spacing: 10) {
                         Text("PhotoMap")
-                            .font(.largeTitle)
-                            .fontWeight(.heavy)
+                            .font(.custom("Recipekorea", size: 40))
                             .foregroundColor(.white)
                         Image("mainlogo")
                             .resizable()
@@ -34,8 +33,7 @@ struct LoginView: View {
                         .frame(height: 10)
                     VStack() {
                         Text("포토맵에 오신것을 환영합니다!")
-                            .font(.body)
-                            .fontWeight(.bold)
+                            .font(.custom("NanumSquareRoundB", size: 17))
                             .foregroundColor(.white)
                         Button(action: {
                             self.isLoading.toggle()

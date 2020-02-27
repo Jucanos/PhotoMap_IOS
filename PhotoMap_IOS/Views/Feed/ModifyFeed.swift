@@ -11,7 +11,6 @@ import SwiftUI
 struct ModifyFeed: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var feedStore: FeedStore
-    @EnvironmentObject var userSettings: UserSettings
     @Binding var selectedFeed: FeedData?
     @State var modifiedTitle: String = ""
     @State var modifiedContext: String = ""
@@ -23,18 +22,18 @@ struct ModifyFeed: View {
             LoadingView(isShowing: self.$isLoading){
                 VStack(alignment: .leading) {
                     Text("제목")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.custom("NanumSquareRoundR", size: 25))
                     TextField(self.selectedFeed!.title!.isEmpty ? "제목을 정해주세요!" : self.selectedFeed!.title!,  text: self.$modifiedTitle)
+                        .font(.custom("NanumSquareRoundR", size: 15))
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                     Spacer()
                         .frame(height: 100)
                     
                     Text("내용")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.custom("NanumSquareRoundR", size: 25))
                     TextField(self.selectedFeed!.context!.isEmpty ? "내용을 정해주세요!" : self.selectedFeed!.context!,  text: self.$modifiedContext)
+                        .font(.custom("NanumSquareRoundR", size: 15))
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Spacer()
                 }
@@ -49,13 +48,14 @@ struct ModifyFeed: View {
                     self.showAlert = true
                 } else{
                     self.isLoading = true
-                    self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!,userTocken: self.userSettings.userTocken!, title: self.modifiedTitle, context: self.modifiedContext){
+                    self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!, title: self.modifiedTitle, context: self.modifiedContext){
                         self.isLoading = false
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }
             }) {
                 Text("확인")
+                    .font(.custom("NanumSquareRoundR", size: 17))
             })
         }
     }

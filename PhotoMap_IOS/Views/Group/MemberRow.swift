@@ -19,8 +19,8 @@ struct MemberRow: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .frame(width: 50, height: 50)
             }
-            Text(verbatim: member.nickname!)
-                .font(.headline)
+            Text(member.nickname!)
+                .font(.custom("NanumSquareRoundR", size: 17))
             Spacer()
         }
     }

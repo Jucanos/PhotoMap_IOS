@@ -25,6 +25,7 @@ struct Notice: View {
                             .listStyle(PlainListStyle())
                         } else {
                             Text("공지사항이 없습니다!")
+                                .font(.custom("NanumSquareRoundB", size: 17))
                         }
                     }
                 } else {
@@ -49,14 +50,16 @@ struct NoticeRow: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(notice.updatedAt!)
+                    Text(notice.getProperUpdatedAt())
+                        .font(.custom("NanumSquareRoundL", size: 12))
                         .foregroundColor(.gray)
                     Text(notice.title!)
+                        .font(.custom("NanumSquareRoundB", size: 17))
                 }
                 Spacer()
                 isActivate ? Image(systemName: "chevron.up") : Image(systemName: "chevron.down")
             }
-            .padding()
+            .padding(10)
             .onTapGesture {
                 self.isActivate.toggle()
             }
@@ -64,6 +67,7 @@ struct NoticeRow: View {
                 ZStack(alignment: .leading){
                     Color(.secondarySystemBackground)
                     Text(notice.context!)
+                        .font(.custom("NanumSquareRoundR", size: 15))
                         .lineLimit(nil)
                         .multilineTextAlignment(.leading)
                 }

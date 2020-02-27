@@ -54,13 +54,14 @@ struct SubAddGroup: View {
     @Binding var groupName: String
     let menuClose: () -> Void
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 10) {
             Text("그룹생성")
-                .font(.system(size: 25, weight: .heavy))
+                .font(.custom("NanumSquareRoundB", size: 25))
                 .foregroundColor(.white)
                 .padding(.leading, 15)
             HStack{
                 TextField("그룹 이름을 입력하세요", text: $groupName)
+                    .font(.custom("NanumSquareRoundB", size: 17))
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 Button(action: {
