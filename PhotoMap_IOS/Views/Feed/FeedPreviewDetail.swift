@@ -46,9 +46,12 @@ struct FeedPreviewDetail: View {
                     }
                 }
                 
-                VStack(alignment: .leading){
-                    Text(mapStore.getOwnerName(from: feedData.creator!)).font(.headline)
-                    Text("\(feedData.getProperUpdateAt())").foregroundColor(Color(.lightGray)).font(.subheadline)
+                VStack(alignment: .leading, spacing: 5){
+                    Text(mapStore.getOwnerName(from: feedData.creator!))
+                    .font(.custom("NanumSquareRoundB", size: 17))
+                    Text("\(feedData.getProperCreatedAt())")
+                    .font(.custom("NanumSquareRoundR", size: 12))
+                        .foregroundColor(Color(.lightGray))
                 }
                 
                 Spacer()
@@ -77,9 +80,12 @@ struct FeedPreviewDetail: View {
             }
             
             // Title & Context
-            VStack(alignment: .leading){
+            VStack(alignment: .leading, spacing: 5){
                 Text("\(feedData.title!)")
-                Text("\(feedData.context!)").foregroundColor(Color(.lightGray)).font(.subheadline)
+                    .font(.custom("NanumSquareRoundB", size: 17))
+                Text("\(feedData.context!)")
+                    .font(.custom("NanumSquareRoundR", size: 12))
+                    .foregroundColor(Color(.lightGray))
             }.padding(.leading, 10)
         }
     }

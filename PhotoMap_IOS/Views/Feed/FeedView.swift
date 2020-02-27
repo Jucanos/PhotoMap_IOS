@@ -24,7 +24,8 @@ struct FeedView: View {
                 if self.feedStore.feedData != nil{
                     Group{
                         if self.feedStore.feedData!.isEmpty{
-                            Text("피드가 없어요!")
+                            Text("피드가 없어요🤔")
+                            .font(.custom("NanumSquareRoundR", size: 15))
                         } else{
                             FeedDetail(mapKey: self.mapKey)
                         }

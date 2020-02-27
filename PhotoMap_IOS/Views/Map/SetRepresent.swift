@@ -135,6 +135,7 @@ struct AdjustImage: View {
                     }})
                 {
                     Text("확인")
+                    .font(.custom("NanumSquareRoundB", size: 17))
                 })
             }
         }

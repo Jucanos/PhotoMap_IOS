@@ -43,7 +43,7 @@ struct FeedData: Codable {
         return images
     }
     
-    func getProperUpdateAt() -> String {
+    func getProperCreatedAt() -> String {
         if createdAt != nil{
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -168,7 +168,7 @@ class FeedStore: ObservableObject {
                     if item.sid == sid{
                         self.feedData![idx].title = title
                         self.feedData![idx].context = context
-                        return
+                        break
                     }
                     idx += 1
                 }
