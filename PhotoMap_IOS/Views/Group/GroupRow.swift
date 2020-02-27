@@ -55,7 +55,7 @@ struct GroupRow: View {
                     .opacity(UserSettings.shared.userInfo?.data?.primary == self.group.mid ? 1 : 0)
             }
         .onAppear(){
-            self.midRep = Database.database().reference(withPath: "maps").child(self.group.mid!)
+            self.midRep = Database.database().reference(withPath: "dev/maps").child(self.group.mid!)
             self.midRepHandle = self.midRep.observe(DataEventType.value, with: { snapShot in
                 print("at groupRow callback")
                 let remoteValue = snapShot.value as? Int ?? 0

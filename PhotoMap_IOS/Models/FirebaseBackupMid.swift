@@ -26,7 +26,7 @@ class FireBaseBackMid: ObservableObject {
     }
     
     func initObserve(uid: String) {
-        ref = Database.database().reference(withPath: "users/" + uid)
+        ref = Database.database().reference(withPath: "dev/users/" + uid)
         ref.observe(.value, with: { snapShot in
             print("Backup Changed!!")
             self.mids = snapShot.value as? [String : AnyObject] ?? [:]

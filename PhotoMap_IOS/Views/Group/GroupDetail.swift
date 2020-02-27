@@ -136,7 +136,7 @@ struct GroupDetail: View {
         }
         .onAppear(){
             self.isLoading = true
-            self.ref = Database.database().reference(withPath: "maps").child((self.groupData?.mid!)!)
+            self.ref = Database.database().reference(withPath: "dev/maps").child((self.groupData?.mid!)!)
             self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
                 print("at groupDetail callback")
                 FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
