@@ -29,11 +29,38 @@ struct MapData: Codable {
         if updatedAt != nil{
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            dateFormatter.locale = Locale(identifier: "ko_kr")
             dateFormatter.timeZone = NSTimeZone(name: "KST") as TimeZone?
             let date = dateFormatter.date(from: updatedAt!)
             
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-            return dateFormatter.string(from: date!)
+            let curDate = Date()
+            let calendar = Calendar.current
+            let curComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: curDate)
+            let mapComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date!)
+            
+            if curComponents.year != mapComponents.year{
+                dateFormatter.dateFormat = "yy'년'M'월'dd'일'"
+                return dateFormatter.string(from: date!)
+            } else{
+                if curComponents.month != mapComponents.month {
+                    dateFormatter.dateFormat = "M'월'd'일'"
+                    return dateFormatter.string(from: date!)
+                } else{
+                    if curComponents.day != mapComponents.day {
+                        if curComponents.day == (mapComponents.day! + 1) {
+                            
+                            dateFormatter.dateFormat = "'어제' a h:mm"
+                            return dateFormatter.string(from: date!)
+                        } else{
+                            dateFormatter.dateFormat = "d'일' h:mm"
+                            return dateFormatter.string(from: date!)
+                        }
+                    } else {
+                        dateFormatter.dateFormat = "a h:mm"
+                        return dateFormatter.string(from: date!)
+                    }
+                }
+            }
         } else {
             return ""
         }
