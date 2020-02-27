@@ -126,7 +126,6 @@ class FeedStore: ObservableObject {
         }
         
         // End the raw http request data, note that there is 2 extra dash ("-") at the end, this is to indicate the end of the data
-        // According to the HTTP 1.1 specification https://tools.ietf.org/html/rfc7230
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
         
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
@@ -211,7 +210,8 @@ class FeedStore: ObservableObject {
         let hour = calendar.component(.hour, from: date)
         let minutes = calendar.component(.minute, from: date)
         let sec = calendar.component(.second, from: date)
-        return "\(hour):\(minutes):\(sec)"
+        let msec = calendar.component(.nanosecond, from: date)
+        return "\(hour):\(minutes):\(sec):\(msec)"
     }
     
     func getSortedFeeds(from oldArr: [FeedData]) -> [FeedData] {

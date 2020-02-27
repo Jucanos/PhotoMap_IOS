@@ -62,13 +62,13 @@ struct MainGroupView: View {
                             }
                             .actionSheet(isPresented: self.$showActionsheet) {
                                 ActionSheet(title: Text(""), buttons: [
-                                    .default(Text("그룹 나가기"), action: {
+                                    .default(Text("그룹 나가기").font(.custom("NanumSquareRoundR", size: 15)), action: {
                                         self.groupStore.exitGroup(from: self.selectedGroup!.mid!)
                                     }),
-                                    .default(Text("이름 바꾸기"), action: {
+                                    .default(Text("이름 바꾸기").font(.custom("NanumSquareRoundR", size: 15)), action: {
                                         self.showSheet.toggle()
                                     }),
-                                    .destructive(Text("취소"))
+                                    .destructive(Text("취소").font(.custom("NanumSquareRoundR", size: 15)))
                                 ])
                             }
                             .sheet(isPresented: self.$showSheet) {
