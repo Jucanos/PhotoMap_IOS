@@ -14,6 +14,8 @@ struct UserLogout: View {
         VStack {
             Spacer()
             Text("정말 로그아웃 하시겠습니까?")
+                .font(.custom("NanumSquareRoundB", size: 17))
+            
             Spacer()
             Button(action: {
                 self.userSettings.userLogout()
@@ -21,6 +23,7 @@ struct UserLogout: View {
                 ZStack {
                     Color(.gray)
                     Text("로그아웃 하기")
+                        .font(.custom("NanumSquareRoundB", size: 17))
                         .foregroundColor(.white)
                 }
                 .frame(height: 70)
