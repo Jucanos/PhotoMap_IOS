@@ -382,6 +382,7 @@
 				9750585B23C1B17800BF54E5 /* Resources */,
 				976E636D23E4009E00246541 /* Carthage Run Script */,
 				9AE8393B6B442F1FD8B2A8EA /* [CP] Embed Pods Frameworks */,
+				97DD09DC240A580300B58007 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -473,6 +474,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		97DD09DC240A580300B58007 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		9AE8393B6B442F1FD8B2A8EA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
