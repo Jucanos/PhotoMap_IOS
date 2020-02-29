@@ -20,16 +20,16 @@ struct MemberList: View {
                         .frame(height: CGFloat(50))
                     AddingMemberView()
                     List{
-                        ForEach(mapStore.mapData.owners!, id: \.uid) { mb in
+                        ForEach(mapStore.mapData.getSortedOwners(), id: \.uid) { mb in
                             MemberRow(member: mb)                            
                         }
                     }
-//                    MenuOptionView()
                 }
             }
         }
     }
 }
+
 struct MenuTtileView: View {
     var body: some View {
         ZStack{
@@ -44,6 +44,7 @@ struct MenuTtileView: View {
         }
     }
 }
+
 struct MenuOptionView: View {
     var body: some View {
         HStack {
@@ -87,24 +88,19 @@ struct AddingMemberView: View {
             }) {
                 HStack{
                     Image(systemName: "person.badge.plus.fill")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.black)
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.black)
                     
                     Text("그룹멤버 초대")
-                    .font(.custom("NanumSquareRoundB", size: 17))
-                    .foregroundColor(.black)
+                        .font(.custom("NanumSquareRoundB", size: 17))
+                        .foregroundColor(.black)
                 }
             }
             Spacer()
         }
         .padding()
-        
     }
-    
-    
-    
-    
 }
 
 struct MemberList_Previews: PreviewProvider {

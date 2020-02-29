@@ -65,6 +65,13 @@ struct MapData: Codable {
             return ""
         }
     }
+    
+    func getSortedOwners() ->[UserInfoData] {
+        if owners == nil {
+            return []
+        }
+        return owners!.sorted(by: {$0.nickname! < $1.nickname!})
+    }
 }
 
 struct MapImage: Codable {
