@@ -39,15 +39,17 @@ struct MainGroupView: View {
                                             RoundedRectangle(cornerRadius: 20)
                                                 .fill(Color(.white))
                                                 .shadow(radius: 5)
+                                            
                                             GroupRow(group: group)
                                                 .padding()
                                         }
-                                        .listRowInsets(.init(top: 30, leading: 10, bottom: 0, trailing: 10))
+                                            
                                         .onTapGesture {
                                             self.selectedGroup = group
                                             self.activateNavi = true
                                             print("tapped!")
                                         }
+                                        .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
                                         .onLongPressGesture {
                                             self.showActionsheet = true
                                             self.selectedGroup = group
@@ -59,18 +61,21 @@ struct MainGroupView: View {
                                     Text("")
                                 }
                                 .buttonStyle(PlainButtonStyle())
+                                
                             }
+                                
                             .actionSheet(isPresented: self.$showActionsheet) {
                                 ActionSheet(title: Text(""), buttons: [
-                                    .default(Text("그룹 나가기").font(.custom("NanumSquareRoundR", size: 15)), action: {
+                                    .default(Text("그룹 나가기").foregroundColor(.red), action: {
                                         self.groupStore.exitGroup(from: self.selectedGroup!.mid!)
                                     }),
                                     .default(Text("이름 바꾸기").font(.custom("NanumSquareRoundR", size: 15)), action: {
                                         self.showSheet.toggle()
                                     }),
-                                    .destructive(Text("취소").font(.custom("NanumSquareRoundR", size: 15)))
+                                    .cancel(Text("취소").font(.custom("NanumSquareRoundR", size: 15)))
                                 ])
                             }
+//                        .modifier(ActionSheetCustom())
                             .sheet(isPresented: self.$showSheet) {
                                 ChangeGroupName(selectedGroup: self.$selectedGroup)
                             }
@@ -85,5 +90,44 @@ struct MainGroupView: View {
                 }
             }
         }
+    }
+}
+
+//struct ActionSheetConfigurator: UIViewControllerRepresentable {
+//    var configure: (UIAlertController) -> Void = { _ in }
+//
+//    func makeUIViewController(context: UIViewControllerRepresentableContext<ActionSheetConfigurator>) -> UIViewController {
+//        UIViewController()
+//    }
+//
+//    func updateUIViewController(
+//        _ uiViewController: UIViewController,
+//        context: UIViewControllerRepresentableContext<ActionSheetConfigurator>) {
+//        if let actionSheet = uiViewController.presentedViewController as? UIAlertController,
+//            actionSheet.preferredStyle == .actionSheet {
+//            self.configure(actionSheet)
+//        }
+//    }
+//}
+//
+//struct ActionSheetCustom: ViewModifier {
+//
+//    func body(content: Content) -> some View {
+//        content
+//            .background(ActionSheetConfigurator { action in
+//                action.view.tintColor = UIColor.black
+//                let titleAttribute = [NSAttributedString.Key.font: UIFont(name: "NanumSquareRoundR", size: 25)!, NSAttributedString.Key.foregroundColor: UIColor.black]
+//
+//                for item in action.actions {
+//                    item.setValue(UIColor.yellow, forKey: "title")
+//                }
+//            })
+//
+//    }
+//}
+extension UIAlertController {
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.tintColor = .black
     }
 }

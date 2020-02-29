@@ -77,6 +77,7 @@ struct GroupDetail: View {
             Button(action: {
                 self.isLoading = true
                 self.userSettings.setRepresentMap(mid: self.mapStore.mapData.mid!){
+                    UserGroupStore.shared.sortMaps()
                     self.isLoading = false
                     self.isButtonActivate.toggle()
                 }
@@ -94,6 +95,7 @@ struct GroupDetail: View {
                     let img = tmpView.takeScreenshot(origin: .zero, size: UIScreen.main.bounds.size)
                     UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
                     self.isLoading = false
+                    self.isButtonActivate.toggle()
                     }
             }) {
                 IconAndTextButton(imageName: "photo", buttonText: "이미지로 저장하기")

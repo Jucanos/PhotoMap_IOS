@@ -178,4 +178,10 @@ class UserGroupStore: ObservableObject {
         }
         return newArr
     }
+    
+    func sortMaps() {
+        DispatchQueue.main.async {
+            self.mapData = self.getSortedMaps(from: self.mapData!)
+        }
+    }
 }

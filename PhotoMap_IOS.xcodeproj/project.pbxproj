@@ -17,6 +17,7 @@
 		9712887923EA7CED00DBB233 /* YPImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976E636E23E401A300246541 /* YPImagePicker.framework */; };
 		9716581623D36E8C000C10DF /* UserLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716581523D36E8C000C10DF /* UserLogout.swift */; };
 		971B35DF23DAF76800689C96 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971B35DE23DAF76800689C96 /* ImagePicker.swift */; };
+		971F186424090E8600623414 /* CustomActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971F186324090E8600623414 /* CustomActionSheet.swift */; };
 		9725067D23EAE993004D8EBD /* SetRepresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725067C23EAE993004D8EBD /* SetRepresent.swift */; };
 		972B0FDF23C865C400BF1F65 /* KoreaMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972B0FDE23C865C400BF1F65 /* KoreaMap.swift */; };
 		973281D823D02D1800153874 /* AddGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973281D723D02D1800153874 /* AddGroup.swift */; };
@@ -83,6 +84,7 @@
 		970CFCD023C2148F00D9FB12 /* KakaoLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginButton.swift; sourceTree = "<group>"; };
 		9716581523D36E8C000C10DF /* UserLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogout.swift; sourceTree = "<group>"; };
 		971B35DE23DAF76800689C96 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		971F186324090E8600623414 /* CustomActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheet.swift; sourceTree = "<group>"; };
 		9725067C23EAE993004D8EBD /* SetRepresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRepresent.swift; sourceTree = "<group>"; };
 		972B0FDE23C865C400BF1F65 /* KoreaMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaMap.swift; sourceTree = "<group>"; };
 		973281D723D02D1800153874 /* AddGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroup.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				9798FC0423FD32120026042B /* ActivityIndicator.swift */,
 				9798FC0623FD324E0026042B /* LoadingView.swift */,
 				977B2CFE2404F13500912EFA /* CautionView.swift */,
+				971F186324090E8600623414 /* CustomActionSheet.swift */,
 			);
 			path = SupportingView;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				9754A48E23FBAFD9000D8326 /* FirebaseBackupMid.swift in Sources */,
 				97C7575023E1CC990095E3B7 /* PageView.swift in Sources */,
 				973281DC23D045AC00153874 /* PageViewController.swift in Sources */,
+				971F186424090E8600623414 /* CustomActionSheet.swift in Sources */,
 				9750586323C1B17800BF54E5 /* SceneDelegate.swift in Sources */,
 				973F6A3423CEEC9C008C4EEC /* MemberRow.swift in Sources */,
 				9773018123C71F7B00E3CE99 /* SplashView.swift in Sources */,

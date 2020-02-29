@@ -14,7 +14,15 @@ struct KoreaMap: View {
     @State var selected: Int? = 0
     @State var selectedLoc: String?
     @State var showActionSheet: Bool = false
-    
+    let mapName = ["gyeonggi": "경기도",
+                   "gangwon": "강원도",
+                   "chungbuk": "충청북도",
+                   "chungnam": "충청남도",
+                   "jeonbuk": "전라북도",
+                   "jeonnam": "전라남도",
+                   "gyeongbuk": "경상북도",
+                   "gyeongnam": "경상남도",
+                   "jeju": "제주도"]
     var body: some View {
         GeometryReader { gr in
             ZStack {
@@ -77,14 +85,14 @@ struct KoreaMap: View {
                     .opacity(0.1)
             }
             .actionSheet(isPresented: self.$showActionSheet){
-                ActionSheet(title: Text(""), message: Text(""), buttons: [
+                ActionSheet(title: Text("\(self.mapName[self.selectedLoc!]!)"), buttons: [
                     .default(Text("대표사진 설정"), action: {
                         self.selected = 10
                     }),
                     .default(Text("대표사진 지우기"), action: {
                         self.mapStore.deleteRepresentImage(cityKey: self.selectedLoc!, userTocken: self.userSettings.userTocken!)
                     }),
-                    .destructive(Text("취소"))
+                    .cancel(Text("취소"))
                 ])
             }
         }
