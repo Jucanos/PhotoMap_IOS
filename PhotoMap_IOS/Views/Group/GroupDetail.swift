@@ -77,6 +77,7 @@ struct GroupDetail: View {
             Button(action: {
                 self.isLoading = true
                 self.userSettings.setRepresentMap(mid: self.mapStore.mapData.mid!){
+                    UserGroupStore.shared.sortMaps()
                     self.isLoading = false
                     self.isButtonActivate.toggle()
                 }
@@ -94,6 +95,7 @@ struct GroupDetail: View {
                     let img = tmpView.takeScreenshot(origin: .zero, size: UIScreen.main.bounds.size)
                     UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
                     self.isLoading = false
+                    self.isButtonActivate.toggle()
                     }
             }) {
                 IconAndTextButton(imageName: "photo", buttonText: "이미지로 저장하기")
@@ -136,7 +138,7 @@ struct GroupDetail: View {
         }
         .onAppear(){
             self.isLoading = true
-            self.ref = Database.database().reference(withPath: "maps").child((self.groupData?.mid!)!)
+            self.ref = Database.database().reference(withPath: "dev/maps").child((self.groupData?.mid!)!)
             self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
                 print("at groupDetail callback")
                 FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
@@ -146,17 +148,5 @@ struct GroupDetail: View {
         .onDisappear(){
             self.ref.removeObserver(withHandle: self.refHandle)
         }
-    }
-    
-    func saveImage(image: UIImage) {
-        if let data = image.pngData() {
-            let filename = getDocumentsDirectory().appendingPathComponent("copy.png")
-            try? data.write(to: filename)
-        }
-    }
-    
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
     }
 }

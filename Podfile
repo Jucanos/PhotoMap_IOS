@@ -4,7 +4,8 @@
 target 'PhotoMap_IOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
- 
+  # Pod for Google Crashlytics
+  pod 'Firebase/Crashlytics'
   # Pod for Google Analytics
   pod 'Firebase/Analytics'
   # Pods for Firebase Cloud Message

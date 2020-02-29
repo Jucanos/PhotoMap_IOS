@@ -59,7 +59,7 @@ class AppNoticeStore: ObservableObject {
             print("Get notice Success!")
             print(notice)
             DispatchQueue.main.async {
-                self.noticeData = (notice.data as! [AppNoticeData])
+                self.noticeData = self.getSortedNotices(from: (notice.data as! [AppNoticeData]))
                 completionHandler()
             }
         }.onError{ error in
@@ -68,5 +68,16 @@ class AppNoticeStore: ObservableObject {
             }
         }
         .call()
+    }
+    
+    func getSortedNotices(from oldArr: [AppNoticeData]) -> [AppNoticeData] {
+        var newArr: [AppNoticeData] = []
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = NSTimeZone(name: "KST") as TimeZone?
+        
+        newArr = oldArr.sorted(by: {dateFormatter.date(from: $0.updatedAt!)! > dateFormatter.date(from: $1.updatedAt!)!})
+        return newArr
     }
 }

@@ -13,12 +13,22 @@ struct MemberRow: View {
     var member: UserInfoData
     var body: some View {
         HStack{
-            URLImage(URL(string: member.thumbnail!)!) { proxy in
-                proxy.image
+            Group{
+                if member.thumbnail != nil {
+                    URLImage(URL(string: member.thumbnail!)!) { proxy in
+                        proxy.image
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .frame(width: 50, height: 50)
+                    }
+                } else {
+                    Image(systemName: "person.crop.square")
                     .resizable()
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .frame(width: 50, height: 50)
+                }
             }
+            
             Text(member.nickname!)
                 .font(.custom("NanumSquareRoundR", size: 15))
             Spacer()

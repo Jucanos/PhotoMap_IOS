@@ -29,14 +29,14 @@ struct FeedDetail: View {
                     }
                 }
                 .actionSheet(isPresented: $showFeedOption){
-                    ActionSheet(title: Text(""), message: Text(""), buttons: [
+                    ActionSheet(title: Text(""), buttons: [
                         .default(Text("스토리 삭제"), action: {
                             self.feedStore.deleteFeed(sid: (self.selectedFeed?.sid!)!)
                         }),
                         .default(Text("스토리 수정"), action: {
                             self.showModifyFeed = true
                         }),
-                        .destructive(Text("취소"))
+                        .cancel(Text("취소"))
                     ])
                 }
                 .sheet(isPresented: self.$showModifyFeed) {
