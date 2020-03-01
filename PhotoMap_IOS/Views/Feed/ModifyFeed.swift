@@ -22,19 +22,21 @@ struct ModifyFeed: View {
             LoadingView(isShowing: self.$isLoading){
                 VStack(alignment: .leading) {
                     Text("제목")
-                        .font(.custom("NanumSquareRoundR", size: 25))
-                    TextField(self.selectedFeed!.title!.isEmpty ? "제목을 정해주세요!" : self.selectedFeed!.title!,  text: self.$modifiedTitle)
+                        .font(.custom("NanumSquareRoundB", size: 25))
+                    VStack(spacing: 2){
+                        TextField(self.selectedFeed!.title!.isEmpty ? "제목을 정해주세요!" : self.selectedFeed!.title!,  text: self.$modifiedTitle)
                         .font(.custom("NanumSquareRoundR", size: 15))
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
+                        Divider().foregroundColor(Color(.lightGray))
+                    }
                     Spacer()
                         .frame(height: 100)
-                    
                     Text("내용")
-                        .font(.custom("NanumSquareRoundR", size: 25))
-                    TextField(self.selectedFeed!.context!.isEmpty ? "내용을 정해주세요!" : self.selectedFeed!.context!,  text: self.$modifiedContext)
+                        .font(.custom("NanumSquareRoundB", size: 25))
+                    VStack(spacing: 2) {
+                        TextField(self.selectedFeed!.context!.isEmpty ? "내용을 정해주세요!" : self.selectedFeed!.context!,  text: self.$modifiedContext)
                         .font(.custom("NanumSquareRoundR", size: 15))
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Divider().foregroundColor(Color(.lightGray))
+                    }
                     Spacer()
                 }
             }
