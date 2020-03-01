@@ -243,7 +243,6 @@ class MapStore: ObservableObject {
     
     func getOwnerThumbnail(from uid: String) -> String{
         if let target = self.mapData.owners!.firstIndex(where: {$0.uid == uid}){
-            print(target)
             return self.mapData.owners![target].thumbnail!
         } else{
             return ""

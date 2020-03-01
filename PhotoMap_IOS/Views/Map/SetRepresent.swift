@@ -113,7 +113,6 @@ struct AdjustImage: View {
                     self.isLoading = true
                     let imgSize = UIImage(named: self.location)?.size
                     let ratio = imgSize!.height / imgSize!.width
-                    print(ratio)
                     
                     let newHeight = gr.size.width * ratio
                     let newOffset = (gr.frame(in: .global).size.height - newHeight) / 2
@@ -128,7 +127,6 @@ struct AdjustImage: View {
                     let imageRef = image.cgImage!.cropping(to: rect)
                     
                     let newImage = UIImage(cgImage: imageRef!)
-                    print(newImage)
                     
                     self.mapStore.setRepresentImage(cityKey: self.location, userTocken: self.userSettings.userTocken!, image: newImage){
                         self.isLoading = false

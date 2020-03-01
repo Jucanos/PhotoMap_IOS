@@ -90,7 +90,6 @@ struct GroupDetail: View {
             Button(action: {
                 self.isLoading = true
                 self.mapStore.getMapImage() { target in
-                    print(target)
                     let tmpView = Image(uiImage: target).resizable().scaledToFit()
                     let img = tmpView.takeScreenshot(origin: .zero, size: UIScreen.main.bounds.size)
                     UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)

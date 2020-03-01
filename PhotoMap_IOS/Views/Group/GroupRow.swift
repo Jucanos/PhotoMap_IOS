@@ -44,7 +44,7 @@ struct GroupRow: View {
                     .opacity(self.badgeCounter != 0 ? 1 : 0)
                     .frame(width: 15, height: 15)
                     .foregroundColor(.red)
-                    .offset(x: 20, y: -20)
+                    .offset(x: 25, y: -25)
                 }
                 VStack(alignment: .leading, spacing: 5) {
                     Text(verbatim: "\(self.group.name!)")
