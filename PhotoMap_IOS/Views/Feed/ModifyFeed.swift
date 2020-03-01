@@ -15,7 +15,6 @@ struct ModifyFeed: View {
     @State var modifiedTitle: String = ""
     @State var modifiedContext: String = ""
     @State var isLoading = false
-    @State var showAlert = false
     
     var body: some View {
         NavigationView {
@@ -25,7 +24,7 @@ struct ModifyFeed: View {
                         .font(.custom("NanumSquareRoundB", size: 25))
                     VStack(spacing: 2){
                         TextField(self.selectedFeed!.title!.isEmpty ? "제목을 정해주세요!" : self.selectedFeed!.title!,  text: self.$modifiedTitle)
-                        .font(.custom("NanumSquareRoundR", size: 15))
+                            .font(.custom("NanumSquareRoundR", size: 15))
                         Divider().foregroundColor(Color(.lightGray))
                     }
                     Spacer()
@@ -34,26 +33,22 @@ struct ModifyFeed: View {
                         .font(.custom("NanumSquareRoundB", size: 25))
                     VStack(spacing: 2) {
                         TextField(self.selectedFeed!.context!.isEmpty ? "내용을 정해주세요!" : self.selectedFeed!.context!,  text: self.$modifiedContext)
-                        .font(.custom("NanumSquareRoundR", size: 15))
+                            .font(.custom("NanumSquareRoundR", size: 15))
                         Divider().foregroundColor(Color(.lightGray))
                     }
                     Spacer()
                 }
             }
             .padding()
-            .alert(isPresented: self.$showAlert){
-                Alert(title: Text("제목이 없습니다!"), dismissButton: .default(Text("확인")))
-            }
             .navigationBarTitle("스토리 수정하기", displayMode: .inline)
             .navigationBarItems(leading: backButton, trailing: Button(action: {
                 if self.modifiedTitle.isEmpty{
-                    self.showAlert = true
-                } else{
-                    self.isLoading = true
-                    self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!, title: self.modifiedTitle, context: self.modifiedContext){
-                        self.isLoading = false
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
+                    self.modifiedTitle = (self.selectedFeed?.title!)!
+                }
+                self.isLoading = true
+                self.feedStore.modifyFeed(sid: (self.selectedFeed?.sid!)!, title: self.modifiedTitle, context: self.modifiedContext){
+                    self.isLoading = false
+                    self.presentationMode.wrappedValue.dismiss()
                 }
             }) {
                 Text("확인")

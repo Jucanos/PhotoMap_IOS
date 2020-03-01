@@ -63,7 +63,7 @@ struct AddingMemberView: View {
             Button(action: {
                 let template = KMTFeedTemplate { feedTemplateBuilder in
                     feedTemplateBuilder.content = KMTContentObject(builderBlock: { contentBuilder in
-                        contentBuilder.title = "포토맵"
+                        contentBuilder.title = "포토맵 그룹에 초대되었습니다."
                         contentBuilder.imageURL = URL(string: "https://ifh.cc/g/ODD7n.png")!
                         contentBuilder.link = KMTLinkObject(builderBlock: { (linkBuilder) in
                             linkBuilder.iosExecutionParams = "mid=\(self.mapStore.mapData.mid!)"

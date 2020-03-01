@@ -157,7 +157,7 @@ class UserGroupStore: ObservableObject {
     }
     
     func getMapThumbnail(mid: String, completionHandler: @escaping(_ target: UIImage) -> Void) {
-        let url = "https://s3.soybeans.tech/uploads/dev/\(mid)/main.png"
+        let url = "https://s3.soybeans.tech/uploads/prod/\(mid)/main.png"
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: URL(string: url)!) {
                 if let image = UIImage(data: data) {
