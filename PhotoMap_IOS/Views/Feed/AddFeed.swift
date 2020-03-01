@@ -18,6 +18,7 @@ struct AddFeed: View {
     @State var selectedImage: [UIImage] = []
     @State var showImagePicker = true
     @State var isLoading = false
+    @State var showAlert = false
     var cityKey: String
     
     var body: some View {
@@ -66,17 +67,23 @@ struct AddFeed: View {
                         .foregroundColor(.white)
                     }, trailing:
                     Button(action: {
-                        self.isLoading = true
-                        self.feedStore.addFeed(mid: self.mapStore.mapData.mid!, cityKey: self.cityKey, title: self.title, context: self.content, images: self.selectedImage){
-                            self.isLoading = false
-                            self.presentationMode.wrappedValue.dismiss()
+                        if self.title.isEmpty{
+                            self.showAlert = true
+                        } else {
+                            self.isLoading = true
+                            self.feedStore.addFeed(mid: self.mapStore.mapData.mid!, cityKey: self.cityKey, title: self.title, context: self.content, images: self.selectedImage){
+                                self.isLoading = false
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
                         }
                     }) {
                         Text("업로드")
                             .font(.custom("NanumSquareRoundB", size: 17))
                             .foregroundColor(.white)
-                    }
-            )
+                })
+            .alert(isPresented: self.$showAlert) {
+                Alert(title: Text("제목을 입력하세요"))
+            }
         }
     }
 }

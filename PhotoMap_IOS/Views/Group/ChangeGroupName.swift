@@ -19,12 +19,12 @@ struct ChangeGroupName: View {
         NavigationView {
             LoadingView(isShowing: self.$isLoading){
                 GeometryReader{ geo in
-                    VStack(alignment: .leading){
-                        Text("그룹의 이름을 입력해 주세요")
+                    VStack(alignment: .leading, spacing: 3){
+                        Text("그룹이름")
                             .font(.custom("NanumSquareRoundB", size: 17))
                             .foregroundColor(.gray)
                         Spacer()
-                            .frame(height: 30)
+                            .frame(height: 25)
                         TextField(self.selectedGroup!.name!, text: self.$strFromUser)
                             .font(.custom("NanumSquareRoundR", size: 17))
                         Divider()
