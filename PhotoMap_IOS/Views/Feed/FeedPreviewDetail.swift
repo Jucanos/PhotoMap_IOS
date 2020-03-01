@@ -85,7 +85,6 @@ struct FeedPreviewDetail: View {
                     .font(.custom("NanumSquareRoundB", size: 17))
                 Text("\(feedData.context!)")
                     .font(.custom("NanumSquareRoundR", size: 12))
-                    .foregroundColor(Color(.lightGray))
             }.padding(.leading, 10)
         }
     }
