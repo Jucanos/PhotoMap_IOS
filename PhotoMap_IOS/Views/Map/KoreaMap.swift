@@ -45,6 +45,8 @@ struct KoreaMap: View {
                         .offset(x: -49, y: 32)
                     BackImage(mapImage: "jeonnam", masterSize: CGSize(width: 150,height: 135))
                         .offset(x: -62, y: 110)
+                    Image("dokdo").resizable().scaledToFit().frame(width: 60, height: 20)
+                        .offset(x: 160, y: -100)
                 }
                 
                 Group{

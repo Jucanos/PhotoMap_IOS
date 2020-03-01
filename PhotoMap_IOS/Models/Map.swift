@@ -86,7 +86,6 @@ class MapStore: ObservableObject {
     @Published var mapData: MapData = MapData(){
         willSet{
             objectWillChange.send()
-            print("mapData Changed!!")
         }
     }
     
@@ -99,10 +98,8 @@ class MapStore: ObservableObject {
             Method(.get)
             Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ map in
-            print("map loadid!")
             DispatchQueue.main.async {
                 self.mapData = map.data!
-                print(self.mapData.owners! as Any)
                 completionHandler()
             }
         }.onError{ error in
@@ -246,7 +243,6 @@ class MapStore: ObservableObject {
     
     func getOwnerThumbnail(from uid: String) -> String{
         if let target = self.mapData.owners!.firstIndex(where: {$0.uid == uid}){
-            print(target)
             return self.mapData.owners![target].thumbnail!
         } else{
             return ""

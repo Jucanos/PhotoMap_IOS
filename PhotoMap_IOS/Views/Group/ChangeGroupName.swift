@@ -14,16 +14,17 @@ struct ChangeGroupName: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var strFromUser: String = ""
     @State var isLoading = false
+    @State var showAlert = false
     var body: some View {
         NavigationView {
             LoadingView(isShowing: self.$isLoading){
                 GeometryReader{ geo in
-                    VStack(alignment: .leading){
-                        Text("그룹의 이름을 입력해 주세요")
+                    VStack(alignment: .leading, spacing: 3){
+                        Text("그룹이름")
                             .font(.custom("NanumSquareRoundB", size: 17))
                             .foregroundColor(.gray)
                         Spacer()
-                            .frame(height: 30)
+                            .frame(height: 25)
                         TextField(self.selectedGroup!.name!, text: self.$strFromUser)
                             .font(.custom("NanumSquareRoundR", size: 17))
                         Divider()
@@ -43,15 +44,22 @@ struct ChangeGroupName: View {
                         .frame(width: 15)
                     }, trailing:
                     Button(action: {
-                        self.isLoading = true
-                        self.groupStore.changeGroupName(mid: self.selectedGroup!.mid!, newName: self.strFromUser) {
-                            self.isLoading = false
-                            self.presentationMode.wrappedValue.dismiss()
+                        if self.strFromUser.isEmpty {
+                            self.showAlert = true
+                        } else {
+                            self.isLoading = true
+                            self.groupStore.changeGroupName(mid: self.selectedGroup!.mid!, newName: self.strFromUser) {
+                                self.isLoading = false
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
                         }
                     }) {
                         Text("확인")
                         .font(.custom("NanumSquareRoundB", size: 17))
                 })
+                    .alert(isPresented: self.$showAlert) {
+                        Alert(title: Text("바꿀 이름을 입력해주세요"))
+                }
             }
             
         }

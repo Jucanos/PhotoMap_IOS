@@ -15,7 +15,7 @@ final class ImagePicker: ObservableObject {
     private init() {}  //force using the singleton: ImagePicker.shared
     let view = ImagePicker.View()
     let coordinator = ImagePicker.Coordinator()
-
+    
     // Bindable Object part
     let willChange = PassthroughSubject<UIImage, Never>()
     @Published var image: UIImage? {
@@ -40,7 +40,7 @@ extension ImagePicker {
             picker.dismiss(animated:true)
         }
     }
-
+    
     struct View: UIViewControllerRepresentable {
         func makeCoordinator() -> Coordinator {
             ImagePicker.shared.coordinator

@@ -20,9 +20,9 @@ struct FeedDetail: View {
     var body: some View {
         Group{
             if self.feedStore.feedData != nil{
-                ScrollView{
+                RefreshableScrollView(action: {self.feedStore.loadFeeds(mid: self.mapStore.mapData.mid!, mapKey: self.mapKey, completionHandler: {})}){
                     VStack(alignment: .leading, spacing: 2){
-                        ForEach(feedStore.feedData!, id: \.sid) { item in
+                        ForEach(self.feedStore.feedData!, id: \.sid) { item in
                             FeedPreviewDetail(showFeedOption: self.$showFeedOption, selectedFeed: self.$selectedFeed, feedData: item)
                                 .padding(.top, 10)
                         }
