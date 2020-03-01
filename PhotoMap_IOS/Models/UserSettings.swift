@@ -28,6 +28,13 @@ class UserSettings: ObservableObject {
         guard let session = KOSession.shared() else {
             return
         }
+        KOSessionTask.accessTokenInfoTask() { (accessTockenInfo, error) in
+            if error != nil {
+                print(error.debugDescription)
+            } else {
+                print(accessTockenInfo?.expiresInMillis)
+            }
+        }
         if session.isOpen(){
             self.userTocken = session.token!.accessToken
             print("kakao tocken: ", self.userTocken!)

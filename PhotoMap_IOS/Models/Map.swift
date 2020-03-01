@@ -86,7 +86,6 @@ class MapStore: ObservableObject {
     @Published var mapData: MapData = MapData(){
         willSet{
             objectWillChange.send()
-            print("mapData Changed!!")
         }
     }
     
@@ -99,10 +98,8 @@ class MapStore: ObservableObject {
             Method(.get)
             Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ map in
-            print("map loadid!")
             DispatchQueue.main.async {
                 self.mapData = map.data!
-                print(self.mapData.owners! as Any)
                 completionHandler()
             }
         }.onError{ error in

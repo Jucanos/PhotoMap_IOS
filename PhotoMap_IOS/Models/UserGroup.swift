@@ -28,13 +28,11 @@ class UserGroupStore: ObservableObject {
     
     func loadMaps() {
         let url = NetworkURL.sharedInstance.getUrlString("/maps")
-        print("try to road")
         AnyRequest<UserGroup> {
             Url(url)
             Method(.get)
             Header.Authorization(.bearer(UserSettings.shared.userTocken!))
         }.onObject{ groups in
-            print(groups)
             DispatchQueue.main.async {
                 self.mapData = self.getSortedMaps(from: groups.data as! [MapData])
             }
@@ -56,9 +54,7 @@ class UserGroupStore: ObservableObject {
             Header.ContentType(.json)
             Body(["name":name])
         }.onObject{ newGroup in
-            print("add new group to server success!!")
             DispatchQueue.main.async {
-//                self.mapData.append(newGroup.data!)
                 self.loadMaps()
                 completionHandler()
             }
@@ -139,7 +135,6 @@ class UserGroupStore: ObservableObject {
             Header.ContentType(.json)
             Body(["remove": "true"])
         }.onError{ error in
-            print("error ocured!!!!")
             if let stringData = String(data: error.error!, encoding: .utf8){
                 print(stringData)
             }
@@ -159,6 +154,19 @@ class UserGroupStore: ObservableObject {
             }
         }
         .call()
+    }
+    
+    func getMapThumbnail(mid: String, completionHandler: @escaping(_ target: UIImage) -> Void) {
+        let url = "https://s3.soybeans.tech/uploads/dev/\(mid)/main.png"
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: URL(string: url)!) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        completionHandler(image)
+                    }
+                }
+            }
+        }
     }
     
     func getSortedMaps(from oldArr: [MapData]) -> [MapData] {

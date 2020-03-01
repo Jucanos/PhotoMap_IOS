@@ -140,8 +140,8 @@ struct GroupDetail: View {
             self.isLoading = true
             self.ref = Database.database().reference(withPath: "dev/maps").child((self.groupData?.mid!)!)
             self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
-                print("at groupDetail callback")
-                FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: snapShot.value as! Int)
+                let remoteValue = snapShot.value as? [String: Int]
+                FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: remoteValue!["logNumber"]!)
                 self.mapStore.loadMapDetail(mid: (self.groupData?.mid!)!) {self.isLoading = false}
             })
         }

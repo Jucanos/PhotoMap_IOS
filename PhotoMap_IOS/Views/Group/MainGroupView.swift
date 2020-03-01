@@ -47,7 +47,6 @@ struct MainGroupView: View {
                                         .onTapGesture {
                                             self.selectedGroup = group
                                             self.activateNavi = true
-                                            print("tapped!")
                                         }
                                         .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
                                         .onLongPressGesture {
