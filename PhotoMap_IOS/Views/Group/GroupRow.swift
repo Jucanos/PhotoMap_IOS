@@ -25,7 +25,7 @@ struct GroupRow: View {
                         if ThumbnailImage != nil {
                             ThumbnailImage!.resizable().frame(width: 60, height: 60)
                         } else {
-                            Image(systemName: "photo").resizable().scaledToFit().frame(width: 60, height: 60)
+                            Image(systemName: "photo").resizable().scaledToFit().frame(width: 30, height: 30)
                             .onAppear(){
                                 UserGroupStore.shared.getMapThumbnail(mid: self.group.mid!) { img in
                                     self.ThumbnailImage = Image(uiImage: img)

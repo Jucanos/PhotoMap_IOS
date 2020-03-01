@@ -32,7 +32,7 @@ class UserSettings: ObservableObject {
             if error != nil {
                 print(error.debugDescription)
             } else {
-                print(accessTockenInfo?.expiresInMillis)
+                print(accessTockenInfo?.expiresInMillis ?? 0)
             }
         }
         if session.isOpen(){
