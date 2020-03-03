@@ -28,44 +28,38 @@ class UserSettings: ObservableObject {
         guard let session = KOSession.shared() else {
             return
         }
-        KOSessionTask.accessTokenInfoTask() { (accessTockenInfo, error) in
-            if error != nil {
-                print(error.debugDescription)
-            } else {
-                print(accessTockenInfo?.expiresInMillis ?? 0)
+        session.refreshAccessToken(){error in
+            if session.isOpen(){
+                self.userTocken = session.token!.accessToken
+                print("kakao tocken: ", self.userTocken!)
             }
-        }
-        if session.isOpen(){
-            self.userTocken = session.token!.accessToken
-            print("kakao tocken: ", self.userTocken!)
-        }
-        if self.userTocken == nil{
-            print("kakao tocken nil!!")
-            return
-        }
-        
-        // 2. 참조 된 카카오 tocken으로 Photomap server에 인증 시도
-        let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
-        AnyRequest<UserInfo>{
-            Url(authUrl)
-            Method(.get)
-            Header.Authorization(.bearer(self.userTocken!))
-        }.onObject { usrInfo in
-            print(usrInfo)
-            DispatchQueue.main.async {
-                self.userInfo = usrInfo
-                FireBaseBackMid.shared.initObserve(uid: (usrInfo.data?.uid!)!)
-                Messaging.messaging().subscribe(toTopic: (usrInfo.data?.uid!)!)
+            if self.userTocken == nil{
+                print("kakao tocken nil!!")
+                return
+            }
+            // 2. 참조 된 카카오 tocken으로 Photomap server에 인증 시도
+            let authUrl = NetworkURL.sharedInstance.getUrlString("/users")
+            AnyRequest<UserInfo>{
+                Url(authUrl)
+                Method(.get)
+                Header.Authorization(.bearer(self.userTocken!))
+            }.onObject { usrInfo in
+                print(usrInfo)
+                DispatchQueue.main.async {
+                    self.userInfo = usrInfo
+                    FireBaseBackMid.shared.initObserve(uid: (usrInfo.data?.uid!)!)
+                    Messaging.messaging().subscribe(toTopic: (usrInfo.data?.uid!)!)
+                    onEndHandler()
+                }
+            }
+            .onError { error in
+                if let stringError = String(data: error.error!, encoding: .utf8){
+                    print(stringError)
+                }
                 onEndHandler()
             }
+            .call()
         }
-        .onError { error in
-            if let stringError = String(data: error.error!, encoding: .utf8){
-                print(stringError)
-            }
-            onEndHandler()
-        }
-        .call()
     }
     
     func loginFromKakao(handler: @escaping ()->Void) -> Void{
