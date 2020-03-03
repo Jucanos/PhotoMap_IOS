@@ -16,6 +16,7 @@ struct GroupRow: View {
     @State var midRepHandle = DatabaseHandle()
     @ObservedObject var fbBackMid = FireBaseBackMid.shared
     @State var ThumbnailImage: Image?
+    @State var localThumNumber = 0
     var group: MapData
     
     var body: some View {
@@ -26,11 +27,6 @@ struct GroupRow: View {
                             ThumbnailImage!.resizable().frame(width: 60, height: 60)
                         } else {
                             Image(systemName: "photo").resizable().scaledToFit().frame(width: 30, height: 30)
-                            .onAppear(){
-                                UserGroupStore.shared.getMapThumbnail(mid: self.group.mid!) { img in
-                                    self.ThumbnailImage = Image(uiImage: img)
-                                }
-                            }
                         }
                     }
                     
@@ -69,10 +65,11 @@ struct GroupRow: View {
                 let backValue = self.fbBackMid.getUpdateNumber(mid: self.group.mid!)
                 if remoteValue != nil {
                     self.badgeCounter = remoteValue!["logNumber"]! - backValue
-                    if remoteValue!["userNumber"]! <= 4 {
+                    if self.localThumNumber != remoteValue!["userNumber"]! {
                         UserGroupStore.shared.getMapThumbnail(mid: self.group.mid!) { img in
                             self.ThumbnailImage = Image(uiImage: img)
                         }
+                        self.localThumNumber = remoteValue!["userNumber"]!
                     }
                     UserGroupStore.shared.loadMaps()
                 }
