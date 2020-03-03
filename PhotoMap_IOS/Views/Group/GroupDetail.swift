@@ -137,7 +137,7 @@ struct GroupDetail: View {
         }
         .onAppear(){
             self.isLoading = true
-            self.ref = Database.database().reference(withPath: "prod/maps").child((self.groupData?.mid!)!)
+            self.ref = Database.database().reference(withPath: "dev/maps").child((self.groupData?.mid!)!)
             self.refHandle = self.ref.observe(DataEventType.value, with: { snapShot in
                 let remoteValue = snapShot.value as? [String: Int]
                 FireBaseBackMid.shared.syncUpdateNumber(mid: (self.groupData?.mid!)!, value: remoteValue!["logNumber"]!)
