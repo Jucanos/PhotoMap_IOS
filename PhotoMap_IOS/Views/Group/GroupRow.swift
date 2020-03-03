@@ -59,7 +59,7 @@ struct GroupRow: View {
                     .opacity(UserSettings.shared.userInfo?.data?.primary == self.group.mid ? 1 : 0)
             }
         .onAppear(){
-            self.midRep = Database.database().reference(withPath: "dev/maps").child(self.group.mid!)
+            self.midRep = Database.database().reference(withPath: "prod/maps").child(self.group.mid!)
             self.midRepHandle = self.midRep.observe(DataEventType.value, with: { snapShot in
                 let remoteValue = snapShot.value as? [String: Int]
                 let backValue = self.fbBackMid.getUpdateNumber(mid: self.group.mid!)
