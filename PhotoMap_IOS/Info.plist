@@ -2,17 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>사용자의 사진에 접근하려 합니다.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Recipekorea.ttf</string>
-		<string>NanumSquareRoundL.ttf</string>
-		<string>NanumSquareRoundR.ttf</string>
-		<string>NanumSquareRoundB.ttf</string>
-	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -59,11 +48,18 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>사용자의 카메라에 접근하려 합니다.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>사용자의 마이크에 접근하려 합니다.</string>
+	<string>게시할 사진을 찍기 위해 카메라에 접근하려 합니다.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>스크린샷을 저장하기 위해 사용자의 사진에 접근하려 합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사용자의 사진에 접근하려 합니다.</string>
+	<string>게시할 사진을 가져오기 위해 사용자의 사진에 접근하려 합니다.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Recipekorea.ttf</string>
+		<string>NanumSquareRoundL.ttf</string>
+		<string>NanumSquareRoundR.ttf</string>
+		<string>NanumSquareRoundB.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -83,8 +79,6 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
-		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -104,5 +98,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

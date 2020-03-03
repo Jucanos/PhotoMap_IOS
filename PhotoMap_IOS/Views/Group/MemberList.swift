@@ -61,17 +61,18 @@ struct AddingMemberView: View {
     var body: some View {
         HStack{
             Button(action: {
+                let name = UserSettings.shared.userInfo!.data!.nickname!
                 let template = KMTFeedTemplate { feedTemplateBuilder in
                     feedTemplateBuilder.content = KMTContentObject(builderBlock: { contentBuilder in
-                        contentBuilder.title = "포토맵 그룹에 초대되었습니다."
-                        contentBuilder.imageURL = URL(string: "https://ifh.cc/g/ODD7n.png")!
+                        contentBuilder.title = "\(name)님이 photoMap에 초대했습니다."
+                        contentBuilder.imageURL = URL(string: "https://s3.soybeans.tech/logo.png")!
                         contentBuilder.link = KMTLinkObject(builderBlock: { (linkBuilder) in
                             linkBuilder.iosExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
                             linkBuilder.androidExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
                         })
                     })
                     feedTemplateBuilder.addButton(KMTButtonObject(builderBlock: { buttonBuilder in
-                        buttonBuilder.title = "초대받기"
+                        buttonBuilder.title = "초대 받기"
                         buttonBuilder.link = KMTLinkObject(builderBlock: { linkBuilder in
                             linkBuilder.iosExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
                             linkBuilder.androidExecutionParams = "mid=\(self.mapStore.mapData.mid!)"
