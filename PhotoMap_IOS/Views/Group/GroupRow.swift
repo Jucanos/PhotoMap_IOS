@@ -65,7 +65,7 @@ struct GroupRow: View {
                 let backValue = self.fbBackMid.getUpdateNumber(mid: self.group.mid!)
                 if remoteValue != nil {
                     self.badgeCounter = remoteValue!["logNumber"]! - backValue
-                    if self.localThumNumber != remoteValue!["userNumber"]! {
+                    if remoteValue!["userNumber"] != nil && self.localThumNumber != remoteValue!["userNumber"]! {
                         UserGroupStore.shared.getMapThumbnail(mid: self.group.mid!) { img in
                             self.ThumbnailImage = Image(uiImage: img)
                         }
