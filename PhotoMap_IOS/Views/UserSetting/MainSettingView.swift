@@ -19,8 +19,12 @@ struct MainSettingView: View {
                     NavigationLink(destination: Notice()) {
                         SettingRow(setImage: "exclamationmark.bubble", settingName: "공지사항")
                     }
-                    SettingRow(setImage: "ellipses.bubble",settingName: "리뷰 작성하기")
-                    SettingRow(setImage: "square.and.arrow.up",settingName: "앱 공유하기")
+                    NavigationLink(destination: Review()) {
+                        SettingRow(setImage: "ellipses.bubble",settingName: "리뷰 작성하기")
+                    }
+                    NavigationLink(destination: AppSharing()) {
+                        SettingRow(setImage: "square.and.arrow.up",settingName: "앱 공유하기")
+                    }
                 }
                 Section(header: Text("회원정보관리").font(.custom("NanumSquareRoundL", size: 12))) {
                     NavigationLink(destination: UserLogout()) {
